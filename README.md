@@ -2,6 +2,8 @@
 
 Built with **React 18 + TypeScript + Vite + Tailwind CSS v3**.
 
+**Repository:** [https://github.com/nthangeniphumudzo/chat-website](https://github.com/nthangeniphumudzo/chat-website)
+
 ## Quick Start
 
 ```bash
