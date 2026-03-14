@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-dm font-light antialiased transition-colors duration-300;
+    overflow-x: hidden;
+  }
+
+  /* Remove tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improve touch targets */
+  button,
+  a {
+    touch-action: manipulation;
+  }
+
+  /* iOS momentum scrolling */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Offset anchor targets for fixed navbar */
+  [id] {
+    scroll-margin-top: 72px;
+  }
+
+  @media (min-width: 1024px) {
+    [id] {
+      scroll-margin-top: 88px;
+    }
+  }
+}
+
+@layer utilities {
+  .text-gradient-mint {
+    background: linear-gradient(135deg, #00e6a0, #00c88a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .phone-shadow {
+    box-shadow:
+      0 40px 80px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .phone-shadow-light {
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.06);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
