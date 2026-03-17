@@ -19,11 +19,6 @@ export default function Hero({ isDark }: HeroProps) {
 
       {/* ── Text ── */}
       <div className="relative z-10 animate-fade-up text-center lg:text-left order-1 lg:order-none w-full">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-mint/20 bg-mint/5 text-mint text-xs font-medium uppercase tracking-widest mb-5">
-          <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse-dot" />
-          Now available
-        </div>
-
         <div className="flex justify-center lg:justify-start mb-5">
           <img
             src={isDark ? icon_dark : icon_light}
@@ -32,22 +27,29 @@ export default function Hero({ isDark }: HeroProps) {
           />
         </div>
 
+        <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
+          Connecting People's Hearts
+        </p>
+
         <h1 className="font-syne font-extrabold text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5">
           Meaningful<br />
           <span className="text-mint">Connections</span>,<br />
           Real Conversations.
         </h1>
 
-        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8">
+        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-4">
           Swipe, compliment, and chat with people who match what you're looking for. When you both connect — the conversation begins.
+        </p>
+        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 font-medium">
+          Real face, real profile, real person. We verify everyone — so there's no catfishing here. The person in the picture is the person in your DMs.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
           <a
-            href="#download"
+            href="#waitlist"
             className="w-full sm:w-auto text-center px-8 py-4 rounded-full bg-mint text-gray-900 font-syne font-bold text-base active:scale-95 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-mint/30 transition-all duration-200"
           >
-            Download For Free
+            Join the waitlist
           </a>
           <a
             href="#features"

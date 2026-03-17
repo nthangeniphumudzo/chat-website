@@ -19,8 +19,8 @@ const safetyCards: SafetyCard[] = [
   },
   {
     icon: '✅',
-    title: 'Face Verification',
-    description: 'Optional face verification during sign-up helps keep the community genuine and trustworthy.',
+    title: 'Everyone Verified',
+    description: 'Every user is verified — no one can use Chat without passing verification. When you see Rihanna on Chat, you\'re talking to Rihanna. No catfishing, no fake profiles.',
   },
   {
     icon: '🆘',
@@ -62,7 +62,7 @@ export default function SafetySection() {
           Your safety is <span className="text-mint">built in</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          Every tool you need to stay in control of your experience — who sees you, who can contact you, and how to report anything that doesn't feel right.
+          Every user is verified before they can use Chat — so the person you're talking to is always who they say they are. Plus full control over who sees you, who can contact you, and how to report anything that doesn't feel right.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

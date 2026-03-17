@@ -21,7 +21,7 @@ const tabs: Tab[] = [
 function LegalMeta() {
   return (
     <p className="text-xs text-gray-400 dark:text-gray-600 mb-5">
-      Last updated: [Date] &nbsp;·&nbsp;{' '}
+      Last updated: 17 March 2026 &nbsp;·&nbsp;{' '}
       <a href="mailto:chat@phcreations.com" className="text-mint hover:underline">
         chat@phcreations.com
       </a>

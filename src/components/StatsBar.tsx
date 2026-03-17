@@ -1,8 +1,8 @@
 const stats = [
+  { num: '100%', label: 'Verified Users' },
   { num: '4', label: 'Core Tabs' },
   { num: '6', label: 'Profile Photos' },
   { num: '3×', label: 'Message Types' },
-  { num: '100%', label: 'Free to Explore' },
 ]
 
 export default function StatsBar() {

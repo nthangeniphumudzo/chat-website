@@ -75,7 +75,7 @@ export default function Features() {
           Built for <span className="text-mint">real</span> connections
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          Every feature is designed to help you find someone genuinely compatible — and keep things safe along the way.
+          Every user is verified — so every connection is real. Features built to help you find someone genuinely compatible and keep things safe.
         </p>
       </div>
 

@@ -32,6 +32,7 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
     { href: '#screens',    label: 'Screenshots' },
     { href: '#premium',    label: 'Premium' },
     { href: '#safety',     label: 'Safety' },
+    { href: '#privacy',    label: 'Privacy' },
   ]
 
   return (

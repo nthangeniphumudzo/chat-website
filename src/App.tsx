@@ -7,7 +7,9 @@ import Screenshots from './components/Screenshots'
 import MessagingSection from './components/MessagingSection'
 import PremiumSection from './components/PremiumSection'
 import SafetySection from './components/SafetySection'
+import PrivacySection from './components/PrivacySection'
 import DownloadSection from './components/DownloadSection'
+import WaitlistSection from './components/WaitlistSection'
 import LegalSection from './components/LegalSection'
 import Footer from './components/Footer'
 
@@ -25,7 +27,9 @@ export default function App() {
         <MessagingSection isDark={isDark} />
         <PremiumSection isDark={isDark} />
         <SafetySection />
+        <PrivacySection isDark={isDark} />
         <DownloadSection />
+        <WaitlistSection />
         <LegalSection />
         <Footer isDark={isDark} />
       </div>
