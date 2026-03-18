@@ -25,11 +25,11 @@ export default function App() {
         <Features />
         <Screenshots isDark={isDark} />
         <MessagingSection isDark={isDark} />
-        <PremiumSection isDark={isDark} />
         <SafetySection />
         <PrivacySection isDark={isDark} />
-        <DownloadSection />
+        <PremiumSection isDark={isDark} />
         <WaitlistSection />
+        <DownloadSection />
         <LegalSection />
         <Footer isDark={isDark} />
       </div>

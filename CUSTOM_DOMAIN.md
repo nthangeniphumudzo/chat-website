@@ -19,12 +19,12 @@ Your site is currently at: **https://nthangeniphumudzo.github.io/chat-website/**
 
 ## 1. Domain in the repo
 
-**`public/CNAME`** is set to **chatphcreations.co.za**. It is copied into `dist/` on build and deployed with `npm run deploy`. No change needed unless you use a different domain.
+**`public/CNAME`** is set to **www.chatphcreations.co.za**. It is copied into `dist/` on build and deployed. Use the same value in GitHub’s Custom domain field.
 
 ## 2. GitHub Pages
 
 1. Open **https://github.com/nthangeniphumudzo/chat-website** → **Settings** → **Pages**.
-2. Under **Custom domain**, enter **chatphcreations.co.za** and click **Save**.
+2. Under **Custom domain**, enter **www.chatphcreations.co.za** (must match DNS and `public/CNAME`) and click **Save**.
 3. After DNS is correct, turn on **Enforce HTTPS** if you want.
 
 ## 3. Configure DNS for chatphcreations.co.za
@@ -57,6 +57,23 @@ Add this **1 CNAME record**:
 | CNAME | chatphcreations | nthangeniphumudzo.github.io |
 
 (No `https://`, no path. Only `nthangeniphumudzo.github.io`.)
+
+---
+
+### Option C: Using www.chatphcreations.co.za (recommended if you see InvalidDNSError for www)
+
+If you set the custom domain to **www.chatphcreations.co.za** in GitHub, you **must** add this DNS record first; otherwise GitHub shows “Domain's DNS record could not be retrieved (InvalidDNSError)”:
+
+| Type | Name | Value / Target |
+|------|------|----------------|
+| CNAME | **www** | **nthangeniphumudzo.github.io** |
+
+- **Name/Host:** `www` (not the full domain).
+- **Target:** `nthangeniphumudzo.github.io` only (no `https://`, no path).
+- At your DNS provider, do **not** use “URL redirect” or “forwarding” for www — use a normal CNAME.
+- If you use Cloudflare, set the record to **DNS only** (grey cloud), not proxied (orange cloud), until the domain is working.
+
+After adding the CNAME, wait 5–30 minutes (up to 24–48 hours) for propagation, then in GitHub **Settings → Pages → Custom domain** enter **www.chatphcreations.co.za** and Save. The repo’s `public/CNAME` is already set to `www.chatphcreations.co.za`; redeploy so the live site has it.
 
 ---
 

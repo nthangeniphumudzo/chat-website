@@ -30,9 +30,9 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
   const links = [
     { href: '#features',   label: 'Features' },
     { href: '#screens',    label: 'Screenshots' },
-    { href: '#premium',    label: 'Premium' },
     { href: '#safety',     label: 'Safety' },
     { href: '#privacy',    label: 'Privacy' },
+    { href: '#premium',    label: 'Premium' },
   ]
 
   return (
