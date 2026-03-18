@@ -28,20 +28,23 @@ export default function Hero({ isDark }: HeroProps) {
         </div>
 
         <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
-          Connecting People's Hearts
+          Dating that leads to real conversation
         </p>
 
         <h1 className="font-syne font-extrabold text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5">
-          Meaningful<br />
-          <span className="text-mint">Connections</span>,<br />
-          Real Conversations.
+          Real people.<br />
+          <span className="text-mint">Real conversation.</span><br />
+          Real connection.
         </h1>
 
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-4">
-          Swipe, compliment, and chat with people who match what you're looking for. When you both connect — the conversation begins.
+          Swipe, send a compliment, and chat with verified people who are actually looking for the same thing. When you both connect — the conversation starts for real.
         </p>
-        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 font-medium">
-          Real face, real profile, real person. We verify everyone — so there's no catfishing here. The person in the picture is the person in your DMs.
+        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-6 font-medium">
+          Every profile is verified. Real face, real person — no catfishing. The person in the photo is the person in your DMs.
+        </p>
+        <p className="text-mint/90 text-sm font-medium max-w-md mx-auto lg:mx-0 mb-8">
+          Join the waitlist and be first in when we launch.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
@@ -55,7 +58,7 @@ export default function Hero({ isDark }: HeroProps) {
             href="#features"
             className="w-full sm:w-auto text-center px-8 py-4 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-dm text-base active:scale-95 hover:border-mint hover:text-mint transition-all duration-200"
           >
-            See Features
+            See what you get
           </a>
         </div>
       </div>

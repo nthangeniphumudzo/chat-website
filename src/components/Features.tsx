@@ -69,13 +69,13 @@ export default function Features() {
     <section id="features" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto">
       <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-10 sm:mb-14">
         <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">
-          Everything you need
+          What’s inside the app
         </p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 sm:mb-5">
-          Built for <span className="text-mint">real</span> connections
+          Built so you find <span className="text-mint">real</span> connections
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          Every user is verified — so every connection is real. Features built to help you find someone genuinely compatible and keep things safe.
+          Verified users, compliments that get noticed, and features that put you in control. Join the waitlist and be first to use it.
         </p>
       </div>
 

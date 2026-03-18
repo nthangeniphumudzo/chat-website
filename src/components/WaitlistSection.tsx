@@ -35,12 +35,15 @@ export default function WaitlistSection() {
       className="py-16 sm:py-24 px-5 sm:px-8 lg:px-24 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]"
     >
       <div ref={ref} className="opacity-0 translate-y-8 transition-all duration-700 max-w-2xl mx-auto text-center">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Join the waitlist</p>
+        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Reserve your spot</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
-          Be the first to <span className="text-mint">know</span>
+          Be first to get <span className="text-mint">real</span> connections
         </h2>
-        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed mb-8">
-          Get early access and updates. No spam — just one message when we're ready for you.
+        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed mb-6">
+          Verified profiles, real conversations, and no catfishing — join the waitlist and we’ll tell you the moment the app is ready. Early joiners get in first.
+        </p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">
+          No spam. One email when we launch.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-left sm:flex sm:flex-row sm:gap-3 sm:items-end sm:space-y-0">
