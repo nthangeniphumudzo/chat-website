@@ -2,9 +2,9 @@ import emailjs from '@emailjs/browser'
 
 // EmailJS configuration (same approach as phcreationsPublic)
 // Get these from your EmailJS dashboard: https://dashboard.emailjs.com
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || ''
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
-const EMAILJS_WAITLIST_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_WAITLIST_TEMPLATE_ID || import.meta.env.VITE_EMAILJS_TEMPLATE_ID || ''
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_b0a374y'
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '4fePMJtucCcdrOcU1'
+const EMAILJS_WAITLIST_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_WAITLIST_TEMPLATE_ID || import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_cx2qx1t'
 
 export interface WaitlistFormData {
   email: string
