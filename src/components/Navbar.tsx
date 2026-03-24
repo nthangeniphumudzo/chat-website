@@ -83,10 +83,10 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
 
           {/* CTA — desktop only */}
           <a
-            href="#waitlist"
+            href="#download"
             className="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 transition-all duration-200"
           >
-            Join waitlist
+            Download beta
           </a>
 
           {/* Hamburger — mobile only */}
@@ -121,11 +121,11 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
             </a>
           ))}
           <a
-            href="#waitlist"
+            href="#download"
             onClick={() => setMenuOpen(false)}
             className="mt-3 inline-flex items-center justify-center px-5 py-3.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-transform"
           >
-            Join waitlist
+            Download beta
           </a>
         </div>
       </div>

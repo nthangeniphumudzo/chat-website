@@ -65,10 +65,10 @@ export default function PremiumSection({ isDark }: PremiumSectionProps) {
                 ))}
               </ul>
               <a
-                href="#waitlist"
+                href="#download"
                 className="mt-6 sm:mt-8 w-full inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 transition-all duration-200"
               >
-                Join waitlist — get early access
+                Download beta
               </a>
             </div>
           </div>
