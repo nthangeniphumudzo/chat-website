@@ -3,7 +3,7 @@ import appStoreBadge from '../assets/app-store-badge.svg'
 import googlePlayBadge from '../assets/google-play-badge.svg'
 
 const EAS_BUILD_ANDROID =
-  'https://expo.dev/accounts/nthangeniph/projects/Chat/builds/a431a509-52ec-4ad8-ac11-dab9db259ee6'
+  'https://expo.dev/accounts/nthangeniph/projects/Chat/builds/28010399-6f18-4fb5-987b-a05f9db98425'
 
 const BETA_VERSION_LABEL = 'Beta version 1.0.2'
 

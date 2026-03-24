@@ -41,6 +41,23 @@ export default function Footer({ isDark }: FooterProps) {
           ))}
         </ul>
 
+        {/* Trust & registration */}
+        <div className="max-w-2xl text-center space-y-2 px-2">
+          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+            <span className="font-medium text-gray-600 dark:text-gray-300">
+              Globally recognised
+            </span>{' '}
+            through TransUnion verification. Our Data Protection Officer (DPO) helps ensure privacy and data protection meet international expectations.
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+            PH CREATION SOFTWARE is registered with the{' '}
+            <span className="font-medium text-gray-600 dark:text-gray-300">
+              Companies and Intellectual Property Commission (CIPC)
+            </span>{' '}
+            in South Africa.
+          </p>
+        </div>
+
         {/* Copyright */}
         <p className="text-xs text-gray-400 dark:text-gray-600 text-center">
           © {new Date().getFullYear()} PH CREATION SOFTWARE. All rights reserved.
