@@ -2,13 +2,18 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 import appStoreBadge from '../assets/app-store-badge.svg'
 import googlePlayBadge from '../assets/google-play-badge.svg'
 
-const EAS_BUILD_ANDROID =
-  'https://expo.dev/accounts/nthangeniph/projects/Chat/builds/28010399-6f18-4fb5-987b-a05f9db98425'
-
 const BETA_VERSION_LABEL = 'Beta version 1.0.2'
+
+function androidBetaUrl(): string | undefined {
+  const v = import.meta.env.VITE_ANDROID_BETA_URL
+  if (typeof v !== 'string') return undefined
+  const t = v.trim()
+  return t.length > 0 ? t : undefined
+}
 
 export default function DownloadSection() {
   const ref = useScrollReveal<HTMLDivElement>()
+  const androidUrl = androidBetaUrl()
 
   return (
     <section id="download" className="py-20 sm:py-28 lg:py-32 px-5 sm:px-8 text-center relative overflow-hidden">
@@ -38,12 +43,27 @@ export default function DownloadSection() {
             />
             <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Coming soon</span>
           </div>
-          <StoreButton
-            href={EAS_BUILD_ANDROID}
-            badge={googlePlayBadge}
-            alt="Get the Chat beta via Google Play"
-            badgeHeight={52}
-          />
+          {androidUrl ? (
+            <StoreButton
+              href={androidUrl}
+              badge={googlePlayBadge}
+              alt="Get the Chat beta via Google Play"
+              badgeHeight={52}
+            />
+          ) : (
+            <div
+              className="flex flex-col items-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 w-full sm:w-auto opacity-80"
+              aria-label="Android beta link not configured"
+            >
+              <img
+                src={googlePlayBadge}
+                alt=""
+                className="w-auto object-contain opacity-50"
+                style={{ height: '52px' }}
+              />
+              <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Coming soon</span>
+            </div>
+          )}
         </div>
 
         <p className="mt-6 sm:mt-8 text-sm text-gray-400 dark:text-gray-600">
