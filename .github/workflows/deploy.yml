@@ -12,12 +12,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      # EmailJS — add these as repo secrets (Settings → Secrets and variables → Actions)
+      # EmailJS — repo secrets (Settings → Secrets and variables → Actions)
       VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
       VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
       VITE_EMAILJS_WAITLIST_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_WAITLIST_TEMPLATE_ID }}
-      # Android beta EAS install URL — update secret when you ship a new build (no code change)
-      VITE_ANDROID_BETA_URL: ${{ secrets.VITE_ANDROID_BETA_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,6 +28,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # Android URL is NOT passed to Vite — written to public/android-beta.json only (no old URL stuck in JS bundle).
+      # Set repository Secret OR Variable named VITE_ANDROID_BETA_URL, then redeploy.
+      - name: Write Android beta URL for site
+        env:
+          ANDROID_BETA_URL: ${{ secrets.VITE_ANDROID_BETA_URL || vars.VITE_ANDROID_BETA_URL }}
+        run: node scripts/write-android-beta-json.mjs
 
       - name: Build
         run: npm run build

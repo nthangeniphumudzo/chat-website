@@ -1,19 +1,44 @@
+import { useState, useEffect } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import appStoreBadge from '../assets/app-store-badge.svg'
 import googlePlayBadge from '../assets/google-play-badge.svg'
 
 const BETA_VERSION_LABEL = 'Beta version 1.0.2'
 
-function androidBetaUrl(): string | undefined {
+function envAndroidBetaUrl(): string | undefined {
   const v = import.meta.env.VITE_ANDROID_BETA_URL
   if (typeof v !== 'string') return undefined
   const t = v.trim()
   return t.length > 0 ? t : undefined
 }
 
+/** Load URL from public/android-beta.json (CI writes this from GitHub Secrets/Variables). Env is fallback for local dev. */
+function useAndroidBetaUrl(): string | undefined {
+  const [url, setUrl] = useState<string | undefined>(() => envAndroidBetaUrl())
+
+  useEffect(() => {
+    const envUrl = envAndroidBetaUrl()
+    const base = import.meta.env.BASE_URL || './'
+    const jsonPath =
+      base === './' || base === ''
+        ? './android-beta.json'
+        : `${base.replace(/\/?$/, '/') }android-beta.json`
+
+    fetch(jsonPath)
+      .then(r => (r.ok ? r.json() : {}))
+      .then((data: { url?: unknown }) => {
+        const fromJson = typeof data?.url === 'string' ? data.url.trim() : ''
+        setUrl(fromJson || envUrl || undefined)
+      })
+      .catch(() => setUrl(envUrl || undefined))
+  }, [])
+
+  return url
+}
+
 export default function DownloadSection() {
   const ref = useScrollReveal<HTMLDivElement>()
-  const androidUrl = androidBetaUrl()
+  const androidUrl = useAndroidBetaUrl()
 
   return (
     <section id="download" className="py-20 sm:py-28 lg:py-32 px-5 sm:px-8 text-center relative overflow-hidden">
