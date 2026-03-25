@@ -16,6 +16,7 @@ import Footer from './components/Footer'
 export default function App() {
   const { toggle, isDark } = useTheme()
 
+  
   return (
     <div className={isDark ? 'dark' : ''}>
       <div className="min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
