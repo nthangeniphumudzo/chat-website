@@ -1,14 +1,9 @@
-import { Link } from 'react-router-dom'
 import { icon_dark, icon_light } from '../assets/images'
 
-type FooterLinkItem =
-  | { label: string; href: string }
-  | { label: string; to: string }
-
-const legalLinks: FooterLinkItem[] = [
+const legalLinks = [
   { label: 'Terms of Service', href: '#legal' },
   { label: 'Privacy Policy', href: '#legal' },
-  { label: 'Account Deletion', to: '/account-deletion' },
+  { label: 'Account Deletion', href: './account-deletion/' },
   { label: 'Community Guidelines', href: '#legal' },
   { label: 'Cookie Policy', href: '#legal' },
   { label: 'Contact', href: 'mailto:chat@phcreations.com' },
@@ -23,48 +18,33 @@ export default function Footer({ isDark }: FooterProps) {
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col items-center gap-5 sm:gap-6">
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
+        <a href="./" className="flex items-center gap-2.5 group">
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
             className="w-7 h-7 object-contain transition-transform duration-200 group-hover:scale-105"
           />
           <span className="font-syne font-extrabold text-lg tracking-tight text-mint">Chat</span>
-        </Link>
+        </a>
 
-        {/* Links — 2 col grid on mobile, single row on sm+ */}
         <ul className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-5 sm:gap-x-6 gap-y-3 sm:gap-y-2 text-center">
-          {legalLinks.map(item =>
-            'to' in item ? (
-              <li key={item.label}>
-                <Link
-                  to={item.to}
-                  className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ) : (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
-                >
-                  {item.label}
-                </a>
-              </li>
-            )
-          )}
+          {legalLinks.map(({ label, href }) => (
+            <li key={label}>
+              <a
+                href={href}
+                className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        {/* Trust & registration */}
         <div className="max-w-2xl text-center space-y-2 px-2">
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-            <span className="font-medium text-gray-600 dark:text-gray-300">
-              Globally recognised
-            </span>{' '}
-            through TransUnion verification. Our Data Protection Officer (DPO) helps ensure privacy and data protection meet international expectations.
+            <span className="font-medium text-gray-600 dark:text-gray-300">Globally recognised</span>{' '}
+            through TransUnion verification. Our Data Protection Officer (DPO) helps ensure privacy and data
+            protection meet international expectations.
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
             PH CREATION SOFTWARE is registered with the{' '}
@@ -75,7 +55,6 @@ export default function Footer({ isDark }: FooterProps) {
           </p>
         </div>
 
-        {/* Copyright */}
         <p className="text-xs text-gray-400 dark:text-gray-600 text-center">
           © {new Date().getFullYear()} PH CREATION SOFTWARE. All rights reserved.
         </p>
