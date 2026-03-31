@@ -1,12 +1,17 @@
+import { Link } from 'react-router-dom'
 import { icon_dark, icon_light } from '../assets/images'
 
-const legalLinks = [
-  { label: 'Terms of Service',     href: '#legal' },
-  { label: 'Privacy Policy',       href: '#legal' },
-  { label: 'Account Deletion',     href: 'account-deletion/' },
+type FooterLinkItem =
+  | { label: string; href: string }
+  | { label: string; to: string }
+
+const legalLinks: FooterLinkItem[] = [
+  { label: 'Terms of Service', href: '#legal' },
+  { label: 'Privacy Policy', href: '#legal' },
+  { label: 'Account Deletion', to: '/account-deletion' },
   { label: 'Community Guidelines', href: '#legal' },
-  { label: 'Cookie Policy',        href: '#legal' },
-  { label: 'Contact',              href: 'mailto:chat@phcreations.com' },
+  { label: 'Cookie Policy', href: '#legal' },
+  { label: 'Contact', href: 'mailto:chat@phcreations.com' },
 ]
 
 interface FooterProps {
@@ -19,27 +24,38 @@ export default function Footer({ isDark }: FooterProps) {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col items-center gap-5 sm:gap-6">
 
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 group">
+        <Link to="/" className="flex items-center gap-2.5 group">
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
             className="w-7 h-7 object-contain transition-transform duration-200 group-hover:scale-105"
           />
           <span className="font-syne font-extrabold text-lg tracking-tight text-mint">Chat</span>
-        </a>
+        </Link>
 
         {/* Links — 2 col grid on mobile, single row on sm+ */}
         <ul className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-5 sm:gap-x-6 gap-y-3 sm:gap-y-2 text-center">
-          {legalLinks.map(({ label, href }) => (
-            <li key={label}>
-              <a
-                href={href}
-                className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
+          {legalLinks.map(item =>
+            'to' in item ? (
+              <li key={item.label}>
+                <Link
+                  to={item.to}
+                  className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ) : (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
+                >
+                  {item.label}
+                </a>
+              </li>
+            )
+          )}
         </ul>
 
         {/* Trust & registration */}
