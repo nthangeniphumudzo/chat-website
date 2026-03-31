@@ -3,6 +3,7 @@ import { icon_dark, icon_light } from '../assets/images'
 const legalLinks = [
   { label: 'Terms of Service',     href: '#legal' },
   { label: 'Privacy Policy',       href: '#legal' },
+  { label: 'Account Deletion',     href: 'account-deletion/' },
   { label: 'Community Guidelines', href: '#legal' },
   { label: 'Cookie Policy',        href: '#legal' },
   { label: 'Contact',              href: 'mailto:chat@phcreations.com' },
