@@ -1,20 +1,25 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 
-/** GitHub Pages serves real files; `/account-deletion` must map to `account-deletion/index.html` (HTTP 200). */
-function accountDeletionStaticFallback(): Plugin {
+/** GitHub Pages: static policy pages need `folder/index.html` (HTTP 200). Dev server maps bare paths. */
+const STATIC_PAGE_PREFIXES = ['/account-deletion', '/child-safety'] as const
+
+function staticPolicyPagesFallback(): Plugin {
   const rewrite = (req: { url?: string }, _res: unknown, next: () => void) => {
     const raw = req.url ?? ''
     const path = raw.split('?')[0] ?? ''
     const query = raw.includes('?') ? '?' + raw.split('?').slice(1).join('?') : ''
-    if (path === '/account-deletion' || path === '/account-deletion/') {
-      req.url = '/account-deletion/index.html' + query
+    for (const prefix of STATIC_PAGE_PREFIXES) {
+      if (path === prefix || path === prefix + '/') {
+        req.url = prefix + '/index.html' + query
+        break
+      }
     }
     next()
   }
 
   return {
-    name: 'account-deletion-static',
+    name: 'static-policy-pages',
     configureServer(server) {
       server.middlewares.use(rewrite)
     },
@@ -26,5 +31,5 @@ function accountDeletionStaticFallback(): Plugin {
 
 export default defineConfig({
   base: './',
-  plugins: [react(), accountDeletionStaticFallback()],
+  plugins: [react(), staticPolicyPagesFallback()],
 })
