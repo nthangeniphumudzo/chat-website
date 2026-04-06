@@ -1,4 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { img_chat, img_chat_light } from '../assets/images'
 import profilePrivacyDark from '../assets/privacy/profile-privacy-dark.png'
 import profilePrivacyLight from '../assets/privacy/profile-privacy-light.png'
 import blockContactsListDark from '../assets/privacy/block-contacts-list-dark.png'
@@ -10,18 +11,62 @@ interface PrivacySectionProps {
 
 export default function PrivacySection({ isDark }: PrivacySectionProps) {
   const textRef = useScrollReveal<HTMLDivElement>()
+  const screenshotProtectionRef = useScrollReveal<HTMLDivElement>()
+  const introRef = useScrollReveal<HTMLDivElement>()
   const phonesRef = useScrollReveal<HTMLDivElement>()
   const blockListRef = useScrollReveal<HTMLDivElement>()
 
   const profileImg = isDark ? profilePrivacyDark : profilePrivacyLight
   const blockListImg = isDark ? blockContactsListDark : blockContactsListLight
+  const chatImg = isDark ? img_chat : img_chat_light
 
   const phoneClass = `rounded-[32px] overflow-hidden border ${isDark ? 'border-white/10 shadow-2xl shadow-black/50' : 'border-black/10 shadow-xl shadow-black/10'}`
 
   return (
     <section id="privacy" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-24 max-w-7xl mx-auto">
-      <div ref={textRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-12 sm:mb-16">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Privacy &amp; peace of mind</p>
+      <div ref={textRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-6 sm:mb-8">
+        <p className="text-xs font-medium uppercase tracking-widest text-mint">Privacy &amp; peace of mind</p>
+      </div>
+
+      {/* Screenshot protection — directly under section label */}
+      <div ref={screenshotProtectionRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-14 sm:mb-20 pb-14 sm:pb-16 border-b border-gray-200 dark:border-gray-800">
+        <h3 className="font-syne font-bold text-lg sm:text-xl text-gray-900 dark:text-gray-100 mb-3 tracking-tight">
+          Protection on every screen
+        </h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-2 max-w-2xl">
+          While you use Chat, you see the full experience — messages, photos, and context. If someone tries to capture a screenshot or screen recording of <span className="text-gray-700 dark:text-gray-300 font-medium">any</span> screen, that capture comes out <span className="text-gray-700 dark:text-gray-300 font-medium">blank or black</span>, so your private moments are not saved to their camera roll.
+        </p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-8 max-w-2xl">
+          We built it that way on purpose: your privacy is not an afterthought.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-8 lg:gap-12 max-w-md sm:max-w-none mx-auto lg:mx-0 lg:max-w-3xl">
+          <div className="flex flex-col items-center lg:items-start">
+            <p className="text-xs font-medium uppercase tracking-widest text-mint mb-3">In the app</p>
+            <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
+              <img
+                src={chatImg}
+                alt="Chat conversation as you see it while using the app"
+                className="w-full block"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center lg:items-start">
+            <p className="text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
+              What a screenshot captures
+            </p>
+            <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
+              <div
+                className="w-full bg-black block aspect-[472/1024]"
+                role="img"
+                aria-label="Any screen in the app: screenshots and recordings show a blank or black frame instead of your content"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ref={introRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-12 sm:mb-16">
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
           Stay off their radar.<br />
           <span className="text-mint">Block exes, stalkers, anyone.</span>

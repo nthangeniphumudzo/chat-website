@@ -39,6 +39,34 @@ const features: Feature[] = [
   },
 ]
 
+function ScreenshotFlagship() {
+  const ref = useScrollReveal<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      className="opacity-0 translate-y-8 transition-all duration-700 relative mb-6 sm:mb-8 rounded-2xl overflow-hidden border-2 border-mint/35 dark:border-mint/25 bg-gradient-to-br from-mint/[0.12] via-white to-white dark:from-mint/[0.08] dark:via-[#121212] dark:to-[#0a0a0a] shadow-lg shadow-mint/5 dark:shadow-black/40"
+    >
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(52,211,153,0.18),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(52,211,153,0.12),transparent)]" />
+      <div className="relative p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
+        <div className="flex-shrink-0 mb-6 lg:mb-0">
+          <p className="text-xs font-semibold uppercase tracking-widest text-mint mb-3">Flagship privacy</p>
+          <div className="w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl bg-mint/15 dark:bg-mint/10 border border-mint/25 flex items-center justify-center text-4xl sm:text-[2.75rem] shadow-inner shadow-mint/10">
+            📵
+          </div>
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="font-syne font-extrabold text-2xl sm:text-3xl lg:text-4xl text-gray-900 dark:text-gray-50 tracking-tight leading-tight mb-3 sm:mb-4">
+            Screenshot &amp; recording <span className="text-mint">protection</span>
+          </h3>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+            <span className="font-medium text-gray-800 dark:text-gray-200">Every screen in the app</span> is covered: screenshots and screen recordings capture a <span className="font-medium text-gray-800 dark:text-gray-200">blank or black frame</span> — not your messages, photos, or context. It is a rare, tangible promise that we are building Chat with your privacy at the centre, not as a footnote.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function FeatureCard({ icon, title, description }: Feature) {
   const ref = useScrollReveal<HTMLDivElement>()
   return (
@@ -74,10 +102,12 @@ export default function Features() {
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 sm:mb-5">
           Built so you find <span className="text-mint">real</span> connections
         </h2>
-        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          Verified users, compliments that get noticed, and features that put you in control. Join the waitlist and be first to use it.
+        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+          <span className="text-gray-700 dark:text-gray-200 font-medium">App-wide screenshot and recording protection</span> sets us apart: nothing you see in Chat leaks through someone else’s camera roll. Plus verified users, compliments that get noticed, and the rest of the features below.
         </p>
       </div>
+
+      <ScreenshotFlagship />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {features.map(f => (

@@ -15,7 +15,8 @@ const safetyCards: SafetyCard[] = [
   {
     icon: '🔒',
     title: 'Privacy Settings',
-    description: 'Control who sees your age, distance, and profile. Enable screenshot protection for extra peace of mind.',
+    description:
+      'Control who sees your age, distance, and profile. Screenshot protection applies across the whole app — every screen shows a blank or black frame in captures and recordings, so your chats stay between you and your match.',
   },
   {
     icon: '✅',
@@ -62,7 +63,7 @@ export default function SafetySection() {
           Your safety is <span className="text-mint">built in</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          Every user is verified before they can use Chat — so the person you're talking to is always who they say they are. Plus full control over who sees you, who can contact you, and how to report anything that doesn't feel right.
+          Every user is verified before they can use Chat — so the person you're talking to is always who they say they are. Plus full control over who sees you, who can contact you, and how to report anything that doesn't feel right. The app blocks screenshots and recordings app-wide, so those captures stay blank or black on every screen.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
