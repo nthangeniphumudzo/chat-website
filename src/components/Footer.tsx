@@ -5,6 +5,7 @@ const legalLinks = [
   { label: 'Privacy Policy', href: '#legal' },
   { label: 'Child safety', href: './child-safety/' },
   { label: 'Account Deletion', href: './account-deletion/' },
+  { label: 'Support', href: './support/' },
   { label: 'Community Guidelines', href: '#legal' },
   { label: 'Cookie Policy', href: '#legal' },
   { label: 'Contact', href: 'mailto:chat@phcreations.com' },

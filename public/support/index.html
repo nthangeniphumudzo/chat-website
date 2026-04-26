@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support — Chat</title>
+    <meta
+      name="description"
+      content="Get help with Chat: in-app Help Center and Contact Support, or email support at chat@phcreations.com. Response within 24–48 hours for in-app requests."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050505;
+        --card: #121212;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --line: #1f2937;
+        --mint: #00f5b4;
+      }
+      :root[data-theme="light"] {
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --text: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --mint: #00b586;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+      .bar {
+        border-bottom: 1px solid var(--line);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .bar .back {
+        color: var(--mint);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-height: 44px;
+        padding: 10px 14px 10px 10px;
+        margin: -10px 0 -10px -10px;
+        border-radius: 12px;
+      }
+      .bar .back .arrow {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .bar .back:hover {
+        background: color-mix(in srgb, var(--mint) 12%, transparent);
+      }
+      .theme {
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 999px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 1.15rem;
+        line-height: 1;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .theme:hover {
+        border-color: var(--mint);
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Syne, system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        margin: 0 0 28px;
+        line-height: 1.15;
+      }
+      h2 {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        margin: 0 0 10px;
+      }
+      h3 {
+        font-size: 1.05rem;
+        margin: 16px 0 8px;
+        font-weight: 700;
+      }
+      .eyebrow {
+        color: var(--mint);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        margin: 14px 0;
+      }
+      section h2:first-child {
+        margin-top: 0;
+      }
+      ol,
+      ul {
+        margin: 10px 0 0;
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 6px 0;
+      }
+      a {
+        color: var(--mint);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        margin: 10px 0 0;
+      }
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background: color-mix(in srgb, var(--line) 45%, transparent);
+        font-weight: 600;
+      }
+      footer {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .subtle {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin: 0 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="../" aria-label="Back to home"><span class="arrow" aria-hidden="true">←</span> Home</a>
+      <button type="button" class="theme" id="themeToggle" aria-label="Toggle color theme">☀️</button>
+    </div>
+    <main>
+      <p class="eyebrow">Support</p>
+      <h1>Chat support</h1>
+
+      <section>
+        <h2>How to get help in the app</h2>
+        <p class="subtle">When you are <strong>signed in</strong>:</p>
+        <ol>
+          <li>Open the <strong>Profile</strong> tab.</li>
+          <li>Open <strong>Settings</strong>.</li>
+          <li>
+            Under <strong>Support &amp; Legal</strong>, you can use:
+            <ul>
+              <li><strong>Help Center</strong> — FAQs and articles (search and categories: getting started, account, matching, safety, billing, technical).</li>
+              <li><strong>Contact Support</strong> — Submit a ticket by topic, subject, and message.</li>
+              <li><strong>Feedback</strong> — Suggestions and product feedback.</li>
+              <li><strong>Community Guidelines</strong> — Community standards.</li>
+              <li><strong>Legal</strong> — Terms of Service, Privacy Policy, and related documents.</li>
+            </ul>
+          </li>
+        </ol>
+        <h3>Contact Support</h3>
+        <ul>
+          <li>Choose a <strong>topic</strong> (for example account, billing, technical, profile, matching, safety, or other).</li>
+          <li>Enter a <strong>subject</strong> and <strong>message</strong> (minimum length may apply in the app).</li>
+          <li>
+            After a successful submission, the app explains that the team will respond
+            <strong>within 24–48 hours</strong> at the <strong>email address associated with your account</strong>.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Reporting another user (safety and conduct)</h2>
+        <p>
+          Use <strong>Report a Problem</strong> to flag inappropriate or unsafe behavior.
+          <strong>Contact Support</strong> with topic <strong>Safety Concern</strong> is still right for account-level
+          help, questions about a report, or trouble using these tools. <strong>Community Guidelines</strong> in the app
+          describe expected behavior.
+        </p>
+        <h3>From an open chat</h3>
+        <ol>
+          <li>Open the <strong>conversation</strong> with the person you want to report.</li>
+          <li>Tap the <strong>info</strong> control on the <strong>chat header</strong> (opens the safety toolkit).</li>
+          <li>
+            Choose <strong>Report [name]</strong>. The other person is <strong>not told</strong> you reported them.
+          </li>
+          <li>On <strong>Report a Problem</strong>, select the type of issue, add details, and <strong>submit</strong>.</li>
+        </ol>
+        <h3>From the Chats list</h3>
+        <ol>
+          <li>Open the <strong>Chats</strong> tab.</li>
+          <li>Open <strong>more options</strong> for the conversation (per-chat menu).</li>
+          <li>Tap <strong>Report</strong> to open <strong>Report a Problem</strong> for that person.</li>
+        </ol>
+        <h3>From Discover / Explore</h3>
+        <ol>
+          <li>On a profile, open the <strong>safety tools</strong> (for example <strong>Safe Guard</strong>).</li>
+          <li>
+            Tap <strong>Report</strong> for <strong>Report a Problem</strong>. You can also <strong>Block</strong> or
+            use <strong>Access Safety Center</strong> from the same place.
+          </li>
+        </ol>
+        <h3>From Profile — Safety Center</h3>
+        <ol>
+          <li>Open the <strong>Profile</strong> tab and select the <strong>Privacy &amp; Safety</strong> segment.</li>
+          <li>Open <strong>Safety Center</strong>.</li>
+          <li>
+            Under <strong>Resources</strong>, tap <strong>Report a Problem</strong> for inappropriate behavior or safety
+            concerns.
+          </li>
+          <li>
+            The same list includes <strong>My Reports</strong> (status of submissions) and
+            <strong>Block Someone</strong>; <strong>Get Help</strong> points to the safety email (see
+            <a href="#email">Email support</a> below).
+          </li>
+        </ol>
+        <h3>After you submit</h3>
+        <ul>
+          <li>Reports are <strong>reviewed</strong> by the team. Check <strong>My Reports</strong> in <strong>Safety Center</strong> for status.</li>
+          <li>
+            When you report in connection with a match or chat, the product may <strong>end further interaction</strong>
+            (for example by blocking, unmatching, or removing the conversation) as part of processing—follow any
+            on-screen explanation, and your <strong>Terms of Service</strong> / <strong>Community Guidelines</strong>
+            for policy details.
+          </li>
+        </ul>
+      </section>
+
+      <section id="email">
+        <h2>Email support</h2>
+        <p>
+          <strong>General inquiries</strong> (including if you cannot use the in-app form):
+          <a href="mailto:chat@phcreations.com">chat@phcreations.com</a>
+        </p>
+        <p>
+          This address matches the in-app legal copy (for example the Terms of Service contact section). In replies, we
+          may ask you to include:
+        </p>
+        <ul>
+          <li>The email on your <strong>Chat</strong> account (if you are not writing from that address).</li>
+          <li>
+            A short <strong>description</strong> of the issue, plus <strong>device or browser</strong> and
+            <strong>OS version</strong> (for example iOS, Android, or desktop OS) for technical issues.
+          </li>
+          <li><strong>Bundle ID</strong> or app name if the message could be misrouted from other products.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What we can help with</h2>
+        <p class="subtle">Topics align with in-app <strong>Contact Support</strong>:</p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Topic</th>
+              <th scope="col">Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Account</strong></td>
+              <td>Login, access, or account issues</td>
+            </tr>
+            <tr>
+              <td><strong>Billing &amp; subscription</strong></td>
+              <td>Payments, subscriptions, refunds (per store and policy)</td>
+            </tr>
+            <tr>
+              <td><strong>Technical</strong></td>
+              <td>Crashes, bugs, or unexpected behavior</td>
+            </tr>
+            <tr>
+              <td><strong>Profile</strong></td>
+              <td>Photos, profile fields, or verification</td>
+            </tr>
+            <tr>
+              <td><strong>Matching &amp; messages</strong></td>
+              <td>Matching or messaging features</td>
+            </tr>
+            <tr>
+              <td><strong>Safety</strong></td>
+              <td>Safety, harassment, or privacy concerns (see also community guidelines)</td>
+            </tr>
+            <tr>
+              <td><strong>Other</strong></td>
+              <td>Anything that does not fit the above</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Self-service and policies</h2>
+        <ul>
+          <li><strong>Help Center</strong> (in app): FAQs and articles when logged in.</li>
+          <li><strong>Community Guidelines</strong> (in app): How to behave on the service and how to report violations.</li>
+          <li><strong>Legal</strong> (in app): Terms, privacy, cookies (as applicable on our public site).</li>
+        </ul>
+        <p>
+          Reporting paths in Help should match the current app: <strong>Profile</strong> →
+          <strong>Privacy &amp; Safety</strong> → <strong>Safety Center</strong> → <strong>Report a Problem</strong>.
+        </p>
+      </section>
+
+      <footer>Last updated: April 26, 2026</footer>
+    </main>
+    <script>
+      (function () {
+        var root = document.documentElement
+        var key = "chat-support-theme"
+        var btn = document.getElementById("themeToggle")
+        function apply(t) {
+          root.setAttribute("data-theme", t)
+          if (btn) {
+            btn.textContent = t === "dark" ? "☀️" : "🌙"
+            btn.setAttribute("aria-label", t === "dark" ? "Switch to light mode" : "Switch to dark mode")
+          }
+        }
+        var s = localStorage.getItem(key)
+        var darkPref = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        apply(s || (darkPref ? "dark" : "light"))
+        if (btn) {
+          btn.addEventListener("click", function () {
+            var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark"
+            localStorage.setItem(key, next)
+            apply(next)
+          })
+        }
+      })()
+    </script>
+  </body>
+</html>

@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 
 /** GitHub Pages: static policy pages need `folder/index.html` (HTTP 200). Dev server maps bare paths. */
-const STATIC_PAGE_PREFIXES = ['/account-deletion', '/child-safety'] as const
+const STATIC_PAGE_PREFIXES = ['/account-deletion', '/child-safety', '/support'] as const
 
 function staticPolicyPagesFallback(): Plugin {
   const rewrite = (req: { url?: string }, _res: unknown, next: () => void) => {
