@@ -100,7 +100,7 @@ export default function WaitlistSection() {
         {status === 'success' && (
           <div className="mt-6 p-4 rounded-xl bg-mint/10 border border-mint/30 text-mint">
             <p className="font-medium">You're on the list.</p>
-            <p className="text-sm opacity-90">You will receive the beta version of the app as soon as it is published.</p>
+            <p className="text-sm opacity-90">We’ll email you when there’s a build ready for you.</p>
           </div>
         )}
 

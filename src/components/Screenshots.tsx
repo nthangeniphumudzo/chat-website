@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import {
-  img_explore, img_likes, img_match, img_chat, img_chats_list, img_settings, img_profile, img_safety,
-  img_explore_light, img_likes_light, img_chat_light, img_chats_list_light, img_settings_light, img_profile_light, img_safety_light,
+  img_explore, img_chat, img_chats_list, img_settings, img_profile, img_safety,
+  img_explore_light, img_chat_light, img_chats_list_light, img_settings_light, img_profile_light, img_safety_light,
+  img_speed_date_inbox, img_speed_date_author, img_speed_date_sent, img_speed_date_modal,
 } from '../assets/images'
 
 interface ScreenItem {
@@ -12,14 +13,16 @@ interface ScreenItem {
 }
 
 const screens: ScreenItem[] = [
-  { darkSrc: img_explore,     lightSrc: img_explore_light,     caption: 'Explore' },
-  { darkSrc: img_likes,       lightSrc: img_likes_light,       caption: 'Likes' },
-  { darkSrc: img_match,       lightSrc: img_match,             caption: "It's a Match!" },
-  { darkSrc: img_chat,        lightSrc: img_chat_light,        caption: 'Messaging' },
-  { darkSrc: img_chats_list,  lightSrc: img_chats_list_light,  caption: 'Chats' },
-  { darkSrc: img_settings,    lightSrc: img_settings_light,    caption: 'Explore Settings' },
-  { darkSrc: img_profile,     lightSrc: img_profile_light,     caption: 'Profile' },
-  { darkSrc: img_safety,      lightSrc: img_safety_light,      caption: 'Safe Guard' },
+  { darkSrc: img_speed_date_inbox, lightSrc: img_speed_date_inbox, caption: 'Dates — home' },
+  { darkSrc: img_speed_date_author, lightSrc: img_speed_date_author, caption: 'Dates — your questions' },
+  { darkSrc: img_speed_date_sent, lightSrc: img_speed_date_sent, caption: 'Dates — sent' },
+  { darkSrc: img_speed_date_modal, lightSrc: img_speed_date_modal, caption: 'Browse — respond to their questions' },
+  { darkSrc: img_explore, lightSrc: img_explore_light, caption: 'Browse' },
+  { darkSrc: img_chats_list, lightSrc: img_chats_list_light, caption: 'Inbox' },
+  { darkSrc: img_chat, lightSrc: img_chat_light, caption: 'Messaging' },
+  { darkSrc: img_profile, lightSrc: img_profile_light, caption: 'You' },
+  { darkSrc: img_settings, lightSrc: img_settings_light, caption: 'Filters & safety' },
+  { darkSrc: img_safety, lightSrc: img_safety_light, caption: 'Safe Guard' },
 ]
 
 interface ScreenshotsProps {
@@ -48,7 +51,7 @@ export default function Screenshots({ isDark }: ScreenshotsProps) {
               Every screen, <span className="text-mint">crafted</span>
             </h2>
             <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mt-3 sm:mt-4">
-              A focused interface designed to keep you in the moment — not the app.
+              A quick tour: Dates when you open the app (inbox of answers), writing your three questions, sent answers, answering someone from Browse when their card shows what they asked, Inbox with Primary and Archived, a conversation, You, filters, and safety.
             </p>
           </div>
           <div className="flex gap-3 flex-shrink-0">

@@ -3,7 +3,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 import appStoreBadge from '../assets/app-store-badge.svg'
 import googlePlayBadge from '../assets/google-play-badge.svg'
 
-const BETA_VERSION_LABEL = 'Beta version 1.0.2'
+const BETA_VERSION_LABEL = 'Version 1.0.2'
 
 function envAndroidBetaUrl(): string | undefined {
   const v = import.meta.env.VITE_ANDROID_BETA_URL
@@ -47,18 +47,18 @@ export default function DownloadSection() {
       </div>
 
       <div ref={ref} className="opacity-0 translate-y-8 transition-all duration-700 relative z-10 max-w-xl mx-auto">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Beta version</p>
+        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Get the app</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 sm:mb-5">
-          Try <span className="text-mint">Chat</span> before everyone else
+          <span className="text-mint">Chat</span> on your phone
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10">
-          This is an early beta — you get the real app to try on your phone. It’s free to install; you can explore everything and go Premium when you’re ready.
+          The same flow you see here: Dates when you open it, then Browse, Inbox, and You. Free to install; add Premium when you want more room to move.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 justify-center items-center">
           <div
             className="flex flex-col items-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 w-full sm:w-auto opacity-80"
-            aria-label="iOS beta coming soon"
+            aria-label="iOS — coming soon"
           >
             <img
               src={appStoreBadge}
@@ -72,13 +72,13 @@ export default function DownloadSection() {
             <StoreButton
               href={androidUrl}
               badge={googlePlayBadge}
-              alt="Get the Chat beta via Google Play"
+              alt="Get Chat on Google Play"
               badgeHeight={52}
             />
           ) : (
             <div
               className="flex flex-col items-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 w-full sm:w-auto opacity-80"
-              aria-label="Android beta link not configured"
+              aria-label="Android link not configured"
             >
               <img
                 src={googlePlayBadge}

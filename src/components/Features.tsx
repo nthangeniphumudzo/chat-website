@@ -8,34 +8,38 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    icon: '🧭',
-    title: 'Explore',
-    description: 'Swipe through profiles one at a time. Like, pass, or send a compliment with a personal message to stand out.',
+    icon: '⚡',
+    title: 'Speed Date',
+    description:
+      'This is what the Dates tab is for — the screen you land on. Write up to three questions in your own words — each person’s trio is different, and nothing is pulled from a shared list. Others answer in writing; you get an inbox to match, pass, favorite, or highlight standout replies — so the first move is substance, not only a swipe.',
+  },
+  {
+    icon: '🔎',
+    title: 'Browse',
+    description:
+      'Not the first screen — it’s where you go when you want discovery: a location-aware card stack with like, pass, filters, Boost when enabled, and safety tools. When a card shows the questions that person wrote for Speed Date, you can open the answer flow right there.',
+  },
+  {
+    icon: '💬',
+    title: 'Inbox',
+    description:
+      'After you and someone else match (from Browse and/or Speed Date), your thread lives here — voice, photo, reactions, and replies where available.',
+  },
+  {
+    icon: '👤',
+    title: 'You',
+    description:
+      'Your photos, preferences, verification, and account settings — plus subscription, boosts, and vault-style items such as roses when the product enables them.',
   },
   {
     icon: '📍',
-    title: 'Location Discovery',
-    description: 'Find people near you with a customisable radius. Expand automatically if you run low on profiles.',
-  },
-  {
-    icon: '💌',
-    title: 'Compliments',
-    description: 'Send a personal note alongside your like. A mutual like and compliment creates an instant match.',
-  },
-  {
-    icon: '❤️',
-    title: 'Likes Tab',
-    description: 'See everyone who liked you. Like back for a match, pass, or respond with your own compliment.',
-  },
-  {
-    icon: '✨',
-    title: 'Rich Profiles',
-    description: 'Photos, bio, interests, lifestyle, religion, zodiac, and goals — everything to make a real first impression.',
+    title: 'Near you',
+    description: 'Customisable discovery radius with sensible expansion when you run low on people to see.',
   },
   {
     icon: '🔄',
     title: 'Undo',
-    description: 'Changed your mind? Go back to the previous profile in Explore and give it another look.',
+    description: 'Changed your mind on Browse? Step back one card and take another look before you commit.',
   },
 ]
 
@@ -59,7 +63,7 @@ function ScreenshotFlagship() {
             Screenshot &amp; recording <span className="text-mint">protection</span>
           </h3>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
-            <span className="font-medium text-gray-800 dark:text-gray-200">Every screen in the app</span> is covered: screenshots and screen recordings capture a <span className="font-medium text-gray-800 dark:text-gray-200">blank or black frame</span> — not your messages, photos, or context. It is a rare, tangible promise that we are building Chat with your privacy at the centre, not as a footnote.
+            <span className="font-medium text-gray-800 dark:text-gray-200">Every screen in the app</span> is covered: screenshots and screen recordings capture a <span className="font-medium text-gray-800 dark:text-gray-200">blank or black frame</span> — not your messages, photos, or context. Someone can’t walk away with your chat from a quick screen grab.
           </p>
         </div>
       </div>
@@ -100,10 +104,10 @@ export default function Features() {
           What’s inside the app
         </p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 sm:mb-5">
-          Built so you find <span className="text-mint">real</span> connections
+          Built around <span className="text-mint">Dates</span>, not endless scrolling
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
-          <span className="text-gray-700 dark:text-gray-200 font-medium">App-wide screenshot and recording protection</span> sets us apart: nothing you see in Chat leaks through someone else’s camera roll. Plus verified users, compliments that get noticed, and the rest of the features below.
+          <span className="text-gray-700 dark:text-gray-200 font-medium">Screenshot and screen recording protection</span> is on everywhere: someone else’s camera roll won’t capture your chats or photos — just a blank or black frame. You move between Dates, Browse, Inbox, and You like any other part of the app.
         </p>
       </div>
 

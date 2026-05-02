@@ -2,12 +2,11 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 import { img_premium } from '../assets/images'
 
 const premiumFeatures = [
-  'Unlimited likes',
-  'See who liked you',
   'Instant messaging (text, voice, photo)',
-  '1 Boost per week',
-  '2 compliments per week',
-  'Advanced explore filters',
+  'Same plan rules for Speed Date and Browse when you hit a limit',
+  '1 Boost per week (when Boost is enabled)',
+  'Roses and plan extras where the product includes them',
+  'Advanced filters on Browse',
   'Control your profile visibility',
   'Unlimited boost purchases',
 ]
@@ -31,10 +30,10 @@ export default function PremiumSection({ isDark }: PremiumSectionProps) {
         <div ref={textRef} className="opacity-0 translate-y-8 transition-all duration-700">
           <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Go Premium</p>
           <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-5 sm:mb-6">
-            More features,<br />more <span className="text-mint">matches</span>
+            More room to<br /><span className="text-mint">move first</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-md mb-6 sm:mb-8">
-            Chat is free to explore. Premium unlocks the full experience — instant messaging, advanced filters, Boost visibility, and more control over who sees you.
+            Chat is free to try. Premium unlocks the full stack — messaging, filters, Boost when you use it, and the extra headroom on Speed Date and Browse when your plan says so.
           </p>
           {/* Phone — hidden on mobile to save space, shown on lg */}
           <div className="hidden lg:inline-block">
@@ -68,7 +67,7 @@ export default function PremiumSection({ isDark }: PremiumSectionProps) {
                 href="#download"
                 className="mt-6 sm:mt-8 w-full inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 transition-all duration-200"
               >
-                Download beta
+                Download
               </a>
             </div>
           </div>

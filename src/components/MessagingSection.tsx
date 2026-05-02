@@ -24,13 +24,13 @@ export default function MessagingSection({ isDark }: MessagingSectionProps) {
   return (
     <section id="messaging" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-24 max-w-7xl mx-auto">
       <div ref={textRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-12 sm:mb-16">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Premium Messaging</p>
+        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Inbox after you match</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
-          When you match,<br />
-          <span className="text-mint">really</span> connect
+          Mutual match —<br />
+          <span className="text-mint">from Browse or Speed Date</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-2xl">
-          Premium unlocks real-time messaging that goes beyond text — voice notes, photo sharing, reactions, and replies.
+          When you and someone match from Browse and/or Speed Date, the thread shows up here. Premium unlocks the full real-time stack — voice, photos, reactions, and replies where enabled.
         </p>
       </div>
 

@@ -223,7 +223,7 @@ function CommunityContent() {
 
       <LegalBlock title="Reporting Violations">
         Report violations through{' '}
-        <strong className="text-gray-700 dark:text-gray-300">Settings {'>'} Privacy & Safety {'>'} Report a Problem</strong>{' '}
+        <strong className="text-gray-700 dark:text-gray-300">You {'>'} Privacy & Safety {'>'} Report a Problem</strong>{' '}
         in the app, or contact our safety team at{' '}
         <a href="mailto:chat@phcreations.com" className="text-mint hover:underline">
           chat@phcreations.com

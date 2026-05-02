@@ -1,7 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import { img_chat, img_chat_light } from '../assets/images'
-import profilePrivacyDark from '../assets/privacy/profile-privacy-dark.png'
-import profilePrivacyLight from '../assets/privacy/profile-privacy-light.png'
+import { img_chat, img_chat_light, img_safety, img_safety_light } from '../assets/images'
 import blockContactsListDark from '../assets/privacy/block-contacts-list-dark.png'
 import blockContactsListLight from '../assets/privacy/block-contacts-list-light.png'
 
@@ -16,7 +14,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
   const phonesRef = useScrollReveal<HTMLDivElement>()
   const blockListRef = useScrollReveal<HTMLDivElement>()
 
-  const profileImg = isDark ? profilePrivacyDark : profilePrivacyLight
+  const privacyHubImg = isDark ? img_safety : img_safety_light
   const blockListImg = isDark ? blockContactsListDark : blockContactsListLight
   const chatImg = isDark ? img_chat : img_chat_light
 
@@ -72,21 +70,26 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
           <span className="text-mint">Block exes, stalkers, anyone.</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-2xl">
-          Pick people from your contacts who shouldn't have access to your profile. Once blocked, they won't show up in your Explore and you won't show up in theirs.
+          Pick people from your contacts who shouldn't have access to your profile. Once blocked, they won't show up in Browse and you won't show up in theirs.
         </p>
       </div>
 
-      {/* Topic 1: Profile Privacy & Safety — picture directly under this topic */}
+      {/* Topic 1: You → Privacy & Safety — same screens as the in-app tour (screenshots/safety-*) */}
       <div ref={phonesRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-14 sm:mb-20">
         <h3 className="font-syne font-bold text-lg sm:text-xl text-gray-900 dark:text-gray-100 mb-3 tracking-tight">
-          Profile → Privacy &amp; Safety
+          You → Privacy &amp; Safety
         </h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6 max-w-2xl">
-          Manage your block list, control who sees your profile, and access safety settings in one place.
+          From the You tab, open Privacy &amp; Safety to manage your block list, who can see you, and safety tools in one place.
         </p>
         <div className="flex justify-center lg:justify-start">
           <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
-            <img src={profileImg} alt="Profile Privacy & Safety screen" className="w-full block" loading="lazy" />
+            <img
+              src={privacyHubImg}
+              alt="Privacy and safety settings on the You tab"
+              className="w-full block"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
