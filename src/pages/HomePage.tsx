@@ -8,7 +8,6 @@ import PremiumSection from '../components/PremiumSection'
 import SafetySection from '../components/SafetySection'
 import PrivacySection from '../components/PrivacySection'
 import DownloadSection from '../components/DownloadSection'
-import WaitlistSection from '../components/WaitlistSection'
 import LegalSection from '../components/LegalSection'
 import Footer from '../components/Footer'
 
@@ -29,7 +28,6 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
       <SafetySection />
       <PrivacySection isDark={isDark} />
       <PremiumSection isDark={isDark} />
-      <WaitlistSection />
       <DownloadSection />
       <LegalSection />
       <Footer isDark={isDark} />
