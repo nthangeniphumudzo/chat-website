@@ -3,7 +3,6 @@ import {
     img_speed_date_inbox,
     img_explore,
     img_chats_list,
-    img_profile,
     img_screenshot_extra,
 } from '../assets/images'
 
