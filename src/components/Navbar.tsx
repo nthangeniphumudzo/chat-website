@@ -37,11 +37,10 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || menuOpen
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || menuOpen
           ? 'bg-white/95 dark:bg-[#050505]/95 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
         <a href="./" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
@@ -75,12 +74,7 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
             {isDark ? '☀️' : '🌙'}
           </button>
 
-          <a
-            href="./#download"
-            className="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 transition-all duration-200"
-          >
-            Download
-          </a>
+          {/* Download CTA removed — floating bar handles mobile downloads */}
 
           <button
             className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5"
@@ -96,9 +90,8 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
       </div>
 
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } bg-white dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          } bg-white dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800`}
       >
         <div className="px-5 py-4 flex flex-col gap-1">
           {marketingLinks.map(({ href, label }) => (
