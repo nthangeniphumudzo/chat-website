@@ -4,6 +4,7 @@ import {
   img_explore_light, img_settings_light,
   img_speed_date_inbox,
 } from '../assets/images'
+import ScreenshotCarousel from './ScreenshotCarousel'
 
 interface HeroProps {
   isDark: boolean
@@ -19,7 +20,7 @@ export default function Hero({ isDark }: HeroProps) {
       </div>
 
       {/* ── Text ── */}
-      <div className="relative z-10 animate-fade-up text-center lg:text-left order-1 lg:order-none w-full">
+      <div className="relative z-10 animate-fade-up text-center lg:text-left order-2 lg:order-none w-full">
         <div className="flex justify-center lg:justify-start mb-5">
           <img
             src={isDark ? icon_dark : icon_light}
@@ -29,8 +30,12 @@ export default function Hero({ isDark }: HeroProps) {
         </div>
 
         <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
-          This is how Chat opens — Dates first, Browse when you want to look around
+          Start with real answers — meet people through three short, thoughtful questions.
         </p>
+
+        <div className="mx-auto mb-6 lg:mb-8 w-full max-w-sm">
+          <ScreenshotCarousel />
+        </div>
 
         <h1 className="font-syne font-extrabold text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5">
           Your questions.<br />
@@ -65,11 +70,7 @@ export default function Hero({ isDark }: HeroProps) {
       </div>
 
       {/* ── Phones: single on mobile, stacked trio on desktop ── */}
-      <div className="flex lg:hidden justify-center order-2 w-full pt-4 animate-fade-up-1">
-        <div className={`w-56 rounded-[36px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
-          <img src={img_speed_date_inbox} alt="Dates — replies you’ve received" className="w-full block" loading="eager" />
-        </div>
-      </div>
+
 
       <div className="hidden lg:flex relative justify-center items-end h-[560px] animate-fade-up-1">
         <div className="absolute bottom-0 right-0 z-10 translate-x-[-80px] translate-y-[80px] scale-75 opacity-50">
