@@ -1,16 +1,15 @@
-import { useState } from 'react'
+// no hooks needed
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import appStoreBadge from '../assets/app-store-badge.svg'
 import googlePlayBadge from '../assets/google-play-badge.svg'
 import { img_chat } from '../assets/images'
 
 const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
-const TESTFLIGHT_URL = 'https://testflight.apple.com/join/xeFze9Fv'
+const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
 
 export default function DownloadSection() {
   const ref = useScrollReveal<HTMLDivElement>()
   const androidUrl = GOOGLE_PLAY_URL
-  const [showIosInstructions, setShowIosInstructions] = useState(false)
 
   return (
     <section id="download" className="py-20 sm:py-28 lg:py-32 px-5 sm:px-8 text-center relative overflow-hidden">
@@ -39,56 +38,26 @@ export default function DownloadSection() {
 
         <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-start sm:gap-6 justify-center">
           <div className="flex flex-col gap-4 w-full sm:w-[360px]">
-            <button
-              type="button"
-              onClick={() => setShowIosInstructions((current) => !current)}
-              aria-expanded={showIosInstructions}
-              aria-controls="ios-download-instructions"
-              className="relative flex items-center justify-center px-5 py-4 rounded-3xl bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 w-full opacity-90 hover:border-mint hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center px-5 py-4 rounded-3xl bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 w-full opacity-90 hover:border-mint hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
             >
               <img
                 src={appStoreBadge}
-                alt="TestFlight iOS beta"
+                alt="Download on the App Store"
                 className="w-auto object-contain dark:invert"
                 style={{ height: '40px' }}
               />
-              <span aria-hidden="true" className="absolute right-4 text-mint">
-                {showIosInstructions ? '▴' : '▾'}
-              </span>
-              <span className="sr-only">Toggle TestFlight instructions</span>
-            </button>
-
-            {showIosInstructions && (
-              <div
-                id="ios-download-instructions"
-                className="rounded-3xl border border-mint/20 bg-mint/5 p-6 text-left text-sm text-gray-700 dark:text-gray-200"
-              >
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-3">Install Chat on iOS via TestFlight</h3>
-                <p className="mb-3">
-                  To test the beta iOS app with TestFlight, install Apple TestFlight from the App Store if you don't already have it.
-                  Then tap the public invite link below, accept the invite, and install the beta build.
-                </p>
-                <ol className="list-decimal list-inside space-y-2 mb-4 text-gray-700 dark:text-gray-300">
-                  <li>Install Apple TestFlight from the App Store.</li>
-                  <li>Open the public TestFlight invite link for Chat.</li>
-                  <li>Accept the invite and install the beta build.</li>
-                </ol>
-                <a
-                  href={TESTFLIGHT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-mint px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-mint/90 transition-colors"
-                >
-                  Download on TestFlight
-                </a>
-              </div>
-            )}
+            </a>
           </div>
 
           <StoreButton
             href={androidUrl}
             badge={googlePlayBadge}
-            alt="Get Chat on Google Play"
+            alt="Get it on Google Play"
+            darkInvert
             badgeHeight={52}
           />
         </div>
