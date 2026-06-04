@@ -55,10 +55,10 @@ function ToSContent() {
     <div>
       <LegalMeta />
       <LegalIntro>
-        By accessing and using Chat, you accept and agree to be bound by these terms. If you do not agree, you may not use our service.
+        By accessing and using Ch@t, you accept and agree to be bound by these terms. If you do not agree, you may not use our service.
       </LegalIntro>
       <LegalBlock title="1. Eligibility">
-        You must be at least 18 years old to use this service. By using Chat, you represent and warrant that you have the legal capacity to enter into this agreement. You must be single, separated, or divorced; provide accurate and current information; maintain the confidentiality of your account; and you may not create more than one account.
+        You must be at least 18 years old to use this service. By using Ch@t, you represent and warrant that you have the legal capacity to enter into this agreement. You must be single, separated, or divorced; provide accurate and current information; maintain the confidentiality of your account; and you may not create more than one account.
       </LegalBlock>
       <LegalBlock title="2. User Accounts">
         You are responsible for maintaining the security of your account credentials and for all activities that occur under your account. You must provide accurate registration information and immediately notify us of any unauthorised use. We reserve the right to suspend or terminate accounts that violate these terms.
@@ -96,7 +96,7 @@ function PrivacyContent() {
     <div>
       <LegalMeta />
       <LegalIntro>
-        Your privacy matters to us. This policy explains how we collect, use, and protect your personal information when you use Chat.
+        Your privacy matters to us. This policy explains how we collect, use, and protect your personal information when you use Ch@t.
       </LegalIntro>
       <LegalBlock title="1. Information We Collect">
         We collect information you provide directly (profile data, photos, bio, preferences, account credentials), information collected automatically (usage data, device information, log data, location data if enabled), and payment or billing information for premium features.
@@ -179,7 +179,7 @@ const guidelines = [
   { icon: '✅', title: 'Be Authentic',          description: 'Use your real photos and accurate information. Catfishing and impersonation are strictly prohibited. Keep your profile information honest.' },
   { icon: '🖼️', title: 'Appropriate Content', description: 'No nudity, explicit content, hate speech, discriminatory content, or violent imagery. Respect copyright and intellectual property.' },
   { icon: '🚫', title: 'No Scams or Spam',     description: "Financial scams, spam, and fraudulent activity are prohibited. Don't ask for money. No pyramid schemes or mass unsolicited messaging." },
-  { icon: '🔞', title: 'Age Requirements',     description: 'You must be 18 or older to use Chat. Falsifying your age will result in immediate termination. Report users who appear underage.' },
+  { icon: '🔞', title: 'Age Requirements',     description: 'You must be 18 or older to use Ch@t. Falsifying your age will result in immediate termination. Report users who appear underage.' },
 ]
 
 const enforcement = [
@@ -193,7 +193,7 @@ function CommunityContent() {
     <div>
       <LegalMeta />
       <LegalIntro>
-        These guidelines help create a safe, respectful, and welcoming environment for everyone on Chat. Violations may result in warnings, suspension, or permanent removal.
+        These guidelines help create a safe, respectful, and welcoming environment for everyone on Ch@t. Violations may result in warnings, suspension, or permanent removal.
       </LegalIntro>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-7 pb-7 border-b border-gray-100 dark:border-gray-800">
@@ -255,7 +255,7 @@ export default function LegalSection() {
             Transparency &amp; <span className="text-mint">Trust</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-lg">
-            Everything you need to know about how Chat works, how we protect your data, and the standards we hold our community to.
+            Everything you need to know about how Ch@t works, how we protect your data, and the standards we hold our community to.
           </p>
         </div>
 

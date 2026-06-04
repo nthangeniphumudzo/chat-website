@@ -11,35 +11,35 @@ const features: Feature[] = [
     icon: '⚡',
     title: 'Speed Date',
     description:
-      'This is what the Dates tab is for — the screen you land on. Write up to three questions in your own words — each person’s trio is different, and nothing is pulled from a shared list. Others answer in writing; you get an inbox to match, pass, favorite, or highlight standout replies — so the first move is substance, not only a swipe.',
+      'The first screen you see isn\'t profiles — it\'s answers. People nearby read your three questions and wrote something back. Real words, in their voice, before you ever connect. That\'s your Dates tab. That\'s where Ch@t starts.',
   },
   {
     icon: '🔎',
     title: 'Browse',
     description:
-      'Not the first screen — it’s where you go when you want discovery: a location-aware card stack with like, pass, filters, Boost when enabled, and safety tools. When a card shows the questions that person wrote for Speed Date, you can open the answer flow right there.',
+      'When you\'re ready to explore, Browse shows who\'s nearby. The difference: their Speed Date questions are right there on the card. You already know what they care about before you decide. Not just a face — context.',
   },
   {
     icon: '💬',
     title: 'Inbox',
     description:
-      'After you and someone else match (from Browse and/or Speed Date), your thread lives here — voice, photo, reactions, and replies where available.',
+      'After a mutual match — from Dates or Browse — your thread starts here. The first message isn\'t awkward because it isn\'t really the first thing. You already know something real about each other.',
   },
   {
     icon: '👤',
     title: 'You',
     description:
-      'Your photos, preferences, verification, and account settings — plus subscription, boosts, and vault-style items such as roses when the product enables them.',
+      'Your profile, your photos, your preferences — and verification that makes sure the person on the other side is exactly who they say they are. No surprises. No strangers pretending.',
   },
   {
     icon: '📍',
     title: 'Near you',
-    description: 'Customisable discovery radius with sensible expansion when you run low on people to see.',
+    description: 'Discovery radius that adjusts as you use it. Close enough to be real, wide enough to find the right person — not just the nearest one.',
   },
   {
     icon: '🔄',
     title: 'Undo',
-    description: 'Changed your mind on Browse? Step back one card and take another look before you commit.',
+    description: 'Changed your mind on Browse? Step back and look again. Some people are worth a second read.',
   },
 ]
 
@@ -60,10 +60,11 @@ function ScreenshotFlagship() {
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="font-syne font-extrabold text-2xl sm:text-3xl lg:text-4xl text-gray-900 dark:text-gray-50 tracking-tight leading-tight mb-3 sm:mb-4">
-            Screenshot &amp; recording <span className="text-mint">protection</span>
+            What you share here<br />
+            <span className="text-mint">stays here.</span>
           </h3>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
-            <span className="font-medium text-gray-800 dark:text-gray-200">Every screen in the app</span> is covered: screenshots and screen recordings capture a <span className="font-medium text-gray-800 dark:text-gray-200">blank or black frame</span> — not your messages, photos, or context. Someone can’t walk away with your chat from a quick screen grab.
+            Every screen in the app is covered. If someone tries to screenshot or record — your messages, photos, anything — what they get is <span className="font-medium text-gray-800 dark:text-gray-200">a blank or black frame</span>. Not your words. Not your face. Nothing. We built it that way on purpose.
           </p>
         </div>
       </div>
@@ -101,13 +102,14 @@ export default function Features() {
     <section id="features" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto">
       <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-10 sm:mb-14">
         <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">
-          What’s inside the app
+          Inside the app
         </p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 sm:mb-5">
-          Built around <span className="text-mint">Dates</span>, not endless scrolling
+          Four tabs. One idea:<br />
+          <span className="text-mint">know before you match.</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
-          <span className="text-gray-700 dark:text-gray-200 font-medium">Screenshot and screen recording protection</span> is on everywhere: someone else’s camera roll won’t capture your chats or photos — just a blank or black frame. You move between Dates, Browse, Inbox, and You like any other part of the app.
+          Everything in Chat is built so you arrive at a conversation knowing something real. Plus — <span className="text-gray-700 dark:text-gray-200 font-medium">every screen is protected</span>: screenshots and recordings show a blank or black frame, not your chats or photos. What happens here stays here.
         </p>
       </div>
 

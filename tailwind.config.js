@@ -12,8 +12,8 @@ export default {
         },
       },
       fontFamily: {
-        syne: ['Syne', 'sans-serif'],
-        dm: ['DM Sans', 'sans-serif'],
+        syne: ['"Playfair Display"', 'Georgia', 'serif'],
+        dm: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-up': 'fadeUp 0.6s ease both',

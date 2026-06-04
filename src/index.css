@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply font-dm font-light antialiased transition-colors duration-300;
+    @apply font-dm font-normal antialiased transition-colors duration-300;
     overflow-x: hidden;
   }
 

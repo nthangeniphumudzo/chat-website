@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import StatsBar from '../components/StatsBar'
+import NarrativeSection from '../components/NarrativeSection'
 import Features from '../components/Features'
 import Screenshots from '../components/Screenshots'
 import MessagingSection from '../components/MessagingSection'
@@ -23,6 +24,7 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
       <Navbar isDark={isDark} onToggle={onToggleTheme} />
       <Hero isDark={isDark} />
       <StatsBar />
+      <NarrativeSection />
       <Features />
       <Screenshots isDark={isDark} />
       <MessagingSection isDark={isDark} />

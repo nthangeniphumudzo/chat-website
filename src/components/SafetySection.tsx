@@ -9,24 +9,24 @@ interface SafetyCard {
 const safetyCards: SafetyCard[] = [
   {
     icon: '🛡️',
-    title: 'Safe Guard',
-    description: 'Block or report anyone directly from their profile. We keep it confidential — they won\'t know.',
+    title: 'Block or report silently',
+    description: 'One tap, directly from someone\'s profile. We keep it confidential — they\'ll never know you reported them. Your peace of mind, without the confrontation.',
   },
   {
     icon: '🔒',
-    title: 'Privacy Settings',
+    title: 'You control who sees you',
     description:
-      'Control who sees your age, distance, and profile. Screenshot protection applies across the whole app — every screen shows a blank or black frame in captures and recordings, so your chats stay between you and your match.',
+      'Set who can see your age, distance, and profile. And remember — every screen is screenshot-protected. Whatever you share in Ch@t stays in Ch@t, not someone\'s camera roll.',
   },
   {
     icon: '✅',
-    title: 'Everyone Verified',
-    description: 'Every user is verified — no one can use Chat without passing verification. When you see Rihanna on Chat, you\'re talking to Rihanna. No catfishing, no fake profiles.',
+    title: 'The person you see is the person you get.',
+    description: 'Nobody uses Ch@t without passing verification. That face on the card? That\'s them. Not a photo from five years ago. Not a stranger. Them. Verified.',
   },
   {
     icon: '🆘',
-    title: 'Safety Center',
-    description: 'Tips, resources, and direct access to support — all in one place whenever you need it.',
+    title: 'Safety is a tap away',
+    description: 'Tips, resources, and direct access to real support — all inside the app. Because safety shouldn\'t feel buried.',
   },
 ]
 
@@ -58,12 +58,13 @@ export default function SafetySection() {
   return (
     <section id="safety" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto">
       <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-10 sm:mb-12">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Privacy &amp; Safety</p>
+        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Safety &amp; trust</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 sm:mb-5">
-          Your safety is <span className="text-mint">built in</span>
+          The person you're talking to<br />
+          <span className="text-mint">is actually them.</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          Every user is verified before they can use Chat — so the person you're talking to is always who they say they are. Plus full control over who sees you, who can contact you, and how to report anything that doesn't feel right. The app blocks screenshots and recordings app-wide, so those captures stay blank or black on every screen.
+          No one can use Ch@t without passing verification first. The profile you're reading is real. The questions they wrote are theirs. You can control who sees you, report without confrontation, and every screenshot or recording across the whole app shows blank — so what you share stays yours.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

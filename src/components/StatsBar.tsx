@@ -1,8 +1,8 @@
 const stats = [
-  { num: '3', label: 'Questions in your Speed Date' },
-  { num: '1st', label: 'Opens on Dates' },
-  { num: '100%', label: 'Verified profiles' },
-  { num: 'You', label: 'Curate answers — match or pass' },
+  { num: '3', label: 'Questions you write yourself' },
+  { num: 'Written', label: 'Answers before the first hello' },
+  { num: '100%', label: 'Real — every profile verified' },
+  { num: '0', label: 'Awkward openers required' },
 ]
 
 export default function StatsBar() {
@@ -10,7 +10,7 @@ export default function StatsBar() {
     <div className="border-y border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
         <p className="text-center text-sm font-medium text-gray-500 dark:text-gray-400 mb-6 max-w-xl mx-auto">
-          You start with real answers to what you asked — then Browse or jump into Inbox whenever you want.
+          You know something true about them before you say a word.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {stats.map(({ num, label }) => (

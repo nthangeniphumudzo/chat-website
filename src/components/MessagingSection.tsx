@@ -9,7 +9,6 @@ const chatFeatures = [
   'Read receipts so you know they saw it',
 ]
 
-const listFeature = 'All conversations in one organised list.'
 
 interface MessagingSectionProps {
   isDark: boolean
@@ -24,20 +23,20 @@ export default function MessagingSection({ isDark }: MessagingSectionProps) {
   return (
     <section id="messaging" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-24 max-w-7xl mx-auto">
       <div ref={textRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-12 sm:mb-16">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Inbox after you match</p>
+        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">When you both match</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
-          Mutual match —<br />
-          <span className="text-mint">from Browse or Speed Date</span>
+          The conversation starts<br />
+          <span className="text-mint">where most never do.</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-2xl">
-          When you and someone match from Browse and/or Speed Date, the thread shows up here. Premium unlocks the full real-time stack — voice, photos, reactions, and replies where enabled.
+          After a mutual match — from Dates or Browse — the thread lives here. You already know something real about each other. That changes everything about how the first message feels. Premium unlocks the full stack: voice, photos, reactions, and replies.
         </p>
       </div>
 
       {/* Topic 1: Chat — picture directly under this topic */}
       <div ref={chatRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-14 sm:mb-20">
         <h3 className="font-syne font-bold text-lg sm:text-xl text-gray-900 dark:text-gray-100 mb-3 tracking-tight">
-          Real conversations
+          A conversation with somewhere to go
         </h3>
         <ul className="divide-y divide-gray-100 dark:divide-gray-800 mb-6 max-w-2xl">
           {chatFeatures.map(item => (
@@ -57,10 +56,10 @@ export default function MessagingSection({ isDark }: MessagingSectionProps) {
       {/* Topic 2: Chats list — picture directly under this topic */}
       <div ref={listRef} className="opacity-0 translate-y-8 transition-all duration-700">
         <h3 className="font-syne font-bold text-lg sm:text-xl text-gray-900 dark:text-gray-100 mb-3 tracking-tight">
-          All in one place
+          Everyone you matched with, in one place
         </h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6 max-w-2xl">
-          {listFeature}
+          Every thread in one organised list — each one started from something real.
         </p>
         <div className="flex justify-center lg:justify-start">
           <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>

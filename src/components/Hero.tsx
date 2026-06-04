@@ -30,7 +30,7 @@ export default function Hero({ isDark }: HeroProps) {
         </div>
 
         <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
-          Start with real answers — meet people through three short, thoughtful questions.
+          The opener that actually works
         </p>
 
         <div className="mx-auto mb-6 lg:mb-8 w-full max-w-sm">
@@ -38,19 +38,19 @@ export default function Hero({ isDark }: HeroProps) {
         </div>
 
         <h1 className="font-syne font-extrabold text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5">
-          Your questions.<br />
-          <span className="text-mint">Their answers.</span><br />
-          Better first impressions.
+          Meet them<br />
+          before<br />
+          <span className="text-mint">the first message.</span>
         </h1>
 
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-4">
-          Write up to three Speed Date questions in your own words — they’re yours, not a shared script, and every profile’s trio is different. People reply in writing before the small talk; you get an inbox to match, pass, or favorite on substance, not only a photo swipe.
+          Most matches end before they start. The opener goes nowhere. The conversation fades. Not because you weren’t right for each other — because there was nothing real to begin with.
         </p>
-        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-6 font-medium">
-          Browse is only when you’re ready to look around: nearby people, like and pass, and when their card shows the questions they wrote, you can answer from there. Threads live in Inbox after mutual matches — every profile stays verified.
+        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
+          Ch@t starts differently. You write three questions — your words, not a shared script. People answer them in writing before you ever connect. By the time you’re talking, you already know something true about them.
         </p>
         <p className="text-mint/90 text-sm font-medium max-w-md mx-auto lg:mx-0 mb-8">
-          Free to install — bring your own questions.
+          Right now, someone nearby is answering. What would you ask?
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">

@@ -32,7 +32,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
           Protection on every screen
         </h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-2 max-w-2xl">
-          While you use Chat, you see the full experience — messages, photos, and context. If someone tries to capture a screenshot or screen recording of <span className="text-gray-700 dark:text-gray-300 font-medium">any</span> screen, that capture comes out <span className="text-gray-700 dark:text-gray-300 font-medium">blank or black</span>, so your private moments are not saved to their camera roll.
+          While you use Ch@t, you see the full experience — messages, photos, and context. If someone tries to capture a screenshot or screen recording of <span className="text-gray-700 dark:text-gray-300 font-medium">any</span> screen, that capture comes out <span className="text-gray-700 dark:text-gray-300 font-medium">blank or black</span>, so your private moments are not saved to their camera roll.
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-8 max-w-2xl">
           We built it that way on purpose: your privacy is not an afterthought.

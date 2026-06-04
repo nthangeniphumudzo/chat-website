@@ -49,7 +49,7 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
             alt="Chat logo"
             className="w-8 h-8 object-contain transition-transform duration-200 group-hover:scale-105"
           />
-          <span className="font-syne font-extrabold text-xl tracking-tight text-mint">Chat</span>
+          <span className="font-syne font-extrabold text-xl tracking-tight text-mint">Ch@t</span>
         </a>
 
         <ul className="hidden md:flex items-center gap-8">
