@@ -37,7 +37,7 @@ export default function DownloadSection() {
           People nearby are already writing theirs. Some of them are already answering yours.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-sm mx-auto sm:max-w-none">
+        <div className="hidden lg:flex flex-row gap-4 justify-center w-full">
           <a
             href={APP_STORE_URL}
             target="_blank"
@@ -65,7 +65,7 @@ export default function DownloadSection() {
           </a>
         </div>
 
-        <p className="mt-4 text-xs text-gray-400 dark:text-gray-600 font-medium">
+        <p className="hidden lg:block mt-4 text-xs text-gray-400 dark:text-gray-600 font-medium">
           Free to download — no credit card required
         </p>
 

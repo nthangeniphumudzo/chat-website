@@ -49,7 +49,6 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
             alt="Chat logo"
             className="w-8 h-8 object-contain transition-transform duration-200 group-hover:scale-105"
           />
-          <span className="font-syne font-extrabold text-xl tracking-tight text-mint">Ch@t</span>
         </a>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -104,13 +103,6 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
               {label}
             </a>
           ))}
-          <a
-            href="./#download"
-            onClick={() => setMenuOpen(false)}
-            className="mt-3 inline-flex items-center justify-center px-5 py-3.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-transform"
-          >
-            Download
-          </a>
         </div>
       </div>
     </nav>

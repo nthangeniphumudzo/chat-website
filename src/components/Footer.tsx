@@ -26,7 +26,6 @@ export default function Footer({ isDark }: FooterProps) {
             alt="Chat logo"
             className="w-7 h-7 object-contain transition-transform duration-200 group-hover:scale-105"
           />
-          <span className="font-syne font-extrabold text-lg tracking-tight text-mint">Ch@t</span>
         </a>
 
         <ul className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-5 sm:gap-x-6 gap-y-3 sm:gap-y-2 text-center">
