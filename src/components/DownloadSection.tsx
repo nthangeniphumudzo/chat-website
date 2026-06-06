@@ -1,6 +1,8 @@
 // no hooks needed
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { img_chat } from '../assets/images'
+import appStoreBadge from '../assets/app-store-badge.svg'
+import googlePlayBadge from '../assets/google-play-badge.svg'
 
 const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
 const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
@@ -37,31 +39,22 @@ export default function DownloadSection() {
           People nearby are already writing theirs. Some of them are already answering yours.
         </p>
 
-        <div className="hidden lg:flex flex-row gap-4 justify-center w-full">
+        <div className="hidden lg:flex flex-row gap-5 justify-center w-full">
           <a
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-[#00e6a0] text-gray-900 font-syne font-bold text-base active:scale-95 hover:bg-[#00c88a] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,230,160,0.35)] transition-all duration-200 shadow-[0_4px_16px_rgba(0,230,160,0.3)]"
+            className="hover:opacity-80 hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
           >
-            <AppleIcon className="w-5 h-5 flex-shrink-0" />
-            <span className="flex flex-col items-start leading-tight">
-              <span className="text-[10px] font-dm font-medium opacity-80 uppercase tracking-wider">Download on the</span>
-              <span>App Store</span>
-            </span>
+            <img src={appStoreBadge} alt="Download on the App Store" className="h-14 object-contain dark:invert" />
           </a>
-
           <a
             href={GOOGLE_PLAY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-gray-900 dark:bg-[#f0f0f0] text-white dark:text-gray-900 font-syne font-bold text-base active:scale-95 hover:bg-gray-800 dark:hover:bg-white hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200"
+            className="hover:opacity-80 hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
           >
-            <GooglePlayIcon className="w-5 h-5 flex-shrink-0" />
-            <span className="flex flex-col items-start leading-tight">
-              <span className="text-[10px] font-dm font-medium opacity-70 uppercase tracking-wider">Get it on</span>
-              <span>Google Play</span>
-            </span>
+            <img src={googlePlayBadge} alt="Get it on Google Play" className="h-14 object-contain dark:invert" />
           </a>
         </div>
 
@@ -80,18 +73,3 @@ export default function DownloadSection() {
   )
 }
 
-function AppleIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-    </svg>
-  )
-}
-
-function GooglePlayIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.7-2.7-10.89 9.78zm-1.97-20.52C1.07 3.55 1 3.89 1 4.26v15.48c0 .37.07.71.21 1.02l.09.08 8.67-8.67v-.2L1.3 3.16l-.09.08zM20.54 10.7l-2.46-1.42-3.06 3.06 3.06 3.06 2.48-1.43c.71-.41.71-1.87-.02-2.27zm-18.35 12.5l.08-.05 12.61-7.28-2.69-2.7-10 10.03z" />
-    </svg>
-  )
-}
