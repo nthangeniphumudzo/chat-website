@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 interface Feature {
@@ -73,24 +74,62 @@ function ScreenshotFlagship() {
 }
 
 function FeatureCard({ icon, title, description }: Feature) {
-  const ref = useScrollReveal<HTMLDivElement>()
+  const revealRef = useScrollReveal<HTMLDivElement>()
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const [hovered, setHovered] = useState(false)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const nx = (e.clientX - rect.left) / rect.width   // 0..1
+    const ny = (e.clientY - rect.top) / rect.height    // 0..1
+    setTilt({ x: (ny - 0.5) * -20, y: (nx - 0.5) * 26 })
+  }
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 })
+    setHovered(false)
+  }
+
   return (
     <div
-      ref={ref}
-      className="opacity-0 translate-y-8 transition-all duration-700 group relative bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-7 hover:-translate-y-1 hover:border-mint/40 dark:hover:border-mint/30 overflow-hidden"
+      ref={revealRef}
+      className="opacity-0 translate-y-8 transition-all duration-700"
+      style={{ perspective: '500px' }}
     >
-      {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-mint to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transition: hovered ? 'transform 0.08s ease-out' : 'transform 0.5s ease-out',
+          transformStyle: 'preserve-3d',
+          willChange: 'transform',
+        }}
+        className="group relative bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-7 hover:border-mint/40 dark:hover:border-mint/30 overflow-hidden h-full"
+      >
+        {/* Top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-mint to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      <div className="w-12 h-12 rounded-xl bg-mint/5 dark:bg-mint/5 border border-mint/10 flex items-center justify-center text-2xl mb-5">
-        {icon}
+        {/* Dynamic glare that tracks cursor */}
+        <div
+          className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ background: `radial-gradient(circle at ${50 + tilt.y * 2.5}% ${50 - tilt.x * 2.5}%, rgba(0,230,160,0.07), transparent 65%)` }}
+        />
+
+        <div className="w-12 h-12 rounded-xl bg-mint/5 dark:bg-mint/5 border border-mint/10 flex items-center justify-center text-2xl mb-5">
+          {icon}
+        </div>
+        <h3 className="font-syne font-bold text-base mb-3 text-gray-900 dark:text-gray-100 tracking-tight">
+          {title}
+        </h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+          {description}
+        </p>
       </div>
-      <h3 className="font-syne font-bold text-base mb-3 text-gray-900 dark:text-gray-100 tracking-tight">
-        {title}
-      </h3>
-      <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-        {description}
-      </p>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import {
   icon_dark, icon_light,
   img_explore, img_settings,
@@ -11,12 +12,54 @@ interface HeroProps {
 }
 
 export default function Hero({ isDark }: HeroProps) {
+  const bgRef = useRef<HTMLDivElement>(null)
+  const phonesRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let mx = 0, my = 0
+    let cx = 0, cy = 0
+    let raf: number
+
+    const onMove = (e: MouseEvent) => {
+      mx = (e.clientX / window.innerWidth) * 2 - 1
+      my = (e.clientY / window.innerHeight) * 2 - 1
+    }
+
+    const tick = () => {
+      // Lerp toward target (0.06 = smooth but responsive)
+      cx += (mx - cx) * 0.06
+      cy += (my - cy) * 0.06
+
+      // Background drifts opposite — simulates a far layer
+      if (bgRef.current) {
+        bgRef.current.style.transform = `translate(${-cx * 24}px, ${-cy * 16}px)`
+      }
+      // Phones drift with cursor — simulates a close layer
+      if (phonesRef.current) {
+        phonesRef.current.style.transform = `translate(${cx * 18}px, ${cy * 10}px)`
+      }
+      raf = requestAnimationFrame(tick)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    // Start after fade-up animation finishes (0.7s)
+    const timer = setTimeout(() => { raf = requestAnimationFrame(tick) }, 750)
+
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      clearTimeout(timer)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
     <section className="relative flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 lg:gap-12 px-5 sm:px-8 lg:px-24 pt-24 sm:pt-28 pb-12 max-w-7xl mx-auto">
 
-      {/* Background glow — clipped to section via overflow-hidden on a pseudo-wrapper */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Background glow — parallax layer (drifts away from cursor) */}
+      <div ref={bgRef} className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="absolute top-0 right-0 w-72 sm:w-[400px] lg:w-[600px] h-72 sm:h-[400px] lg:h-[600px] bg-mint/10 rounded-full blur-[80px] lg:blur-[120px] -translate-y-1/3 translate-x-1/4" />
+        <div className="absolute top-1/3 right-1/4 w-56 sm:w-72 lg:w-96 h-56 sm:h-72 lg:h-96 bg-mint/[0.06] rounded-full blur-[60px] lg:blur-[90px]" />
+        <div className="absolute bottom-0 left-0 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 bg-mint/[0.05] rounded-full blur-[70px] translate-y-1/2 -translate-x-1/3" />
       </div>
 
       {/* ── Text ── */}
@@ -44,10 +87,10 @@ export default function Hero({ isDark }: HeroProps) {
         </h1>
 
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-4">
-          Most matches end before they start. The opener goes nowhere. The conversation fades. Not because you weren’t right for each other — because there was nothing real to begin with.
+          Most matches end before they start. The opener goes nowhere. The conversation fades. Not because you weren't right for each other — because there was nothing real to begin with.
         </p>
         <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
-          Ch@t starts differently. You write three questions — your words, not a shared script. People answer them in writing before you ever connect. By the time you’re talking, you already know something true about them.
+          Ch@t starts differently. You write three questions — your words, not a shared script. People answer them in writing before you ever connect. By the time you're talking, you already know something true about them.
         </p>
         <p className="text-mint/90 text-sm font-medium max-w-md mx-auto lg:mx-0 mb-8">
           Right now, someone nearby is answering. What would you ask?
@@ -69,23 +112,47 @@ export default function Hero({ isDark }: HeroProps) {
         </div>
       </div>
 
-      {/* ── Phones: single on mobile, stacked trio on desktop ── */}
-
-
-      <div className="hidden lg:flex relative justify-center items-end h-[560px] animate-fade-up-1">
-        <div className="absolute bottom-0 right-0 z-10 translate-x-[-80px] translate-y-[80px] scale-75 opacity-50">
-          <div className={`w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
+      {/* ── Phones: parallax layer (drifts toward cursor) ── */}
+      <div
+        ref={phonesRef}
+        className="hidden lg:flex relative justify-center items-end h-[560px] animate-fade-up-1"
+        style={{ perspective: '500px', perspectiveOrigin: '50% 70%' }}
+      >
+        {/* Back phone — most rotated, tilted furthest back */}
+        <div
+          className="absolute bottom-0 right-0 z-10"
+          style={{
+            transform: 'translateX(-92px) translateY(46px) scale(0.75) rotateY(-30deg) rotateX(-14deg)',
+            opacity: 0.45,
+          }}
+        >
+          <div className={`animate-float-slower w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
             <img src={isDark ? img_settings : img_settings_light} alt="Browse — filters and safety" className="w-full block" loading="lazy" />
           </div>
         </div>
-        <div className="absolute bottom-0 right-0 z-20 translate-x-[-40px] translate-y-[40px] scale-[0.875] opacity-75">
-          <div className={`w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
-            <img src={isDark ? img_explore : img_explore_light} alt="Browse — their Speed Date questions on the card" className="w-full block" loading="lazy" />
+
+        {/* Middle phone — moderate tilt */}
+        <div
+          className="absolute bottom-0 right-0 z-20"
+          style={{
+            transform: 'translateX(-46px) translateY(24px) scale(0.875) rotateY(-15deg) rotateX(-8deg)',
+            opacity: 0.78,
+          }}
+        >
+          <div className={`animate-float-slow w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
+            <img src={isDark ? img_explore : img_explore_light} alt="Browse — Speed Date questions on the card" className="w-full block" loading="lazy" />
           </div>
         </div>
-        <div className="absolute bottom-0 right-0 z-30">
-          <div className={`w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
-            <img src={img_speed_date_inbox} alt="Dates — replies you’ve received" className="w-full block" loading="eager" />
+
+        {/* Front phone — slight tilt toward viewer */}
+        <div
+          className="absolute bottom-0 right-0 z-30"
+          style={{
+            transform: 'rotateY(8deg) rotateX(-4deg)',
+          }}
+        >
+          <div className={`animate-float w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
+            <img src={img_speed_date_inbox} alt="Dates — replies you've received" className="w-full block" loading="eager" />
           </div>
         </div>
       </div>

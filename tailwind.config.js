@@ -21,6 +21,9 @@ export default {
         'fade-up-2': 'fadeUp 0.6s 0.2s ease both',
         'fade-up-3': 'fadeUp 0.6s 0.3s ease both',
         'pulse-dot': 'pulseDot 2s ease infinite',
+        'float': 'float 3.5s ease-in-out infinite',
+        'float-slow': 'floatSlow 5s 0.8s ease-in-out infinite',
+        'float-slower': 'floatSlow 7s 1.6s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
@@ -30,6 +33,14 @@ export default {
         pulseDot: {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },
           '50%': { opacity: '0.5', transform: 'scale(0.8)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        floatSlow: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-6px)' },
         },
       },
     },

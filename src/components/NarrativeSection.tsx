@@ -32,7 +32,7 @@ function Step({ num, heading, body }: Step) {
       className="opacity-0 translate-y-8 transition-all duration-700 flex gap-6 sm:gap-10 lg:gap-14"
     >
       <div className="flex-shrink-0 pt-1">
-        <span className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-mint/20 dark:text-mint/15 leading-none select-none">
+        <span className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-mint/20 dark:text-mint/15 leading-none select-none num-3d">
           {num}
         </span>
       </div>
