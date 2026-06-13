@@ -18,7 +18,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
   const blockListImg = isDark ? blockContactsListDark : blockContactsListLight
   const chatImg = isDark ? img_chat : img_chat_light
 
-  const phoneClass = `rounded-[32px] overflow-hidden border ${isDark ? 'border-white/10 shadow-2xl shadow-black/50' : 'border-black/10 shadow-xl shadow-black/10'}`
+  const phoneClass = `rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`
 
   return (
     <section id="privacy" className="py-16 sm:py-24 px-5 sm:px-8 lg:px-24 max-w-7xl mx-auto">
@@ -40,7 +40,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-8 lg:gap-12 max-w-md sm:max-w-none mx-auto lg:mx-0 lg:max-w-3xl">
           <div className="flex flex-col items-center lg:items-start">
             <p className="text-xs font-medium uppercase tracking-widest text-mint mb-3">In the app</p>
-            <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
+            <div className={`w-52 sm:w-60 lg:w-64 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
               <img
                 src={chatImg}
                 alt="Chat conversation as you see it while using the app"
@@ -53,7 +53,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
               What a screenshot captures
             </p>
-            <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
+            <div className={`w-52 sm:w-60 lg:w-64 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
               <div
                 className="w-full bg-black block aspect-[472/1024]"
                 role="img"
@@ -83,7 +83,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
           From the You tab, open Privacy &amp; Safety to manage your block list, who can see you, and safety tools in one place.
         </p>
         <div className="flex justify-center lg:justify-start">
-          <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
+          <div className={`w-52 sm:w-60 lg:w-64 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
             <img
               src={privacyHubImg}
               alt="Privacy and safety settings on the You tab"
@@ -110,7 +110,7 @@ export default function PrivacySection({ isDark }: PrivacySectionProps) {
           </li>
         </ul>
         <div className="flex justify-center lg:justify-start">
-          <div className={`w-52 sm:w-56 lg:w-48 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
+          <div className={`w-52 sm:w-60 lg:w-64 ${phoneClass} transition-all duration-300 hover:-translate-y-2`}>
             <img src={blockListImg} alt="Your block list — blocked contacts" className="w-full block" loading="lazy" />
           </div>
         </div>

@@ -12,13 +12,13 @@ export default function StatsBar() {
         <p className="text-center text-sm font-medium text-gray-500 dark:text-gray-400 mb-6 max-w-xl mx-auto">
           You know something true about them before you say a word.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
           {stats.map(({ num, label }) => (
             <div key={label} className="text-center">
-              <div className="font-syne font-extrabold text-xl sm:text-2xl lg:text-3xl text-mint tracking-tight leading-none">
+              <div className="font-syne font-extrabold text-4xl sm:text-5xl lg:text-6xl text-mint tracking-tight leading-none mb-2 sm:mb-3">
                 {num}
               </div>
-              <div className="text-xs font-medium uppercase tracking-widest text-gray-500 dark:text-gray-500 mt-1.5 sm:mt-2">
+              <div className="text-xs font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400 leading-snug max-w-[10rem] mx-auto">
                 {label}
               </div>
             </div>

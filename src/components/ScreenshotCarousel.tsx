@@ -24,7 +24,7 @@ export default function ScreenshotCarousel() {
     }, [])
 
     return (
-        <div className="w-48 mx-auto rounded-[28px] overflow-hidden relative">
+        <div className="w-full rounded-[28px] overflow-hidden relative">
             <div className="relative h-[320px] sm:h-[360px] w-full bg-gray-50 dark:bg-[#0b0b0b]">
                 {images.map((imgObj, i) => (
                     <img

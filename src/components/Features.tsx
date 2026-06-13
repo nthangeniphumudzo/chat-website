@@ -54,7 +54,7 @@ function ScreenshotFlagship() {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(52,211,153,0.18),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(52,211,153,0.12),transparent)]" />
       <div className="relative p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
         <div className="flex-shrink-0 mb-6 lg:mb-0">
-          <p className="text-xs font-semibold uppercase tracking-widest text-mint mb-3">Flagship privacy</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-mint mb-3">Flagship privacy</p>
           <div className="w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl bg-mint/15 dark:bg-mint/10 border border-mint/25 flex items-center justify-center text-4xl sm:text-[2.75rem] shadow-inner shadow-mint/10">
             📵
           </div>
@@ -123,7 +123,7 @@ function FeatureCard({ icon, title, description }: Feature) {
         <div className="w-12 h-12 rounded-xl bg-mint/5 dark:bg-mint/5 border border-mint/10 flex items-center justify-center text-2xl mb-5">
           {icon}
         </div>
-        <h3 className="font-syne font-bold text-base mb-3 text-gray-900 dark:text-gray-100 tracking-tight">
+        <h3 className="font-syne font-bold text-lg mb-3 text-gray-900 dark:text-gray-100 tracking-tight">
           {title}
         </h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">

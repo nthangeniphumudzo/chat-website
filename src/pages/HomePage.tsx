@@ -24,7 +24,7 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
       <Navbar isDark={isDark} onToggle={onToggleTheme} />
       <Hero isDark={isDark} />
       <StatsBar />
-      <NarrativeSection />
+      <NarrativeSection isDark={isDark} />
       <Features />
       <Screenshots isDark={isDark} />
       <MessagingSection isDark={isDark} />

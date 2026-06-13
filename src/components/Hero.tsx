@@ -25,7 +25,6 @@ export default function Hero({ isDark }: HeroProps) {
       mx = (e.clientX / window.innerWidth) * 2 - 1
       my = (e.clientY / window.innerHeight) * 2 - 1
 
-      // Spotlight: instant, relative to section
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect()
         sectionRef.current.style.setProperty('--sx', `${e.clientX - rect.left}px`)
@@ -36,13 +35,8 @@ export default function Hero({ isDark }: HeroProps) {
     const tick = () => {
       cx += (mx - cx) * 0.06
       cy += (my - cy) * 0.06
-
-      if (bgRef.current) {
-        bgRef.current.style.transform = `translate(${-cx * 24}px, ${-cy * 16}px)`
-      }
-      if (phonesRef.current) {
-        phonesRef.current.style.transform = `translate(${cx * 18}px, ${cy * 10}px)`
-      }
+      if (bgRef.current) bgRef.current.style.transform = `translate(${-cx * 24}px, ${-cy * 16}px)`
+      if (phonesRef.current) phonesRef.current.style.transform = `translate(${cx * 18}px, ${cy * 10}px)`
       raf = requestAnimationFrame(tick)
     }
 
@@ -61,13 +55,9 @@ export default function Hero({ isDark }: HeroProps) {
       ref={sectionRef}
       className="relative flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 lg:gap-12 px-5 sm:px-8 lg:px-24 pt-24 sm:pt-28 pb-12 max-w-7xl mx-auto overflow-hidden"
     >
-      {/* Spotlight — cursor-following radial glow */}
       <div className="spotlight-overlay absolute inset-0 pointer-events-none z-0" aria-hidden="true" />
-
-      {/* Dot grid — dark mode only, fades toward edges */}
       <div className="hero-grid absolute inset-0 pointer-events-none z-0 opacity-0 dark:opacity-100" aria-hidden="true" />
 
-      {/* Background glow orbs — parallax layer (drifts away from cursor) */}
       <div ref={bgRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div className="absolute top-0 right-0 w-72 sm:w-[400px] lg:w-[600px] h-72 sm:h-[400px] lg:h-[600px] bg-mint/10 rounded-full blur-[80px] lg:blur-[120px] -translate-y-1/3 translate-x-1/4" />
         <div className="absolute top-1/3 right-1/4 w-56 sm:w-72 lg:w-96 h-56 sm:h-72 lg:h-96 bg-mint/[0.06] rounded-full blur-[60px] lg:blur-[90px]" />
@@ -84,29 +74,21 @@ export default function Hero({ isDark }: HeroProps) {
           />
         </div>
 
-        <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
+        <p className="text-mint font-dm font-medium text-sm sm:text-base mb-4 tracking-wide">
           The opener that actually works
         </p>
 
-        <div className="mx-auto mb-6 lg:mb-8 w-full max-w-sm">
-          <ScreenshotCarousel />
-        </div>
-
-        <h1 className="font-syne font-extrabold text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5">
-          Meet them<br />
-          before<br />
+        <h1 className="font-syne font-extrabold text-[2.8rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-6 lg:mb-8">
+          Meet them<br />before<br />
           <span className="text-mint">the first message.</span>
         </h1>
 
-        <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-4">
-          Most matches end before they start. The opener goes nowhere. The conversation fades. Not because you weren't right for each other — because there was nothing real to begin with.
-        </p>
-        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
-          Ch@t starts differently. You write three questions — your words, not a shared script. People answer them in writing before you ever connect. By the time you're talking, you already know something true about them.
-        </p>
-        <p className="text-mint/90 text-sm font-medium max-w-md mx-auto lg:mx-0 mb-8">
-          Right now, someone nearby is answering. What would you ask?
-        </p>
+        {/* Mobile-only screenshot — big visual before the CTA */}
+        <div className="lg:hidden mb-8 flex justify-center">
+          <div className="w-56 sm:w-64">
+            <ScreenshotCarousel />
+          </div>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
           <a
@@ -124,44 +106,33 @@ export default function Hero({ isDark }: HeroProps) {
         </div>
       </div>
 
-      {/* ── Phones: parallax layer (drifts toward cursor) ── */}
+      {/* ── Phones: desktop only, parallax foreground layer ── */}
       <div
         ref={phonesRef}
-        className="hidden lg:flex relative justify-center items-end h-[560px] animate-fade-up-1 z-10"
+        className="hidden lg:flex relative justify-center items-end h-[580px] animate-fade-up-1 z-10"
         style={{ perspective: '500px', perspectiveOrigin: '50% 70%' }}
       >
-        {/* Back phone — most rotated, tilted furthest back */}
         <div
           className="absolute bottom-0 right-0 z-10"
-          style={{
-            transform: 'translateX(-92px) translateY(46px) scale(0.75) rotateY(-30deg) rotateX(-14deg)',
-            opacity: 0.45,
-          }}
+          style={{ transform: 'translateX(-92px) translateY(46px) scale(0.75) rotateY(-30deg) rotateX(-14deg)', opacity: 0.45 }}
         >
           <div className={`animate-float-slower w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
             <img src={isDark ? img_settings : img_settings_light} alt="Browse — filters and safety" className="w-full block" loading="lazy" />
           </div>
         </div>
 
-        {/* Middle phone — moderate tilt */}
         <div
           className="absolute bottom-0 right-0 z-20"
-          style={{
-            transform: 'translateX(-46px) translateY(24px) scale(0.875) rotateY(-15deg) rotateX(-8deg)',
-            opacity: 0.78,
-          }}
+          style={{ transform: 'translateX(-46px) translateY(24px) scale(0.875) rotateY(-15deg) rotateX(-8deg)', opacity: 0.78 }}
         >
           <div className={`animate-float-slow w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
             <img src={isDark ? img_explore : img_explore_light} alt="Browse — Speed Date questions on the card" className="w-full block" loading="lazy" />
           </div>
         </div>
 
-        {/* Front phone — slight tilt toward viewer */}
         <div
           className="absolute bottom-0 right-0 z-30"
-          style={{
-            transform: 'rotateY(8deg) rotateX(-4deg)',
-          }}
+          style={{ transform: 'rotateY(8deg) rotateX(-4deg)' }}
         >
           <div className={`animate-float w-52 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
             <img src={img_speed_date_inbox} alt="Dates — replies you've received" className="w-full block" loading="eager" />
