@@ -69,7 +69,7 @@ export default function Hero({ isDark }: HeroProps) {
       {/* ── Text ── */}
       <div className="relative z-10 animate-fade-up text-center lg:text-left order-2 lg:order-none w-full">
         <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
-          The opener that actually works
+          Swipe less. Connect more
         </p>
 
         <h1 className="hidden lg:block font-syne font-extrabold text-[2.4rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5 lg:mb-8">
