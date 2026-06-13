@@ -49,7 +49,7 @@ function ScreenshotFlagship() {
   return (
     <div
       ref={ref}
-      className="opacity-0 translate-y-8 transition-all duration-700 relative mb-6 sm:mb-8 rounded-2xl overflow-hidden border-2 border-mint/35 dark:border-mint/25 bg-gradient-to-br from-mint/[0.12] via-white to-white dark:from-mint/[0.08] dark:via-[#121212] dark:to-[#0a0a0a] shadow-lg shadow-mint/5 dark:shadow-black/40"
+      className="shimmer-card opacity-0 translate-y-8 transition-all duration-700 relative mb-6 sm:mb-8 rounded-2xl overflow-hidden border-2 border-mint/35 dark:border-mint/25 bg-gradient-to-br from-mint/[0.12] via-white to-white dark:from-mint/[0.08] dark:via-[#121212] dark:to-[#0a0a0a] shadow-lg shadow-mint/5 dark:shadow-black/40"
     >
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(52,211,153,0.18),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(52,211,153,0.12),transparent)]" />
       <div className="relative p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
@@ -109,7 +109,7 @@ function FeatureCard({ icon, title, description }: Feature) {
           transformStyle: 'preserve-3d',
           willChange: 'transform',
         }}
-        className="group relative bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-7 hover:border-mint/40 dark:hover:border-mint/30 overflow-hidden h-full"
+        className="shimmer-card group relative bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-7 hover:border-mint/40 dark:hover:border-mint/30 overflow-hidden h-full"
       >
         {/* Top accent line */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-mint to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

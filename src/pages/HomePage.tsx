@@ -20,7 +20,7 @@ interface HomePageProps {
 
 export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden pb-20 lg:pb-0" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden pb-20 lg:pb-0" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <Navbar isDark={isDark} onToggle={onToggleTheme} />
       <Hero isDark={isDark} />
       <StatsBar />

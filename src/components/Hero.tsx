@@ -12,6 +12,7 @@ interface HeroProps {
 }
 
 export default function Hero({ isDark }: HeroProps) {
+  const sectionRef = useRef<HTMLElement>(null)
   const bgRef = useRef<HTMLDivElement>(null)
   const phonesRef = useRef<HTMLDivElement>(null)
 
@@ -23,18 +24,22 @@ export default function Hero({ isDark }: HeroProps) {
     const onMove = (e: MouseEvent) => {
       mx = (e.clientX / window.innerWidth) * 2 - 1
       my = (e.clientY / window.innerHeight) * 2 - 1
+
+      // Spotlight: instant, relative to section
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect()
+        sectionRef.current.style.setProperty('--sx', `${e.clientX - rect.left}px`)
+        sectionRef.current.style.setProperty('--sy', `${e.clientY - rect.top}px`)
+      }
     }
 
     const tick = () => {
-      // Lerp toward target (0.06 = smooth but responsive)
       cx += (mx - cx) * 0.06
       cy += (my - cy) * 0.06
 
-      // Background drifts opposite — simulates a far layer
       if (bgRef.current) {
         bgRef.current.style.transform = `translate(${-cx * 24}px, ${-cy * 16}px)`
       }
-      // Phones drift with cursor — simulates a close layer
       if (phonesRef.current) {
         phonesRef.current.style.transform = `translate(${cx * 18}px, ${cy * 10}px)`
       }
@@ -42,7 +47,6 @@ export default function Hero({ isDark }: HeroProps) {
     }
 
     window.addEventListener('mousemove', onMove, { passive: true })
-    // Start after fade-up animation finishes (0.7s)
     const timer = setTimeout(() => { raf = requestAnimationFrame(tick) }, 750)
 
     return () => {
@@ -53,10 +57,18 @@ export default function Hero({ isDark }: HeroProps) {
   }, [])
 
   return (
-    <section className="relative flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 lg:gap-12 px-5 sm:px-8 lg:px-24 pt-24 sm:pt-28 pb-12 max-w-7xl mx-auto">
+    <section
+      ref={sectionRef}
+      className="relative flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 lg:gap-12 px-5 sm:px-8 lg:px-24 pt-24 sm:pt-28 pb-12 max-w-7xl mx-auto overflow-hidden"
+    >
+      {/* Spotlight — cursor-following radial glow */}
+      <div className="spotlight-overlay absolute inset-0 pointer-events-none z-0" aria-hidden="true" />
 
-      {/* Background glow — parallax layer (drifts away from cursor) */}
-      <div ref={bgRef} className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Dot grid — dark mode only, fades toward edges */}
+      <div className="hero-grid absolute inset-0 pointer-events-none z-0 opacity-0 dark:opacity-100" aria-hidden="true" />
+
+      {/* Background glow orbs — parallax layer (drifts away from cursor) */}
+      <div ref={bgRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div className="absolute top-0 right-0 w-72 sm:w-[400px] lg:w-[600px] h-72 sm:h-[400px] lg:h-[600px] bg-mint/10 rounded-full blur-[80px] lg:blur-[120px] -translate-y-1/3 translate-x-1/4" />
         <div className="absolute top-1/3 right-1/4 w-56 sm:w-72 lg:w-96 h-56 sm:h-72 lg:h-96 bg-mint/[0.06] rounded-full blur-[60px] lg:blur-[90px]" />
         <div className="absolute bottom-0 left-0 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 bg-mint/[0.05] rounded-full blur-[70px] translate-y-1/2 -translate-x-1/3" />
@@ -115,7 +127,7 @@ export default function Hero({ isDark }: HeroProps) {
       {/* ── Phones: parallax layer (drifts toward cursor) ── */}
       <div
         ref={phonesRef}
-        className="hidden lg:flex relative justify-center items-end h-[560px] animate-fade-up-1"
+        className="hidden lg:flex relative justify-center items-end h-[560px] animate-fade-up-1 z-10"
         style={{ perspective: '500px', perspectiveOrigin: '50% 70%' }}
       >
         {/* Back phone — most rotated, tilted furthest back */}
