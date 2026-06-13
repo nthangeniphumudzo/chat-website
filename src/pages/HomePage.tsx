@@ -9,7 +9,6 @@ import PremiumSection from '../components/PremiumSection'
 import SafetySection from '../components/SafetySection'
 import PrivacySection from '../components/PrivacySection'
 import DownloadSection from '../components/DownloadSection'
-import FloatingDownloadBar from '../components/FloatingDownloadBar'
 import LegalSection from '../components/LegalSection'
 import Footer from '../components/Footer'
 
@@ -20,7 +19,7 @@ interface HomePageProps {
 
 export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
   return (
-    <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden pb-20 lg:pb-0" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
       <Navbar isDark={isDark} onToggle={onToggleTheme} />
       <Hero isDark={isDark} />
       <StatsBar />
@@ -32,7 +31,6 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
       <PrivacySection isDark={isDark} />
       <PremiumSection isDark={isDark} />
       <DownloadSection />
-      <FloatingDownloadBar />
       <LegalSection />
       <Footer isDark={isDark} />
     </div>

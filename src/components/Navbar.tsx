@@ -43,7 +43,20 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
         }`}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
-        <a href="./" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
+        {/* Mobile: burger on the left */}
+        <button
+          className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 flex-shrink-0"
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+        </button>
+
+        {/* Desktop: logo on the left */}
+        <a href="./" className="hidden md:flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
@@ -65,25 +78,20 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Mobile: download button routes back to hero download section */}
+          <a
+            href="#"
+            className="md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-transform duration-200"
+          >
+            Download
+          </a>
+
           <button
             onClick={onToggle}
             aria-label="Toggle theme"
             className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-base hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
           >
             {isDark ? '☀️' : '🌙'}
-          </button>
-
-          {/* Download CTA removed — floating bar handles mobile downloads */}
-
-          <button
-            className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5"
-            onClick={() => setMenuOpen(v => !v)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </button>
         </div>
       </div>

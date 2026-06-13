@@ -37,7 +37,7 @@ export default function DownloadSection() {
           People nearby are already writing theirs. Some of them are already answering yours.
         </p>
 
-        <div className="hidden lg:flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
           <a href={GOOGLE_PLAY_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200" aria-label="Get it on Google Play">
             <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Google Play Store">
               <rect width="180" height="53" rx="6" fill="#000000" />
@@ -76,7 +76,7 @@ export default function DownloadSection() {
           </a>
         </div>
 
-        <p className="hidden lg:block mt-4 text-xs text-gray-400 dark:text-gray-600 font-medium">
+        <p className="mt-4 text-xs text-gray-400 dark:text-gray-600 font-medium">
           Free to download — no credit card required
         </p>
 

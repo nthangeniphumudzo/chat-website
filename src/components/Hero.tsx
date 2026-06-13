@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react'
 import {
-  icon_dark, icon_light,
   img_explore, img_settings,
   img_explore_light, img_settings_light,
   img_speed_date_inbox,
 } from '../assets/images'
 import ScreenshotCarousel from './ScreenshotCarousel'
+
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
+const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
 
 interface HeroProps {
   isDark: boolean
@@ -53,7 +55,7 @@ export default function Hero({ isDark }: HeroProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 lg:gap-12 px-5 sm:px-8 lg:px-24 pt-24 sm:pt-28 pb-12 max-w-7xl mx-auto overflow-hidden"
+      className="relative flex flex-col lg:grid lg:grid-cols-2 items-center gap-8 lg:gap-12 px-5 sm:px-8 lg:px-24 pt-20 sm:pt-24 lg:pt-28 pb-12 max-w-7xl mx-auto overflow-hidden"
     >
       <div className="spotlight-overlay absolute inset-0 pointer-events-none z-0" aria-hidden="true" />
       <div className="hero-grid absolute inset-0 pointer-events-none z-0 opacity-0 dark:opacity-100" aria-hidden="true" />
@@ -66,42 +68,71 @@ export default function Hero({ isDark }: HeroProps) {
 
       {/* ── Text ── */}
       <div className="relative z-10 animate-fade-up text-center lg:text-left order-2 lg:order-none w-full">
-        <div className="flex justify-center lg:justify-start mb-5">
-          <img
-            src={isDark ? icon_dark : icon_light}
-            alt="Chat app"
-            className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-contain shadow-xl"
-          />
-        </div>
-
-        <p className="text-mint font-dm font-medium text-sm sm:text-base mb-4 tracking-wide">
+        <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
           The opener that actually works
         </p>
 
-        <h1 className="font-syne font-extrabold text-[2.8rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-6 lg:mb-8">
+        <h1 className="hidden lg:block font-syne font-extrabold text-[2.4rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-5 lg:mb-8">
           Meet them<br />before<br />
           <span className="text-mint">the first message.</span>
         </h1>
 
-        {/* Mobile-only screenshot — big visual before the CTA */}
-        <div className="lg:hidden mb-8 flex justify-center">
+        {/* Mobile: carousel first */}
+        <div className="lg:hidden mt-4 mb-5 flex justify-center">
           <div className="w-56 sm:w-64">
             <ScreenshotCarousel />
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+        {/* Mobile: store badges below carousel */}
+        <p className="lg:hidden text-center font-syne font-bold text-lg mb-3">
+          Download the app
+        </p>
+        <div className="lg:hidden flex gap-3 justify-center mb-5">
+          <a href={GOOGLE_PLAY_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 active:scale-95 transition-transform duration-200" aria-label="Get it on Google Play">
+            <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Google Play Store">
+              <rect width="180" height="53" rx="6" fill="#000000" />
+              <rect x="0.5" y="0.5" width="179" height="52" rx="5.5" stroke="#A6A6A6" strokeOpacity="0.5" fill="none" />
+              <g transform="translate(12, 10)">
+                <path d="M0 3.5L18 16.5L0 29.5V3.5Z" fill="url(#heroPlayGradient)" />
+                <path d="M0 3.5L18 16.5L23 11.5L5 0L0 3.5Z" fill="#00F076" />
+                <path d="M23 11.5L18 16.5L23 21.5L28 16.5L23 11.5Z" fill="#FFD400" />
+                <path d="M0 29.5L18 16.5L23 21.5L5 33L0 29.5Z" fill="#F33E48" />
+                <path d="M0 3.5L5 0L28 16.5L5 33L0 29.5V3.5Z" fill="url(#heroPlayOverlay)" fillOpacity="0.1" />
+                <defs>
+                  <linearGradient id="heroPlayGradient" x1="0" y1="16.5" x2="18" y2="16.5">
+                    <stop stopColor="#00D4FF" />
+                    <stop offset="1" stopColor="#00F076" />
+                  </linearGradient>
+                  <linearGradient id="heroPlayOverlay" x1="14" y1="0" x2="14" y2="33">
+                    <stop stopColor="white" />
+                    <stop offset="1" stopColor="white" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+              </g>
+              <text x="52" y="18" fill="#FFFFFF" fontSize="8" fontFamily="system-ui, -apple-system, sans-serif" letterSpacing="0.5">GET IT ON</text>
+              <text x="52" y="36" fill="#FFFFFF" fontSize="16" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="500">Google Play</text>
+            </svg>
+          </a>
+          <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 active:scale-95 transition-transform duration-200" aria-label="Download on the App Store">
+            <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Apple App Store">
+              <rect width="180" height="53" rx="6" fill="#000000" />
+              <rect x="0.5" y="0.5" width="179" height="52" rx="5.5" stroke="#A6A6A6" strokeOpacity="0.5" fill="none" />
+              <g transform="translate(14, 10)">
+                <path d="M15.5 8.5C14.2 8.5 12.7 9.3 11.8 10.4C11 11.4 10.3 12.9 10.5 14.4C11.9 14.5 13.4 13.6 14.2 12.5C15 11.5 15.6 10 15.5 8.5ZM18.7 14.7C16.6 14.6 14.8 15.9 13.8 15.9C12.8 15.9 11.2 14.8 9.5 14.8C6.9 14.9 4.5 16.1 3.2 18.2C0.5 22.4 2.5 28.7 5.1 32C6.4 33.7 7.9 35.5 9.8 35.5C11.6 35.4 12.3 34.3 14.4 34.3C16.5 34.3 17.1 35.5 19 35.4C21 35.4 22.3 33.7 23.6 32C25.1 30.1 25.7 28.2 25.7 28.1C25.7 28 22.4 26.8 22.4 23C22.4 19.7 25 18.2 25.1 18.1C23.4 15.6 20.8 14.8 18.7 14.7Z" fill="#FFFFFF" />
+              </g>
+              <text x="48" y="18" fill="#FFFFFF" fontSize="8" fontFamily="system-ui, -apple-system, sans-serif" letterSpacing="0.3">Download on the</text>
+              <text x="48" y="36" fill="#FFFFFF" fontSize="16" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="500">App Store</text>
+            </svg>
+          </a>
+        </div>
+
+        <div className="hidden lg:flex justify-start">
           <a
             href="#download"
-            className="hidden lg:inline-block w-full sm:w-auto text-center px-8 py-4 rounded-full bg-mint text-gray-900 font-syne font-bold text-base active:scale-95 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-mint/30 transition-all duration-200"
+            className="w-full sm:w-auto text-center px-8 py-4 rounded-full bg-mint text-gray-900 font-syne font-bold text-base active:scale-95 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-mint/30 transition-all duration-200"
           >
             Download
-          </a>
-          <a
-            href="#features"
-            className="w-full sm:w-auto text-center px-8 py-4 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-dm text-base active:scale-95 hover:border-mint hover:text-mint transition-all duration-200"
-          >
-            How it works
           </a>
         </div>
       </div>
