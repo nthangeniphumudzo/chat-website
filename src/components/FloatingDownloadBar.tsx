@@ -40,11 +40,9 @@ export default function FloatingDownloadBar() {
   return (
     <div className="fixed bottom-6 left-0 right-0 z-50 px-5">
       <div className="max-w-sm mx-auto">
-        {/* Outer glow ring */}
         <div className="rounded-[20px] p-px bg-gradient-to-br from-mint/60 via-mint/30 to-transparent shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
           <div className="rounded-[18.5px] overflow-hidden bg-[#161616] dark:bg-white">
 
-            {/* Mint accent bar across the top */}
             <div className="h-0.5 w-full bg-gradient-to-r from-mint via-mint/80 to-transparent" />
 
             {/* Store label row */}
@@ -68,7 +66,7 @@ export default function FloatingDownloadBar() {
             <div className="flex items-center gap-3 px-3.5 py-3">
               <img
                 src={isDark ? icon_dark : icon_light}
-                alt="Ch·t app icon"
+                alt="app icon"
                 className="w-12 h-12 rounded-xl flex-shrink-0"
               />
 
@@ -83,9 +81,9 @@ export default function FloatingDownloadBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-shrink-0 px-5 py-1.5 rounded-full bg-mint text-gray-900 text-[13px] font-bold hover:brightness-110 active:scale-95 transition-all duration-150"
-                aria-label={`Download Ch·t on ${storeName}`}
+                aria-label={`Download on ${storeName}`}
               >
-                Get
+                {isIOS ? 'GET' : 'Install'}
               </a>
             </div>
 
