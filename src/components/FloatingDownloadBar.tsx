@@ -25,64 +25,71 @@ function PlayIcon() {
   )
 }
 
+// DEBUG: platform check removed so it renders on desktop too — restore when done
 export default function FloatingDownloadBar() {
   const [dismissed, setDismissed] = useState(false)
   const platform = usePlatform()
   const { isDark } = useTheme()
 
-  if (dismissed || platform === 'unknown') return null
+  if (dismissed) return null
 
   const isIOS = platform === 'ios'
   const storeUrl = isIOS ? APP_STORE_URL : GOOGLE_PLAY_URL
   const storeName = isIOS ? 'App Store' : 'Google Play'
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 z-50 px-4 lg:hidden">
-      <div className="max-w-sm mx-auto rounded-2xl overflow-hidden bg-white dark:bg-[#1c1c1c] border-t-2 border-t-mint shadow-[0_0_0_1.5px_rgba(0,230,160,0.45),0_8px_40px_rgba(0,230,160,0.2),0_4px_24px_rgba(0,0,0,0.35)]">
+    <div className="fixed bottom-6 left-0 right-0 z-50 px-5">
+      <div className="max-w-sm mx-auto">
+        {/* Outer glow ring */}
+        <div className="rounded-[20px] p-px bg-gradient-to-br from-mint/60 via-mint/30 to-transparent shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
+          <div className="rounded-[18.5px] overflow-hidden bg-[#161616] dark:bg-white">
 
-        {/* Store label row */}
-        <div className="flex items-center justify-between px-3 pt-2 pb-0">
-          <div className="flex items-center gap-1 text-gray-400 dark:text-gray-500">
-            {isIOS ? <AppleIcon /> : <PlayIcon />}
-            <span className="text-[10px] font-medium tracking-wide">{storeName}</span>
+            {/* Mint accent bar across the top */}
+            <div className="h-0.5 w-full bg-gradient-to-r from-mint via-mint/80 to-transparent" />
+
+            {/* Store label row */}
+            <div className="flex items-center justify-between px-3.5 pt-2.5 pb-0">
+              <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500">
+                {isIOS ? <AppleIcon /> : <PlayIcon />}
+                <span className="text-[10px] font-semibold tracking-widest uppercase">{storeName}</span>
+              </div>
+              <button
+                onClick={() => setDismissed(true)}
+                aria-label="Dismiss"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-200 dark:hover:text-gray-700 transition-colors p-1 -mr-0.5"
+              >
+                <svg viewBox="0 0 12 12" className="w-3 h-3" aria-hidden="true">
+                  <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Main content row */}
+            <div className="flex items-center gap-3 px-3.5 py-3">
+              <img
+                src={isDark ? icon_dark : icon_light}
+                alt="Ch·t app icon"
+                className="w-12 h-12 rounded-xl flex-shrink-0"
+              />
+
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-white dark:text-gray-900 leading-tight">{isIOS ? 'ch@t' : 'Chat'}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 truncate mt-0.5">Dating · Speed Date · Messaging</p>
+                <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">Free</p>
+              </div>
+
+              <a
+                href={storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 px-5 py-1.5 rounded-full bg-mint text-gray-900 text-[13px] font-bold hover:brightness-110 active:scale-95 transition-all duration-150"
+                aria-label={`Download Ch·t on ${storeName}`}
+              >
+                Get
+              </a>
+            </div>
+
           </div>
-          <button
-            onClick={() => setDismissed(true)}
-            aria-label="Dismiss"
-            className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1 -mr-1"
-          >
-            <svg viewBox="0 0 12 12" className="w-3 h-3 fill-current" aria-hidden="true">
-              <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Main row */}
-        <div className="flex items-center gap-3 px-3 py-2.5">
-          {/* App icon */}
-          <img
-            src={isDark ? icon_dark : icon_light}
-            alt="Ch·t app icon"
-            className="w-12 h-12 rounded-xl flex-shrink-0 shadow-sm"
-          />
-
-          {/* App info */}
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white truncate leading-tight">Ch·t</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">Dating · Speed Date · Messaging</p>
-            <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">Free</p>
-          </div>
-
-          {/* Get button */}
-          <a
-            href={storeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-shrink-0 px-5 py-1.5 rounded-full bg-gray-100 dark:bg-white/10 text-[13px] font-bold text-blue-500 dark:text-blue-400 hover:bg-gray-200 dark:hover:bg-white/20 active:scale-95 transition-all duration-150"
-            aria-label={`Download Ch·t on ${storeName}`}
-          >
-            Get
-          </a>
         </div>
       </div>
     </div>
