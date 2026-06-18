@@ -38,7 +38,7 @@ export default function FloatingDownloadBar() {
 
   return (
     <div className="fixed bottom-4 left-0 right-0 z-50 px-4 lg:hidden">
-      <div className="max-w-sm mx-auto rounded-2xl overflow-hidden bg-white/95 dark:bg-[#141414]/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.18)] border border-gray-200/60 dark:border-white/10">
+      <div className="max-w-sm mx-auto rounded-2xl overflow-hidden bg-white dark:bg-[#1c1c1c] border-t-2 border-t-mint shadow-[0_0_0_1.5px_rgba(0,230,160,0.45),0_8px_40px_rgba(0,230,160,0.2),0_4px_24px_rgba(0,0,0,0.35)]">
 
         {/* Store label row */}
         <div className="flex items-center justify-between px-3 pt-2 pb-0">
