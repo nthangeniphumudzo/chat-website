@@ -38,7 +38,7 @@ export default function FloatingDownloadBar() {
   const storeName = isIOS ? 'App Store' : 'Google Play'
 
   return (
-    <div className="fixed bottom-6 left-0 right-0 z-50 px-5">
+    <div className="fixed bottom-2 left-0 right-0 z-50 px-5">
       <div className="max-w-sm mx-auto">
         <div className="rounded-[20px] p-px bg-gradient-to-br from-mint/60 via-mint/30 to-transparent shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
           <div className="rounded-[18.5px] overflow-hidden bg-[#161616] dark:bg-white">
