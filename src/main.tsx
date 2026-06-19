@@ -17,7 +17,7 @@ fetch('https://chatopscontainer.grayplant-ccb9b969.southafricanorth.azurecontain
   const activeRef = ref || sessionStorage.getItem('promoRef')
   if (!activeRef) return
 
-  const url = `https://api.chatphcreations.co.za/api/promo-codes/${encodeURIComponent(activeRef)}/track`
+  const url = `https://chatopscontainer.grayplant-ccb9b969.southafricanorth.azurecontainerapps.io/api/promo-codes/${encodeURIComponent(activeRef)}/track`
 
   if (navigator.sendBeacon) {
     navigator.sendBeacon(url)
