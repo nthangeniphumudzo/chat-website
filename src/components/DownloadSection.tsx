@@ -1,5 +1,4 @@
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import { usePlatform } from '../hooks/usePlatform'
 import { img_chat } from '../assets/images'
 
 const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
@@ -7,8 +6,6 @@ const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
 
 export default function DownloadSection() {
   const ref = useScrollReveal<HTMLDivElement>()
-  const platform = usePlatform()
-
   return (
     <section id="download" className="py-20 sm:py-28 lg:py-32 px-5 sm:px-8 text-center relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -39,7 +36,6 @@ export default function DownloadSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
-          {platform !== 'ios' && (
           <a href={GOOGLE_PLAY_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200" aria-label="Get it on Google Play">
             <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Google Play Store">
               <rect width="180" height="53" rx="6" fill="#000000" />
@@ -65,8 +61,6 @@ export default function DownloadSection() {
               <text x="52" y="36" fill="#FFFFFF" fontSize="16" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="500">Google Play</text>
             </svg>
           </a>
-          )}
-          {platform !== 'android' && (
           <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform duration-200" aria-label="Download on the App Store">
             <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Apple App Store">
               <rect width="180" height="53" rx="6" fill="#000000" />
@@ -78,7 +72,6 @@ export default function DownloadSection() {
               <text x="48" y="36" fill="#FFFFFF" fontSize="16" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="500">App Store</text>
             </svg>
           </a>
-          )}
         </div>
 
         <p className="mt-4 text-xs text-gray-400 dark:text-gray-600 font-medium">
