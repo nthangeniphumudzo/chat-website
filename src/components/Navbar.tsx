@@ -80,7 +80,7 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Mobile: download button routes back to hero download section */}
           <a
-            href="#"
+            href="#download"
             className="md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-transform duration-200"
           >
             Download
