@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import { usePlatform } from '../hooks/usePlatform'
 import {
   img_explore, img_settings,
   img_explore_light, img_settings_light,
@@ -18,8 +17,6 @@ export default function Hero({ isDark }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const bgRef = useRef<HTMLDivElement>(null)
   const phonesRef = useRef<HTMLDivElement>(null)
-  const platform = usePlatform()
-
   useEffect(() => {
     let mx = 0, my = 0
     let cx = 0, cy = 0
@@ -91,7 +88,6 @@ export default function Hero({ isDark }: HeroProps) {
           Download the app
         </p>
         <div className="lg:hidden flex gap-3 justify-center mb-5">
-          {platform !== 'ios' && (
           <a href={GOOGLE_PLAY_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 active:scale-95 transition-transform duration-200" aria-label="Get it on Google Play">
             <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Google Play Store">
               <rect width="180" height="53" rx="6" fill="#000000" />
@@ -117,8 +113,6 @@ export default function Hero({ isDark }: HeroProps) {
               <text x="52" y="36" fill="#FFFFFF" fontSize="16" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="500">Google Play</text>
             </svg>
           </a>
-          )}
-          {platform !== 'android' && (
           <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="hover:scale-105 active:scale-95 transition-transform duration-200" aria-label="Download on the App Store">
             <svg viewBox="0 0 180 53" className="h-10 w-auto" role="img" aria-label="Apple App Store">
               <rect width="180" height="53" rx="6" fill="#000000" />
@@ -130,7 +124,6 @@ export default function Hero({ isDark }: HeroProps) {
               <text x="48" y="36" fill="#FFFFFF" fontSize="16" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="500">App Store</text>
             </svg>
           </a>
-          )}
         </div>
 
         <div className="hidden lg:flex justify-start">
