@@ -20,6 +20,7 @@ export default {
         'fade-up-1': 'fadeUp 0.6s 0.1s ease both',
         'fade-up-2': 'fadeUp 0.6s 0.2s ease both',
         'fade-up-3': 'fadeUp 0.6s 0.3s ease both',
+        'cursor-blink': 'cursorBlink 0.8s step-end infinite',
         'pulse-dot': 'pulseDot 2s ease infinite',
         'float': 'float 3.5s ease-in-out infinite',
         'float-slow': 'floatSlow 5s 0.8s ease-in-out infinite',
@@ -29,6 +30,10 @@ export default {
         fadeUp: {
           from: { opacity: '0', transform: 'translateY(24px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        cursorBlink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
         pulseDot: {
           '0%, 100%': { opacity: '1', transform: 'scale(1)' },

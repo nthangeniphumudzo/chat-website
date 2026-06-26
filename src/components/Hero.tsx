@@ -1,10 +1,14 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   img_explore, img_settings,
   img_explore_light, img_settings_light,
   img_speed_date_inbox,
 } from '../assets/images'
 import ScreenshotCarousel from './ScreenshotCarousel'
+import { usePlatform } from '../hooks/usePlatform'
+
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
+const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
 
 interface HeroProps {
   isDark: boolean
@@ -14,6 +18,42 @@ export default function Hero({ isDark }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const bgRef = useRef<HTMLDivElement>(null)
   const phonesRef = useRef<HTMLDivElement>(null)
+  const platform = usePlatform()
+  const downloadUrl = platform === 'ios' ? APP_STORE_URL : GOOGLE_PLAY_URL
+
+  const line1 = "Your future gf/bf has already installed the app."
+  const line2 = "Don't leave them hanging."
+  const fullText = line1 + line2
+  const [charCount, setCharCount] = useState(0)
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
+    const type = (count: number) => {
+      setCharCount(count)
+      if (count < fullText.length) {
+        timer = setTimeout(() => type(count + 1), 42)
+      }
+    }
+    const delay = setTimeout(() => type(0), 800)
+    return () => { clearTimeout(delay); clearTimeout(timer) }
+  }, [])
+
+  const segments = [
+    { text: "Your ", cls: "font-dm text-gray-500 dark:text-white/50", link: false },
+    { text: "future gf/bf ", cls: "font-syne italic font-semibold text-gray-900 dark:text-white", link: false },
+    { text: "has already ", cls: "font-dm text-gray-500 dark:text-white/50", link: false },
+    { text: "installed", cls: "font-dm text-gray-500 dark:text-white/50 underline decoration-dotted underline-offset-2 hover:text-mint transition-colors duration-200 cursor-pointer", link: true },
+    { text: " the app.", cls: "font-dm text-gray-500 dark:text-white/50", link: false },
+  ]
+  let rem = charCount
+  const typed1 = segments.map(s => {
+    const vis = s.text.slice(0, Math.max(0, rem))
+    rem = Math.max(0, rem - s.text.length)
+    return { ...s, vis }
+  })
+  const typed2 = charCount > line1.length ? line2.slice(0, charCount - line1.length) : ''
+  const isDone = charCount >= fullText.length
+
   useEffect(() => {
     let mx = 0, my = 0
     let cx = 0, cy = 0
@@ -64,6 +104,22 @@ export default function Hero({ isDark }: HeroProps) {
 
       {/* ── Text ── */}
       <div className="relative z-10 animate-fade-up text-center lg:text-left order-2 lg:order-none w-full">
+        <div className="mb-3">
+          <p className="text-xl sm:text-2xl min-h-[1.75rem]">
+            {typed1.map((s, i) => s.link ? (
+              <a key={i} href={downloadUrl} target="_blank" rel="noopener noreferrer" className={s.cls}>{s.vis}</a>
+            ) : (
+              <span key={i} className={s.cls}>{s.vis}</span>
+            ))}
+            {charCount <= line1.length && <span className="animate-cursor-blink select-none font-light font-dm text-gray-400 dark:text-white/40">|</span>}
+          </p>
+          {charCount > line1.length && (
+            <p className="font-dm text-xs sm:text-sm text-gray-400 dark:text-white/30 tracking-widest uppercase mt-1">
+              {typed2}{!isDone && <span className="animate-cursor-blink select-none font-light">|</span>}
+            </p>
+          )}
+        </div>
+
         <p className="text-mint font-dm font-medium text-sm sm:text-base mb-3 tracking-wide">
           Swipe less. Connect more
         </p>

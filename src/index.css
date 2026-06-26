@@ -30,14 +30,14 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Offset anchor targets for fixed navbar */
+  /* Offset anchor targets for fixed navbar + announcement bar */
   [id] {
-    scroll-margin-top: 72px;
+    scroll-margin-top: 112px;
   }
 
   @media (min-width: 1024px) {
     [id] {
-      scroll-margin-top: 88px;
+      scroll-margin-top: 128px;
     }
   }
 }
