@@ -11,12 +11,19 @@ const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
 
 const avatars = [avatar1, avatar2, avatar3, avatar4]
 
-function StoreButton({ href, badge, badgeAlt }: { href: string; badge: string; badgeAlt: string }) {
+function trackDownload(store: string) {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'download_click', { store })
+  }
+}
+
+function StoreButton({ href, badge, badgeAlt, store }: { href: string; badge: string; badgeAlt: string; store: string }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackDownload(store)}
       className="h-11 w-36 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-200"
     >
       <img src={badge} alt={badgeAlt} className="h-full w-full object-contain" />
@@ -89,8 +96,8 @@ export default function ConversionHero() {
               Get it now — available on both
             </p>
             <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
-              <StoreButton href={GOOGLE_PLAY_URL} badge={googlePlayBadge} badgeAlt="Get it on Google Play" />
-              <StoreButton href={APP_STORE_URL} badge={appStoreBadge} badgeAlt="Download on the App Store" />
+              <StoreButton href={GOOGLE_PLAY_URL} badge={googlePlayBadge} badgeAlt="Get it on Google Play" store="google_play" />
+              <StoreButton href={APP_STORE_URL} badge={appStoreBadge} badgeAlt="Download on the App Store" store="app_store" />
             </div>
             <p className="text-xs text-gray-400 dark:text-gray-600">Free · No credit card · Verified profiles</p>
 
