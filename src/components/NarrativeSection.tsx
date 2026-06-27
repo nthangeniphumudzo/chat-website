@@ -118,7 +118,11 @@ export default function NarrativeSection({ isDark }: NarrativeSectionProps) {
       <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12">
 
         <div ref={labelRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-16 sm:mb-24 text-center">
-          <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">
+          <div className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full bg-mint/10 border border-mint/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
+            <span className="text-xs font-medium text-mint tracking-wide">People nearby are writing their questions right now</span>
+          </div>
+          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">
             How a real conversation starts
           </p>
           <p className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-gray-900 dark:text-white leading-tight tracking-tight max-w-2xl mx-auto">
