@@ -4,6 +4,7 @@ import {
   img_explore, img_explore_light,
   img_speed_date_inbox,
 } from '../assets/images'
+import ScreenshotCarousel from './ScreenshotCarousel'
 
 interface StepData {
   num: string
@@ -13,25 +14,27 @@ interface StepData {
   imageLight: string
   imageAlt: string
   imageOnLeft: boolean
+  carousel?: boolean
 }
 
 const steps: StepData[] = [
   {
     num: '01',
-    heading: 'You ask something that actually matters.',
-    body: 'Three questions. Your words, no shared script. They filter every match for you — forever.',
-    imageDark: img_speed_date_modal,
-    imageLight: img_speed_date_modal,
-    imageAlt: 'Writing your Speed Date questions',
-    imageOnLeft: true,
-  },
-  {
-    num: '02',
     heading: 'Someone reads and decides to reply.',
     body: 'Not a swipe. They read, they thought, they wrote something back. That choice means more than a hundred matches.',
     imageDark: img_explore,
     imageLight: img_explore_light,
     imageAlt: 'Browse — Speed Date questions on the card',
+    imageOnLeft: true,
+    carousel: true,
+  },
+  {
+    num: '02',
+    heading: 'You ask something that actually matters.',
+    body: 'Three questions. Your words, no shared script. They filter every match for you — forever.',
+    imageDark: img_speed_date_modal,
+    imageLight: img_speed_date_modal,
+    imageAlt: 'Writing your Speed Date questions',
     imageOnLeft: false,
   },
   {
@@ -53,20 +56,26 @@ interface StepProps extends StepData {
   isDark: boolean
 }
 
-function Step({ num, heading, body, imageDark, imageLight, imageAlt, imageOnLeft, isDark }: StepProps) {
+function Step({ num, heading, body, imageDark, imageLight, imageAlt, imageOnLeft, carousel, isDark }: StepProps) {
   const imgRef = useScrollReveal<HTMLDivElement>()
   const textRef = useScrollReveal<HTMLDivElement>()
 
   const phoneEl = (
     <div ref={imgRef} className="opacity-0 translate-y-8 transition-all duration-700 flex justify-center">
-      <div className={`w-56 sm:w-64 lg:w-72 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
-        <img
-          src={isDark ? imageDark : imageLight}
-          alt={imageAlt}
-          className="w-full block"
-          loading="lazy"
-        />
-      </div>
+      {carousel ? (
+        <div className="w-56 sm:w-64 lg:w-72">
+          <ScreenshotCarousel />
+        </div>
+      ) : (
+        <div className={`w-56 sm:w-64 lg:w-72 rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
+          <img
+            src={isDark ? imageDark : imageLight}
+            alt={imageAlt}
+            className="w-full block"
+            loading="lazy"
+          />
+        </div>
+      )}
     </div>
   )
 

@@ -1,5 +1,4 @@
 import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
 import StatsBar from '../components/StatsBar'
 import NarrativeSection from '../components/NarrativeSection'
 import Features from '../components/Features'
@@ -22,9 +21,8 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
   return (
     <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
       <Navbar isDark={isDark} onToggle={onToggleTheme} />
-      <Hero isDark={isDark} />
-      <StatsBar />
       <NarrativeSection isDark={isDark} />
+      <StatsBar />
       <Features />
       <Screenshots isDark={isDark} />
       <MessagingSection isDark={isDark} />
