@@ -1,4 +1,3 @@
-import { usePlatform } from '../hooks/usePlatform'
 import googlePlayBadge from '../assets/google-play-badge.svg'
 import appStoreBadge from '../assets/app-store-badge.svg'
 import avatar1 from '../assets/avatars/IMG_3097.jpg'
@@ -25,8 +24,6 @@ function StoreButton({ href, badge, badgeAlt }: { href: string; badge: string; b
 }
 
 export default function ConversionHero() {
-  const platform = usePlatform()
-
   return (
     <section className="relative pt-24 sm:pt-28 lg:pt-32 pb-14 px-5 sm:px-8 text-center overflow-hidden">
       {/* Background glow */}
