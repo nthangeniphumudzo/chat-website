@@ -4,6 +4,7 @@ import { icon_dark, icon_light } from '../assets/images'
 interface NavbarProps {
   isDark: boolean
   onToggle: () => void
+  badgesVisible: boolean
 }
 
 const marketingLinks = [
@@ -14,7 +15,7 @@ const marketingLinks = [
   { href: './#premium', label: 'Premium' },
 ] as const
 
-export default function Navbar({ isDark, onToggle }: NavbarProps) {
+export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -78,10 +79,10 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Mobile: download button routes back to hero download section */}
+          {/* Appears only once the store badges have scrolled out of view */}
           <a
-            href="#download"
-            className="md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-transform duration-200"
+            href="#store-badges"
+            className={`md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-all duration-300 ${badgesVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             Download
           </a>

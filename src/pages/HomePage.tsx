@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import ConversionHero from '../components/ConversionHero'
 import StatsBar from '../components/StatsBar'
@@ -19,9 +20,22 @@ interface HomePageProps {
 }
 
 export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
+  const [badgesVisible, setBadgesVisible] = useState(true)
+
+  useEffect(() => {
+    const el = document.getElementById('store-badges')
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setBadgesVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
-      <Navbar isDark={isDark} onToggle={onToggleTheme} />
+      <Navbar isDark={isDark} onToggle={onToggleTheme} badgesVisible={badgesVisible} />
       <ConversionHero />
       <NarrativeSection isDark={isDark} />
       <StatsBar />
