@@ -21,12 +21,13 @@ export default function ConversionHero() {
 
         {/* The hook — this is the only thing that needs to land */}
         <h1 className="font-syne font-extrabold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.05] mb-6">
-          Dating shouldn't start<br />with judging photos.
+          Three real questions.
+          <br />One real connection
         </h1>
 
         {/* One quiet line — sets up the scroll */}
         <p className="text-gray-500 dark:text-gray-400 text-lg sm:text-xl leading-relaxed mb-12 max-w-md mx-auto">
-          There's a better way to meet someone. Scroll to see how.
+          Meet new people through guided speed dates designed to spark genuine conversations—not endless swiping.
         </p>
 
         {/* The one action */}
