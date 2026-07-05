@@ -21,8 +21,8 @@ export default function ConversionHero() {
 
         {/* The hook — this is the only thing that needs to land */}
         <h1 className="font-syne font-extrabold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-[1.05] mb-6">
-          Three real questions.
-          <br />One real connection
+          Three real questions,
+          <br />One real connection.
         </h1>
 
         {/* One quiet line — sets up the scroll */}
