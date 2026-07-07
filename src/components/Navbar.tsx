@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { icon_dark, icon_light } from '../assets/images'
+import { usePlatform } from '../hooks/usePlatform'
+import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
 
 interface NavbarProps {
   isDark: boolean
@@ -19,6 +21,12 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+  const platform = usePlatform()
+
+  // Known platform → deep-link straight to the store; otherwise fall back to
+  // scrolling to the badges so desktop visitors can still pick their store.
+  const storeUrl =
+    platform === 'ios' ? APP_STORE_URL : platform === 'android' ? GOOGLE_PLAY_URL : null
 
   useEffect(() => {
     const handler = () => {
@@ -92,7 +100,8 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Mobile: appears only once the hero store badges scroll out of view */}
           <a
-            href="#store-badges"
+            href={storeUrl ?? '#store-badges'}
+            onClick={() => storeUrl && trackDownload(platform === 'ios' ? 'app_store' : 'google_play', 'navbar')}
             className={`md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-all duration-300 ${badgesVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             Download
@@ -100,7 +109,8 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
 
           {/* Desktop: always available */}
           <a
-            href="#download"
+            href={storeUrl ?? '#download'}
+            onClick={() => storeUrl && trackDownload(platform === 'ios' ? 'app_store' : 'google_play', 'navbar')}
             className="hidden md:inline-flex px-5 py-2 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95 transition-all duration-200"
           >
             Get the app
