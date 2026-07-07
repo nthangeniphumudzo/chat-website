@@ -172,11 +172,6 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Copy + CTA */}
         <div className="text-center lg:text-left order-1">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold text-mint bg-mint/10 border border-mint/20 rounded-full px-3 py-1 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse-dot" />
-            Dating that starts with a question
-          </span>
-
           <h1 className="font-syne font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-5">
             Three real questions,
             <br />
