@@ -1,10 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePlatform } from '../hooks/usePlatform'
 import { useTheme } from '../hooks/useTheme'
 import { icon_light, icon_dark } from '../assets/images'
-
-const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
-const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
+import { GOOGLE_PLAY_URL, APP_STORE_URL, trackDownload } from '../constants'
 
 function AppleIcon() {
   return (
@@ -25,20 +23,48 @@ function PlayIcon() {
   )
 }
 
-// DEBUG: platform check removed so it renders on desktop too — restore when done
+/**
+ * Mobile app-install card. Appears after the visitor scrolls past the hero,
+ * and gets out of the way when the final download section is on screen.
+ */
 export default function FloatingDownloadBar() {
   const [dismissed, setDismissed] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
+  const [nearDownload, setNearDownload] = useState(false)
   const platform = usePlatform()
   const { isDark } = useTheme()
 
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 500)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const el = document.getElementById('download')
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setNearDownload(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   if (dismissed) return null
 
+  const visible = pastHero && !nearDownload
   const isIOS = platform === 'ios'
   const storeUrl = isIOS ? APP_STORE_URL : GOOGLE_PLAY_URL
   const storeName = isIOS ? 'App Store' : 'Google Play'
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 z-50 px-5">
+    <div
+      className={`md:hidden fixed bottom-4 left-0 right-0 z-40 px-5 transition-all duration-500 ${
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0 pointer-events-none'
+      }`}
+    >
       <div className="max-w-sm mx-auto">
         <div className="rounded-[20px] p-px bg-gradient-to-br from-mint/60 via-mint/30 to-transparent shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
           <div className="rounded-[18.5px] overflow-hidden bg-[#161616] dark:bg-white">
@@ -80,6 +106,7 @@ export default function FloatingDownloadBar() {
                 href={storeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackDownload(isIOS ? 'app_store' : 'google_play', 'floating_bar')}
                 className="flex-shrink-0 px-5 py-1.5 rounded-full bg-mint text-gray-900 text-[13px] font-bold hover:brightness-110 active:scale-95 transition-all duration-150"
                 aria-label={`Download on ${storeName}`}
               >

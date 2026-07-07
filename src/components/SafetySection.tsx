@@ -64,7 +64,7 @@ export default function SafetySection() {
           <span className="text-mint">is actually them.</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
-          No one can use Ch@t without passing verification first. The profile you're reading is real. The questions they wrote are theirs. You can control who sees you, report without confrontation, and every screenshot or recording across the whole app shows blank — so what you share stays yours.
+          No one uses Ch@t without passing verification first. The profile you're reading is real, and the questions they wrote are theirs.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

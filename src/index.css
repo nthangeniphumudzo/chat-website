@@ -171,4 +171,24 @@
     opacity: 1;
     animation: shimmer-spin 2.5s linear infinite;
   }
+
+  /* Chat bubble pop-in — hero live demo */
+  @keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
+  }
+
+  .bubble-in {
+    animation: bubbleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  /* How-it-works step timer — fills the bottom edge of the active step */
+  @keyframes stepProgress {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+
+  .step-progress {
+    animation: stepProgress linear both;
+  }
 }

@@ -8,15 +8,16 @@ interface NavbarProps {
 }
 
 const marketingLinks = [
+  { href: './#how', label: 'How it works' },
   { href: './#features', label: 'Features' },
-  { href: './#screens', label: 'Screenshots' },
-  { href: './#safety', label: 'Safety' },
   { href: './#privacy', label: 'Privacy' },
-  { href: './#premium', label: 'Premium' },
+  { href: './#safety', label: 'Safety' },
+  { href: './#faq', label: 'FAQ' },
 ] as const
 
 export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
+  const [progress, setProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -24,7 +25,10 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
       const y = window.scrollY
       setScrolled(y > 20)
       if (y > 80) setMenuOpen(false)
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(max > 0 ? Math.min(y / max, 1) : 0)
     }
+    handler()
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
@@ -43,6 +47,13 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
           : 'bg-transparent'
         }`}
     >
+      {/* Reading progress */}
+      <div
+        className="absolute top-0 left-0 h-0.5 bg-mint transition-transform duration-150 origin-left w-full"
+        style={{ transform: `scaleX(${progress})` }}
+        aria-hidden
+      />
+
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
         {/* Mobile: burger on the left */}
         <button
@@ -79,12 +90,20 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Appears only once the store badges have scrolled out of view */}
+          {/* Mobile: appears only once the hero store badges scroll out of view */}
           <a
             href="#store-badges"
             className={`md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-all duration-300 ${badgesVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             Download
+          </a>
+
+          {/* Desktop: always available */}
+          <a
+            href="#download"
+            className="hidden md:inline-flex px-5 py-2 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95 transition-all duration-200"
+          >
+            Get the app
           </a>
 
           <button

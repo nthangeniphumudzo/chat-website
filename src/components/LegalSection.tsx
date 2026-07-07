@@ -237,6 +237,7 @@ function CommunityContent() {
 
 export default function LegalSection() {
   const [activeTab, setActiveTab] = useState<TabId>('tos')
+  const [expanded, setExpanded] = useState(false)
   const headingRef = useScrollReveal<HTMLDivElement>()
 
   const content: Record<TabId, ReactNode> = {
@@ -246,28 +247,33 @@ export default function LegalSection() {
     community: <CommunityContent />,
   }
 
+  const openTab = (id: TabId) => {
+    setActiveTab(id)
+    setExpanded(true)
+  }
+
   return (
     <div id="legal" className="bg-gray-50 dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800">
-      <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
-        <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-8 sm:mb-10">
+      <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
+        <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-6 sm:mb-8">
           <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Legal & Policies</p>
-          <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
+          <h2 className="font-syne font-extrabold text-2xl sm:text-3xl tracking-tight leading-tight mb-3">
             Transparency &amp; <span className="text-mint">Trust</span>
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-lg">
-            Everything you need to know about how Ch@t works, how we protect your data, and the standards we hold our community to.
+          <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base leading-relaxed max-w-lg">
+            How Ch@t works, how we protect your data, and the standards we hold our community to. Pick a policy to read it here.
           </p>
         </div>
 
         {/* Tabs — horizontally scrollable on mobile */}
         <div className="overflow-x-auto scrollbar-hide -mx-5 sm:mx-0 px-5 sm:px-0">
-          <div className="flex min-w-max sm:min-w-0 sm:flex-wrap gap-0 border-b border-gray-200 dark:border-gray-800 mb-7 sm:mb-8">
+          <div className={`flex min-w-max sm:min-w-0 sm:flex-wrap gap-0 border-b border-gray-200 dark:border-gray-800 ${expanded ? 'mb-7 sm:mb-8' : ''}`}>
             {tabs.map(({ id, label }) => (
               <button
                 key={id}
-                onClick={() => setActiveTab(id)}
+                onClick={() => (expanded && activeTab === id ? setExpanded(false) : openTab(id))}
                 className={`px-4 py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-all duration-200 whitespace-nowrap ${
-                  activeTab === id
+                  expanded && activeTab === id
                     ? 'border-mint text-mint'
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
@@ -278,9 +284,17 @@ export default function LegalSection() {
           </div>
         </div>
 
-        <div className="animate-fade-up">
-          {content[activeTab]}
-        </div>
+        {expanded && (
+          <div className="animate-fade-up">
+            {content[activeTab]}
+            <button
+              onClick={() => setExpanded(false)}
+              className="mt-8 text-xs font-medium text-gray-400 dark:text-gray-500 hover:text-mint transition-colors"
+            >
+              ↑ Collapse policies
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
