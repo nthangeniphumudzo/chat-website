@@ -12,7 +12,6 @@ import FAQ from '../components/FAQ'
 import DownloadSection from '../components/DownloadSection'
 import LegalSection from '../components/LegalSection'
 import Footer from '../components/Footer'
-import FloatingDownloadBar from '../components/FloatingDownloadBar'
 
 interface HomePageProps {
   isDark: boolean
@@ -48,7 +47,6 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
       <DownloadSection />
       <LegalSection />
       <Footer isDark={isDark} />
-      <FloatingDownloadBar />
     </div>
   )
 }
