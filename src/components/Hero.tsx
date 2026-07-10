@@ -173,17 +173,21 @@ export default function Hero() {
         {/* Copy + CTA */}
         <div className="text-center lg:text-left order-1">
           <h1 className="font-syne font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-5">
-            Three real questions,
+            Stop endless swiping.
             <br />
-            <span className="text-mint">one real connection.</span>
+            <span className="text-mint">Start real conversations.</span>
           </h1>
 
           <p className="text-gray-500 dark:text-gray-400 text-lg sm:text-xl leading-relaxed mb-8 max-w-md mx-auto lg:mx-0">
-            You write three questions. People nearby answer in their own words — before you ever match. No endless swiping.
+            Get to know people through their answers before you ever match. Three questions. Honest conversations. Better connections.
           </p>
 
           <StoreBadges placement="hero" id="store-badges" className="lg:justify-start mb-4" />
-          <p className="text-xs font-medium text-mint mb-8">Free to download · No ads, ever</p>
+          <p className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 text-xs font-medium text-gray-500 dark:text-gray-400 mb-8">
+            <span>💚 Free to download</span>
+            <span>🔒 Verified profiles</span>
+            <span>💬 Personality before photos</span>
+          </p>
 
           <SocialProof />
         </div>
