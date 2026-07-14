@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import StatsBar from '../components/StatsBar'
 import HowItWorks from '../components/HowItWorks'
-import FeatureTabs from '../components/FeatureTabs'
-import PrivacyDemo from '../components/PrivacyDemo'
-import SafetySection from '../components/SafetySection'
-import Screenshots from '../components/Screenshots'
-import PremiumSection from '../components/PremiumSection'
-import FAQ from '../components/FAQ'
-import DownloadSection from '../components/DownloadSection'
-import LegalSection from '../components/LegalSection'
-import Footer from '../components/Footer'
+
+// Below-the-fold sections load as a separate chunk so the hero renders sooner
+const FeatureTabs = lazy(() => import('../components/FeatureTabs'))
+const PrivacyDemo = lazy(() => import('../components/PrivacyDemo'))
+const SafetySection = lazy(() => import('../components/SafetySection'))
+const Screenshots = lazy(() => import('../components/Screenshots'))
+const PremiumSection = lazy(() => import('../components/PremiumSection'))
+const FAQ = lazy(() => import('../components/FAQ'))
+const DownloadSection = lazy(() => import('../components/DownloadSection'))
+const LegalSection = lazy(() => import('../components/LegalSection'))
+const Footer = lazy(() => import('../components/Footer'))
 
 interface HomePageProps {
   isDark: boolean
@@ -38,15 +40,17 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
       <Hero />
       <StatsBar />
       <HowItWorks isDark={isDark} />
-      <FeatureTabs isDark={isDark} />
-      <PrivacyDemo isDark={isDark} />
-      <SafetySection />
-      <Screenshots isDark={isDark} />
-      <PremiumSection isDark={isDark} />
-      <FAQ />
-      <DownloadSection />
-      <LegalSection />
-      <Footer isDark={isDark} />
+      <Suspense fallback={null}>
+        <FeatureTabs isDark={isDark} />
+        <PrivacyDemo isDark={isDark} />
+        <SafetySection />
+        <Screenshots isDark={isDark} />
+        <PremiumSection isDark={isDark} />
+        <FAQ />
+        <DownloadSection />
+        <LegalSection />
+        <Footer isDark={isDark} />
+      </Suspense>
     </div>
   )
 }

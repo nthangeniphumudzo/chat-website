@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import StoreBadges from './StoreBadges'
-import avatar1 from '../assets/avatars/IMG_3097.jpg'
-import avatar2 from '../assets/avatars/IMG_3185.jpg'
-import avatar3 from '../assets/avatars/4a115dd1-ea95-4e48-b8f6-d53972ced8de.jpg'
-import avatar4 from '../assets/avatars/86f5a1dc-87c8-40eb-bc2e-97445b708ee3.jpg'
+import avatar1 from '../assets/avatars/IMG_3097.webp'
+import avatar2 from '../assets/avatars/IMG_3185.webp'
+import avatar3 from '../assets/avatars/4a115dd1-ea95-4e48-b8f6-d53972ced8de.webp'
+import avatar4 from '../assets/avatars/86f5a1dc-87c8-40eb-bc2e-97445b708ee3.webp'
 
 const conversations = [
   {
