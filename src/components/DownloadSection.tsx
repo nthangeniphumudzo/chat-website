@@ -23,14 +23,14 @@ export default function DownloadSection() {
   }
 
   return (
-    <section id="download" className="py-20 sm:py-28 px-5 sm:px-8 text-center relative overflow-hidden">
+    <section id="download" className="panel items-center px-5 sm:px-8 text-center overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[300px] sm:w-[600px] h-[200px] sm:h-[300px] bg-mint/10 rounded-full blur-[80px] sm:blur-[100px]" />
+        <div className="w-[400px] sm:w-[700px] h-[300px] sm:h-[400px] bg-mint/15 rounded-full blur-[100px] sm:blur-[120px]" />
       </div>
 
       <div ref={ref} className="opacity-0 translate-y-8 transition-all duration-700 relative z-10 max-w-2xl mx-auto">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">One last thing</p>
-        <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">One last thing</p>
+        <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-6">
           What would your
           <br />
           <span className="text-mint">three questions be?</span>
@@ -86,7 +86,7 @@ export default function DownloadSection() {
 
         <div className={`inline-block transition-all duration-500 ${done ? 'scale-105' : ''}`}>
           <div className={done ? 'rounded-3xl ring-2 ring-mint/50 ring-offset-4 ring-offset-white dark:ring-offset-[#050505] p-3' : 'p-1'}>
-            <SmartDownload placement="final_cta" reassure={false} />
+            <SmartDownload placement="final_cta" className="justify-center" />
           </div>
         </div>
 

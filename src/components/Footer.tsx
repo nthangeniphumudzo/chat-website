@@ -13,9 +13,10 @@ const legalLinks = [
 
 interface FooterProps {
   isDark: boolean
+  onToggleTheme: () => void
 }
 
-export default function Footer({ isDark }: FooterProps) {
+export default function Footer({ isDark, onToggleTheme }: FooterProps) {
   return (
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col items-center gap-5 sm:gap-6">
@@ -27,6 +28,16 @@ export default function Footer({ isDark }: FooterProps) {
             className="w-7 h-7 object-contain transition-transform duration-200 group-hover:scale-105"
           />
         </a>
+
+        {/* Appearance toggle — tucked down here so the top bar stays clean */}
+        <button
+          onClick={onToggleTheme}
+          aria-label="Toggle light or dark mode"
+          className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint transition-all duration-200"
+        >
+          <span className="text-sm">{isDark ? '☀️' : '🌙'}</span>
+          {isDark ? 'Light mode' : 'Dark mode'}
+        </button>
 
         <ul className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-5 sm:gap-x-6 gap-y-3 sm:gap-y-2 text-center">
           {legalLinks.map(({ label, href }) => (

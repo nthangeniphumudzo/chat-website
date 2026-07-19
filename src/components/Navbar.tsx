@@ -5,18 +5,15 @@ import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
 
 interface NavbarProps {
   isDark: boolean
-  onToggle: () => void
 }
 
 const marketingLinks = [
   { href: './#how', label: 'How it works' },
-  { href: './#features', label: 'Features' },
   { href: './#privacy', label: 'Privacy' },
-  { href: './#safety', label: 'Safety' },
   { href: './#faq', label: 'FAQ' },
 ] as const
 
-export default function Navbar({ isDark, onToggle }: NavbarProps) {
+export default function Navbar({ isDark }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -62,27 +59,16 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
       />
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
-        {/* Mobile: burger on the left */}
-        <button
-          className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 flex-shrink-0"
-          onClick={() => setMenuOpen(v => !v)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-        >
-          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-          <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-        </button>
-
-        {/* Desktop: logo on the left */}
-        <a href="./" className="hidden md:flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
+        {/* Logo on the left — all sizes */}
+        <a href="./" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
-            className="w-8 h-8 object-contain transition-transform duration-200 group-hover:scale-105"
+            className="w-11 h-11 object-contain transition-transform duration-200 group-hover:scale-105"
           />
         </a>
 
+        {/* Desktop nav links */}
         <ul className="hidden md:flex items-center gap-8">
           {marketingLinks.map(({ href, label }) => (
             <li key={href}>
@@ -97,10 +83,7 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Mobile download lives in the sticky bottom bar (StickyDownloadBar)
-              so it stays under the thumb — no top pill needed here. */}
-
-          {/* Desktop: always available */}
+          {/* Desktop: get the app */}
           <a
             href={storeUrl ?? '#download'}
             onClick={() => storeUrl && trackDownload(platform === 'ios' ? 'app_store' : 'google_play', 'navbar')}
@@ -109,12 +92,16 @@ export default function Navbar({ isDark, onToggle }: NavbarProps) {
             Get the app
           </a>
 
+          {/* Mobile: burger on the right */}
           <button
-            onClick={onToggle}
-            aria-label="Toggle theme"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-base hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200"
+            className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 flex-shrink-0"
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
           >
-            {isDark ? '☀️' : '🌙'}
+            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </button>
         </div>
       </div>

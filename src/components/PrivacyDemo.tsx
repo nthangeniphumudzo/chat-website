@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import { img_chat, img_chat_light } from '../assets/images'
+import { img_profile, img_profile_light } from '../assets/images'
 
 const privacyPoints = [
   {
     icon: '📵',
     title: 'Screenshot-proof, everywhere',
-    body: 'Every screen is covered — messages, photos, profiles. A capture comes out blank or black.',
+    body: 'Every capture comes out blank.',
   },
   {
     icon: '🙈',
     title: 'Invisible to people you block',
-    body: 'Block exes or anyone from your contacts. They never see you, you never see them — and they are never notified.',
+    body: 'They never see you. Never notified.',
   },
   {
     icon: '🎛️',
     title: 'You decide who sees you',
-    body: 'Age, distance, profile visibility — all under your control from the Privacy & Safety hub.',
+    body: 'Age, distance, profile — your call.',
   },
 ]
 
@@ -43,15 +43,15 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
   }
 
   return (
-    <section id="privacy" className="py-16 sm:py-24 bg-gray-50 dark:bg-[#080808] border-y border-gray-200 dark:border-gray-800">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
-        <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-10 sm:mb-14 text-center">
-          <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Flagship privacy</p>
-          <h2 className="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
-            Go on. <span className="text-mint">Try to screenshot it.</span>
+    <section id="privacy" className="panel bg-gray-50 dark:bg-[#080808] px-5 sm:px-8 lg:px-12 py-20">
+      <div className="max-w-6xl mx-auto w-full">
+        <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-12 sm:mb-16 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">Flagship privacy</p>
+          <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-5">
+            Try to <span className="text-mint">screenshot it.</span>
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
-            What you share in Ch@t stays in Ch@t. Press the button and see exactly what a screenshot of any screen captures.
+          <p className="text-lg sm:text-2xl text-gray-500 dark:text-gray-400 leading-snug max-w-lg mx-auto">
+            Go on. See what a screenshot actually captures.
           </p>
         </div>
 
@@ -61,8 +61,8 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
             <div className="relative w-56 sm:w-64">
               <div className={`relative rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
                 <img
-                  src={isDark ? img_chat : img_chat_light}
-                  alt="A conversation as you see it in the app"
+                  src={isDark ? img_profile : img_profile_light}
+                  alt="A profile as you see it in the app"
                   className="w-full block"
                   loading="lazy"
                 />

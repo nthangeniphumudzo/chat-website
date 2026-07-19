@@ -191,4 +191,50 @@
   .step-progress {
     animation: stepProgress linear both;
   }
+
+  /* ── Full-screen poster panels (Tinder-style) ─────────────────── */
+
+  /* Each panel fills the viewport so you scroll through them like slides.
+     min-height, not fixed, so tall content on small phones can still grow. */
+  .panel {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Oversized poster headline */
+  .poster-h {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+  }
+
+  /* Soft reveal used across panels */
+  @keyframes panelUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .panel-reveal.is-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Phone that bleeds off the panel edge */
+  .phone-bleed {
+    box-shadow:
+      0 60px 120px -30px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
 }

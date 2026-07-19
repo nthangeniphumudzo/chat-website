@@ -21,7 +21,7 @@ const steps: StepData[] = [
   {
     num: '01',
     heading: 'Write your three questions',
-    body: 'The ones that actually matter to you. Your words, no script — and they filter every match, forever.',
+    body: 'Your words. They filter every match.',
     imageDark: img_speed_date_modal,
     imageLight: img_speed_date_modal,
     imageAlt: 'Writing your Speed Date questions',
@@ -29,7 +29,7 @@ const steps: StepData[] = [
   {
     num: '02',
     heading: 'People nearby answer them',
-    body: 'They read, they think, they write back. One thoughtful reply beats a hundred swipes.',
+    body: 'One honest reply beats a hundred swipes.',
     imageDark: img_explore,
     imageLight: img_explore_light,
     imageAlt: 'Browse — your questions on the card',
@@ -37,7 +37,7 @@ const steps: StepData[] = [
   {
     num: '03',
     heading: 'Open the app to answers',
-    body: "Real words, in their voice, waiting in your Dates tab. The first message is never awkward — it already happened.",
+    body: 'The first message already happened.',
     imageDark: img_speed_date_inbox,
     imageLight: img_speed_date_inbox,
     imageAlt: 'Speed Date inbox — answers waiting',

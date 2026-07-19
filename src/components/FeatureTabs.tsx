@@ -13,7 +13,6 @@ interface TabData {
   label: string
   title: string
   description: string
-  chips: string[]
   imageDark: string
   imageLight: string
 }
@@ -23,10 +22,8 @@ const tabs: TabData[] = [
     id: 'dates',
     icon: '⚡',
     label: 'Dates',
-    title: 'Open the app to answers, not strangers',
-    description:
-      'Your home screen is an inbox of people who read your three questions and wrote something back. Pass, or show interest — the choice starts with their words.',
-    chips: ['Answers first', 'Your questions', 'No cold openers'],
+    title: 'Open the app to answers',
+    description: 'An inbox of people who read your questions and wrote back.',
     imageDark: img_speed_date_inbox,
     imageLight: img_speed_date_inbox,
   },
@@ -34,10 +31,8 @@ const tabs: TabData[] = [
     id: 'browse',
     icon: '🔎',
     label: 'Browse',
-    title: 'Explore nearby — with context',
-    description:
-      'Every card shows the person and the questions they wrote. You know what they care about before you decide. Changed your mind? Undo and look again.',
-    chips: ['People near you', 'Questions on the card', 'Undo'],
+    title: 'Explore nearby, with context',
+    description: 'Every card shows their answers — so you know before you decide.',
     imageDark: img_explore,
     imageLight: img_explore_light,
   },
@@ -45,10 +40,8 @@ const tabs: TabData[] = [
     id: 'inbox',
     icon: '💬',
     label: 'Inbox',
-    title: 'Conversations with somewhere to go',
-    description:
-      'After a mutual match, your thread starts here — text, voice, photos. The first message is easy, because you already know something real about each other.',
-    chips: ['Text · voice · photo', 'Primary & archived', 'Screenshot-proof'],
+    title: 'Conversations that go somewhere',
+    description: 'The first message is easy — you already know something real.',
     imageDark: img_chat,
     imageLight: img_chat_light,
   },
@@ -56,10 +49,8 @@ const tabs: TabData[] = [
     id: 'you',
     icon: '👤',
     label: 'You',
-    title: 'Your profile, verified and in control',
-    description:
-      'Photos, preferences, and verification that guarantees the person on the other side is who they say they are. You decide who sees your age, distance, and profile.',
-    chips: ['100% verified', 'Visibility controls', 'Privacy & safety hub'],
+    title: 'Verified, and in your control',
+    description: 'Everyone is verified. You decide who sees you.',
     imageDark: img_profile,
     imageLight: img_profile_light,
   },
@@ -116,19 +107,9 @@ export default function FeatureTabs({ isDark }: FeatureTabsProps) {
             <h3 className="font-syne font-extrabold text-2xl sm:text-3xl text-gray-900 dark:text-white tracking-tight leading-tight mb-4">
               {tab.title}
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-6">
+            <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
               {tab.description}
             </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2">
-              {tab.chips.map(chip => (
-                <span
-                  key={chip}
-                  className="text-xs font-semibold text-mint bg-mint/10 border border-mint/20 rounded-full px-3 py-1.5"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
           </div>
 
           <div className="order-1 lg:order-2 flex justify-center">

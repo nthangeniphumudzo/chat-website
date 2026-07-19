@@ -4,27 +4,27 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 const faqs = [
   {
     q: 'Is Ch@t really free?',
-    a: 'Yes — free to download and free to meet people. No credit card, no trial, no ads. Premium exists for extras like advanced filters and Boost, but the core experience works without it.',
+    a: 'Yes — free to download and free to meet people. Premium adds extras, but the core works without it.',
   },
   {
     q: 'Are the profiles real people?',
-    a: 'Every single profile passes verification before it can use the app. The face on the card is the person you\'ll talk to — no bots, no catfishing, no five-year-old photos.',
+    a: 'Every profile is verified before it can use the app. No bots, no catfishing, no old photos.',
   },
   {
     q: 'Can someone screenshot my chats or photos?',
-    a: 'No. Every screen in the app is protected — screenshots and screen recordings come out blank or black. Your words and photos never end up in someone\'s camera roll.',
+    a: 'No. Every screen is protected — captures come out blank. Nothing reaches their camera roll.',
   },
   {
     q: 'How is this different from swiping apps?',
-    a: 'Other apps start with a face; Ch@t starts with your three questions. People answer them in their own words before you ever match, so the first message is never a cold "hey".',
+    a: 'They start with a face. Ch@t starts with your questions — so the first message is never a cold "hey".',
   },
   {
     q: 'Who can see my profile?',
-    a: 'You decide. Control who sees your age, distance, and profile — and block anyone straight from your contacts. Blocked people never see you, and they\'re never notified.',
+    a: 'You decide. Control your visibility, and block anyone from your contacts — silently.',
   },
   {
     q: 'Is it only for people near me?',
-    a: 'Discovery is local by design — real people in your city, not across the country. Your radius adjusts as you use it: close enough to be real, wide enough to find the right person.',
+    a: 'Yes — local by design. Real people in your city, not across the country.',
   },
 ]
 

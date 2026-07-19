@@ -33,7 +33,7 @@ export default function PremiumSection({ isDark }: PremiumSectionProps) {
             More room to<br /><span className="text-mint">move first</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-md mb-6 sm:mb-8">
-            Ch@t is free to try. Premium unlocks the full stack — messaging, filters, Boost when you use it, and the extra headroom on Speed Date and Browse when your plan says so.
+            Free to start. Premium adds messaging, filters, and Boost when you want more.
           </p>
           {/* Phone — hidden on mobile to save space, shown on lg */}
           <div className="hidden lg:inline-block">
