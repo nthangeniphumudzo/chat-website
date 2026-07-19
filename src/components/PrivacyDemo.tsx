@@ -64,7 +64,6 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
                   src={isDark ? img_profile : img_profile_light}
                   alt="A profile as you see it in the app"
                   className="w-full block"
-                  loading="lazy"
                 />
                 {/* What the screenshot gets */}
                 <div

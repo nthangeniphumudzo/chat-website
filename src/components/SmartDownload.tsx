@@ -8,12 +8,9 @@ interface SmartDownloadProps {
 }
 
 /**
- * One calm, platform-aware download button.
- *
- * iPhone → App Store, everything else (Android + desktop) → Google Play.
- * Deliberately quiet: a single button, no badges, no reassurance stack — the
- * page shouldn't shout "download" at every turn. People meet it naturally as
- * they scroll.
+ * One calm "Download app" button. A deliberate press deep-links straight to the
+ * visitor's own store — iPhone → App Store, everything else → Google Play.
+ * (There is intentionally no auto-redirect on landing; only a real click acts.)
  */
 export default function SmartDownload({ placement, id, className = '' }: SmartDownloadProps) {
   const platform = usePlatform()

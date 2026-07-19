@@ -19,8 +19,7 @@ export default function Navbar({ isDark }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const platform = usePlatform()
 
-  // Known platform → deep-link straight to the store; otherwise fall back to
-  // scrolling to the badges so desktop visitors can still pick their store.
+  // A press deep-links to the visitor's store; desktop (no store) scrolls to the CTA.
   const storeUrl =
     platform === 'ios' ? APP_STORE_URL : platform === 'android' ? GOOGLE_PLAY_URL : null
 
@@ -83,7 +82,7 @@ export default function Navbar({ isDark }: NavbarProps) {
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Desktop: get the app */}
+          {/* Desktop: press deep-links to the store; desktop falls back to the CTA */}
           <a
             href={storeUrl ?? '#download'}
             onClick={() => storeUrl && trackDownload(platform === 'ios' ? 'app_store' : 'google_play', 'navbar')}
