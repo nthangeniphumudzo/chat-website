@@ -6,7 +6,6 @@ import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
 interface NavbarProps {
   isDark: boolean
   onToggle: () => void
-  badgesVisible: boolean
 }
 
 const marketingLinks = [
@@ -17,7 +16,7 @@ const marketingLinks = [
   { href: './#faq', label: 'FAQ' },
 ] as const
 
-export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps) {
+export default function Navbar({ isDark, onToggle }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -98,14 +97,8 @@ export default function Navbar({ isDark, onToggle, badgesVisible }: NavbarProps)
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Mobile: appears only once the hero store badges scroll out of view */}
-          <a
-            href={storeUrl ?? '#store-badges'}
-            onClick={() => storeUrl && trackDownload(platform === 'ios' ? 'app_store' : 'google_play', 'navbar')}
-            className={`md:hidden px-4 py-1.5 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm active:scale-95 transition-all duration-300 ${badgesVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-          >
-            Download
-          </a>
+          {/* Mobile download lives in the sticky bottom bar (StickyDownloadBar)
+              so it stays under the thumb — no top pill needed here. */}
 
           {/* Desktop: always available */}
           <a

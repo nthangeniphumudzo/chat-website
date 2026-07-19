@@ -1,8 +1,9 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import StatsBar from '../components/StatsBar'
 import HowItWorks from '../components/HowItWorks'
+import StickyDownloadBar from '../components/StickyDownloadBar'
 
 // Below-the-fold sections load as a separate chunk so the hero renders sooner
 const FeatureTabs = lazy(() => import('../components/FeatureTabs'))
@@ -21,22 +22,9 @@ interface HomePageProps {
 }
 
 export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
-  const [badgesVisible, setBadgesVisible] = useState(true)
-
-  useEffect(() => {
-    const el = document.getElementById('store-badges')
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => setBadgesVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
-      <Navbar isDark={isDark} onToggle={onToggleTheme} badgesVisible={badgesVisible} />
+      <Navbar isDark={isDark} onToggle={onToggleTheme} />
       <Hero />
       <StatsBar />
       <HowItWorks isDark={isDark} />
@@ -51,6 +39,7 @@ export default function HomePage({ isDark, onToggleTheme }: HomePageProps) {
         <LegalSection />
         <Footer isDark={isDark} />
       </Suspense>
+      <StickyDownloadBar />
     </div>
   )
 }

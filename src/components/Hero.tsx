@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import StoreBadges from './StoreBadges'
+import SmartDownload from './SmartDownload'
 import avatar1 from '../assets/avatars/IMG_3097.webp'
 import avatar2 from '../assets/avatars/IMG_3185.webp'
 import avatar3 from '../assets/avatars/4a115dd1-ea95-4e48-b8f6-d53972ced8de.webp'
@@ -173,20 +173,24 @@ export default function Hero() {
         {/* Copy + CTA */}
         <div className="text-center lg:text-left order-1">
           <h1 className="font-syne font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-5">
-            Stop endless swiping.
+            Real people near you.
             <br />
-            <span className="text-mint">Start real conversations.</span>
+            <span className="text-mint">Ready to actually talk.</span>
           </h1>
 
           <p className="text-gray-500 dark:text-gray-400 text-lg sm:text-xl leading-relaxed mb-8 max-w-md mx-auto lg:mx-0">
-            Get to know people through their answers before you ever match. Three questions. Honest conversations. Better connections.
+            See who's nearby, read their answers to three honest questions, and start a real conversation — before you ever match. No endless swiping.
           </p>
 
-          <StoreBadges placement="hero" id="store-badges" className="lg:justify-start mb-4" />
+          <SmartDownload
+            placement="hero"
+            id="store-badges"
+            className="items-center lg:items-start mb-6"
+          />
           <p className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 text-xs font-medium text-gray-500 dark:text-gray-400 mb-8">
-            <span>💚 Free to download</span>
             <span>🔒 Verified profiles</span>
             <span>💬 Personality before photos</span>
+            <span>📍 People near you</span>
           </p>
 
           <SocialProof />

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import StoreBadges from './StoreBadges'
+import SmartDownload from './SmartDownload'
 
 const sampleQuestions = [
   "What's a belief you've changed your mind about?",
@@ -85,8 +85,8 @@ export default function DownloadSection() {
         </p>
 
         <div className={`inline-block transition-all duration-500 ${done ? 'scale-105' : ''}`}>
-          <div className={done ? 'rounded-3xl ring-2 ring-mint/50 ring-offset-4 ring-offset-white dark:ring-offset-[#050505] p-1' : 'p-1'}>
-            <StoreBadges placement="final_cta" />
+          <div className={done ? 'rounded-3xl ring-2 ring-mint/50 ring-offset-4 ring-offset-white dark:ring-offset-[#050505] p-3' : 'p-1'}>
+            <SmartDownload placement="final_cta" reassure={false} />
           </div>
         </div>
 
