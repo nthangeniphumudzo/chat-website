@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Install Chat beta with TestFlight</title>
+    <meta
+      name="description"
+      content="How to install the Chat beta on iPhone using TestFlight. Includes the TestFlight app link and the public invite to the beta build."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050505;
+        --card: #121212;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --line: #1f2937;
+        --mint: #00f5b4;
+      }
+      :root[data-theme="light"] {
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --text: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --mint: #00b586;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+      .bar {
+        border-bottom: 1px solid var(--line);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .bar .back {
+        color: var(--mint);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-height: 44px;
+        padding: 10px 14px 10px 10px;
+        margin: -10px 0 -10px -10px;
+        border-radius: 12px;
+      }
+      .bar .back .arrow {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .bar .back:hover {
+        background: color-mix(in srgb, var(--mint) 12%, transparent);
+      }
+      .theme {
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 999px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 1.15rem;
+        line-height: 1;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .theme:hover {
+        border-color: var(--mint);
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+      h1,
+      h2 {
+        font-family: Syne, system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        margin: 0 0 12px;
+        line-height: 1.15;
+      }
+      h2 {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        margin: 0 0 10px;
+      }
+      .eyebrow {
+        color: var(--mint);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .lead {
+        color: var(--muted);
+        margin: 0 0 28px;
+        font-size: 1.05rem;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        margin: 14px 0;
+      }
+      .button-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+      .button:hover {
+        transform: translateY(-1px);
+        border-color: var(--mint);
+      }
+      .button.primary {
+        background: var(--mint);
+        color: #000;
+        border-color: transparent;
+      }
+      ol,
+      ul {
+        margin: 10px 0 0;
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 10px 0;
+      }
+      a {
+        color: var(--mint);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      code {
+        font-size: 0.85em;
+        background: color-mix(in srgb, var(--line) 60%, transparent);
+        padding: 2px 6px;
+        border-radius: 6px;
+      }
+      footer {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="../" aria-label="Back to home"><span class="arrow" aria-hidden="true">←</span> Home</a>
+      <button type="button" class="theme" id="themeToggle" aria-label="Toggle color theme">☀️</button>
+    </div>
+    <main>
+      <p class="eyebrow">iOS beta</p>
+      <h1>Install Chat beta with TestFlight</h1>
+      <p class="lead">
+        Use TestFlight to install the Chat beta on your iPhone. First install the TestFlight app, then accept the public invite for the Chat beta build.
+      </p>
+
+      <section>
+        <div class="button-grid">
+          <a
+            class="button"
+            href="https://apps.apple.com/app/apple-testflight/id899247664"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download TestFlight
+          </a>
+          <a
+            class="button primary"
+            href="https://testflight.apple.com/join/xeFze9Fv"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Chat beta invite
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2>How to install</h2>
+        <ol>
+          <li>Tap <strong>Download TestFlight</strong> to install Apple TestFlight on your iPhone.</li>
+          <li>Open the TestFlight app, then tap the public invite link above or paste it into Safari.</li>
+          <li>Choose <strong>Accept</strong> and then tap <strong>Install</strong> for the Chat beta build.</li>
+          <li>After install, open Chat from TestFlight and use it like a normal app. Updates will arrive through TestFlight.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Need help?</h2>
+        <p>
+          If the invite link does not open, make sure you are signed into the App Store with your Apple ID and installed TestFlight first. For support, email
+          <a href="mailto:chat@phcreations.com">chat@phcreations.com</a>.
+        </p>
+      </section>
+
+      <footer>Last updated: June 1, 2026</footer>
+    </main>
+    <script>
+      (function () {
+        var root = document.documentElement
+        var key = 'chat-testflight-theme'
+        var btn = document.getElementById('themeToggle')
+        function apply(t) {
+          root.setAttribute('data-theme', t)
+          if (btn) {
+            btn.textContent = t === 'dark' ? '☀️' : '🌙'
+            btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode')
+          }
+        }
+        var s = localStorage.getItem(key)
+        var darkPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        apply(s || (darkPref ? 'dark' : 'light'))
+        if (btn) {
+          btn.addEventListener('click', function () {
+            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+            localStorage.setItem(key, next)
+            apply(next)
+          })
+        }
+      })()
+    </script>
+  </body>
+</html>
