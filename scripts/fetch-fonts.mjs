@@ -13,7 +13,7 @@ await mkdir(outDir, { recursive: true })
 const UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 const cssUrl =
-  'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap'
 
 const css = await (await fetch(cssUrl, { headers: { 'User-Agent': UA } })).text()
 

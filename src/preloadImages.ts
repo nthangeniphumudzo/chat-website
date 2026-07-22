@@ -19,6 +19,14 @@ const urls = [
 export function preloadImages() {
   if (typeof window === 'undefined') return
 
+  // Back off on weak connections: warming ~550KB up front would just starve a
+  // struggling pipe. There, images load on demand as the user scrolls instead.
+  const conn = (navigator as unknown as {
+    connection?: { saveData?: boolean; effectiveType?: string }
+  }).connection
+  if (conn?.saveData) return
+  if (conn?.effectiveType && /(^|\b)(slow-2g|2g|3g)\b/.test(conn.effectiveType)) return
+
   const warm = () => {
     for (const src of urls) {
       const img = new Image()

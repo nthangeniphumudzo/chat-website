@@ -80,7 +80,7 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
               <div className={`w-52 sm:w-60 rounded-[36px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
                 <img src={isDark ? darkSrc : lightSrc} alt={caption} className="w-full block" draggable={false} />
               </div>
-              <p className="mt-4 text-sm font-semibold text-gray-500 dark:text-gray-400">{caption}</p>
+              <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-400">{caption}</p>
             </div>
           ))}
         </div>

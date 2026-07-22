@@ -28,20 +28,11 @@ fetch('https://chatlivecontainer.wonderfulbeach-a47f64a5.southafricanorth.azurec
 })()
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-const rootEl = document.getElementById('root')!
-const tree = (
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 )
 
-// Production build ships pre-rendered HTML → hydrate it (hero is already on
-// screen before this runs). Dev serves an empty root → create a fresh one.
-if (rootEl.hasChildNodes()) {
-  ReactDOM.hydrateRoot(rootEl, tree)
-} else {
-  ReactDOM.createRoot(rootEl).render(tree)
-}
-
-// Warm every screenshot into cache once the hero is up, so scrolling is instant.
+// Warm every screenshot into cache after first paint, so scrolling is instant.
 preloadImages()
