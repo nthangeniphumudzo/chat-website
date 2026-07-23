@@ -18,7 +18,8 @@ export default function Hero() {
         </h1>
 
         <p className="text-gray-600 dark:text-gray-300 text-lg sm:text-2xl leading-relaxed mb-10 max-w-xl mx-auto">
-          Get to know them through their answers — long before you ever match.
+          It starts with a Speed Date — three questions, honest answers from people
+          nearby, before you ever match.
         </p>
 
         <SmartDownload placement="hero" id="store-badges" className="justify-center" />
