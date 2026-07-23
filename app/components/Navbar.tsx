@@ -26,7 +26,7 @@ export default function Navbar({ isDark }: NavbarProps) {
   useEffect(() => {
     const handler = () => {
       const y = window.scrollY
-      setScrolled(y > 20)
+      setScrolled(y > 4)
       if (y > 80) setMenuOpen(false)
       const max = document.documentElement.scrollHeight - window.innerHeight
       setProgress(max > 0 ? Math.min(y / max, 1) : 0)
@@ -45,8 +45,9 @@ export default function Navbar({ isDark }: NavbarProps) {
 
   return (
     <nav
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || menuOpen
-          ? 'bg-white/95 dark:bg-[#050505]/95 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800'
+          ? 'bg-white dark:bg-[#050505] border-b border-gray-200 dark:border-gray-800'
           : 'bg-transparent'
         }`}
     >
