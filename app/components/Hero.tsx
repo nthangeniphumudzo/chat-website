@@ -18,8 +18,7 @@ export default function Hero() {
         </h1>
 
         <p className="text-gray-600 dark:text-gray-300 text-lg sm:text-2xl leading-relaxed mb-10 max-w-xl mx-auto">
-          It starts with a Speed Date — three questions, honest answers from people
-          nearby, before you ever match.
+          Go for a Speed Date without the awkwardness. Meet new people in your area and start meaningful conversations with just a few taps.
         </p>
 
         <SmartDownload placement="hero" id="store-badges" className="justify-center" />
