@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import type { Route } from "./+types/home";
 import { useTheme } from "../hooks/useTheme";
-import { preloadImages } from "../preloadImages";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import StoryPanels from "../components/StoryPanels";
@@ -53,9 +52,6 @@ export default function Home() {
   const { isDark, toggle } = useTheme();
 
   useEffect(() => {
-    // Warm screenshots into cache (client-only)
-    preloadImages();
-
     // Fire-and-forget visitor tracking
     fetch(`${TRACK_BASE}/website-visitors/track`, { method: "POST", keepalive: true }).catch(() => {});
 

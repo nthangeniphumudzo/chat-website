@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   isRouteErrorResponse,
   Links,
@@ -76,19 +77,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Meta />
         <Links />
-        {/* Google Analytics 4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JEM4G6RPF" />
+        {/* Analytics stub only — queues events immediately (so download
+            tracking works). The heavy GA + Clarity scripts load on idle in
+            <App/>, keeping them off the critical path on slow connections. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
               "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4JEM4G6RPF');",
-          }}
-        />
-        {/* Microsoft Clarity */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              '(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xdppoucvrx");',
           }}
         />
       </head>
@@ -102,6 +97,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    // Load the heavy third-party analytics only once the browser is idle, so
+    // they never contend with content + hydration on weak connections.
+    const load = () => {
+      const ga = document.createElement("script");
+      ga.async = true;
+      ga.src = "https://www.googletagmanager.com/gtag/js?id=G-4JEM4G6RPF";
+      document.head.appendChild(ga);
+
+      const clarity = document.createElement("script");
+      clarity.async = true;
+      clarity.src = "https://www.clarity.ms/tag/xdppoucvrx";
+      document.head.appendChild(clarity);
+    };
+
+    const ric = (
+      window as unknown as {
+        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
+      }
+    ).requestIdleCallback;
+    if (ric) ric(load, { timeout: 5000 });
+    else setTimeout(load, 3000);
+  }, []);
+
   return <Outlet />;
 }
 

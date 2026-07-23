@@ -65,7 +65,7 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
         {/* Real app screen — writing your three questions */}
         <div className="flex justify-center">
           <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-            <img src={isDark ? img_write_questions : img_write_questions_light} alt="Writing your three questions" className="w-full block" />
+            <img src={isDark ? img_write_questions : img_write_questions_light} alt="Writing your three questions" className="w-full block" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
         <div className="flex justify-center">
           {custom ?? (
             <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-              <img src={isDark ? imageDark : imageLight} alt={alt} className="w-full block" />
+              <img src={isDark ? imageDark : imageLight} alt={alt} className="w-full block" loading="lazy" decoding="async" />
             </div>
           )}
         </div>

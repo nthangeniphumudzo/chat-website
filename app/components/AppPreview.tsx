@@ -78,7 +78,7 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
           {screens.map(({ darkSrc, lightSrc, caption }, i) => (
             <div key={i} className="shrink-0 w-full snap-center flex flex-col items-center px-5">
               <div className={`w-52 sm:w-60 rounded-[36px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-                <img src={isDark ? darkSrc : lightSrc} alt={caption} className="w-full block" draggable={false} />
+                <img src={isDark ? darkSrc : lightSrc} alt={caption} className="w-full block" draggable={false} loading="lazy" decoding="async" />
               </div>
               <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-400">{caption}</p>
             </div>
