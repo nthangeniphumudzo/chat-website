@@ -70,7 +70,7 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
             <img
               src={isDark ? img_write_questions : img_write_questions_light}
               alt="Writing your three questions"
-              className="w-full block"
+              className="w-full block shot"
               width={900}
               height={1951}
               decoding="async"
@@ -113,7 +113,7 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
               <img
                 src={isDark ? imageDark : imageLight}
                 alt={alt}
-                className="w-full block"
+                className="w-full block shot"
                 width={471}
                 height={1024}
                 loading="lazy"

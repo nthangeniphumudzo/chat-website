@@ -63,7 +63,7 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
                 <img
                   src={isDark ? img_profile : img_profile_light}
                   alt="A profile as you see it in the app"
-                  className="w-full block"
+                  className="w-full block shot"
                   width={471}
                   height={1024}
                   loading="lazy"

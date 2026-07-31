@@ -83,7 +83,7 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
                 <img
                   src={isDark ? darkSrc : lightSrc}
                   alt={caption}
-                  className="w-full block"
+                  className="w-full block shot"
                   width={471}
                   height={1024}
                   draggable={false}
