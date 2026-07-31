@@ -64,14 +64,14 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="py-16 sm:py-24 px-5 sm:px-8 max-w-3xl mx-auto">
-      <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-8 sm:mb-10 text-center">
+      <div ref={headingRef} className="reveal mb-8 sm:mb-10 text-center">
         <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Before you ask</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">
           Fair questions, <span className="text-mint">straight answers.</span>
         </h2>
       </div>
 
-      <div ref={listRef} className="opacity-0 translate-y-8 transition-all duration-700 flex flex-col gap-3">
+      <div ref={listRef} className="reveal flex flex-col gap-3">
         {faqs.map((f, i) => (
           <FaqItem key={f.q} {...f} open={open === i} onToggle={() => setOpen(open === i ? null : i)} />
         ))}

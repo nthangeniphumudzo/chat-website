@@ -45,7 +45,7 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
   return (
     <section id="privacy" className="panel bg-gray-50 dark:bg-[#080808] px-5 sm:px-8 lg:px-12 py-20">
       <div className="max-w-6xl mx-auto w-full">
-        <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-12 sm:mb-16 text-center">
+        <div ref={headingRef} className="reveal mb-12 sm:mb-16 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">Flagship privacy</p>
           <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-5">
             Try to <span className="text-mint">screenshot it.</span>
@@ -55,7 +55,7 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
           </p>
         </div>
 
-        <div ref={bodyRef} className="opacity-0 translate-y-8 transition-all duration-700 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div ref={bodyRef} className="reveal grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Interactive phone */}
           <div className="flex flex-col items-center">
             <div className="relative w-56 sm:w-64">
@@ -64,6 +64,8 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
                   src={isDark ? img_profile : img_profile_light}
                   alt="A profile as you see it in the app"
                   className="w-full block"
+                  width={471}
+                  height={1024}
                   loading="lazy"
                   decoding="async"
                 />

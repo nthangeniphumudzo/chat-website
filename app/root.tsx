@@ -20,8 +20,13 @@ export const links: Route.LinksFunction = () => [
   { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/jakarta-400.woff2", crossOrigin: "anonymous" },
 ];
 
-// Apply the saved theme class before paint to avoid a flash of the wrong theme.
-const themeScript = `(function(){try{var s=localStorage.getItem('chat-theme');var t=s==='light'?'light':'dark';document.documentElement.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}})();`;
+// Runs before first paint. Two jobs:
+//  1. Apply the saved theme class so there's no flash of the wrong theme.
+//  2. Arm the scroll-reveal animation by adding .js-reveal, then disarm it on a
+//     watchdog timer. Sections are only ever hidden while .js-reveal is set, so
+//     if the JS bundle is slow to arrive on a weak connection the page reveals
+//     itself anyway rather than sitting blank below the fold.
+const bootScript = `(function(){var d=document.documentElement;try{var s=localStorage.getItem('chat-theme');d.classList.add(s==='light'?'light':'dark');}catch(e){d.classList.add('dark');}d.classList.add('js-reveal');setTimeout(function(){d.classList.remove('js-reveal');},1500);})();`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -73,7 +78,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="google-site-verification" content="S4WDdm8kX-QrNUy7g4YN9w9NOGgZV1j1ILpFCe6N6WY" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Meta />
         <Links />

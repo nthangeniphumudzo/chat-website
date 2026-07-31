@@ -47,7 +47,7 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
 
       <div
         ref={ref}
-        className="opacity-0 translate-y-8 transition-all duration-700 relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+        className="reveal relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
       >
         {/* Copy */}
         <div className="text-center lg:text-left">
@@ -65,7 +65,16 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
         {/* Real app screen — writing your three questions */}
         <div className="flex justify-center">
           <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-            <img src={isDark ? img_write_questions : img_write_questions_light} alt="Writing your three questions" className="w-full block" loading="lazy" decoding="async" />
+            {/* First screen below the hero — eager, so it's already there when
+                the user's first scroll arrives rather than starting then. */}
+            <img
+              src={isDark ? img_write_questions : img_write_questions_light}
+              alt="Writing your three questions"
+              className="w-full block"
+              width={900}
+              height={1951}
+              decoding="async"
+            />
           </div>
         </div>
       </div>
@@ -86,7 +95,7 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
 
       <div
         ref={ref}
-        className={`opacity-0 translate-y-8 transition-all duration-700 relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}
+        className={`reveal relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}
       >
         {/* Copy */}
         <div className="text-center lg:text-left">
@@ -101,7 +110,15 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
         <div className="flex justify-center">
           {custom ?? (
             <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-              <img src={isDark ? imageDark : imageLight} alt={alt} className="w-full block" loading="lazy" decoding="async" />
+              <img
+                src={isDark ? imageDark : imageLight}
+                alt={alt}
+                className="w-full block"
+                width={471}
+                height={1024}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           )}
         </div>

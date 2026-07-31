@@ -28,7 +28,7 @@ export default function DownloadSection() {
         <div className="w-[400px] sm:w-[700px] h-[300px] sm:h-[400px] bg-mint/15 rounded-full blur-[100px] sm:blur-[120px]" />
       </div>
 
-      <div ref={ref} className="opacity-0 translate-y-8 transition-all duration-700 relative z-10 max-w-2xl mx-auto">
+      <div ref={ref} className="reveal relative z-10 max-w-2xl mx-auto">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">One last thing</p>
         <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-6">
           What would your

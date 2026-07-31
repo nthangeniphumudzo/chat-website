@@ -57,7 +57,7 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
     <section id="preview" className="panel overflow-hidden">
       <div
         ref={headingRef}
-        className="opacity-0 translate-y-8 transition-all duration-700 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto w-full mb-10 sm:mb-14 text-center"
+        className="reveal px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto w-full mb-10 sm:mb-14 text-center"
       >
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">A look inside</p>
         <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-5">
@@ -78,7 +78,18 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
           {screens.map(({ darkSrc, lightSrc, caption }, i) => (
             <div key={i} className="shrink-0 w-full snap-center flex flex-col items-center px-5">
               <div className={`w-52 sm:w-60 rounded-[36px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-                <img src={isDark ? darkSrc : lightSrc} alt={caption} className="w-full block" draggable={false} loading="lazy" decoding="async" />
+                {/* Slide 0 is what you see when the carousel scrolls into
+                    view — load it eagerly. The rest wait until swiped to. */}
+                <img
+                  src={isDark ? darkSrc : lightSrc}
+                  alt={caption}
+                  className="w-full block"
+                  width={471}
+                  height={1024}
+                  draggable={false}
+                  loading={i === 0 ? undefined : 'lazy'}
+                  decoding="async"
+                />
               </div>
               <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-400">{caption}</p>
             </div>

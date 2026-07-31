@@ -1,5 +1,13 @@
 import { useEffect, useRef } from 'react'
 
+/**
+ * Reveals an element once it scrolls into view.
+ *
+ * Pair with the `reveal` class. The hidden state lives in CSS and only applies
+ * while <html> has .js-reveal (see the inline boot script in root.tsx), so a
+ * slow or failed bundle never leaves the page blank — this hook only ever makes
+ * things visible sooner and more prettily, never later.
+ */
 export function useScrollReveal<T extends HTMLElement>() {
   const ref = useRef<T>(null)
 
@@ -7,25 +15,24 @@ export function useScrollReveal<T extends HTMLElement>() {
     const el = ref.current
     if (!el) return
 
-    // If element is already in the viewport on mount (e.g. above the fold), reveal immediately
-    const rect = el.getBoundingClientRect()
-    if (rect.top < window.innerHeight) {
-      el.classList.add('opacity-100', 'translate-y-0')
-      el.classList.remove('opacity-0', 'translate-y-8')
+    const show = () => el.classList.add('is-visible')
+
+    // Already in the viewport on mount (e.g. above the fold) — reveal now.
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      show()
       return
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('opacity-100', 'translate-y-0')
-          el.classList.remove('opacity-0', 'translate-y-8')
+          show()
           observer.disconnect()
         }
       },
       {
-        threshold: 0.08,          // lower threshold — works better on mobile tall sections
-        rootMargin: '0px 0px -40px 0px',  // trigger slightly before element enters viewport
+        threshold: 0.08,                  // low — tall mobile sections rarely cross a high one
+        rootMargin: '0px 0px -40px 0px',  // trigger just before the element enters
       }
     )
     observer.observe(el)

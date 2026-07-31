@@ -255,7 +255,7 @@ export default function LegalSection() {
   return (
     <div id="legal" className="bg-gray-50 dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
-        <div ref={headingRef} className="opacity-0 translate-y-8 transition-all duration-700 mb-6 sm:mb-8">
+        <div ref={headingRef} className="reveal mb-6 sm:mb-8">
           <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Legal & Policies</p>
           <h2 className="font-syne font-extrabold text-2xl sm:text-3xl tracking-tight leading-tight mb-3">
             Transparency &amp; <span className="text-mint">Trust</span>

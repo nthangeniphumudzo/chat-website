@@ -64,6 +64,8 @@ export default function Navbar({ isDark }: NavbarProps) {
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
+            width={120}
+            height={120}
             className="w-11 h-11 object-contain transition-transform duration-200 group-hover:scale-105"
           />
         </a>

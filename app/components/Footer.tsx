@@ -43,6 +43,8 @@ export default function Footer({ isDark, onToggleTheme }: FooterProps) {
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
+            width={120}
+            height={120}
             className="w-7 h-7 object-contain transition-transform duration-200 group-hover:scale-105"
           />
         </a>
