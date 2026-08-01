@@ -26,7 +26,7 @@ export const links: Route.LinksFunction = () => [
 //     watchdog timer. Sections are only ever hidden while .js-reveal is set, so
 //     if the JS bundle is slow to arrive on a weak connection the page reveals
 //     itself anyway rather than sitting blank below the fold.
-const bootScript = `(function(){var d=document.documentElement;try{var s=localStorage.getItem('chat-theme');d.classList.add(s==='light'?'light':'dark');}catch(e){d.classList.add('dark');}d.classList.add('js-reveal');setTimeout(function(){d.classList.remove('js-reveal');},1500);})();`;
+const bootScript = `(function(){var d=document.documentElement;try{var s=localStorage.getItem('chat-theme');d.classList.add(s==='dark'?'dark':'light');}catch(e){d.classList.add('light');}d.classList.add('js-reveal');setTimeout(function(){d.classList.remove('js-reveal');},1500);})();`;
 
 const jsonLd = {
   "@context": "https://schema.org",
