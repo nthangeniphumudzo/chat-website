@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react'
-import { icon_dark, icon_light } from '../assets/images'
+import ChatFlagIcon from './ChatFlagIcon'
 import { usePlatform } from '../hooks/usePlatform'
 import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
-
-interface NavbarProps {
-  isDark: boolean
-}
 
 const marketingLinks = [
   { href: './#how', label: 'How it works' },
@@ -13,7 +9,7 @@ const marketingLinks = [
   { href: './#faq', label: 'FAQ' },
 ] as const
 
-export default function Navbar({ isDark }: NavbarProps) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -61,12 +57,9 @@ export default function Navbar({ isDark }: NavbarProps) {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
         {/* Logo on the left — all sizes */}
         <a href="./" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
-          <img
-            src={isDark ? icon_dark : icon_light}
-            alt="Chat logo"
-            width={120}
-            height={120}
-            className="w-11 h-11 object-contain transition-transform duration-200 group-hover:scale-105"
+          <ChatFlagIcon
+            title="Ch@t"
+            className="w-11 h-11 transition-transform duration-200 group-hover:scale-105"
           />
         </a>
 

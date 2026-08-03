@@ -1,3 +1,4 @@
+import Greeting from './Greeting'
 import SmartDownload from './SmartDownload'
 
 export default function Hero() {
@@ -9,6 +10,8 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto">
+        <Greeting />
+
         <h1 className="poster-h font-syne text-5xl sm:text-7xl lg:text-8xl mb-7">
           People near you
           <br />
