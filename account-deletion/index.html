@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete your Chat account — Chat</title>
+    <meta
+      name="description"
+      content="How to permanently delete your Chat account and associated personal data."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050505;
+        --card: #121212;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --line: #1f2937;
+        --mint: #00f5b4;
+      }
+      :root[data-theme="light"] {
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --text: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --mint: #00b586;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+      .bar {
+        border-bottom: 1px solid var(--line);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .bar .back {
+        color: var(--mint);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-height: 44px;
+        padding: 10px 14px 10px 10px;
+        margin: -10px 0 -10px -10px;
+        border-radius: 12px;
+      }
+      .bar .back .arrow {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .bar .back:hover {
+        background: color-mix(in srgb, var(--mint) 12%, transparent);
+      }
+      .theme {
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 999px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 1.15rem;
+        line-height: 1;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .theme:hover {
+        border-color: var(--mint);
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+      h1,
+      h2 {
+        font-family: Syne, system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        margin: 0 0 12px;
+        line-height: 1.15;
+      }
+      h2 {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        margin: 0 0 10px;
+      }
+      .eyebrow {
+        color: var(--mint);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .lead {
+        color: var(--muted);
+        margin: 0 0 28px;
+        font-size: 1.05rem;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        margin: 14px 0;
+      }
+      ol,
+      ul {
+        margin: 10px 0 0;
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 6px 0;
+      }
+      a {
+        color: var(--mint);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      code {
+        font-size: 0.85em;
+        background: color-mix(in srgb, var(--line) 60%, transparent);
+        padding: 2px 6px;
+        border-radius: 6px;
+      }
+      footer {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="../" aria-label="Back to home"><span class="arrow" aria-hidden="true">←</span> Home</a>
+      <button type="button" class="theme" id="themeToggle" aria-label="Toggle color theme">☀️</button>
+    </div>
+    <main>
+      <p class="eyebrow">Account deletion</p>
+      <h1>Delete your Chat account</h1>
+      <p class="lead">
+        You can permanently delete your account and associated personal data either in the app or by contacting
+        support.
+      </p>
+
+      <section>
+        <h2>Delete your account in the app</h2>
+        <ol>
+          <li>Open <strong>Chat</strong></li>
+          <li>Go to <strong>Profile</strong></li>
+          <li>Tap <strong>Settings</strong></li>
+          <li>Open <strong>Account Actions</strong></li>
+          <li>Tap <strong>Delete Account</strong></li>
+          <li>Confirm deletion</li>
+        </ol>
+        <p>Once confirmed, your account enters deletion processing and cannot be recovered after completion.</p>
+      </section>
+
+      <section>
+        <h2>If you cannot access your account</h2>
+        <p>
+          Email <a href="mailto:chat@phcreations.com">chat@phcreations.com</a> with the subject
+          <strong>Account deletion request</strong> and include:
+        </p>
+        <ul>
+          <li>The phone number linked to your Chat account (E.164 format, for example <code>+27XXXXXXXXX</code>)</li>
+          <li>Your display name (if available)</li>
+          <li>A clear request to permanently delete your account</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What will be deleted</h2>
+        <p>When your deletion request is processed, we delete your account and associated personal data, including:</p>
+        <ul>
+          <li>Account profile data (name, bio, preferences)</li>
+          <li>Uploaded profile and chat photos/videos</li>
+          <li>Messages/chats and related account-linked content</li>
+          <li>Blocked contacts list</li>
+          <li>Account identifiers linked to the user profile</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What we may retain</h2>
+        <p>We may retain limited information where required for:</p>
+        <ul>
+          <li>Security and fraud prevention</li>
+          <li>Legal and compliance obligations required by law</li>
+          <li>Minimal technical logs needed for dispute and security handling</li>
+        </ul>
+        <p>Any retained data is minimized and kept only for the required period.</p>
+      </section>
+
+      <section>
+        <h2>How long it takes</h2>
+        <p>
+          Deletion requests are processed promptly; full deletion is completed within
+          <strong>30 days</strong> of request confirmation, unless a longer retention period is required by law for
+          specific records.
+        </p>
+      </section>
+
+      <section>
+        <h2>Need help?</h2>
+        <p>
+          You will receive acknowledgment that your request was received and processed. For account deletion or
+          privacy-related support, contact
+          <a href="mailto:chat@phcreations.com">chat@phcreations.com</a>.
+        </p>
+      </section>
+
+      <footer>Last updated: March 24, 2026</footer>
+    </main>
+    <script>
+      (function () {
+        var root = document.documentElement
+        var key = "chat-account-deletion-theme"
+        var btn = document.getElementById("themeToggle")
+        function apply(t) {
+          root.setAttribute("data-theme", t)
+          if (btn) {
+            btn.textContent = t === "dark" ? "☀️" : "🌙"
+            btn.setAttribute("aria-label", t === "dark" ? "Switch to light mode" : "Switch to dark mode")
+          }
+        }
+        var s = localStorage.getItem(key)
+        var darkPref = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        apply(s || (darkPref ? "dark" : "light"))
+        if (btn) {
+          btn.addEventListener("click", function () {
+            var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark"
+            localStorage.setItem(key, next)
+            apply(next)
+          })
+        }
+      })()
+    </script>
+  </body>
+</html>

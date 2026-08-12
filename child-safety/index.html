@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Child safety standards — Chat by PH CREATION SOFTWARE</title>
+    <meta
+      name="description"
+      content="Published standards for Chat (PH CREATION SOFTWARE) on child sexual abuse and exploitation (CSAE), reporting, and CSAM."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050505;
+        --card: #121212;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --line: #1f2937;
+        --mint: #00f5b4;
+      }
+      :root[data-theme="light"] {
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --text: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --mint: #00b586;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+      .bar {
+        border-bottom: 1px solid var(--line);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .bar .back {
+        color: var(--mint);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 44px;
+        padding: 10px 14px 10px 10px;
+        margin: -10px 0 -10px -10px;
+        border-radius: 12px;
+      }
+      .bar .back .arrow {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .bar .back:hover {
+        background: color-mix(in srgb, var(--mint) 12%, transparent);
+      }
+      .theme {
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 999px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 1.15rem;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .theme:hover {
+        border-color: var(--mint);
+      }
+      main {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+      h1,
+      h2 {
+        font-family: Syne, system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+        scroll-margin-top: 5rem;
+      }
+      h1 {
+        font-size: clamp(1.65rem, 4vw, 2.5rem);
+        margin: 0 0 12px;
+        line-height: 1.15;
+      }
+      h2 {
+        font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+        margin: 0 0 10px;
+      }
+      .eyebrow {
+        color: var(--mint);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .lead {
+        color: var(--muted);
+        margin: 0 0 20px;
+        font-size: 1.05rem;
+      }
+      .toc {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px 22px;
+        margin-bottom: 24px;
+      }
+      .toc strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+      .toc ul {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+      .toc li {
+        margin: 6px 0;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        margin: 14px 0;
+      }
+      section h2 {
+        margin-top: 0;
+      }
+      ol,
+      ul {
+        margin: 10px 0 0;
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 6px 0;
+      }
+      a {
+        color: var(--mint);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .page-footer {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <a class="back" href="../" aria-label="Back to home"
+        ><span class="arrow" aria-hidden="true">←</span> Home</a
+      >
+      <button type="button" class="theme" id="themeToggle" aria-label="Toggle color theme">☀️</button>
+    </div>
+    <main>
+      <p class="eyebrow">Google Play — Child Safety Standards</p>
+      <h1 id="top">Child safety standards</h1>
+      <p class="lead">
+        This page publishes <strong>Chat</strong>’s standards regarding <strong>child sexual abuse and exploitation (CSAE)</strong> and
+        <strong>child sexual abuse material (CSAM)</strong>. It applies to the app listed on Google Play as
+        <strong>Chat</strong>, developed by <strong>PH CREATION SOFTWARE</strong> (also referred to as “we”, “us”).
+      </p>
+      <p class="lead" style="margin-top: -8px">
+        These standards support compliance with Google Play’s
+        <a
+          href="https://support.google.com/googleplay/android-developer/answer/14747720"
+          rel="noopener noreferrer"
+          target="_blank"
+          >Child Safety Standards policy</a
+        >. This is a public resource; you do not need an account to read it.
+      </p>
+
+      <nav class="toc" aria-label="On this page">
+        <strong>On this page</strong>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#standards">Our standards on CSAE</a></li>
+          <li><a href="#definitions">Definitions (CSAE and CSAM)</a></li>
+          <li><a href="#reporting">Reporting and in-app feedback</a></li>
+          <li><a href="#csam">Addressing CSAM</a></li>
+          <li><a href="#compliance">Legal compliance</a></li>
+          <li><a href="#contact">Child safety point of contact</a></li>
+        </ul>
+      </nav>
+
+      <section id="overview" aria-labelledby="overview-heading">
+        <h2 id="overview-heading">Overview</h2>
+        <p>
+          We take the safety of children seriously. <strong>Chat</strong> is intended for adults and is not directed at children. Regardless,
+          we maintain clear, published standards against CSAE, provide ways for users to raise concerns, and take appropriate action when we
+          become aware of CSAM or conduct that violates these standards or applicable law.
+        </p>
+      </section>
+
+      <section id="standards" aria-labelledby="standards-heading">
+        <h2 id="standards-heading">Our standards on CSAE</h2>
+        <p>We prohibit the use of <strong>Chat</strong> for any activity that involves child sexual abuse or exploitation. This includes, without limitation:</p>
+        <ul>
+          <li>Sexual exploitation or abuse of minors, including grooming, sextortion, or trafficking of a child for sex</li>
+          <li>Sharing, soliciting, storing, or distributing CSAM</li>
+          <li>Any content or behaviour that sexualises, endangers, or exploits children</li>
+          <li>Using the service to facilitate contact with a minor for abusive purposes</li>
+        </ul>
+        <p>
+          We enforce these rules through our policies (including Community Guidelines and Terms of Service), moderation, user reporting,
+          and cooperation with law enforcement where required. Violations may result in content removal, account termination, and referral
+          to authorities.
+        </p>
+      </section>
+
+      <section id="definitions" aria-labelledby="definitions-heading">
+        <h2 id="definitions-heading">Definitions (CSAE and CSAM)</h2>
+        <p>
+          <strong>CSAE</strong> (child sexual abuse and exploitation) means content or behaviour that sexually exploits, abuses, or endangers
+          children — for example grooming, sextortion, trafficking of a child for sex, or other sexual exploitation of a child.
+        </p>
+        <p>
+          <strong>CSAM</strong> (child sexual abuse material) means visual depictions (including photos, videos, and computer-generated
+          imagery) of a minor engaged in sexually explicit conduct. CSAM is illegal. We do not allow CSAM on <strong>Chat</strong> and act
+          when we obtain actual knowledge of it, in line with these standards and applicable law.
+        </p>
+      </section>
+
+      <section id="reporting" aria-labelledby="reporting-heading">
+        <h2 id="reporting-heading">Reporting and in-app feedback</h2>
+        <p>
+          Users must be able to raise concerns <strong>without leaving the app</strong> for routine reports (as required by Google Play for
+          the in-app mechanism). Within <strong>Chat</strong>, use the in-app reporting and safety tools (for example, report user / report
+          content flows) to flag behaviour or content that may violate these standards.
+        </p>
+        <p>
+          You may also email us at
+          <a href="mailto:chat@phcreations.com?subject=Child%20safety%20report%20%E2%80%94%20Chat">chat@phcreations.com</a>
+          with the subject line <strong>Child safety report — Chat</strong>. Include as much detail as you can safely provide (e.g. usernames,
+          timestamps, screenshots where appropriate) so we can investigate.
+        </p>
+      </section>
+
+      <section id="csam" aria-labelledby="csam-heading">
+        <h2 id="csam-heading">Addressing CSAM</h2>
+        <p>
+          When we obtain <strong>actual knowledge</strong> of CSAM on our service, we take <strong>appropriate action</strong> in accordance
+          with these published standards and applicable law — including removing the material, restricting or terminating accounts
+          involved, preserving information where legally required, and reporting to competent authorities where required.
+        </p>
+        <p>
+          We do not prescribe a single technical method for detection; we act consistently with our stated policies, our procedures, and
+          the law.
+        </p>
+      </section>
+
+      <section id="compliance" aria-labelledby="compliance-heading">
+        <h2 id="compliance-heading">Legal compliance</h2>
+        <p>
+          We comply with applicable child-safety and reporting obligations in the jurisdictions where we operate. For legal interpretation of
+          specific regulations, consult qualified counsel; this page is a plain-language summary of our standards, not legal advice.
+        </p>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Child safety point of contact</h2>
+        <p>
+          For questions about <strong>PH CREATION SOFTWARE</strong>’s child-safety practices, CSAM prevention, or compliance with Google Play’s
+          Child Safety Standards as they relate to <strong>Chat</strong>, contact:
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:chat@phcreations.com?subject=Child%20safety%20%E2%80%94%20Chat%20%28PH%20CREATION%20SOFTWARE%29"
+            >chat@phcreations.com</a
+          ><br />
+          Use a clear subject line (e.g. <strong>Child safety — Chat (PH CREATION SOFTWARE)</strong>) so we can route your message promptly.
+        </p>
+        <p>
+          A designated representative of <strong>PH CREATION SOFTWARE</strong> is available to respond regarding our organisation’s approach
+          to CSAE, CSAM, and related compliance.
+        </p>
+      </section>
+
+      <p class="page-footer">Last updated: March 31, 2026</p>
+    </main>
+    <script>
+      (function () {
+        var root = document.documentElement
+        var key = "chat-child-safety-theme"
+        var btn = document.getElementById("themeToggle")
+        function apply(t) {
+          root.setAttribute("data-theme", t)
+          if (btn) {
+            btn.textContent = t === "dark" ? "☀️" : "🌙"
+            btn.setAttribute("aria-label", t === "dark" ? "Switch to light mode" : "Switch to dark mode")
+          }
+        }
+        var s = localStorage.getItem(key)
+        var darkPref = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        apply(s || (darkPref ? "dark" : "light"))
+        if (btn) {
+          btn.addEventListener("click", function () {
+            var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark"
+            localStorage.setItem(key, next)
+            apply(next)
+          })
+        }
+      })()
+    </script>
+  </body>
+</html>
