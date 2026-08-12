@@ -13,28 +13,20 @@ export default function Hero() {
         <Greeting />
 
         <h1 className="poster-h font-syne text-5xl sm:text-7xl lg:text-8xl mb-7">
-          People near you
+          Don't just see someone.
           <br />
-          are ready to
-          <br />
-          <span className="text-mint">connect.</span>
+          <span className="text-mint">Meet them.</span>
         </h1>
 
         <p className="text-gray-600 dark:text-gray-300 text-lg sm:text-2xl leading-relaxed mb-10 max-w-xl mx-auto">
-          Go for a Speed Date without the awkwardness. Meet new people in your area and start meaningful conversations with just a few taps.
-        </p>
+          There's more to someone than a picture.
+          Discover how they think, what matters to them, and if there's something worth exploring — before you connect.        </p>
 
         <SmartDownload placement="hero" id="store-badges" className="justify-center" />
       </div>
 
       {/* Scroll cue pinned to the bottom of the stage */}
-      <a
-        href="#how"
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 hover:text-mint transition-colors"
-      >
-        See how
-        <span className="animate-bounce text-base">↓</span>
-      </a>
+
     </section>
   )
 }

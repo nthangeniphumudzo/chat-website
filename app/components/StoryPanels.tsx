@@ -58,8 +58,8 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
             <span className="text-mint">a question.</span>
           </h2>
           <p className="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 leading-snug max-w-md mx-auto lg:mx-0">
-            Not a photo. Not a swipe. You write three things that matter — in your own words.
-          </p>
+
+            Go beyond the picture and share what matters to you. Choose three questions that reveal how you think, what you value, and the person behind the profile — in your own words.          </p>
         </div>
 
         {/* Real app screen — writing your three questions */}
