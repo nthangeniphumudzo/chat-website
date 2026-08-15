@@ -9,6 +9,7 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import AppLoader from "./components/AppLoader";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -21,13 +22,26 @@ export const links: Route.LinksFunction = () => [
   { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/jakarta-var.woff2", crossOrigin: "anonymous" },
 ];
 
-// Runs before first paint. Two jobs:
+// Runs before first paint. Three jobs:
 //  1. Apply the saved theme class so there's no flash of the wrong theme.
 //  2. Arm the scroll-reveal animation by adding .js-reveal, then disarm it on a
 //     watchdog timer. Sections are only ever hidden while .js-reveal is set, so
 //     if the JS bundle is slow to arrive on a weak connection the page reveals
 //     itself anyway rather than sitting blank below the fold.
-const bootScript = `(function(){var d=document.documentElement;try{var s=localStorage.getItem('chat-theme');d.classList.add(s==='dark'?'dark':'light');}catch(e){d.classList.add('light');}d.classList.add('js-reveal');setTimeout(function(){d.classList.remove('js-reveal');},1500);})();`;
+//  3. Raise the loading overlay (.app-loading) and drop it once the first
+//     screen's assets have landed.
+//
+// The overlay rules are what keep it honest on a weak connection:
+//   MIN  — stay up briefly even on a warm cache, so it reads as a beat rather
+//          than a flicker of something broken.
+//   MAX  — an absolute ceiling. Whatever is still in flight, the page is handed
+//          over. Screenshots already carry inline placeholders, so content that
+//          arrives late still looks intentional rather than empty. Without this
+//          a visitor on a bad link would be held at a logo indefinitely, which
+//          is precisely the audience we cannot afford to lose.
+// Both run off plain DOM events, so a slow or failed hydration cannot strand
+// anyone behind the overlay.
+const bootScript = `(function(){var d=document.documentElement;try{var s=localStorage.getItem('chat-theme');d.classList.add(s==='dark'?'dark':'light');}catch(e){d.classList.add('light');}d.classList.add('js-reveal');setTimeout(function(){d.classList.remove('js-reveal');},1500);var MIN=700,MAX=3000,t0=Date.now(),done=false;d.classList.add('app-loading');function hide(){if(done)return;done=true;d.classList.remove('app-loading');}function ready(){setTimeout(hide,Math.max(0,MIN-(Date.now()-t0)));}if(document.readyState==='complete'){ready();}else{window.addEventListener('load',ready,{once:true});}setTimeout(hide,MAX);})();`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -94,6 +108,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
       </head>
       <body>
+        {/* Server-rendered so the mark is on screen at first paint, in the
+            same breath as the page itself — nothing to wait for. */}
+        <AppLoader />
         {children}
         <ScrollRestoration />
         <Scripts />
