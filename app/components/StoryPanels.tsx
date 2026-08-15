@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import Screenshot from './Screenshot'
 import {
   img_write_questions, img_write_questions_light,
   img_chat, img_chat_light,
@@ -67,13 +68,11 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
           <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
             {/* First screen below the hero — eager, so it's already there when
                 the user's first scroll arrives rather than starting then. */}
-            <img
+            <Screenshot
               src={isDark ? img_write_questions : img_write_questions_light}
               alt="Writing your three questions"
-              className="w-full block shot"
-              width={420}
-              height={910}
-              decoding="async"
+              eager
+              priority
             />
           </div>
         </div>
@@ -110,15 +109,10 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
         <div className="flex justify-center">
           {custom ?? (
             <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-              <img
-                src={isDark ? imageDark : imageLight}
-                alt={alt}
-                className="w-full block shot"
-                width={471}
-                height={1024}
-                loading="lazy"
-                decoding="async"
-              />
+              {/* The story panels are the narrative spine of the page and sit
+                  close behind the hero, so they load up front rather than
+                  racing the visitor's scroll. They're ~20K each. */}
+              <Screenshot src={(isDark ? imageDark : imageLight) ?? ''} alt={alt ?? ''} eager />
             </div>
           )}
         </div>

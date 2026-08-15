@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { img_profile, img_profile_light } from '../assets/images'
+import Screenshot from './Screenshot'
 
 const privacyPoints = [
   {
@@ -60,14 +61,12 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
           <div className="flex flex-col items-center">
             <div className="relative w-56 sm:w-64">
               <div className={`relative rounded-[38px] overflow-hidden border-2 ${isDark ? 'border-white/10 phone-shadow' : 'border-black/10 phone-shadow-light'}`}>
-                <img
+                {/* Eager: this one is interactive, so it has to be the real
+                    screenshot by the time the visitor taps the button. */}
+                <Screenshot
                   src={isDark ? img_profile : img_profile_light}
                   alt="A profile as you see it in the app"
-                  className="w-full block shot"
-                  width={471}
-                  height={1024}
-                  loading="lazy"
-                  decoding="async"
+                  eager
                 />
                 {/* What the screenshot gets */}
                 <div

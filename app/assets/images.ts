@@ -1,4 +1,5 @@
 // App screenshots (replaced for privacy)
+import { LQIP } from './lqip'
 import exploreDark from './screenshots/explore-dark.webp'
 import exploreLight from './screenshots/explore-light.webp'
 import settingsDark from './screenshots/settings-dark.webp'
@@ -20,6 +21,24 @@ import speedDateModal from './screenshots/speed-date-modal.webp'
 // "Write three questions" screen — real app screens, dark + light
 import writeQuestionsDark from './screenshots/write-questions-dark.webp'
 import writeQuestionsLight from './screenshots/write-questions-light.webp'
+
+// Maps a built screenshot URL to its inline placeholder. Vite resolves this
+// glob at build time to { './screenshots/chat-dark.webp': '/assets/chat-dark-<hash>.webp', … },
+// which is the only way to know the hashed URLs the browser will actually see.
+// The single `*` keeps it to the served screenshots — `originals/` stays out.
+const builtUrls = import.meta.glob('./screenshots/*.webp', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>
+
+export const lqipFor: Record<string, string> = Object.fromEntries(
+  Object.entries(builtUrls).flatMap(([filePath, url]) => {
+    const name = filePath.slice(filePath.lastIndexOf('/') + 1, -'.webp'.length)
+    const placeholder = LQIP[name]
+    return placeholder ? [[url, placeholder] as const] : []
+  }),
+)
 
 export const img_explore = exploreDark
 export const img_explore_light = exploreLight

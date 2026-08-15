@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import Screenshot from './Screenshot'
 import {
   img_explore, img_explore_light,
   img_speed_date_author, img_speed_date_modal, img_speed_date_sent,
@@ -87,16 +88,13 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
               <div className={`w-52 sm:w-60 rounded-[36px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
                 {/* Slide 0 is what you see when the carousel scrolls into
                     view, and one slide ahead of you is fetched as you go. The
-                    rest stay lazy so a visitor who never swipes never pays. */}
-                <img
+                    rest stay lazy so a visitor who never swipes never pays —
+                    they still show their inline blur, not an empty frame. */}
+                <Screenshot
                   src={isDark ? darkSrc : lightSrc}
                   alt={caption}
-                  className="w-full block shot"
-                  width={420}
-                  height={913}
+                  eager={i <= loadUpTo}
                   draggable={false}
-                  loading={i <= loadUpTo ? undefined : 'lazy'}
-                  decoding="async"
                 />
               </div>
               <p className="mt-4 text-sm font-bold text-gray-500 dark:text-gray-400">{caption}</p>
