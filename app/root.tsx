@@ -15,9 +15,10 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png", type: "image/png" },
   { rel: "apple-touch-icon", href: "/favicon.png" },
   { rel: "canonical", href: "https://www.chatphcreations.co.za/" },
-  // Preload the two fonts the hero needs first
-  { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/playfair-800.woff2", crossOrigin: "anonymous" },
-  { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/jakarta-400.woff2", crossOrigin: "anonymous" },
+  // Preload the two fonts the hero needs first — one variable file per family
+  // now covers every weight on the page.
+  { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/playfair-var.woff2", crossOrigin: "anonymous" },
+  { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/jakarta-var.woff2", crossOrigin: "anonymous" },
 ];
 
 // Runs before first paint. Two jobs:

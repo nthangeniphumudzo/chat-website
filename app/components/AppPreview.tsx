@@ -39,12 +39,19 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
   const headingRef = useScrollReveal<HTMLDivElement>()
   const trackRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
+  // How many slides are allowed to load. Always stays one ahead of the slide
+  // you're on, so the next screen is already decoded by the time you swipe to
+  // it instead of you arriving on an empty frame. It only ever grows — a slide
+  // that has started loading is never sent back to lazy.
+  const [loadUpTo, setLoadUpTo] = useState(1)
 
   const onScroll = () => {
     const el = trackRef.current
     if (!el) return
     const i = Math.round(el.scrollLeft / el.clientWidth)
-    setActive(Math.max(0, Math.min(screens.length - 1, i)))
+    const next = Math.max(0, Math.min(screens.length - 1, i))
+    setActive(next)
+    setLoadUpTo(prev => Math.max(prev, next + 1))
   }
 
   const goTo = (i: number) => {
@@ -79,15 +86,16 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
             <div key={i} className="shrink-0 w-full snap-center flex flex-col items-center px-5">
               <div className={`w-52 sm:w-60 rounded-[36px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
                 {/* Slide 0 is what you see when the carousel scrolls into
-                    view — load it eagerly. The rest wait until swiped to. */}
+                    view, and one slide ahead of you is fetched as you go. The
+                    rest stay lazy so a visitor who never swipes never pays. */}
                 <img
                   src={isDark ? darkSrc : lightSrc}
                   alt={caption}
                   className="w-full block shot"
-                  width={471}
-                  height={1024}
+                  width={420}
+                  height={913}
                   draggable={false}
-                  loading={i === 0 ? undefined : 'lazy'}
+                  loading={i <= loadUpTo ? undefined : 'lazy'}
                   decoding="async"
                 />
               </div>

@@ -71,8 +71,8 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
               src={isDark ? img_write_questions : img_write_questions_light}
               alt="Writing your three questions"
               className="w-full block shot"
-              width={900}
-              height={1951}
+              width={420}
+              height={910}
               decoding="async"
             />
           </div>

@@ -1,0 +1,22 @@
+# Cache rules for static assets, applied by the Workers assets binding.
+#
+# Without this, Workers assets serves everything as `max-age=0, must-revalidate`,
+# which forces the browser to make a conditional round-trip for *every* asset on
+# *every* visit. On a high-latency mobile link that is seconds of dead time
+# before anything paints, even when the file is already cached on the device.
+
+# Vite fingerprints these filenames with a content hash, so a changed file always
+# gets a new URL. They can safely be cached forever and never revalidated.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts are not fingerprinted, but they only change if we deliberately swap them
+# out — at which point we rename the file to bust the cache.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Unhashed one-offs: cache for a day, then revalidate.
+/favicon.png
+  Cache-Control: public, max-age=86400
+/og-image.png
+  Cache-Control: public, max-age=86400

@@ -22,12 +22,13 @@
   --animate-float-slower: floatSlow 7s 1.6s ease-in-out infinite;
 }
 
-/* ── Self-hosted fonts — no third-party round-trip ──────────────── */
-@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/playfair-700.woff2') format('woff2')}
-@font-face{font-family:'Playfair Display';font-style:normal;font-weight:800;font-display:swap;src:url('/fonts/playfair-800.woff2') format('woff2')}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/jakarta-400.woff2') format('woff2')}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/jakarta-500.woff2') format('woff2')}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/jakarta-700.woff2') format('woff2')}
+/* ── Self-hosted fonts — no third-party round-trip ────────────────
+   Both families are variable fonts, so one file covers every weight we
+   use. Declaring a weight *range* means the browser fetches each family
+   once; the old per-weight rules pointed five URLs at two byte-identical
+   files and paid for the same font up to three times. */
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url('/fonts/playfair-var.woff2') format('woff2')}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:200 800;font-display:swap;src:url('/fonts/jakarta-var.woff2') format('woff2')}
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
