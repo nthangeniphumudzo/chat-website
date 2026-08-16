@@ -3,6 +3,7 @@ import type { Route } from "./+types/home";
 import { useTheme } from "../hooks/useTheme";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import HeroPoster from "../components/HeroPoster";
 import StoryPanels from "../components/StoryPanels";
 import PrivacyDemo from "../components/PrivacyDemo";
 import AppPreview from "../components/AppPreview";
@@ -48,6 +49,17 @@ export function meta(_: Route.MetaArgs) {
 const TRACK_BASE =
   "https://chatlivecontainer.wonderfulbeach-a47f64a5.southafricanorth.azurecontainerapps.io/api";
 
+/**
+ * Which hero the page ships with.
+ *
+ * "direct" leads with the mechanic and a real app screen, for cold traffic that
+ * arrives from a video with no patience; "poster" is the original typographic
+ * screen. Flip this constant and redeploy to swap arms — it is deliberately
+ * build-time rather than a `?hero=` query flag, because picking the variant
+ * during render would desync the server markup from the first client render.
+ */
+const HERO: "direct" | "poster" = "direct";
+
 export default function Home() {
   const { isDark, toggle } = useTheme();
 
@@ -73,7 +85,7 @@ export default function Home() {
   return (
     <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
       <Navbar />
-      <Hero />
+      {HERO === "direct" ? <Hero /> : <HeroPoster />}
       <StoryPanels isDark={isDark} />
       <PrivacyDemo isDark={isDark} />
       <AppPreview isDark={isDark} />

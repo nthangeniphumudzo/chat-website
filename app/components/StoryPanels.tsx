@@ -59,20 +59,24 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
             <span className="text-mint">a question.</span>
           </h2>
           <p className="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 leading-snug max-w-md mx-auto lg:mx-0">
-
-            Go beyond the picture and share what matters to you. Choose three questions that reveal how you think, what you value, and the person behind the profile — in your own words.          </p>
+            Go beyond the picture and share what matters to you. Choose three questions
+            that reveal how you think, what you value, and the person behind the profile
+            — in your own words.
+          </p>
         </div>
 
         {/* Real app screen — writing your three questions */}
         <div className="flex justify-center">
           <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
             {/* First screen below the hero — eager, so it's already there when
-                the user's first scroll arrives rather than starting then. */}
+                the user's first scroll arrives rather than starting then. The
+                hero's screenshot holds the one `priority` slot; marking this one
+                too would just flatten the ordering and neither would arrive
+                sooner. */}
             <Screenshot
               src={isDark ? img_write_questions : img_write_questions_light}
               alt="Writing your three questions"
               eager
-              priority
             />
           </div>
         </div>

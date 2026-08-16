@@ -12,18 +12,23 @@ const marketingLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [menuOpen, setMenuOpen] = useState(false)
   const platform = usePlatform()
 
-  // A press deep-links to the visitor's store; desktop (no store) scrolls to the CTA.
-  const storeUrl =
-    platform === 'ios' ? APP_STORE_URL : platform === 'android' ? GOOGLE_PLAY_URL : null
+  /* This is now the only download link on the page, so it has to resolve to a
+     real store in every state — including 'unknown', which is what both the
+     server render and the client's first paint report. It used to fall back to
+     the #download section, which was fine while that section had a button of
+     its own; with that gone the anchor would strand a desktop visitor, and
+     strand anyone who taps before hydration, in a section they can't act on.
+     Non-iOS therefore lands on Play, the same rule SmartDownload has always
+     used, and Play's web listing handles desktop perfectly well. */
+  const isIos = platform === 'ios'
+  const storeUrl = isIos ? APP_STORE_URL : GOOGLE_PLAY_URL
 
   useEffect(() => {
     const handler = () => {
       const y = window.scrollY
       setScrolled(y > 4)
-      if (y > 80) setMenuOpen(false)
       const max = document.documentElement.scrollHeight - window.innerHeight
       setProgress(max > 0 ? Math.min(y / max, 1) : 0)
     }
@@ -32,17 +37,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [menuOpen])
-
   return (
     <nav
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || menuOpen
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? 'bg-white dark:bg-[#050505] border-b border-gray-200 dark:border-gray-800'
           : 'bg-transparent'
         }`}
@@ -56,7 +54,7 @@ export default function Navbar() {
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
         {/* Logo on the left — all sizes */}
-        <a href="./" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
+        <a href="./" className="flex items-center gap-2.5 group flex-shrink-0">
           <ChatMark
             title="Ch@t"
             className="w-11 h-11 transition-transform duration-200 group-hover:scale-105"
@@ -77,46 +75,27 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Desktop: press deep-links to the store; desktop falls back to the CTA */}
-          <a
-            href={storeUrl ?? '#download'}
-            onClick={() => storeUrl && trackDownload(platform === 'ios' ? 'app_store' : 'google_play', 'navbar')}
-            className="hidden md:inline-flex px-5 py-2 rounded-full bg-mint text-gray-900 font-syne font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95 transition-all duration-200"
-          >
-            Get the app
-          </a>
-
-          {/* Mobile: burger on the right */}
-          <button
-            className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 flex-shrink-0"
-            onClick={() => setMenuOpen(v => !v)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-            <span className={`block w-5 h-0.5 bg-current transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-          </button>
-        </div>
-      </div>
-
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          } bg-white dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800`}
-      >
-        <div className="px-5 py-4 flex flex-col gap-1">
-          {marketingLinks.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-mint active:text-mint transition-colors py-3.5 border-b border-gray-100 dark:border-gray-800 last:border-0"
-            >
-              {label}
-            </a>
-          ))}
-        </div>
+        {/* The corner that used to hold the burger. Every section the menu
+            linked to is on this same page, so the menu was offering a slower
+            route to somewhere a scroll already goes — while the one action that
+            matters was hidden on the breakpoint most visitors arrive on. The
+            pill takes the slot instead and never leaves the screen, so the
+            answer to "I'm convinced" is always one thumb-reach away.
+            Press deep-links to the visitor's store; desktop, which has no
+            store, falls back to the download section. */}
+        <a
+          href={storeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackDownload(isIos ? 'app_store' : 'google_play', 'navbar')}
+          // The label doesn't name the product — the visitor is already on the
+          // page — but a screen reader meeting this link out of context needs it,
+          // and this is the only call to action left.
+          aria-label="Download Ch@t"
+          className="inline-flex flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 font-syne text-sm font-bold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
+        >
+          Download
+        </a>
       </div>
     </nav>
   )

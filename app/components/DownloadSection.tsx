@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import SmartDownload from './SmartDownload'
 
 const sampleQuestions = [
   "What's a belief you've changed your mind about?",
@@ -84,13 +83,7 @@ export default function DownloadSection() {
             : `Pick ${3 - picked.length} more — or download and write your own.`}
         </p>
 
-        <div className={`inline-block transition-all duration-500 ${done ? 'scale-105' : ''}`}>
-          <div className={done ? 'rounded-3xl ring-2 ring-mint/50 ring-offset-4 ring-offset-white dark:ring-offset-[#050505] p-3' : 'p-1'}>
-            <SmartDownload placement="final_cta" className="justify-center" />
-          </div>
-        </div>
-
-        <p className="mt-5 text-xs text-gray-400 dark:text-gray-600 font-medium">
+        <p className="text-xs text-gray-400 dark:text-gray-600 font-medium">
           Free to download — no credit card required
         </p>
         <p className="mt-4 text-sm text-gray-400 dark:text-gray-600">
