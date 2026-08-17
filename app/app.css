@@ -259,10 +259,28 @@
   opacity: 0.75;
   transform: scaleX(0);
   transform-origin: left center;
-  /* Both values are supplied by Hero.tsx: the duration once on the wrapper and
-     inherited, the delay per opener. */
-  animation: strikeOut var(--strike-duration, 0.4s) cubic-bezier(0.65, 0, 0.35, 1)
-    var(--strike-delay, 0s) forwards;
+  /* Longhands, deliberately — not the `animation` shorthand.
+     Both values come from Hero.tsx (duration once on the wrapper and inherited,
+     delay per opener), and two var() times in one shorthand leaves the browser
+     to tell duration from delay by position after substitution. WebKit gets
+     that wrong and transposes them, so every stroke shared a start time and ran
+     for a different length instead of arriving one after another. Naming the
+     longhands makes them impossible to swap. */
+  animation-name: strikeOut;
+  animation-duration: var(--strike-duration, 0.4s);
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-delay: var(--strike-delay, 0s);
+  animation-fill-mode: forwards;
+  /* The sequence is what covers the load, so it must not burn down behind the
+     loading overlay — which now stays up longer, since window.load waits on the
+     whole site's images. Pausing holds the delay countdown too, so the run
+     starts from the top the moment the page is actually on screen. */
+  animation-play-state: paused;
+}
+/* No JS at all means the overlay is never raised, so this matches and the
+   sequence simply plays. */
+html:not(.app-loading) .strike-out::after {
+  animation-play-state: running;
 }
 @keyframes strikeOut { to { transform: scaleX(1); } }
 
