@@ -4,8 +4,6 @@ interface ScreenshotProps {
   src: string
   alt: string
   className?: string
-  /** Skip lazy-loading for screens the visitor reaches early. */
-  eager?: boolean
   /**
    * Jump the network queue. Only worth setting on the single screenshot the
    * visitor sees first — marking several "high" just flattens the ordering
@@ -27,12 +25,18 @@ interface ScreenshotProps {
  *
  * This is the same trick the flag icon gets for free by being inline SVG: the
  * thing you see does not wait on a second network round-trip.
+ *
+ * Nothing here lazy-loads. The whole site's screens are fetched during the
+ * initial load — under the loader and the hero's strike sequence — so that by
+ * the time a visitor scrolls, every panel below is already decoded and waiting.
+ * Scrolling should reveal content, never start fetching it. The screenshots are
+ * ~20K each and only one theme's set is ever in the DOM, so the whole page
+ * costs less than a single photograph would.
  */
 export default function Screenshot({
   src,
   alt,
   className = '',
-  eager,
   priority,
   draggable,
 }: ScreenshotProps) {
@@ -47,7 +51,6 @@ export default function Screenshot({
       // anything loads and nothing shifts when it does.
       width={420}
       height={913}
-      loading={eager ? undefined : 'lazy'}
       fetchPriority={priority ? 'high' : undefined}
       // Never block the main thread on decode — these arrive mid-scroll.
       decoding="async"

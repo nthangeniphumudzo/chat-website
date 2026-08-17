@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Screenshot from './Screenshot'
 import { img_speed_date_author } from '../assets/images'
 
@@ -9,10 +10,40 @@ import { img_speed_date_author } from '../assets/images'
  * right and read as lines rather than a bag of tags. "nice pics" is the pivot
  * of the whole block — it's the photo-only compliment the app exists to
  * replace, so it opens the second row. */
-const DEAD_OPENERS = [
+const OPENER_ROWS = [
   ['“hey”', '“wyd”', '“what’s your favourite colour?”'],
   ['“nice pics”', '“so… what do you do?”', '“what’s your love language?”'],
-] as const
+]
+
+/* The openers arrive as plain text and are crossed off one at a time.
+ *
+ * The opening stillness is what makes it read as a decision rather than a page
+ * still loading — long enough to take the words in before the first line
+ * moves. After that each stroke lands, then rests: the pause is deliberately
+ * longer than the stroke itself, so the six read as six separate judgements
+ * with breathing room between them rather than one continuous sweep.
+ *
+ * Note what this costs — six openers a second apart is a ~8s sequence end to
+ * end. STRIKE_PAUSE is the dial if that turns out to be too long to hold
+ * someone who arrived from a video. */
+const STRIKE_HOLD = 0.9
+const STRIKE_DURATION = 0.4
+const STRIKE_PAUSE = 1.0
+const STRIKE_STAGGER = STRIKE_DURATION + STRIKE_PAUSE
+
+/* One flat running order, so the sequence carries on across the line break
+   rather than restarting on the second row. */
+const DEAD_OPENERS = (() => {
+  let order = 0
+  return OPENER_ROWS.map(row =>
+    /* Rounded because the raw float otherwise reaches the markup as
+       "1.1800000000000002s". */
+    row.map(text => ({
+      text,
+      delay: (STRIKE_HOLD + order++ * STRIKE_STAGGER).toFixed(2),
+    })),
+  )
+})()
 
 /**
  * The hero built for cold traffic — someone who arrived from a TikTok video,
@@ -43,19 +74,30 @@ export default function Hero() {
               the exact openers a visitor has sent or been sent this week — the
               headline underneath then reads as the answer to them. This sits
               where the trust markers used to: "free" survived onto the button,
-              and the verified tick is visible in the screenshot itself. */}
-          <div className="mb-5 flex flex-col items-center gap-y-1 font-syne text-xs text-gray-400 dark:text-gray-500 sm:text-sm lg:items-start">
+              and the verified tick is visible in the screenshot itself.
+
+              --strike-duration is set once here and inherited by every stroke,
+              so the stroke length lives in one place instead of drifting
+              between this file and the stylesheet. */}
+          <div
+            style={{ '--strike-duration': `${STRIKE_DURATION}s` } as CSSProperties}
+            className="mb-5 flex flex-col items-center gap-y-1 font-syne text-xs text-gray-400 dark:text-gray-500 sm:text-sm lg:items-start"
+          >
             {/* The strike is doing all the work visually, and a screen reader
                 gets none of it — so say the quiet part for it. */}
             <span className="sr-only">Instead of the usual openers:</span>
             {DEAD_OPENERS.map(row => (
               <p
-                key={row.join()}
+                key={row[0].text}
                 className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 lg:justify-start"
               >
-                {row.map(opener => (
-                  <span key={opener} className="line-through decoration-mint/70 decoration-2">
-                    {opener}
+                {row.map(({ text, delay }) => (
+                  <span
+                    key={text}
+                    className="strike-out"
+                    style={{ '--strike-delay': `${delay}s` } as CSSProperties}
+                  >
+                    {text}
                   </span>
                 ))}
               </p>
@@ -92,7 +134,6 @@ export default function Hero() {
             <Screenshot
               src={img_speed_date_author}
               alt="A profile in Ch@t with their three questions and a Respond button"
-              eager
               priority
             />
           </div>

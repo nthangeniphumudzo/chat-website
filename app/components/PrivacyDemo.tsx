@@ -66,7 +66,6 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
                 <Screenshot
                   src={isDark ? img_profile : img_profile_light}
                   alt="A profile as you see it in the app"
-                  eager
                 />
                 {/* What the screenshot gets */}
                 <div

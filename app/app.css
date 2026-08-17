@@ -234,6 +234,44 @@
 @keyframes stepProgress { from { width: 0; } to { width: 100%; } }
 .step-progress { animation: stepProgress linear both; }
 
+/* ── Hero: the dead openers striking themselves out ──────────────
+   The openers land as ordinary text, hold for a beat, then get crossed off one
+   at a time. `text-decoration` can't be animated, so the rule is a pseudo
+   element that wipes across from the left; each opener carries its own
+   --strike-delay (set in Hero.tsx) so the six run in sequence across both rows.
+   Doing it in CSS rather than with a timer means it survives hydration and
+   costs no JavaScript. */
+.strike-out {
+  position: relative;
+  /* Keeps a long opener from wrapping inside its own box — the row wraps
+     instead, so the rule never has to cross two lines of text. */
+  white-space: nowrap;
+}
+.strike-out::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-mint);
+  opacity: 0.75;
+  transform: scaleX(0);
+  transform-origin: left center;
+  /* Both values are supplied by Hero.tsx: the duration once on the wrapper and
+     inherited, the delay per opener. */
+  animation: strikeOut var(--strike-duration, 0.4s) cubic-bezier(0.65, 0, 0.35, 1)
+    var(--strike-delay, 0s) forwards;
+}
+@keyframes strikeOut { to { transform: scaleX(1); } }
+
+/* Reduced motion still needs the point made: the openers are struck out, the
+   line just doesn't get drawn. */
+@media (prefers-reduced-motion: reduce) {
+  .strike-out::after { animation: none; transform: scaleX(1); }
+}
+
 /* ── Full-screen poster panels ──────────────────────────────────── */
 .panel {
   min-height: 100vh;

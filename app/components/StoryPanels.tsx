@@ -68,15 +68,12 @@ function DemoPanel({ isDark }: { isDark: boolean }) {
         {/* Real app screen — writing your three questions */}
         <div className="flex justify-center">
           <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-            {/* First screen below the hero — eager, so it's already there when
-                the user's first scroll arrives rather than starting then. The
-                hero's screenshot holds the one `priority` slot; marking this one
-                too would just flatten the ordering and neither would arrive
-                sooner. */}
+            {/* First screen below the hero. The hero's screenshot holds the one
+                `priority` slot; marking this one too would just flatten the
+                ordering and neither would arrive sooner. */}
             <Screenshot
               src={isDark ? img_write_questions : img_write_questions_light}
               alt="Writing your three questions"
-              eager
             />
           </div>
         </div>
@@ -113,10 +110,10 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
         <div className="flex justify-center">
           {custom ?? (
             <div className={`w-60 sm:w-72 lg:w-80 rounded-[40px] overflow-hidden border-2 phone-bleed ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-              {/* The story panels are the narrative spine of the page and sit
-                  close behind the hero, so they load up front rather than
-                  racing the visitor's scroll. They're ~20K each. */}
-              <Screenshot src={(isDark ? imageDark : imageLight) ?? ''} alt={alt ?? ''} eager />
+              {/* The story panels are the narrative spine of the page, and like
+                  everything else here they're fetched during the initial load
+                  rather than racing the visitor's scroll. ~20K each. */}
+              <Screenshot src={(isDark ? imageDark : imageLight) ?? ''} alt={alt ?? ''} />
             </div>
           )}
         </div>
