@@ -290,6 +290,14 @@ html:not(.app-loading) .strike-out::after {
   .strike-out::after { animation: none; transform: scaleX(1); }
 }
 
+/* The live-stats strip arrives after its fetch resolves, so it fades up rather
+   than snapping into a gap the eye was already resting on. */
+@keyframes statsIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.stats-in { animation: statsIn 0.5s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .stats-in { animation: none; }
+}
+
 /* ── Full-screen poster panels ──────────────────────────────────── */
 .panel {
   min-height: 100vh;

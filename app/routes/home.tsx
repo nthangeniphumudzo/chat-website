@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { Route } from "./+types/home";
 import { useTheme } from "../hooks/useTheme";
+import { API_BASE } from "../constants";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import HeroPoster from "../components/HeroPoster";
@@ -46,9 +47,6 @@ export function meta(_: Route.MetaArgs) {
   ];
 }
 
-const TRACK_BASE =
-  "https://chatlivecontainer.wonderfulbeach-a47f64a5.southafricanorth.azurecontainerapps.io/api";
-
 /**
  * Which hero the page ships with.
  *
@@ -65,7 +63,7 @@ export default function Home() {
 
   useEffect(() => {
     // Fire-and-forget visitor tracking
-    fetch(`${TRACK_BASE}/website-visitors/track`, { method: "POST", keepalive: true }).catch(() => {});
+    fetch(`${API_BASE}/website-visitors/track`, { method: "POST", keepalive: true }).catch(() => {});
 
     // Promo code tracking — attribute the visit via ?ref=CODE
     try {
@@ -73,7 +71,7 @@ export default function Home() {
       if (ref) sessionStorage.setItem("promoRef", ref);
       const activeRef = ref || sessionStorage.getItem("promoRef");
       if (activeRef) {
-        const url = `${TRACK_BASE}/promo-codes/${encodeURIComponent(activeRef)}/track`;
+        const url = `${API_BASE}/promo-codes/${encodeURIComponent(activeRef)}/track`;
         if (navigator.sendBeacon) navigator.sendBeacon(url);
         else fetch(url, { method: "POST", keepalive: true }).catch(() => {});
       }

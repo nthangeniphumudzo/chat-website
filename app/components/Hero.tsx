@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import LiveStats from './LiveStats'
 import Screenshot from './Screenshot'
 import { img_speed_date_author } from '../assets/images'
 
@@ -120,6 +121,10 @@ export default function Hero() {
             You write the questions. They answer in their own words. If you
             align, you connect.
           </p>
+
+          {/* Proof of life, directly under the claim it backs up. Absent until
+              real figures land, so the layout must not depend on it. */}
+          <LiveStats className="mt-1" />
         </div>
 
         {/* A real app screen, in the first viewport — and deliberately the
