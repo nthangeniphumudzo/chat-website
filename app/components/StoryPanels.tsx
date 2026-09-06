@@ -26,7 +26,7 @@ const steps: Step[] = [
     line: 'They read your questions and reply — a real answer, never a cold "hey".',
     imageDark: img_chat,
     imageLight: img_chat_light,
-    alt: 'Replying to their questions',
+    alt: 'A member’s profile in Ch@t — their photo, interests and languages',
     reverse: true,
   },
   {

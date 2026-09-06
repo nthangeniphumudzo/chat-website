@@ -129,16 +129,16 @@ export default function Hero() {
 
         {/* A real app screen, in the first viewport — and deliberately the
             receiving side of the mechanic rather than the composing side. A
-            blank question form is the chore; a real person with a verified tick
-            and three questions waiting under a "Respond" button is the reward,
-            which is the half a stranger needs to see first. It's also the one
-            screenshot the visitor sees before any other, so it's the only one
-            worth jumping the network queue. */}
+            blank question form is the chore; a real member with a verified tick,
+            their interests and their own words is the reward, which is the half
+            a stranger needs to see first. It's also the one screenshot the
+            visitor sees before any other, so it's the only one worth jumping
+            the network queue. */}
         <div className="flex justify-center lg:justify-end">
           <div className="w-52 overflow-hidden rounded-[40px] border-2 border-black/10 phone-bleed dark:border-white/10 sm:w-64 lg:w-80">
             <Screenshot
               src={img_speed_date_author}
-              alt="A profile in Ch@t with their three questions and a Respond button"
+              alt="A member’s profile in Ch@t — their photo, interests and languages"
               priority
             />
           </div>
