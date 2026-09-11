@@ -110,9 +110,8 @@ export function loader({ request }: Route.LoaderArgs) {
 // from first paint. Opening a store can take a moment, and a button that does
 // nothing visible for that moment reads as broken — so the pressed button
 // switches to "Opening…" at once. Cleared when the visitor comes back from the
-// store (or after 6s). Skipped when a handler cancelled the tap — that's the
-// in-app-browser help sheet, which is its own response.
-const downloadFeedbackScript = `(function(){function c(){var a=document.querySelectorAll('[data-opening]');for(var i=0;i<a.length;i++)a[i].removeAttribute('data-opening');}document.addEventListener('click',function(e){var t=e.target,a=t&&t.closest?t.closest('[data-download]'):null;if(!a)return;setTimeout(function(){if(e.defaultPrevented)return;a.setAttribute('data-opening','');setTimeout(c,6000);},0);});window.addEventListener('pageshow',c);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')c();});})();`;
+// store (or after 6s).
+const downloadFeedbackScript = `(function(){function c(){var a=document.querySelectorAll('[data-opening]');for(var i=0;i<a.length;i++)a[i].removeAttribute('data-opening');}document.addEventListener('click',function(e){var t=e.target,a=t&&t.closest?t.closest('[data-download]'):null;if(!a)return;a.setAttribute('data-opening','');setTimeout(c,6000);});window.addEventListener('pageshow',c);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')c();});})();`;
 
 // First visit from a phone: send them straight to their store. Runs in <head>,
 // before the CSS and the JS bundle, so it fires as soon as the HTML arrives.

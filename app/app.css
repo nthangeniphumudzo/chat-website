@@ -110,6 +110,15 @@
   transition: opacity 0.45s ease;
 }
 
+/* The Download pill never waits for the overlay. The navbar sits above it
+   from first paint, so the one thing the site exists for can be tapped the
+   moment the HTML lands — the link is plain server-rendered HTML and works
+   before any JS. Measured on a slow 4G phone: the HTML was ready at ~1s but the
+   overlay held the pill hidden and swallowed taps until ~3.3s. The section
+   links stay hidden until the page they point into is showing. */
+.app-loading .site-nav { z-index: 101; }
+.app-loading .site-nav ul { visibility: hidden; }
+
 /* Hold the page still underneath, so a swipe during loading doesn't scroll
    content the visitor can't see. */
 .app-loading,
@@ -178,20 +187,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .dl-spinner { animation: none; border-right-color: currentColor; opacity: 0.55; }
-}
-
-/* ── In-app browser help ────────────────────────────────────────────
-   A nudge toward the ⋯ menu that TikTok and friends keep in the top-right
-   corner, above the page. */
-.in-app-arrow { animation: inAppNudge 1.2s ease-in-out infinite; }
-
-@keyframes inAppNudge {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(4px, -6px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .in-app-arrow { animation: none; }
 }
 
 /* ── Screenshot placeholder ─────────────────────────────────────────

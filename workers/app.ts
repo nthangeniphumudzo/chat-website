@@ -1,8 +1,4 @@
 import { createRequestHandler, RouterContextProvider, createContext } from "react-router";
-import { isbot } from "isbot";
-import { detectPlatform, storeLink } from "../app/lib/platform";
-import { API_BASE } from "../app/constants";
-import { inAppPage } from "./inAppPage";
 
 // Context key so loaders/actions can reach the Cloudflare env if needed later.
 export const cloudflareContext = createContext<{ env: Env; ctx: ExecutionContext }>();
@@ -39,10 +35,6 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    if (url.pathname === "/go" || url.pathname === "/go/") {
-      return goToStore(request, url, ctx);
-    }
-
     const context = new RouterContextProvider();
     context.set(cloudflareContext, { env, ctx });
     const response = await requestHandler(request, context);
@@ -63,61 +55,3 @@ export default {
     return response;
   },
 } satisfies ExportedHandler<Env>;
-
-/**
- * /go — straight to the visitor's store, no website in between.
- *
- * Made for the link on TikTok (onchat.co.za/go). Same routing as the site's
- * Download button — iPhone → App Store, everything else → Google Play, direct
- * app links where the browser can take them (see storeLink).
- *
- * - In-app browsers (TikTok, Instagram, …) get a small page instead of a
- *   redirect. Tested on TikTok: any store redirect there ends in "action can't
- *   be taken" — its browser blocks the handoff to the store app, whatever the
- *   link. The page walks them into their real browser (⋯ → Open in browser),
- *   and since its address is /go, that browser goes straight to the store.
- * - Crawlers and link-preview fetchers get the homepage, so a shared link
- *   previews as the site rather than as a redirect.
- * - The visit (and any ?ref= promo code) is counted here, since the site's own
- *   tracking never runs — once. The in-app page tags its address ?seen=1, so
- *   reopening it in the real browser isn't counted again.
- * - no-store + Vary: the answer depends on the phone, so it must never be
- *   cached and handed to someone on the other platform.
- */
-function goToStore(request: Request, url: URL, ctx: ExecutionContext): Response {
-  const ua = request.headers.get("user-agent") ?? "";
-  const bot = isbot(ua);
-  const headers = { "Cache-Control": "no-store", Vary: "User-Agent" };
-
-  if (bot) {
-    const home = new URL(`https://${CANONICAL_HOST}/`);
-    const ref = url.searchParams.get("ref");
-    if (ref) home.searchParams.set("ref", ref);
-    return new Response(null, { status: 302, headers: { ...headers, Location: home.toString() } });
-  }
-
-  // Only real traffic on the live site is counted — not HEAD probes, not
-  // local or preview builds, and not a visit already counted inside an app.
-  if (request.method === "GET" && url.hostname === CANONICAL_HOST && !url.searchParams.has("seen")) {
-    ctx.waitUntil(trackStoreVisit(url));
-  }
-
-  const platform = detectPlatform(ua, bot);
-  if (platform.inApp) {
-    return new Response(inAppPage(platform, url.searchParams.get("ref")), {
-      status: 200,
-      headers: { ...headers, "Content-Type": "text/html; charset=utf-8" },
-    });
-  }
-
-  return new Response(null, { status: 302, headers: { ...headers, Location: storeLink(platform).href } });
-}
-
-async function trackStoreVisit(url: URL) {
-  const calls = [fetch(`${API_BASE}/website-visitors/track`, { method: "POST" })];
-  const ref = url.searchParams.get("ref");
-  if (ref) {
-    calls.push(fetch(`${API_BASE}/promo-codes/${encodeURIComponent(ref)}/track`, { method: "POST" }));
-  }
-  await Promise.allSettled(calls);
-}
