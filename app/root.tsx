@@ -98,11 +98,14 @@ export function loader({ request }: Route.LoaderArgs) {
 }
 
 // Tap feedback for every download button, installed before React so it works
-// from first paint. Opening a store can take a moment, and a button that does
-// nothing visible for that moment reads as broken — so the pressed button
-// switches to "Opening…" at once. Cleared when the visitor comes back from the
-// store (or after 6s).
-const downloadFeedbackScript = `(function(){function c(){var a=document.querySelectorAll('[data-opening]');for(var i=0;i<a.length;i++)a[i].removeAttribute('data-opening');}document.addEventListener('click',function(e){var t=e.target,a=t&&t.closest?t.closest('[data-download]'):null;if(!a)return;a.setAttribute('data-opening','');setTimeout(c,6000);});window.addEventListener('pageshow',c);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')c();});})();`;
+// from first paint. Opening a store can take a moment, and a button that shows
+// nothing for that moment reads as broken — so the button switches to
+// "Opening…" the instant a finger touches it (pointerdown), not when it lifts:
+// on iPhone the App Store handoff starts on release, which can leave no frame
+// to show anything. If the touch turns into a scroll (pointercancel) or ends
+// without a tap, it switches back. Cleared when the visitor returns from the
+// store, or after 6s.
+const downloadFeedbackScript = `(function(){var held=null,t=0;function pill(e){var n=e.target;return n&&n.closest?n.closest('[data-download]'):null;}function clear(){held=null;var a=document.querySelectorAll('[data-opening]');for(var i=0;i<a.length;i++)a[i].removeAttribute('data-opening');}function on(a){a.setAttribute('data-opening','');clearTimeout(t);t=setTimeout(clear,6000);}document.addEventListener('pointerdown',function(e){if(e.button!==0)return;var a=pill(e);if(!a)return;held=a;on(a);},{passive:true});document.addEventListener('pointercancel',function(){if(held)clear();});document.addEventListener('pointerup',function(){var a=held;if(!a)return;setTimeout(function(){if(held===a)clear();},500);});document.addEventListener('click',function(e){var a=pill(e);if(!a)return;held=null;on(a);});window.addEventListener('pageshow',clear);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clear();});})();`;
 
 // First visit from a phone: send them straight to their store. Runs in <head>,
 // before the CSS and the JS bundle, so it fires as soon as the HTML arrives.
