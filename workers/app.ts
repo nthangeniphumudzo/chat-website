@@ -1,4 +1,7 @@
 import { createRequestHandler, RouterContextProvider, createContext } from "react-router";
+import { isbot } from "isbot";
+import { detectPlatform, storeLink } from "../app/lib/platform";
+import { API_BASE } from "../app/constants";
 
 // Context key so loaders/actions can reach the Cloudflare env if needed later.
 export const cloudflareContext = createContext<{ env: Env; ctx: ExecutionContext }>();
@@ -35,6 +38,10 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    if (url.pathname === "/go" || url.pathname === "/go/") {
+      return goToStore(request, url, ctx);
+    }
+
     const context = new RouterContextProvider();
     context.set(cloudflareContext, { env, ctx });
     const response = await requestHandler(request, context);
@@ -55,3 +62,51 @@ export default {
     return response;
   },
 } satisfies ExportedHandler<Env>;
+
+/**
+ * /go — straight to the visitor's store, no website in between.
+ *
+ * Made for the link on TikTok (onchat.co.za/go): a tap should land in the App
+ * Store or Play Store, not on a page asking for a second tap. Same routing as
+ * the site's Download button — iPhone → App Store, everything else → Google
+ * Play, direct app links where the browser can take them (see storeLink).
+ *
+ * Inside TikTok's own browser, whether the store *app* then opens is TikTok's
+ * call: both stores finish with an app handoff that its browser may block. This
+ * route only decides where to send them.
+ *
+ * - Crawlers and link-preview fetchers get the homepage, so a shared link
+ *   previews as the site rather than as a redirect.
+ * - The visit (and any ?ref= promo code) is counted here, since the page's own
+ *   tracking never runs — without holding up the redirect.
+ * - no-store + Vary: the answer depends on the phone, so it must never be
+ *   cached and handed to someone on the other platform.
+ */
+function goToStore(request: Request, url: URL, ctx: ExecutionContext): Response {
+  const ua = request.headers.get("user-agent") ?? "";
+  const bot = isbot(ua);
+
+  const location = bot
+    ? `https://${CANONICAL_HOST}/${url.search}`
+    : storeLink(detectPlatform(ua, bot)).href;
+
+  // Only real traffic on the live site is counted — not crawlers, not HEAD
+  // probes, and not local or preview builds.
+  if (!bot && request.method === "GET" && url.hostname === CANONICAL_HOST) {
+    ctx.waitUntil(trackStoreVisit(url));
+  }
+
+  return new Response(null, {
+    status: 302,
+    headers: { Location: location, "Cache-Control": "no-store", Vary: "User-Agent" },
+  });
+}
+
+async function trackStoreVisit(url: URL) {
+  const calls = [fetch(`${API_BASE}/website-visitors/track`, { method: "POST" })];
+  const ref = url.searchParams.get("ref");
+  if (ref) {
+    calls.push(fetch(`${API_BASE}/promo-codes/${encodeURIComponent(ref)}/track`, { method: "POST" }));
+  }
+  await Promise.allSettled(calls);
+}
