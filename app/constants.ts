@@ -24,7 +24,10 @@ export const PLAY_STORE_DEEP_LINK =
   `S.browser_fallback_url=${encodeURIComponent(GOOGLE_PLAY_URL)};end`
 
 /** `inApp` names the app whose built-in browser the tap came from, if any — so
- *  analytics can show how many TikTok visitors reach the button. */
+ *  analytics can show how many TikTok visitors reach the button.
+ *
+ *  NOTE: Google Analytics is commented out for performance (trial — see
+ *  root.tsx). With no window.gtag this does nothing until it's restored. */
 export function trackDownload(store: string, placement: string, inApp: string | null = null) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'download_click', { store, placement, in_app: inApp ?? 'none' })

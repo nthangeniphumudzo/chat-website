@@ -148,15 +148,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Meta />
         <Links />
-        {/* Analytics stub only — queues events immediately (so download
-            tracking works). The heavy GA + Clarity scripts load on idle in
-            <App/>, keeping them off the critical path on slow connections. */}
+        {/* GOOGLE ANALYTICS COMMENTED OUT FOR PERFORMANCE (trial).
+            gtag.js is 167 KB over the network and ~510 KB of code for the phone
+            to run — more than the whole site's own JavaScript. Disabled to see
+            how the site performs without it. To restore: uncomment this stub
+            and the gtag.js loader in <App/> below.
+
+            While it's off, trackDownload() in constants.ts finds no window.gtag
+            and quietly does nothing — download_click events aren't recorded.
+
         <script
           dangerouslySetInnerHTML={{
             __html:
               "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4JEM4G6RPF');",
           }}
         />
+        */}
       </head>
       <body>
         {children}
@@ -172,10 +179,12 @@ export default function App() {
     // Load the heavy third-party analytics only once the browser is idle, so
     // they never contend with content + hydration on weak connections.
     const load = () => {
-      const ga = document.createElement("script");
-      ga.async = true;
-      ga.src = "https://www.googletagmanager.com/gtag/js?id=G-4JEM4G6RPF";
-      document.head.appendChild(ga);
+      // GOOGLE ANALYTICS COMMENTED OUT FOR PERFORMANCE (trial) — see the note
+      // on the gtag stub in <Layout/> above. Clarity still loads.
+      // const ga = document.createElement("script");
+      // ga.async = true;
+      // ga.src = "https://www.googletagmanager.com/gtag/js?id=G-4JEM4G6RPF";
+      // document.head.appendChild(ga);
 
       const clarity = document.createElement("script");
       clarity.async = true;
