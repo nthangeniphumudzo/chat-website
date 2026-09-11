@@ -62,7 +62,10 @@ export default function Home() {
   const { isDark, toggle } = useTheme();
 
   useEffect(() => {
-    // Fire-and-forget visitor tracking
+    // Fire-and-forget visitor tracking. The flag tells the first-visit store
+    // redirect in root.tsx this visit is already counted, so it doesn't count
+    // it twice on its way out.
+    (window as unknown as { __chatTracked?: boolean }).__chatTracked = true;
     fetch(`${API_BASE}/website-visitors/track`, { method: "POST", keepalive: true }).catch(() => {});
 
     // Promo code tracking — attribute the visit via ?ref=CODE

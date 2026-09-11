@@ -1,26 +1,24 @@
 import { useState, useEffect } from 'react'
 import { useRouteLoaderData } from 'react-router'
-import { detectPlatform, type Platform } from '../lib/platform'
+import { detectPlatform, UNKNOWN_PLATFORM, type Platform } from '../lib/platform'
 
 /**
- * The visitor's OS, and whether they're inside an app's built-in browser.
+ * The visitor's OS, whether they're inside an app's built-in browser, and
+ * whether store deep links will work for them.
  *
- * Seeded from the user-agent the root loader read off the request, so the
- * server render and the client's first paint already agree on the real platform
- * — no hydration mismatch, and no window where an iPhone visitor is handed the
- * Google Play link because JS hasn't loaded yet. In-app browsers are slow to
- * load JS, so that window used to be widest exactly where it hurt most.
- *
- * After mount it re-reads navigator.userAgent, which only ever changes anything
- * if the page rendered without loader data (e.g. from an error boundary).
+ * Worked out once, on the server, from the request (see the root loader) — so
+ * the server render and the client's first paint agree, the download link is
+ * right before JS loads, and the crawler check (isbot) never ships to the
+ * browser. Falls back to navigator.userAgent only if the page rendered without
+ * loader data, e.g. from an error boundary.
  */
 export function usePlatform(): Platform {
-  const data = useRouteLoaderData('root') as { ua?: string } | undefined
-  const [platform, setPlatform] = useState<Platform>(() => detectPlatform(data?.ua ?? ''))
+  const data = useRouteLoaderData('root') as { platform?: Platform } | undefined
+  const [fallback, setFallback] = useState<Platform | null>(null)
 
   useEffect(() => {
-    setPlatform(detectPlatform(navigator.userAgent))
-  }, [])
+    if (!data?.platform) setFallback(detectPlatform(navigator.userAgent))
+  }, [data?.platform])
 
-  return platform
+  return data?.platform ?? fallback ?? UNKNOWN_PLATFORM
 }

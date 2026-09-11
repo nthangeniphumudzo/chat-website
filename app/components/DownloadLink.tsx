@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { usePlatform } from '../hooks/usePlatform'
-import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
-import type { InAppBrowser } from '../lib/platform'
+import { trackDownload } from '../constants'
+import { storeLink, type InAppBrowser } from '../lib/platform'
 
 interface DownloadLinkProps {
   placement: string
@@ -17,9 +17,14 @@ interface DownloadLinkProps {
  *
  * - iPhone → App Store, everything else → Google Play (Play's web listing
  *   handles desktop fine).
+ * - Phones link straight into the store *app* (see the deep links in
+ *   constants.ts), so there's no web page to load before it opens.
  * - Phones open the store in the same tab. A new tab adds nothing on mobile,
  *   and in-app browsers can't open one at all — `target="_blank"` there is
  *   exactly what produced TikTok's "action can't be taken".
+ * - The button flips to "Opening…" the instant it's pressed (the listener
+ *   lives in root.tsx so it works before hydration), so a store that takes a
+ *   moment never makes the button look dead.
  * - Inside an in-app browser (TikTok, Instagram, …) no web page can hand off to
  *   the store app, so instead of letting the tap fail we show how to get into a
  *   real browser, where the same button works.
@@ -29,15 +34,13 @@ interface DownloadLinkProps {
  * the right store rather than dead-ending.
  */
 export default function DownloadLink({ placement, className, children, ...rest }: DownloadLinkProps) {
-  const { os, inApp } = usePlatform()
+  const platform = usePlatform()
+  const { os, inApp } = platform
+  const link = storeLink(platform)
   const [helpOpen, setHelpOpen] = useState(false)
 
-  const isIos = os === 'ios'
-  const href = isIos ? APP_STORE_URL : GOOGLE_PLAY_URL
-  const store = isIos ? 'app_store' : 'google_play'
-
   const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    trackDownload(store, placement, inApp)
+    trackDownload(link.store, placement, inApp)
     if (inApp) {
       e.preventDefault()
       setHelpOpen(true)
@@ -47,21 +50,25 @@ export default function DownloadLink({ placement, className, children, ...rest }
   return (
     <>
       <a
-        href={href}
-        // Only desktop gets a new tab, so the page stays open behind the store.
-        target={os === 'unknown' && !inApp ? '_blank' : undefined}
+        href={link.href}
+        target={link.newTab ? '_blank' : undefined}
         rel="noopener noreferrer"
         onClick={onClick}
+        data-download=""
         className={className}
         {...rest}
       >
-        {children}
+        <span className="dl-idle">{children}</span>
+        <span className="dl-busy">
+          <span aria-hidden className="dl-spinner" />
+          Opening…
+        </span>
       </a>
       {helpOpen && inApp && (
         <InAppBrowserHelp
           app={inApp}
-          isIos={isIos}
-          storeHref={href}
+          isIos={os === 'ios'}
+          storeHref={link.web}
           onClose={() => setHelpOpen(false)}
         />
       )}

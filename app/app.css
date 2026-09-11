@@ -152,6 +152,34 @@
   .app-loading .mark-heart { animation: none; }
 }
 
+/* ── Download button, pressed ───────────────────────────────────────
+   The root.tsx listener marks a pressed download link [data-opening] and
+   clears it when the visitor comes back from the store. Swapping the label for
+   a spinner the instant it's tapped is what stops a store that takes a moment
+   from reading as a dead button. */
+.dl-busy { display: none; }
+[data-opening] .dl-idle { display: none; }
+[data-opening] .dl-busy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.dl-spinner {
+  width: 0.95em;
+  height: 0.95em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 9999px;
+  animation: dlSpin 0.7s linear infinite;
+}
+
+@keyframes dlSpin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-spinner { animation: none; border-right-color: currentColor; opacity: 0.55; }
+}
+
 /* ── In-app browser help ────────────────────────────────────────────
    A nudge toward the ⋯ menu that TikTok and friends keep in the top-right
    corner, above the page. */
