@@ -1,5 +1,4 @@
-import { usePlatform } from '../hooks/usePlatform'
-import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
+import DownloadLink from './DownloadLink'
 
 interface SmartDownloadProps {
   placement: string
@@ -7,28 +6,16 @@ interface SmartDownloadProps {
   className?: string
 }
 
-/**
- * One calm "Get the app" button. A deliberate press deep-links straight to the
- * visitor's own store — iPhone → App Store, everything else → Google Play.
- * (There is intentionally no auto-redirect on landing; only a real click acts.)
- */
+/** One calm "Get the app" button. Store routing lives in DownloadLink. */
 export default function SmartDownload({ placement, id, className = '' }: SmartDownloadProps) {
-  const platform = usePlatform()
-  const isIos = platform === 'ios'
-  const url = isIos ? APP_STORE_URL : GOOGLE_PLAY_URL
-  const store = isIos ? 'app_store' : 'google_play'
-
   return (
     <div id={id} className={`flex ${className}`}>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => trackDownload(store, placement)}
+      <DownloadLink
+        placement={placement}
         className="inline-flex items-center justify-center rounded-full bg-mint px-8 py-3.5 font-syne text-base font-bold text-gray-900 shadow-md shadow-mint/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
       >
         Get the app
-      </a>
+      </DownloadLink>
     </div>
   )
 }

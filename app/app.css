@@ -152,6 +152,20 @@
   .app-loading .mark-heart { animation: none; }
 }
 
+/* ── In-app browser help ────────────────────────────────────────────
+   A nudge toward the ⋯ menu that TikTok and friends keep in the top-right
+   corner, above the page. */
+.in-app-arrow { animation: inAppNudge 1.2s ease-in-out infinite; }
+
+@keyframes inAppNudge {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(4px, -6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .in-app-arrow { animation: none; }
+}
+
 /* ── Screenshot placeholder ─────────────────────────────────────────
    Each screenshot carries a 24px-wide copy of itself as an inline data URI
    (set as background-image by <Screenshot/>). Stretching those few hundred

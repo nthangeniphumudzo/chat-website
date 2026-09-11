@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import ChatMark from './ChatMark'
-import { usePlatform } from '../hooks/usePlatform'
-import { APP_STORE_URL, GOOGLE_PLAY_URL, trackDownload } from '../constants'
+import DownloadLink from './DownloadLink'
 
 const marketingLinks = [
   { href: './#how', label: 'How it works' },
@@ -12,18 +11,6 @@ const marketingLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
-  const platform = usePlatform()
-
-  /* This is now the only download link on the page, so it has to resolve to a
-     real store in every state — including 'unknown', which is what both the
-     server render and the client's first paint report. It used to fall back to
-     the #download section, which was fine while that section had a button of
-     its own; with that gone the anchor would strand a desktop visitor, and
-     strand anyone who taps before hydration, in a section they can't act on.
-     Non-iOS therefore lands on Play, the same rule SmartDownload has always
-     used, and Play's web listing handles desktop perfectly well. */
-  const isIos = platform === 'ios'
-  const storeUrl = isIos ? APP_STORE_URL : GOOGLE_PLAY_URL
 
   useEffect(() => {
     const handler = () => {
@@ -81,13 +68,11 @@ export default function Navbar() {
             matters was hidden on the breakpoint most visitors arrive on. The
             pill takes the slot instead and never leaves the screen, so the
             answer to "I'm convinced" is always one thumb-reach away.
-            Press deep-links to the visitor's store; desktop, which has no
-            store, falls back to the download section. */}
-        <a
-          href={storeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackDownload(isIos ? 'app_store' : 'google_play', 'navbar')}
+            This is the only download link on the page, so it has to work from
+            everywhere a visitor arrives — including TikTok's in-app browser,
+            which is what DownloadLink handles. */}
+        <DownloadLink
+          placement="navbar"
           // The label doesn't name the product — the visitor is already on the
           // page — but a screen reader meeting this link out of context needs it,
           // and this is the only call to action left.
@@ -95,7 +80,7 @@ export default function Navbar() {
           className="inline-flex flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 font-syne text-sm font-bold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
         >
           Download
-        </a>
+        </DownloadLink>
       </div>
     </nav>
   )

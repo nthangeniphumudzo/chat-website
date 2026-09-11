@@ -80,6 +80,14 @@ const jsonLd = {
   ],
 };
 
+// The request's user-agent, handed to the page so the download link can point
+// at the right store in the server-rendered HTML. HTML is served no-store (see
+// workers/app.ts), so per-visitor output is never cached and served to someone
+// else.
+export function loader({ request }: Route.LoaderArgs) {
+  return { ua: request.headers.get("user-agent") ?? "" };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
