@@ -104,8 +104,25 @@ function InAppBrowserHelp({ app, isIos, storeHref, onClose }: HelpProps) {
     }
   }, [onClose])
 
+  // While the sheet is up, point the page's address at /go. The app's "Open in
+  // browser" hands the browser whatever the address is, and /go sends a real
+  // browser straight to the store — so they skip the site and the second tap.
+  // ?seen=1 because this visit is already counted. Put back when it closes.
+  useEffect(() => {
+    const original = window.location.href
+    try {
+      const go = new URL('/go', window.location.origin)
+      new URLSearchParams(window.location.search).forEach((v, k) => go.searchParams.set(k, v))
+      go.searchParams.set('seen', '1')
+      window.history.replaceState(window.history.state, '', go.toString())
+    } catch {
+      /* leave the address alone */
+    }
+    return () => window.history.replaceState(window.history.state, '', original)
+  }, [])
+
   const copyLink = async () => {
-    // The current URL, so a ?ref= promo code survives the trip to the browser.
+    // The /go address set above, with any ?ref= promo code carried along.
     const ok = await copyText(window.location.href)
     setCopied(ok ? 'done' : 'failed')
   }
@@ -148,7 +165,7 @@ function InAppBrowserHelp({ app, isIos, storeHref, onClose }: HelpProps) {
             Choose <strong>“Open in browser”</strong>
           </Step>
           <Step n={3}>
-            Tap <strong>Download</strong> again — it’ll open the {storeName}
+            The {storeName} opens — or tap <strong>Download</strong> there
           </Step>
         </ol>
 
