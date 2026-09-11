@@ -79,88 +79,6 @@
   .js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
 }
 
-/* ── Loading overlay ────────────────────────────────────────────────
-   Covers the page with a pulsing Ch@t mark until the first screen's assets
-   have landed, so nobody scrolls into content that is still arriving.
-
-   Hidden by default and only shown while <html> carries `app-loading`. That
-   direction matters: the class is added by the boot script, so if scripting is
-   off or the bundle dies, the overlay never appears and the page is readable.
-   The boot script also clears it on a hard timeout, so it cannot strand anyone
-   on a slow connection. */
-.app-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  background: #ffffff;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.45s ease, visibility 0s linear 0.45s;
-}
-
-.dark .app-loader { background: #050505; }
-
-.app-loading .app-loader {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transition: opacity 0.45s ease;
-}
-
-/* The Download pill never waits for the overlay. The navbar sits above it
-   from first paint, so the one thing the site exists for can be tapped the
-   moment the HTML lands — the link is plain server-rendered HTML and works
-   before any JS. Measured on a slow 4G phone: the HTML was ready at ~1s but the
-   overlay held the pill hidden and swallowed taps until ~3.3s. The section
-   links stay hidden until the page they point into is showing. */
-.app-loading .site-nav { z-index: 101; }
-.app-loading .site-nav ul { visibility: hidden; }
-
-/* Hold the page still underneath, so a swipe during loading doesn't scroll
-   content the visitor can't see. */
-.app-loading,
-.app-loading body { overflow: hidden; }
-
-/* Mint on the page's own background — the mark supplies the brand colour
-   itself now that there is no tile behind it doing that job. */
-.app-loader-mark {
-  width: 96px;
-  height: 96px;
-  color: var(--color-mint);
-  animation: markPulse 1.6s ease-in-out infinite;
-}
-
-/* The two hearts on the mark beat against the pulse rather than with it —
-   the icon breathes, the hearts keep time inside it. */
-.app-loading .mark-heart {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: heartBeat 1.6s ease-in-out infinite;
-}
-
-.app-loading .mark-heart-bottom { animation-delay: 0.8s; }
-
-@keyframes markPulse {
-  0%, 100% { transform: scale(1); opacity: 0.85; }
-  50%      { transform: scale(1.08); opacity: 1; }
-}
-
-@keyframes heartBeat {
-  0%, 100%  { transform: scale(1); }
-  30%       { transform: scale(1.25); }
-  45%       { transform: scale(1); }
-}
-
-/* Someone who asked for less motion still gets the overlay — it just sits
-   there quietly instead of pulsing. */
-@media (prefers-reduced-motion: reduce) {
-  .app-loader-mark,
-  .app-loading .mark-heart { animation: none; }
-}
-
 /* ── Download button, pressed ───────────────────────────────────────
    The root.tsx listener marks a pressed download link [data-opening] and
    clears it when the visitor comes back from the store. Swapping the label for
@@ -308,16 +226,6 @@
   animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
   animation-delay: var(--strike-delay, 0s);
   animation-fill-mode: forwards;
-  /* The sequence is what covers the load, so it must not burn down behind the
-     loading overlay — which now stays up longer, since window.load waits on the
-     whole site's images. Pausing holds the delay countdown too, so the run
-     starts from the top the moment the page is actually on screen. */
-  animation-play-state: paused;
-}
-/* No JS at all means the overlay is never raised, so this matches and the
-   sequence simply plays. */
-html:not(.app-loading) .strike-out::after {
-  animation-play-state: running;
 }
 @keyframes strikeOut { to { transform: scaleX(1); } }
 

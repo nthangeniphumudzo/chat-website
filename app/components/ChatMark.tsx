@@ -14,7 +14,7 @@
  */
 
 // Bottom-point heart, ~13 x 11.5, drawn at the origin and positioned by its
-// wrapping <g> — the path's own transform is left free for CSS to animate.
+// wrapping <g>.
 const HEART =
   'M6.5 11.5 C6.5 11.5 0.4 7.6 0.4 3.9 C0.4 1.6 2.4 0.4 4.2 1.3 ' +
   'C5.3 1.85 6.1 2.8 6.5 3.6 C6.9 2.8 7.7 1.85 8.8 1.3 ' +
@@ -48,13 +48,11 @@ export default function ChatMark({ className, title = 'Ch@t' }: ChatMarkProps) {
           strokeDasharray="4.2 3.42"
         />
 
-        {/* Classed so the loading overlay can give them a heartbeat. Inert
-            everywhere else — the mark is still, not animated. */}
         <g transform="translate(46.9 19.05)">
-          <path className="mark-heart mark-heart-top" d={HEART} strokeWidth="2.6" strokeLinejoin="round" />
+          <path d={HEART} strokeWidth="2.6" strokeLinejoin="round" />
         </g>
         <g transform="translate(46.9 61.65)">
-          <path className="mark-heart mark-heart-bottom" d={HEART} strokeWidth="2.6" strokeLinejoin="round" />
+          <path d={HEART} strokeWidth="2.6" strokeLinejoin="round" />
         </g>
 
         <text
