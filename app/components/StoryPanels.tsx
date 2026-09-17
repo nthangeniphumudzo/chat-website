@@ -42,7 +42,7 @@ const steps: Step[] = [
 function DemoPanel({ isDark }: { isDark: boolean }) {
   return (
     <section id="how" className="panel px-5 sm:px-8 overflow-hidden">
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[500px] h-[500px] bg-mint/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="soft-glow absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[740px] h-[740px] [--glow-alpha:0.12] pointer-events-none" />
 
       <div
         className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
@@ -87,7 +87,7 @@ function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom
   return (
     <section className="panel px-5 sm:px-8 overflow-hidden">
       {/* Colored wash offset to the image side */}
-      <div className={`absolute top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-mint/10 rounded-full blur-[120px] pointer-events-none ${reverse ? 'left-0 -translate-x-1/3' : 'right-0 translate-x-1/3'}`} />
+      <div className={`soft-glow absolute top-1/2 -translate-y-1/2 w-[740px] h-[740px] [--glow-alpha:0.12] pointer-events-none ${reverse ? 'left-0 -translate-x-1/3' : 'right-0 translate-x-1/3'}`} />
 
       <div
         className={`relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}

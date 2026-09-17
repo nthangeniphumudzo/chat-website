@@ -64,7 +64,7 @@ export default function Hero() {
     <section className="relative overflow-hidden px-5 pt-20 pb-12 sm:px-8 lg:flex lg:min-h-svh lg:flex-col lg:justify-center lg:pt-20 lg:pb-20">
       {/* Bold, quiet background wash */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] max-w-[140vw] h-[600px] bg-mint/18 dark:bg-mint/12 rounded-full blur-[140px]" />
+        <div className="soft-glow absolute -top-60 left-1/2 -translate-x-1/2 w-[1180px] max-w-[190vw] h-[880px] [--glow-alpha:0.2] dark:[--glow-alpha:0.14]" />
       </div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">

@@ -124,6 +124,27 @@
   background-color: #e9e9e9;
 }
 
+/* ── Soft mint glow ─────────────────────────────────────────────────
+   The background washes used to be solid mint shapes under filter: blur(120–140px).
+   A blur can't be drawn inside its own box: the browser renders a region ~3× the
+   radius wider on every side, at full pixel density — about 22 megapixels for the
+   hero glow alone on a 3× iPhone, ~75 MP across the page. Chrome does that on the
+   GPU; iPhone Safari is far slower at large blurs, and during a fast flick-scroll
+   the tiles it hasn't finished show as blank white until they catch up.
+   A radial gradient draws the same soft wash as a plain background — no filter,
+   nothing to rasterise off-screen. Size the element to the old blurred footprint;
+   set the strength per use with --glow-alpha. */
+.soft-glow {
+  --glow-alpha: 0.12;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(0 230 160 / var(--glow-alpha)) 0%,
+    rgb(0 230 160 / calc(var(--glow-alpha) * 0.6)) 45%,
+    rgb(0 230 160 / 0) 100%
+  );
+}
+
 /* ── Utilities ──────────────────────────────────────────────────── */
 .text-gradient-mint {
   background: linear-gradient(135deg, #00e6a0, #00c88a);

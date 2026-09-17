@@ -22,7 +22,7 @@ export default function DownloadSection() {
   return (
     <section id="download" className="panel items-center px-5 sm:px-8 text-center overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[400px] sm:w-[700px] h-[300px] sm:h-[400px] bg-mint/15 rounded-full blur-[100px] sm:blur-[120px]" />
+        <div className="soft-glow w-[600px] sm:w-[940px] h-[500px] sm:h-[640px] [--glow-alpha:0.17]" />
       </div>
 
       <div className="relative z-10 max-w-2xl mx-auto">
