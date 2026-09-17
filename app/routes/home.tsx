@@ -84,7 +84,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="grain min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
       <Navbar />
       {HERO === "direct" ? <Hero /> : <HeroPoster />}
       <StoryPanels isDark={isDark} />

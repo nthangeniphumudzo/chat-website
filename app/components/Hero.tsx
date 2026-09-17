@@ -82,7 +82,7 @@ export default function Hero() {
               between this file and the stylesheet. */}
           <div
             style={{ '--strike-duration': `${STRIKE_DURATION}s` } as CSSProperties}
-            className="mb-5 flex flex-col items-center gap-y-1 font-syne text-xs text-gray-400 dark:text-gray-500 sm:text-sm lg:items-start"
+            className="mb-5 flex flex-col items-center gap-y-1 font-syne text-sm text-gray-500 dark:text-gray-400 sm:text-base lg:items-start"
           >
             {/* The strike is doing all the work visually, and a screen reader
                 gets none of it — so say the quiet part for it. */}
@@ -112,7 +112,7 @@ export default function Hero() {
           <h1 className="poster-h font-syne mb-5 text-[2.15rem] min-[400px]:text-[2.6rem] sm:text-6xl lg:text-7xl">
             Three questions.
             <br />
-            <span className="text-mint">Real answers.</span>
+            <span className="text-mint-ink">Real answers.</span>
             <br />
             Then you connect.
           </h1>

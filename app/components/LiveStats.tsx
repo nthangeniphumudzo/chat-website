@@ -45,7 +45,7 @@ function useCountUp(target: number, duration = 1100) {
 
 /* Solid shapes, not outlines: at this size next to a bold number an outline
    icon turns to mush, and these have to read at a glance on a phone. */
-const iconClass = 'h-4 w-4 shrink-0 text-mint'
+const iconClass = 'h-4 w-4 shrink-0 text-mint-ink'
 
 /* A speech bubble has to be clearly wider than it is tall, with a tail that
    tapers rather than hanging as a stub — square-ish bubbles that fill their
@@ -89,7 +89,7 @@ function Stat({ value, label, description, live, icon }: StatProps) {
   const shown = useCountUp(value)
   return (
     <div className="px-4 first:pl-0 last:pr-0">
-      <dd className="flex items-center gap-1.5 font-syne text-lg font-bold leading-none text-gray-900 dark:text-gray-100 sm:text-xl">
+      <dd className="flex items-center gap-1.5 text-lg font-semibold leading-none text-gray-900 dark:text-gray-100 sm:text-xl">
         {live && (
           <span className="relative flex h-1.5 w-1.5" aria-hidden>
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75 motion-reduce:animate-none" />
@@ -101,7 +101,7 @@ function Stat({ value, label, description, live, icon }: StatProps) {
             so the figure is read once, settled, by the sr-only copy below. */}
         <span aria-hidden>{group(shown)}</span>
       </dd>
-      <dt className="mt-1 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-400 dark:text-gray-500 sm:text-[11px]">
+      <dt className="mt-1 text-[10px] font-medium uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400 sm:text-[11px]">
         {label}
       </dt>
       <span className="sr-only">

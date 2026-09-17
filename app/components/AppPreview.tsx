@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import Screenshot from './Screenshot'
 import {
   img_explore, img_explore_light,
@@ -37,7 +36,6 @@ interface AppPreviewProps {
  * The user drives it; nothing moves on its own.
  */
 export default function AppPreview({ isDark }: AppPreviewProps) {
-  const headingRef = useScrollReveal<HTMLDivElement>()
   const trackRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
 
@@ -59,15 +57,14 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
   return (
     <section id="preview" className="panel overflow-hidden">
       <div
-        ref={headingRef}
-        className="reveal px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto w-full mb-10 sm:mb-14 text-center"
+        className="px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto w-full mb-10 sm:mb-14 text-center"
       >
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">A look inside</p>
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint-ink mb-5">A look inside</p>
         <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-5">
-          Take a look <span className="text-mint">inside.</span>
+          Take a look <span className="text-mint-ink">inside.</span>
         </h2>
         <p className="text-lg sm:text-2xl text-gray-500 dark:text-gray-400 leading-snug max-w-lg mx-auto">
-          Swipe through the app, screen by screen.
+          Browse the app, screen by screen.
         </p>
       </div>
 
@@ -99,7 +96,7 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
         <button
           onClick={() => goTo(Math.max(0, active - 1))}
           aria-label="Previous screen"
-          className="hidden sm:flex absolute left-2 top-[42%] -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#0d0d0d]/80 backdrop-blur text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint transition-all disabled:opacity-30"
+          className="hidden sm:flex absolute left-2 top-[42%] -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#0d0d0d]/80 backdrop-blur text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint-ink transition-all disabled:opacity-30"
           disabled={active === 0}
         >
           ←
@@ -107,7 +104,7 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
         <button
           onClick={() => goTo(Math.min(screens.length - 1, active + 1))}
           aria-label="Next screen"
-          className="hidden sm:flex absolute right-2 top-[42%] -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#0d0d0d]/80 backdrop-blur text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint transition-all disabled:opacity-30"
+          className="hidden sm:flex absolute right-2 top-[42%] -translate-y-1/2 w-11 h-11 items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#0d0d0d]/80 backdrop-blur text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint-ink transition-all disabled:opacity-30"
           disabled={active === screens.length - 1}
         >
           →
@@ -115,17 +112,24 @@ export default function AppPreview({ isDark }: AppPreviewProps) {
       </div>
 
       {/* Dots */}
-      <div className="flex justify-center gap-2 mt-8">
+      {/* Each dot stays 8px to look at but sits in a 44×44 tap area — Apple's
+          minimum hit region; an 8px target is too small for a thumb. */}
+      <div className="flex justify-center mt-6">
         {screens.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Go to screen ${i + 1}`}
             aria-current={i === active}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === active ? 'w-6 bg-mint' : 'w-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600'
-            }`}
-          />
+            className="group flex h-11 min-w-11 items-center justify-center px-1"
+          >
+            <span
+              aria-hidden
+              className={`block h-2 rounded-full transition-all duration-300 ${
+                i === active ? 'w-6 bg-mint' : 'w-2 bg-gray-300 dark:bg-gray-700 group-hover:bg-gray-400 dark:group-hover:bg-gray-600'
+              }`}
+            />
+          </button>
         ))}
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { icon_dark, icon_light } from '../assets/images'
+import Icon from './Icon'
 
 const legalLinks = [
   { label: 'Terms of Service', href: '#legal' },
@@ -8,7 +9,7 @@ const legalLinks = [
   { label: 'Support', href: './support/' },
   { label: 'Community Guidelines', href: '#legal' },
   { label: 'Cookie Policy', href: '#legal' },
-  { label: 'Contact', href: 'mailto:chat@phcreations.com' },
+  { label: 'Contact', href: 'mailto:chat@phcreations.co.za' },
 ]
 
 const socials = [
@@ -39,7 +40,7 @@ export default function Footer({ isDark, onToggleTheme }: FooterProps) {
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col items-center gap-5 sm:gap-6">
 
-        <a href="./" className="flex items-center gap-2.5 group">
+        <a href="./" aria-label="Ch@t home" className="flex items-center gap-2.5 group p-2">
           <img
             src={isDark ? icon_dark : icon_light}
             alt="Chat logo"
@@ -58,7 +59,7 @@ export default function Footer({ isDark, onToggleTheme }: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Ch@t on ${name}`}
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-mint hover:border-mint hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+              className="w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-mint-ink hover:border-mint hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
             >
               <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-current" aria-hidden>
                 <path d={path} />
@@ -71,18 +72,18 @@ export default function Footer({ isDark, onToggleTheme }: FooterProps) {
         <button
           onClick={onToggleTheme}
           aria-label="Toggle light or dark mode"
-          className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint transition-all duration-200"
+          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint-ink transition-all duration-200"
         >
-          <span className="text-sm">{isDark ? '☀️' : '🌙'}</span>
+          <Icon name={isDark ? 'sun' : 'moon'} className="w-4 h-4" />
           {isDark ? 'Light mode' : 'Dark mode'}
         </button>
 
-        <ul className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-5 sm:gap-x-6 gap-y-3 sm:gap-y-2 text-center">
+        <ul className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-5 sm:gap-x-6 gap-y-0 text-center">
           {legalLinks.map(({ label, href }) => (
             <li key={label}>
               <a
                 href={href}
-                className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint dark:hover:text-mint active:text-mint transition-colors duration-200 py-1 inline-block"
+                className="text-xs text-gray-500 dark:text-gray-400 hover:text-mint-ink dark:hover:text-mint-ink active:text-mint-ink transition-colors duration-200 inline-flex min-h-11 items-center justify-center"
               >
                 {label}
               </a>
@@ -105,7 +106,7 @@ export default function Footer({ isDark, onToggleTheme }: FooterProps) {
           </p>
         </div>
 
-        <p className="text-xs text-gray-400 dark:text-gray-600 text-center">
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
           © {new Date().getFullYear()} PH CREATION SOFTWARE. All rights reserved.
         </p>
       </div>

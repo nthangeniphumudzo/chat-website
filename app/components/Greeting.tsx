@@ -73,7 +73,7 @@ export default function Greeting() {
               n === index ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <LanguageMark code={code} className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-mint flex-shrink-0" />
+            <LanguageMark code={code} className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-mint-ink flex-shrink-0" />
             {text}
           </span>
         ))}

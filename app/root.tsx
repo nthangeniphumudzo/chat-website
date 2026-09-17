@@ -19,24 +19,21 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png", type: "image/png" },
   { rel: "apple-touch-icon", href: "/favicon.png" },
   { rel: "canonical", href: "https://www.chatphcreations.co.za/" },
-  // Preload the two fonts the hero needs first — one variable file per family
-  // now covers every weight on the page.
+  // Preload the display face the hero headline needs first. Body text uses the
+  // system font, so there is nothing else to fetch.
   { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/playfair-var.woff2", crossOrigin: "anonymous" },
-  { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/jakarta-var.woff2", crossOrigin: "anonymous" },
 ];
 
-// Runs before first paint. Two jobs:
-//  1. Apply the saved theme class so there's no flash of the wrong theme.
-//  2. Arm the scroll-reveal animation by adding .js-reveal, then disarm it on a
-//     watchdog timer. Sections are only ever hidden while .js-reveal is set, so
-//     if the JS bundle is slow to arrive on a weak connection the page reveals
-//     itself anyway rather than sitting blank below the fold.
+// Runs before first paint: apply the theme — the visitor's own toggle choice if
+// they made one, otherwise their phone's light/dark setting (see useTheme). It
+// also clears the old 'chat-theme' key, which was saved on every visit and isn't
+// a choice.
 //
 // Nothing here covers the page or holds back a tap: the server sends the whole
 // page, and it's usable the moment it arrives. (A full-screen loading overlay
 // used to sit on top and swallow every tap — measured on a slow 4G phone, the
 // page was ready at ~1s while the overlay blocked it until ~3.3s.)
-const bootScript = `(function(){var d=document.documentElement;try{var s=localStorage.getItem('chat-theme');d.classList.add(s==='dark'?'dark':'light');}catch(e){d.classList.add('light');}d.classList.add('js-reveal');setTimeout(function(){d.classList.remove('js-reveal');},1500);})();`;
+const bootScript = `(function(){var d=document.documentElement;var t='light';try{var s=localStorage.getItem('chat-theme-choice');localStorage.removeItem('chat-theme');t=(s==='dark'||s==='light')?s:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch(e){try{t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e2){}}d.classList.add(t);})();`;
 
 const jsonLd = {
   "@context": "https://schema.org",

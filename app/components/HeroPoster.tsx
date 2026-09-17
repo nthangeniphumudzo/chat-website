@@ -19,7 +19,7 @@ export default function HeroPoster() {
         <h1 className="poster-h font-syne text-5xl sm:text-7xl lg:text-8xl mb-7">
           Don't just see someone.
           <br />
-          <span className="text-mint">Meet them.</span>
+          <span className="text-mint-ink">Meet them.</span>
         </h1>
 
         <p className="text-gray-600 dark:text-gray-300 text-lg sm:text-2xl leading-relaxed mb-10 max-w-xl mx-auto">

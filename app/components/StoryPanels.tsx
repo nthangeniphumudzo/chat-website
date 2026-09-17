@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import Screenshot from './Screenshot'
 import {
   img_write_questions, img_write_questions_light,
@@ -41,22 +40,20 @@ const steps: Step[] = [
 
 /** Screen 2 — the "It starts with a question" beat, shown with a real app screen. */
 function DemoPanel({ isDark }: { isDark: boolean }) {
-  const ref = useScrollReveal<HTMLDivElement>()
   return (
     <section id="how" className="panel px-5 sm:px-8 overflow-hidden">
       <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[500px] h-[500px] bg-mint/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div
-        ref={ref}
-        className="reveal relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+        className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
       >
         {/* Copy */}
         <div className="text-center lg:text-left">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">Step 01 · How Ch@t works</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint-ink mb-5">Step 01 · How Ch@t works</p>
           <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-5">
             It starts with
             <br />
-            <span className="text-mint">a question.</span>
+            <span className="text-mint-ink">a question.</span>
           </h2>
           <p className="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 leading-snug max-w-md mx-auto lg:mx-0">
             Go beyond the picture and share what matters to you. Choose three questions
@@ -87,19 +84,17 @@ interface FeaturePanelProps extends Step {
 }
 
 function FeaturePanel({ eyebrow, title, line, imageDark, imageLight, alt, custom, reverse, isDark }: FeaturePanelProps) {
-  const ref = useScrollReveal<HTMLDivElement>()
   return (
     <section className="panel px-5 sm:px-8 overflow-hidden">
       {/* Colored wash offset to the image side */}
       <div className={`absolute top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-mint/10 rounded-full blur-[120px] pointer-events-none ${reverse ? 'left-0 -translate-x-1/3' : 'right-0 translate-x-1/3'}`} />
 
       <div
-        ref={ref}
-        className={`reveal relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}
+        className={`relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}
       >
         {/* Copy */}
         <div className="text-center lg:text-left">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">{eyebrow}</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint-ink mb-5">{eyebrow}</p>
           <h2 className="poster-h font-syne text-4xl sm:text-5xl lg:text-6xl mb-5">{title}</h2>
           <p className="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 leading-snug max-w-md mx-auto lg:mx-0">
             {line}

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 
 type TabId = 'tos' | 'privacy' | 'cookies' | 'community'
 
@@ -20,10 +19,10 @@ const tabs: Tab[] = [
 
 function LegalMeta() {
   return (
-    <p className="text-xs text-gray-400 dark:text-gray-600 mb-5">
+    <p className="text-xs text-gray-500 dark:text-gray-400 mb-5">
       Last updated: 17 March 2026 &nbsp;·&nbsp;{' '}
-      <a href="mailto:chat@phcreations.com" className="text-mint hover:underline">
-        chat@phcreations.com
+      <a href="mailto:chat@phcreations.co.za" className="text-mint-ink hover:underline">
+        chat@phcreations.co.za
       </a>
     </p>
   )
@@ -40,7 +39,7 @@ function LegalIntro({ children }: { children: ReactNode }) {
 function LegalBlock({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="pb-7 mb-7 border-b border-gray-100 dark:border-gray-800 last:border-0 last:mb-0 last:pb-0">
-      <h3 className="font-syne font-bold text-sm text-gray-900 dark:text-gray-100 mb-3 tracking-tight">
+      <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-3 tracking-tight">
         {title}
       </h3>
       <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{children}</p>
@@ -127,7 +126,7 @@ function PrivacyContent() {
 }
 
 const cookieTypes = [
-  { label: 'Essential',    color: 'bg-mint/10 text-mint',         description: 'Required for the app to function. Cannot be disabled — necessary for authentication and security.' },
+  { label: 'Essential',    color: 'bg-mint/10 text-mint-ink',         description: 'Required for the app to function. Cannot be disabled — necessary for authentication and security.' },
   { label: 'Functional',   color: 'bg-blue-400/10 text-blue-400', description: 'Remember your preferences and settings to personalise your experience.' },
   { label: 'Analytics',    color: 'bg-yellow-400/10 text-yellow-400', description: 'Help us understand how users interact with the app by collecting anonymous usage statistics.' },
   { label: 'Advertising',  color: 'bg-red-400/10 text-red-400',   description: 'Used to deliver relevant advertisements and track the effectiveness of our marketing campaigns.' },
@@ -142,13 +141,13 @@ function CookiesContent() {
       </LegalIntro>
 
       <div className="mb-7 pb-7 border-b border-gray-100 dark:border-gray-800">
-        <h3 className="font-syne font-bold text-sm text-gray-900 dark:text-gray-100 mb-4 tracking-tight">
+        <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-4 tracking-tight">
           Types of Cookies We Use
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {cookieTypes.map(({ label, color, description }) => (
             <div key={label} className="bg-gray-50 dark:bg-[#0d0d0d] border border-gray-200 dark:border-gray-800 rounded-xl p-4">
-              <span className={`inline-block text-xs font-syne font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3 ${color}`}>
+              <span className={`inline-block text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3 ${color}`}>
                 {label}
               </span>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{description}</p>
@@ -203,18 +202,18 @@ function CommunityContent() {
             className="bg-gray-50 dark:bg-[#0d0d0d] border border-gray-200 dark:border-gray-800 rounded-xl p-5 hover:border-mint/30 hover:-translate-y-0.5 transition-all duration-200"
           >
             <div className="text-2xl mb-3">{icon}</div>
-            <h4 className="font-syne font-bold text-sm text-gray-900 dark:text-gray-100 mb-2">{title}</h4>
+            <h4 className="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-2">{title}</h4>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{description}</p>
           </div>
         ))}
       </div>
 
       <div className="mb-7 pb-7 border-b border-gray-100 dark:border-gray-800">
-        <h3 className="font-syne font-bold text-sm text-gray-900 dark:text-gray-100 mb-4 tracking-tight">Enforcement</h3>
+        <h3 className="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-4 tracking-tight">Enforcement</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {enforcement.map(({ label, color, labelColor, description }) => (
             <div key={label} className={`rounded-xl border p-4 ${color}`}>
-              <div className={`font-syne font-bold text-xs mb-2 ${labelColor}`}>{label}</div>
+              <div className={`font-semibold text-xs mb-2 ${labelColor}`}>{label}</div>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{description}</p>
             </div>
           ))}
@@ -225,8 +224,8 @@ function CommunityContent() {
         Report violations through{' '}
         <strong className="text-gray-700 dark:text-gray-300">You {'>'} Privacy & Safety {'>'} Report a Problem</strong>{' '}
         in the app, or contact our safety team at{' '}
-        <a href="mailto:chat@phcreations.com" className="text-mint hover:underline">
-          chat@phcreations.com
+        <a href="mailto:chat@phcreations.co.za" className="text-mint-ink hover:underline">
+          chat@phcreations.co.za
         </a>.
       </LegalBlock>
     </div>
@@ -238,7 +237,6 @@ function CommunityContent() {
 export default function LegalSection() {
   const [activeTab, setActiveTab] = useState<TabId>('tos')
   const [expanded, setExpanded] = useState(false)
-  const headingRef = useScrollReveal<HTMLDivElement>()
 
   const content: Record<TabId, ReactNode> = {
     tos: <ToSContent />,
@@ -255,10 +253,10 @@ export default function LegalSection() {
   return (
     <div id="legal" className="bg-gray-50 dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
-        <div ref={headingRef} className="reveal mb-6 sm:mb-8">
-          <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Legal & Policies</p>
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs font-medium uppercase tracking-widest text-mint-ink mb-4">Legal & Policies</p>
           <h2 className="font-syne font-extrabold text-2xl sm:text-3xl tracking-tight leading-tight mb-3">
-            Transparency &amp; <span className="text-mint">Trust</span>
+            Transparency &amp; <span className="text-mint-ink">Trust</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base leading-relaxed max-w-lg">
             How Ch@t works, how we protect your data, and the standards we hold our community to. Pick a policy to read it here.
@@ -272,9 +270,9 @@ export default function LegalSection() {
               <button
                 key={id}
                 onClick={() => (expanded && activeTab === id ? setExpanded(false) : openTab(id))}
-                className={`px-4 py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-all duration-200 whitespace-nowrap ${
+                className={`min-h-11 px-4 py-3 text-xs sm:text-sm font-medium border-b-2 -mb-px transition-all duration-200 whitespace-nowrap ${
                   expanded && activeTab === id
-                    ? 'border-mint text-mint'
+                    ? 'border-mint text-mint-ink'
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
@@ -289,7 +287,7 @@ export default function LegalSection() {
             {content[activeTab]}
             <button
               onClick={() => setExpanded(false)}
-              className="mt-8 text-xs font-medium text-gray-400 dark:text-gray-500 hover:text-mint transition-colors"
+              className="mt-8 inline-flex min-h-11 items-center text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-mint-ink transition-colors"
             >
               ↑ Collapse policies
             </button>

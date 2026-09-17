@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const sampleQuestions = [
   "What's a belief you've changed your mind about?",
@@ -11,7 +10,6 @@ const sampleQuestions = [
 ]
 
 export default function DownloadSection() {
-  const ref = useScrollReveal<HTMLDivElement>()
   const [picked, setPicked] = useState<string[]>([])
   const done = picked.length === 3
 
@@ -27,12 +25,12 @@ export default function DownloadSection() {
         <div className="w-[400px] sm:w-[700px] h-[300px] sm:h-[400px] bg-mint/15 rounded-full blur-[100px] sm:blur-[120px]" />
       </div>
 
-      <div ref={ref} className="reveal relative z-10 max-w-2xl mx-auto">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint mb-5">One last thing</p>
+      <div className="relative z-10 max-w-2xl mx-auto">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint-ink mb-5">One last thing</p>
         <h2 className="poster-h font-syne text-4xl sm:text-6xl lg:text-7xl mb-6">
           What would your
           <br />
-          <span className="text-mint">three questions be?</span>
+          <span className="text-mint-ink">three questions be?</span>
         </h2>
         <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-8 max-w-md mx-auto">
           Try it — pick three. In the app you'd write your own, and people nearby would start answering them.
@@ -48,12 +46,12 @@ export default function DownloadSection() {
                 key={q}
                 onClick={() => toggle(q)}
                 aria-pressed={selected}
-                className={`text-xs sm:text-sm font-medium rounded-full px-4 py-2.5 border transition-all duration-200 active:scale-95 ${
+                className={`min-h-11 text-xs sm:text-sm font-medium rounded-full px-4 py-2.5 border transition-all duration-200 active:scale-95 ${
                   selected
                     ? 'bg-mint text-gray-900 border-mint shadow-md shadow-mint/25'
                     : done
                       ? 'border-gray-200 dark:border-gray-800 text-gray-300 dark:text-gray-700'
-                      : 'border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint'
+                      : 'border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:border-mint hover:text-mint-ink'
                 }`}
               >
                 {selected && <span className="font-bold mr-1.5">{slot + 1}.</span>}
@@ -75,7 +73,7 @@ export default function DownloadSection() {
 
         <p
           className={`text-base sm:text-lg font-medium leading-relaxed mb-8 transition-all duration-500 ${
-            done ? 'text-gray-800 dark:text-gray-100 opacity-100' : 'text-gray-500 dark:text-gray-400 opacity-80'
+            done ? 'text-gray-800 dark:text-gray-100 opacity-100' : 'text-gray-500 dark:text-gray-400 opacity-100'
           }`}
         >
           {done
@@ -83,13 +81,13 @@ export default function DownloadSection() {
             : `Pick ${3 - picked.length} more — or download and write your own.`}
         </p>
 
-        <p className="text-xs text-gray-400 dark:text-gray-600 font-medium">
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
           Free to download — no credit card required
         </p>
-        <p className="mt-4 text-sm text-gray-400 dark:text-gray-600">
+        <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
           For support:{' '}
-          <a href="mailto:chat@phcreations.com" className="text-mint hover:underline">
-            chat@phcreations.com
+          <a href="mailto:chat@phcreations.co.za" className="inline-block py-[14px] -my-[14px] text-mint-ink hover:underline">
+            chat@phcreations.co.za
           </a>
         </p>
       </div>

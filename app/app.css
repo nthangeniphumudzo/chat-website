@@ -7,9 +7,20 @@
   --color-mint: #00e6a0;
   --color-mint-dim: #00c88a;
   --color-mint-dark: #00a870;
+  /* Mint used AS TEXT. The bright brand mint (#00e6a0) measures 1.64:1 on
+     white — fine as a fill, unreadable as words. This is the text shade:
+     #00825d on white 4.83:1 (passes even small text); dark mode swaps back to
+     the bright mint below (12.45:1 on #050505). Fills, strikes and glows keep
+     using --color-mint. */
+  --color-mint-ink: #00825d;
 
   --font-syne: "Playfair Display", Georgia, serif;
-  --font-dm: "Plus Jakarta Sans", system-ui, sans-serif;
+  /* Body copy and controls use the phone's own UI font — San Francisco on
+     iPhone and Mac, Roboto on Android, Segoe UI on Windows. Apple's branding
+     guidance: a custom face for headlines, the system font for body copy and
+     captions, which is built for legibility at small sizes. It also matches the
+     app itself, and saves a 24 KB font download. Playfair stays for display. */
+  --font-dm: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --animate-fade-up: fadeUp 0.6s ease both;
   --animate-fade-up-1: fadeUp 0.6s 0.1s ease both;
@@ -22,13 +33,14 @@
   --animate-float-slower: floatSlow 7s 1.6s ease-in-out infinite;
 }
 
+.dark { --color-mint-ink: #00e6a0; }
+
 /* ── Self-hosted fonts — no third-party round-trip ────────────────
-   Both families are variable fonts, so one file covers every weight we
-   use. Declaring a weight *range* means the browser fetches each family
+   Playfair Display is a variable font, so one file covers every weight we
+   use (body text uses the system font — see --font-dm). Declaring a weight *range* means the browser fetches each family
    once; the old per-weight rules pointed five URLs at two byte-identical
    files and paid for the same font up to three times. */
 @font-face{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url('/fonts/playfair-var.woff2') format('woff2')}
-@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:200 800;font-display:swap;src:url('/fonts/jakarta-var.woff2') format('woff2')}
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -58,25 +70,6 @@
   /* Offset anchor targets for the fixed navbar */
   [id] { scroll-margin-top: 112px; }
   @media (min-width: 1024px) { [id] { scroll-margin-top: 128px; } }
-}
-
-/* ── Scroll reveal ──────────────────────────────────────────────────
-   Fail-open by design: content is VISIBLE unless <html> carries
-   .js-reveal, which the inline script in root.tsx sets before first
-   paint and drops again on a watchdog timer. So the reveal animation is
-   a progressive enhancement — if the JS bundle is slow, fails, or is
-   disabled, the page still shows its content instead of blank space. */
-.reveal {
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.js-reveal .reveal:not(.is-visible) {
-  opacity: 0;
-  transform: translateY(2rem);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal { transition: none; }
-  .js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
 }
 
 /* ── Download button, pressed ───────────────────────────────────────
@@ -151,34 +144,6 @@
 
 .num-3d {
   text-shadow: 1px 2px 0 rgba(0, 230, 160, 0.14), 2px 4px 0 rgba(0, 230, 160, 0.10), 3px 6px 0 rgba(0, 230, 160, 0.07), 4px 8px 0 rgba(0, 230, 160, 0.04), 0 0 48px rgba(0, 230, 160, 0.08);
-}
-
-/* Animated film grain — dark mode only */
-@keyframes grain {
-  0%, 100% { transform: translate(0, 0) }
-  10% { transform: translate(-2%, -4%) }
-  20% { transform: translate(-6%, 2%) }
-  30% { transform: translate(3%, -5%) }
-  40% { transform: translate(-1%, 6%) }
-  50% { transform: translate(-5%, 0%) }
-  60% { transform: translate(4%, 4%) }
-  70% { transform: translate(-4%, -3%) }
-  80% { transform: translate(2%, 6%) }
-  90% { transform: translate(-5%, 2%) }
-}
-.dark .grain::before {
-  content: '';
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.038;
-  animation: grain 8s steps(10) infinite;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 300px 300px;
 }
 
 /* Chat bubble pop-in — hero live demo */

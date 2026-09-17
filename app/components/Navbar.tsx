@@ -54,7 +54,7 @@ export default function Navbar() {
             <li key={href}>
               <a
                 href={href}
-                className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
               >
                 {label}
               </a>
@@ -77,7 +77,7 @@ export default function Navbar() {
           // page — but a screen reader meeting this link out of context needs it,
           // and this is the only call to action left.
           aria-label="Download Ch@t"
-          className="inline-flex flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 font-syne text-sm font-bold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
+          className="inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
         >
           Download
         </DownloadLink>

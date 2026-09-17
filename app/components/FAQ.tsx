@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const faqs = [
   {
@@ -36,13 +35,13 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         aria-expanded={open}
         className="w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5"
       >
-        <span className="font-syne font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 tracking-tight">
+        <span className="font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 tracking-tight">
           {q}
         </span>
         <span
           aria-hidden
           className={`flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center text-sm transition-all duration-300 ${
-            open ? 'rotate-45 border-mint text-mint bg-mint/10' : 'border-gray-300 dark:border-gray-700 text-gray-400'
+            open ? 'rotate-45 border-mint text-mint-ink' : 'border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400'
           }`}
         >
           +
@@ -58,20 +57,18 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 }
 
 export default function FAQ() {
-  const headingRef = useScrollReveal<HTMLDivElement>()
-  const listRef = useScrollReveal<HTMLDivElement>()
   const [open, setOpen] = useState<number | null>(0)
 
   return (
     <section id="faq" className="py-16 sm:py-24 px-5 sm:px-8 max-w-3xl mx-auto">
-      <div ref={headingRef} className="reveal mb-8 sm:mb-10 text-center">
-        <p className="text-xs font-medium uppercase tracking-widest text-mint mb-4">Before you ask</p>
+      <div className="mb-8 sm:mb-10 text-center">
+        <p className="text-xs font-medium uppercase tracking-widest text-mint-ink mb-4">Before you ask</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">
-          Fair questions, <span className="text-mint">straight answers.</span>
+          Fair questions, <span className="text-mint-ink">straight answers.</span>
         </h2>
       </div>
 
-      <div ref={listRef} className="reveal flex flex-col gap-3">
+      <div className="flex flex-col gap-3">
         {faqs.map((f, i) => (
           <FaqItem key={f.q} {...f} open={open === i} onToggle={() => setOpen(open === i ? null : i)} />
         ))}

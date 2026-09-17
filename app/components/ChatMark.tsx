@@ -62,7 +62,7 @@ export default function ChatMark({ className, title = 'Ch@t' }: ChatMarkProps) {
           lengthAdjust="spacingAndGlyphs"
           fill="currentColor"
           stroke="none"
-          fontFamily="'Plus Jakarta Sans', system-ui, sans-serif"
+          fontFamily="-apple-system, BlinkMacSystemFont, system-ui, sans-serif"
           fontSize="19.5"
           fontWeight="600"
         >
