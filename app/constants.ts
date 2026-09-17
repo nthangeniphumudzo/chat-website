@@ -1,7 +1,7 @@
 /* The live backend. Shared by the visitor/promo tracking in routes/home.tsx and
    the hero's live-stats strip, so the host is written down once. */
 export const API_BASE =
-  'https://chatlivecontainer.wonderfulbeach-a47f64a5.southafricanorth.azurecontainerapps.io/api'
+  'https://chatselinacontainer.lemonplant-6e572701.southafricanorth.azurecontainerapps.io/api'
 
 export const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.phcreations.chat'
 export const APP_STORE_URL = 'https://apps.apple.com/us/app/ch-t/id6763358775'
