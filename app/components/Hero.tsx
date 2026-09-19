@@ -31,7 +31,8 @@ const REEL_STEP = 3.5
 /**
  * The first five seconds. It has to answer "what is this?" and "why is it
  * different?" before anyone scrolls — so: an outcome headline, one sentence of
- * how, one call to action, and the mechanic playing out on a real phone screen.
+ * how, and the mechanic playing out on a real phone screen (plus, on desktop,
+ * the call to action).
  *
  * Nothing else competes for the tap. Trust signals that used to sit here moved
  * into the sections built to carry them (social proof, FAQ).
@@ -40,7 +41,7 @@ export default function Hero() {
   const reelVars = { '--reel-duration': `${REEL_STEP * REEL.length}s` } as CSSProperties
 
   return (
-    <section className="relative overflow-hidden px-5 pt-24 pb-14 sm:px-8 lg:flex lg:min-h-svh lg:flex-col lg:justify-center lg:pt-20 lg:pb-20">
+    <section id="hero" className="relative overflow-hidden px-5 pt-24 pb-14 sm:px-8 lg:flex lg:min-h-svh lg:flex-col lg:justify-center lg:pt-20 lg:pb-20">
       {/* Bold, quiet background wash */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="soft-glow absolute -top-60 left-1/2 -translate-x-1/2 w-[1180px] max-w-[190vw] h-[880px] [--glow-alpha:0.2] dark:[--glow-alpha:0.14]" />
@@ -62,7 +63,12 @@ export default function Hero() {
             ask three questions, read their real answers, then decide.
           </p>
 
-          <GetTheApp placement="hero" align="start" id="hero-cta" />
+          {/* Desktop only. On a phone a download button before the visitor has
+              seen how Ch@t works asks too much too soon; the sticky bar and the
+              buttons further down pick up once they've had the context. */}
+          <div className="hidden md:block">
+            <GetTheApp placement="hero" align="start" />
+          </div>
         </div>
 
         {/* The mechanic, playing on a real phone screen. */}

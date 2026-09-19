@@ -6,13 +6,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteLoaderData,
 } from "react-router";
 import { isbot } from "isbot";
 
 import type { Route } from "./+types/root";
-import { detectPlatform, storeLink } from "./lib/platform";
-import { API_BASE } from "./constants";
+import { detectPlatform } from "./lib/platform";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -73,25 +71,17 @@ const jsonLd = {
 };
 
 // Works out, from the request, which store this visitor belongs to — so the
-// download link is right in the server-rendered HTML — and whether this is a
-// phone that should be sent to its store on a first visit. HTML is served
-// no-store (see workers/app.ts), so per-visitor output is never cached and
-// handed to someone else.
+// download link is right in the server-rendered HTML. HTML is served no-store
+// (see workers/app.ts), so per-visitor output is never cached and handed to
+// someone else.
+//
+// There is deliberately no automatic redirect to the store on a first visit:
+// the visitor decides when to go.
 export function loader({ request }: Route.LoaderArgs) {
   const ua = request.headers.get("user-agent") ?? "";
   const bot = isbot(ua);
   const platform = detectPlatform(ua, bot);
-  const link = storeLink(platform);
-
-  // Only phones whose browser can make the handoff. Never in-app browsers —
-  // an automatic store redirect in TikTok fails with "action can't be taken"
-  // the moment the page lands — and never crawlers, or Google would index the
-  // store listing instead of the site.
-  const firstVisit = platform.canDeepLink
-    ? { deep: link.href, web: link.web, os: platform.os }
-    : null;
-
-  return { platform, firstVisit };
+  return { platform };
 }
 
 // Tap feedback for every download button, installed before React so it works
@@ -104,27 +94,7 @@ export function loader({ request }: Route.LoaderArgs) {
 // store, or after 6s.
 const downloadFeedbackScript = `(function(){var held=null,t=0;function pill(e){var n=e.target;return n&&n.closest?n.closest('[data-download]'):null;}function clear(){held=null;var a=document.querySelectorAll('[data-opening]');for(var i=0;i<a.length;i++)a[i].removeAttribute('data-opening');}function on(a){a.setAttribute('data-opening','');clearTimeout(t);t=setTimeout(clear,6000);}document.addEventListener('pointerdown',function(e){if(e.button!==0)return;var a=pill(e);if(!a)return;held=a;on(a);},{passive:true});document.addEventListener('pointercancel',function(){if(held)clear();});document.addEventListener('pointerup',function(){var a=held;if(!a)return;setTimeout(function(){if(held===a)clear();},500);});document.addEventListener('click',function(e){var a=pill(e);if(!a)return;held=null;on(a);});window.addEventListener('pageshow',clear);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clear();});})();`;
 
-// First visit from a phone: send them straight to their store. Runs in <head>,
-// before the CSS and the JS bundle, so it fires as soon as the HTML arrives.
-//
-//  - Homepage only, and only once: the "visited" mark is written before
-//    leaving, so pressing Back — or any later visit — shows the site as usual.
-//    If storage is blocked we can't remember, so we don't redirect at all
-//    rather than risk doing it on every visit.
-//  - iPhone: the App Store deep link. Safari asks "Open this page in 'App
-//    Store'?" for a redirect nobody tapped — Open goes to the store, Cancel
-//    leaves them on the site. No fallback, so a Cancel is respected.
-//  - Android: the Play deep link. Chrome may refuse an app handoff nobody
-//    tapped, so if the page is still in front after 1.5s we fall back to the
-//    Play web listing — recording the visit first, since the page's own
-//    tracking won't get to run.
-function firstVisitScript(fv: { deep: string; web: string; os: string }) {
-  const j = JSON.stringify;
-  return `(function(){if(location.pathname!=='/')return;try{if(localStorage.getItem('chat-visited'))return;localStorage.setItem('chat-visited','1');}catch(e){return;}location.href=${j(fv.deep)};if(${j(fv.os)}!=='android')return;var left=false;function m(){left=true;}document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')m();});window.addEventListener('pagehide',m);window.addEventListener('blur',m);setTimeout(function(){if(left||document.visibilityState!=='visible')return;if(!window.__chatTracked){try{var b=${j(API_BASE)};navigator.sendBeacon(b+'/website-visitors/track');var r=new URLSearchParams(location.search).get('ref');if(r)navigator.sendBeacon(b+'/promo-codes/'+encodeURIComponent(r)+'/track');}catch(e){}}location.href=${j(fv.web)};},1500);})();`;
-}
-
 export function Layout({ children }: { children: React.ReactNode }) {
-  const data = useRouteLoaderData<typeof loader>("root");
   return (
     <html lang="en">
       <head>
@@ -139,9 +109,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script dangerouslySetInnerHTML={{ __html: downloadFeedbackScript }} />
-        {data?.firstVisit && (
-          <script dangerouslySetInnerHTML={{ __html: firstVisitScript(data.firstVisit) }} />
-        )}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Meta />
         <Links />

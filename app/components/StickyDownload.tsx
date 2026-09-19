@@ -4,29 +4,29 @@ import DownloadLink from './DownloadLink'
 /**
  * A download bar pinned to the bottom of the screen on phones, in thumb reach.
  *
- * It stays out of the way while a full-size download button is already on
- * screen — the hero's at the top, the final one at the bottom — and slides in
- * everywhere between, so someone convinced halfway down never has to scroll to
+ * It stays out of the way in the hero, where the visitor is still finding out
+ * what Ch@t is, and at the final download section, which has its own button.
+ * It slides in everywhere between, so someone convinced halfway down never has to scroll to
  * act. Server-rendered hidden; it only needs to exist once the visitor scrolls.
  */
 export default function StickyDownload() {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    const targets = ['hero-cta', 'download']
+    const targets = ['hero', 'download']
       .map(id => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
     if (targets.length === 0 || !('IntersectionObserver' in window)) return
 
-    const hero = document.getElementById('hero-cta')
+    const hero = document.getElementById('hero')
     const visible = new Set<Element>()
     let heroPassed = false
     const io = new IntersectionObserver(entries => {
       for (const e of entries) {
         if (e.isIntersecting) visible.add(e.target)
         else visible.delete(e.target)
-        // Only once the hero CTA has scrolled *up* past the top — not while
-        // it's still below the fold on a short screen.
+        // Only once the hero has scrolled *up* past the top — not while it's
+        // still on screen.
         if (e.target === hero) heroPassed = !e.isIntersecting && e.boundingClientRect.bottom <= 0
       }
       setShow(heroPassed && visible.size === 0)
