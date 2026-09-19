@@ -9,8 +9,6 @@ interface GetTheAppProps {
   className?: string
 }
 
-const STORE_NAME = { ios: 'the App Store', android: 'Google Play' } as const
-
 const STORE_BUTTON =
   'inline-flex min-h-12 items-center justify-center rounded-full bg-mint px-6 text-base font-semibold text-gray-900 shadow-md shadow-mint/20 transition-all duration-200 hover:-translate-y-0.5 active:scale-95'
 
@@ -18,8 +16,7 @@ const STORE_BUTTON =
  * The page's one call to action, in the form that fits the device.
  *
  * On a phone it is a single button — the store is already known, so offering
- * both would only be a second decision to make. It names the store it opens so
- * the tap holds no surprise.
+ * both would only be a second decision to make.
  *
  * On a computer a store button leads nowhere useful: the app can't be installed
  * there, and "I'll do it on my phone later" rarely happens. So desktop gets a QR
@@ -86,11 +83,8 @@ export default function GetTheApp({ placement, align = 'center', id, className =
         aria-label="Download Ch@t"
         className="inline-flex min-h-14 items-center justify-center rounded-full bg-mint px-9 text-lg font-semibold text-gray-900 shadow-md shadow-mint/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
       >
-        Download the app
+        Download
       </DownloadLink>
-      <p className="mt-2.5 text-xs font-medium text-gray-500 dark:text-gray-400">
-        Free · Opens {STORE_NAME[os]}
-      </p>
     </div>
   )
 }

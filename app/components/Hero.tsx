@@ -49,10 +49,6 @@ export default function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Copy */}
         <div className="text-center lg:text-left">
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">
-            The speed-dating app
-          </p>
-
           {/* The outcome, not the feature. Sized so each line holds on a 375px
               phone. */}
           <h1 className="poster-h font-syne mb-5 text-[2.3rem] min-[400px]:text-[2.7rem] sm:text-6xl lg:text-7xl">
