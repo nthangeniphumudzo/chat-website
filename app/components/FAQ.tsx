@@ -1,17 +1,23 @@
 import { useState } from 'react'
 
+/* The worries that make someone leave to "look it up later", answered here so
+   they don't have to. First four are the brief's objections, in its order. */
 const faqs = [
+  {
+    q: 'Do I have to video call or chat live?',
+    a: 'No. A SpeedDate is written: people answer your three questions in their own time, and you read the answers when you’re ready. No camera, no awkward silences.',
+  },
+  {
+    q: 'Is it safe?',
+    a: 'Every profile is verified and must show a real face. Explicit photos can’t be sent, screenshots come out blank, and you can block anyone — silently. They’re never notified.',
+  },
   {
     q: 'Is Ch@t really free?',
     a: 'Yes — free to download and free to meet people. Premium adds extras, but the core works without it.',
   },
   {
-    q: 'Are the profiles real people?',
-    a: 'Every profile is verified before it can use the app. No bots, no catfishing, no old photos.',
-  },
-  {
-    q: 'Can someone screenshot my chats or photos?',
-    a: 'No. Every screen is protected — captures come out blank. Nothing reaches their camera roll.',
+    q: 'Will there be people near me?',
+    a: 'Ch@t is local by design — you meet real people in your city, not across the country.',
   },
   {
     q: 'How is this different from swiping apps?',
@@ -20,10 +26,6 @@ const faqs = [
   {
     q: 'Who can see my profile?',
     a: 'You decide. Control your visibility, and block anyone from your contacts — silently.',
-  },
-  {
-    q: 'Is it only for people near me?',
-    a: 'Yes — local by design. Real people in your city, not across the country.',
   },
 ]
 

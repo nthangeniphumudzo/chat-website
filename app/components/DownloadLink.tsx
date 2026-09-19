@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react'
 import { usePlatform } from '../hooks/usePlatform'
 import { trackDownload } from '../constants'
-import { storeLink } from '../lib/platform'
+import { storeLink, webStoreLink, type StoreLink } from '../lib/platform'
 
 interface DownloadLinkProps {
   placement: string
   className: string
   children: ReactNode
+  /** Pin the link to one store's web listing instead of detecting it. */
+  store?: StoreLink['store']
   'aria-label'?: string
 }
 
@@ -28,9 +30,9 @@ interface DownloadLinkProps {
  * request's user-agent), so a tap that lands before JS has loaded still goes to
  * the right store rather than dead-ending.
  */
-export default function DownloadLink({ placement, className, children, ...rest }: DownloadLinkProps) {
+export default function DownloadLink({ placement, className, children, store, ...rest }: DownloadLinkProps) {
   const platform = usePlatform()
-  const link = storeLink(platform)
+  const link = store ? webStoreLink(store) : storeLink(platform)
 
   return (
     <a

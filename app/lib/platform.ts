@@ -67,3 +67,10 @@ export function storeLink({ os, canDeepLink }: Platform): StoreLink {
   }
   return { href: GOOGLE_PLAY_URL, web: GOOGLE_PLAY_URL, store: 'google_play', newTab: true }
 }
+
+/** A named store's web listing, opened in a new tab — for desktop, where the
+ *  visitor picks the store themselves because we can't tell which phone they own. */
+export function webStoreLink(store: StoreLink['store']): StoreLink {
+  const web = store === 'app_store' ? APP_STORE_URL : GOOGLE_PLAY_URL
+  return { href: web, web, store, newTab: true }
+}

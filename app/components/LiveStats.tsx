@@ -115,7 +115,7 @@ function Stat({ value, label, description, live, icon }: StatProps) {
  * The "this thing is actually alive" strip.
  *
  * A stranger from a video has no reason to believe an unknown dating app has
- * anyone in it. Three numbers answer that before they've scrolled: people are
+ * anyone in it. Three numbers answer that: people are
  * here right now, they are talking, and they are actually meeting. Every figure
  * is live or same-day on purpose — a big all-time total proves an app was busy
  * once, which is not the question a stranger is asking.
@@ -161,14 +161,12 @@ export default function LiveStats({ className = '' }: { className?: string }) {
       ].filter(s => s.value > 0)
     : []
 
-  /* The row is always in the layout, populated or not. It sits directly above
-     the phone screenshot on mobile, so letting it appear when the fetch lands
-     would shove the screenshot down the page in the middle of someone reading —
-     the hero is exactly where a layout shift is most expensive. */
+  /* The row is always in the layout, populated or not, so the section below
+     doesn't jump when the fetch lands. */
   return (
     <div className={`min-h-[2.5rem] ${className}`}>
       {shown.length > 0 && (
-        <dl className="stats-in flex items-start justify-center divide-x divide-gray-200 dark:divide-gray-800 lg:justify-start">
+        <dl className="stats-in flex items-start justify-center divide-x divide-gray-200 dark:divide-gray-800">
           {shown.map(({ key, ...stat }) => (
             <Stat key={key} {...stat} />
           ))}

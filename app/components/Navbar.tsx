@@ -62,22 +62,18 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* The corner that used to hold the burger. Every section the menu
-            linked to is on this same page, so the menu was offering a slower
-            route to somewhere a scroll already goes — while the one action that
-            matters was hidden on the breakpoint most visitors arrive on. The
-            pill takes the slot instead and never leaves the screen, so the
-            answer to "I'm convinced" is always one thumb-reach away.
-            This is the only download link on the page, so it has to work from
-            everywhere a visitor arrives — including TikTok's in-app browser,
-            which is what DownloadLink handles. */}
+        {/* Desktop keeps a download pill in the corner so the answer to "I'm
+            convinced" never needs a scroll. Phones get the same from the sticky
+            bottom bar (StickyDownload), in thumb reach, once the hero's own
+            button has scrolled away — two pills on one small screen would just
+            compete. */}
         <DownloadLink
           placement="navbar"
           // The label doesn't name the product — the visitor is already on the
           // page — but a screen reader meeting this link out of context needs it,
-          // and this is the only call to action left.
+          // and the pill is the one CTA visible from anywhere on the page.
           aria-label="Download Ch@t"
-          className="inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
+          className="hidden md:inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
         >
           Download
         </DownloadLink>
