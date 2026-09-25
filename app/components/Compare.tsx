@@ -67,7 +67,7 @@ export default function Compare() {
       <div className="soft-glow pointer-events-none absolute -z-10 top-40 left-1/2 h-[720px] w-[880px] max-w-[160vw] -translate-x-1/2 [--glow-alpha:0.26] dark:[--glow-alpha:0.20]" />
       <div className="mx-auto max-w-3xl">
         <div className="mb-10 text-center sm:mb-12">
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">Why Ch@t is different</p>
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">Why Ch@t</p>
           <h2 className="poster-h font-syne text-4xl sm:text-6xl">
             Everything you expect. <span className="text-mint-ink">And then some.</span>
           </h2>
