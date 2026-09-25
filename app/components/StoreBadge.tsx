@@ -10,6 +10,10 @@
  *
  * The lettering uses the phone's own UI font (San Francisco on iOS, Roboto on
  * Android), which is what each badge is set in on the device anyway.
+ *
+ * Decorative on purpose: each badge sits inside a link that already says where
+ * it goes, so a screen reader announcing the badge as well would only say it
+ * twice.
  */
 
 const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif'
@@ -17,7 +21,7 @@ const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, 
 /** Apple's badge, at its published 120 × 40 proportions. */
 export function AppStoreBadge({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 120 40" className={className} role="img" aria-label="Download on the App Store">
+    <svg viewBox="0 0 120 40" className={className} aria-hidden="true" focusable="false">
       <rect width="120" height="40" rx="6.6" fill="#000" />
       <rect x="0.5" y="0.5" width="119" height="39" rx="6.1" fill="none" stroke="#A6A6A6" strokeWidth="1" />
       <g transform="translate(11.5 10.2) scale(1.02)" fill="#fff">
@@ -36,7 +40,7 @@ export function AppStoreBadge({ className = '' }: { className?: string }) {
 /** Google's badge, at its published 135 × 40 proportions. */
 export function GooglePlayBadge({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 135 40" className={className} role="img" aria-label="Get it on Google Play">
+    <svg viewBox="0 0 135 40" className={className} aria-hidden="true" focusable="false">
       <rect width="135" height="40" rx="6.6" fill="#000" />
       <rect x="0.5" y="0.5" width="134" height="39" rx="6.1" fill="none" stroke="#A6A6A6" strokeWidth="1" />
       <g transform="translate(10.5 10) scale(1.5)">

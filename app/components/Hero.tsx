@@ -50,17 +50,19 @@ export default function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Copy */}
         <div className="text-center lg:text-left">
-          {/* The outcome, not the feature. Sized so each line holds on a 375px
-              phone. */}
+          {/* What happens here, in the visitor's own hands: the thing they do
+              first, and what they get for it. One line under it, and no more —
+              the promise is meant to leave a question behind ("how?"), which the
+              screens beside it and the sections below are there to answer.
+              Sized so each line holds on a 375px phone. */}
           <h1 className="poster-h font-syne mb-5 text-[2.3rem] min-[400px]:text-[2.7rem] sm:text-6xl lg:text-7xl">
-            Skip the endless texting.
+            Ask three questions.
             <br />
-            <span className="text-mint-ink">Know if you click first.</span>
+            <span className="text-mint-ink">Meet through real answers.</span>
           </h1>
 
           <p className="mx-auto mb-8 max-w-md text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl lg:mx-0">
-            Mzansi’s #1 speed-dating app, where you speed date before you chat:
-            ask three questions, read their real answers, then decide.
+            Skip the first-date awkwardness.
           </p>
 
           {/* Desktop only. On a phone a download button before the visitor has

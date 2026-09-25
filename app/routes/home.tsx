@@ -5,7 +5,6 @@ import { API_BASE } from "../constants";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import HeroPoster from "../components/HeroPoster";
-import Problem from "../components/Problem";
 import HowItWorks from "../components/HowItWorks";
 import Compare from "../components/Compare";
 import SocialProof from "../components/SocialProof";
@@ -88,7 +87,6 @@ export default function Home() {
     <div className="min-h-screen pb-20 md:pb-0 bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
       <Navbar />
       {HERO === "direct" ? <Hero /> : <HeroPoster />}
-      <Problem />
       <HowItWorks isDark={isDark} />
       <Compare />
       <SocialProof />

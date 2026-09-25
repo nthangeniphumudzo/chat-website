@@ -68,35 +68,49 @@ export default function StickyDownload() {
         open ? 'translate-y-0' : 'pointer-events-none translate-y-[130%]'
       }`}
     >
-      <div className="relative mx-auto flex max-w-sm items-center gap-3 rounded-2xl border border-gray-200/70 bg-white/95 p-3 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-md dark:border-white/10 dark:bg-[#141414]/95">
+      <div className="relative mx-auto max-w-sm">
+        {/* The card *is* the button — a thumb landing anywhere on it goes to the
+            store, which is how the app-install prompts people already know
+            behave. The badge inside is the signature, not the hit area, so
+            nobody has to aim for it. The whole card dips on press.
+
+            Lifted off the page rather than tinted onto it: an opaque surface a
+            step away from the background (plain white on white, a lighter grey
+            on near-black), a hairline edge, and a soft drop shadow underneath.
+            The shadow does the floating; the edge keeps it legible where the
+            section behind it is the same colour. */}
+        <DownloadLink
+          placement="sticky"
+          aria-label={isIOS ? 'Download Ch@t on the App Store' : 'Get Ch@t on Google Play'}
+          className="dl-card block w-full cursor-pointer rounded-2xl bg-white p-3 text-gray-900 ring-1 ring-gray-900/[0.14] shadow-[0_20px_44px_-14px_rgba(15,23,42,0.45),0_6px_14px_-6px_rgba(15,23,42,0.28)] transition-transform duration-150 active:scale-[0.985] dark:bg-[#212127] dark:text-white dark:ring-white/15 dark:shadow-[0_22px_48px_-14px_rgba(0,0,0,0.95),0_3px_10px_-3px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.06)]"
+        >
+          <span className="flex w-full items-center gap-3">
+            <img
+              src={isDark ? icon_dark : icon_light}
+              alt=""
+              className="h-11 w-11 flex-shrink-0 rounded-xl ring-1 ring-gray-900/10 dark:ring-white/10"
+            />
+
+            <span className="min-w-0 flex-1">
+              <span className="block truncate font-syne text-base font-bold leading-tight">Ch@t</span>
+              <span className="mt-0.5 block truncate text-xs text-gray-500 dark:text-gray-400">Dating · Free</span>
+            </span>
+
+            {isIOS ? <AppStoreBadge className="h-9 w-[108px] flex-shrink-0" /> : <GooglePlayBadge className="h-9 w-[121px] flex-shrink-0" />}
+          </span>
+        </DownloadLink>
+
+        {/* Outside the link, not inside it: a button nested in a link is invalid
+            HTML, and a tap meant for the × must never reach the store. */}
         <button
           onClick={dismiss}
           aria-label="Dismiss"
-          className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm active:scale-95 dark:border-white/10 dark:bg-[#1f1f1f] dark:text-gray-400"
+          className="absolute -right-2 -top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white text-gray-500 ring-1 ring-gray-900/10 shadow-[0_4px_10px_-2px_rgba(15,23,42,0.25)] active:scale-95 dark:bg-[#2a2a30] dark:text-gray-300 dark:ring-white/15"
         >
           <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" aria-hidden="true">
             <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
           </svg>
         </button>
-
-        <img
-          src={isDark ? icon_dark : icon_light}
-          alt=""
-          className="h-11 w-11 flex-shrink-0 rounded-xl shadow-sm"
-        />
-
-        <div className="min-w-0 flex-1">
-          <p className="truncate font-syne text-base font-bold leading-tight text-gray-900 dark:text-white">Ch@t</p>
-          <p className="mt-0.5 truncate text-xs text-gray-500 dark:text-gray-400">Dating · Free</p>
-        </div>
-
-        <DownloadLink
-          placement="sticky"
-          aria-label={isIOS ? 'Download Ch@t on the App Store' : 'Get Ch@t on Google Play'}
-          className="inline-flex min-h-11 flex-shrink-0 items-center text-sm font-semibold text-gray-900 active:scale-95 dark:text-white"
-        >
-          {isIOS ? <AppStoreBadge className="h-9 w-[108px]" /> : <GooglePlayBadge className="h-9 w-[121px]" />}
-        </DownloadLink>
       </div>
     </div>
   )

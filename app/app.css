@@ -85,6 +85,10 @@
   gap: 0.45em;
 }
 
+/* The floating card is one big download link, so its pressed state spans the
+   whole card rather than sitting where the label used to start. */
+.dl-card[data-opening] .dl-busy { justify-content: center; min-height: 2.75rem; }
+
 .dl-spinner {
   width: 0.95em;
   height: 0.95em;
