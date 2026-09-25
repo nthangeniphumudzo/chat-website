@@ -31,7 +31,7 @@ const faqs = [
 
 function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
   return (
-    <div className="border border-gray-200 dark:border-gray-800 rounded-2xl bg-white dark:bg-[#101010] overflow-hidden transition-colors duration-200 hover:border-mint/30">
+    <div className="glass rounded-2xl overflow-hidden transition-colors duration-200 hover:border-mint/30">
       <button
         onClick={onToggle}
         aria-expanded={open}
@@ -62,7 +62,8 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="py-16 sm:py-24 px-5 sm:px-8 max-w-3xl mx-auto">
+    <section id="faq" className="relative overflow-hidden py-16 sm:py-24 px-5 sm:px-8 max-w-3xl mx-auto">
+      <div className="soft-glow pointer-events-none absolute -z-10 -top-20 left-1/2 h-[560px] w-[760px] max-w-[150vw] -translate-x-1/2 [--glow-alpha:0.26] dark:[--glow-alpha:0.14]" />
       <div className="mb-8 sm:mb-10 text-center">
         <p className="text-xs font-medium uppercase tracking-widest text-mint-ink mb-4">Before you ask</p>
         <h2 className="font-syne font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">

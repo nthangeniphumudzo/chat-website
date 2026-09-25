@@ -42,7 +42,8 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
   }
 
   return (
-    <section id="privacy" className="panel bg-gray-50 dark:bg-[#080808] px-5 sm:px-8 lg:px-12 py-20">
+    <section id="privacy" className="panel bg-[linear-gradient(180deg,#f7f9fb_0%,#ecfaf4_45%,#f7f9fb_100%)] dark:bg-none dark:bg-[#080808] px-5 sm:px-8 lg:px-12 py-20">
+      <div className="soft-glow pointer-events-none absolute -z-10 top-1/4 left-1/2 h-[720px] w-[880px] max-w-[160vw] -translate-x-1/2 [--glow-alpha:0.24] dark:[--glow-alpha:0.18]" />
       <div className="max-w-6xl mx-auto w-full">
         <div className="mb-12 sm:mb-16 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-mint-ink mb-5">Flagship privacy</p>
@@ -113,7 +114,7 @@ export default function PrivacyDemo({ isDark }: PrivacyDemoProps) {
             {privacyPoints.map(({ icon, title, body }) => (
               <div
                 key={title}
-                className="flex gap-4 p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#101010] border border-gray-200 dark:border-gray-800 hover:border-mint/30 transition-colors duration-200"
+                className="flex gap-4 p-5 sm:p-6 glass rounded-2xl hover:border-mint/30 transition-colors duration-200"
               >
                 <div className="w-11 h-11 rounded-xl bg-mint/5 border border-mint/10 flex items-center justify-center flex-shrink-0 text-mint-ink">
                   <Icon name={icon} className="w-5 h-5" />

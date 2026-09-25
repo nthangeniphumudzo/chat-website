@@ -41,7 +41,7 @@ export default function SocialProof() {
         {TESTIMONIALS.length > 0 && (
           <ul className="mt-12 grid grid-cols-1 gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
             {TESTIMONIALS.map(({ name, city, quote }) => (
-              <li key={name + quote} className="rounded-3xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-[#101010]">
+              <li key={name + quote} className="glass rounded-3xl p-6">
                 <blockquote className="text-base leading-relaxed text-gray-800 dark:text-gray-100">“{quote}”</blockquote>
                 <p className="mt-4 text-sm font-semibold text-gray-500 dark:text-gray-400">
                   {name} · {city}

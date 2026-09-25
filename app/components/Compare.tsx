@@ -62,7 +62,9 @@ function Mark({ yes }: { yes: boolean }) {
 /** Why Ch@t, feature by feature, against the typical swipe app. */
 export default function Compare() {
   return (
-    <section id="compare" className="bg-gray-50 px-5 py-20 dark:bg-[#080808] sm:px-8 sm:py-28">
+    <section id="compare" className="relative overflow-hidden bg-[linear-gradient(180deg,#f7f9fb_0%,#ecfaf4_45%,#f7f9fb_100%)] px-5 py-20 dark:bg-none dark:bg-[#080808] sm:px-8 sm:py-28">
+      {/* The glass above it needs something to hold. */}
+      <div className="soft-glow pointer-events-none absolute -z-10 top-40 left-1/2 h-[720px] w-[880px] max-w-[160vw] -translate-x-1/2 [--glow-alpha:0.26] dark:[--glow-alpha:0.20]" />
       <div className="mx-auto max-w-3xl">
         <div className="mb-10 text-center sm:mb-12">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">Why Ch@t is different</p>
@@ -71,7 +73,7 @@ export default function Compare() {
           </h2>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#101010]">
+        <div className="glass overflow-hidden rounded-3xl">
           <table className="w-full text-left text-sm sm:text-base">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-800">

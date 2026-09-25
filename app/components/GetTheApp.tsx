@@ -39,7 +39,7 @@ export default function GetTheApp({ placement, align = 'center', id, className =
             So the QR card is only shown on a large screen with a mouse — a
             phone can't scan its own screen — and everything else gets both
             store buttons. */}
-        <div className="hidden items-center gap-5 rounded-3xl border border-gray-200 bg-white p-4 pr-6 text-left shadow-sm dark:border-gray-800 dark:bg-[#101010] pointer-fine:lg:flex">
+        <div className="glass hidden items-center gap-5 rounded-3xl p-4 pr-6 text-left pointer-fine:lg:flex">
           {/* White tile in both themes: phone cameras read dark-on-light far more
               reliably than an inverted code. */}
           <div className="rounded-2xl bg-white p-2.5 ring-1 ring-black/5">

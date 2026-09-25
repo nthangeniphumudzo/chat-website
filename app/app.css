@@ -230,6 +230,81 @@
   overflow: hidden;
 }
 .poster-h { font-weight: 800; letter-spacing: -0.03em; line-height: 0.98; }
+/* ── Glass surfaces ────────────────────────────────────────────────
+   One treatment for every card on the page: a pane that lets the section's
+   mint glow through, blurs whatever sits behind it, and catches a thin line of
+   light along its top edge. That is what reads as glass — the blur alone reads
+   as a grey box.
+
+   The plain background and border come first so a browser without
+   backdrop-filter still gets a solid, legible card; the blur is added only
+   where it is supported. Firefox on Android and older WebViews land on the
+   fallback. */
+.glass {
+  /* The gloss: a short fall of light from the top edge, over the pane colour.
+     Without it a translucent box reads as a flat tint rather than a surface. */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 42%),
+    rgba(255, 255, 255, 0.70);
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 14px 34px -18px rgba(15, 23, 42, 0.30);
+}
+
+.dark .glass {
+  /* White at low opacity rather than a grey: it takes its colour from the glow
+     behind it, which is what keeps it from going flat. */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0) 45%),
+    rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 18px 44px -20px rgba(0, 0, 0, 0.85);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0) 42%),
+      rgba(255, 255, 255, 0.52);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    backdrop-filter: blur(16px) saturate(150%);
+  }
+  .dark .glass {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 45%),
+      rgba(255, 255, 255, 0.045);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+}
+
+/* The header over the page: the same glass, edge to edge. */
+.glass-bar {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.dark .glass-bar {
+  background: rgba(5, 5, 5, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-bar {
+    background: rgba(255, 255, 255, 0.60);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+  .dark .glass-bar {
+    background: rgba(5, 5, 5, 0.55);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+}
+
 .phone-bleed {
   box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
