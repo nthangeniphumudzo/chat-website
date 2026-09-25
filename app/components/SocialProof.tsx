@@ -1,4 +1,3 @@
-import GetTheApp from './GetTheApp'
 import LiveStats from './LiveStats'
 
 interface Testimonial {
@@ -52,7 +51,6 @@ export default function SocialProof() {
           </ul>
         )}
 
-        <GetTheApp placement="proof" className="mt-12" />
       </div>
     </section>
   )

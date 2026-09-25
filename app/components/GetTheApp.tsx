@@ -48,7 +48,7 @@ export default function GetTheApp({ placement, align = 'center', id, className =
           <div>
             <p className="font-semibold text-gray-900 dark:text-gray-100">Scan to download</p>
             <p className="mt-1 max-w-[12rem] text-sm leading-snug text-gray-500 dark:text-gray-400">
-              Point your phone’s camera here. Free on iPhone and Android.
+              Point your phone’s camera here.
             </p>
             <p className="mt-3 flex gap-4 text-sm font-semibold">
               <DownloadLink placement={placement} store="app_store" className="text-mint-ink hover:underline">
@@ -70,7 +70,6 @@ export default function GetTheApp({ placement, align = 'center', id, className =
               Google Play
             </DownloadLink>
           </div>
-          <p className="mt-2.5 text-xs font-medium text-gray-500 dark:text-gray-400">Free on iPhone and Android</p>
         </div>
       </div>
     )

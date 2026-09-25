@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import ChatMark from './ChatMark'
 import DownloadLink from './DownloadLink'
+import { useStickyDismissed } from '../hooks/useStickyDismissed'
 
 const marketingLinks = [
   { href: './#how', label: 'How it works' },
@@ -9,6 +10,7 @@ const marketingLinks = [
 ] as const
 
 export default function Navbar() {
+  const { dismissed } = useStickyDismissed()
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
 
@@ -63,17 +65,17 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop keeps a download pill in the corner so the answer to "I'm
-            convinced" never needs a scroll. Phones get the same from the sticky
-            bottom bar (StickyDownload), in thumb reach, once the hero's own
-            button has scrolled away — two pills on one small screen would just
-            compete. */}
+            convinced" never needs a scroll. Phones get that from the floating
+            card instead (StickyDownload), in thumb reach — two of them on one
+            small screen would only compete. Send the card away, though, and the
+            pill takes over up here, so the app is never more than a tap away. */}
         <DownloadLink
           placement="navbar"
           // The label doesn't name the product — the visitor is already on the
           // page — but a screen reader meeting this link out of context needs it,
           // and the pill is the one CTA visible from anywhere on the page.
           aria-label="Download Ch@t"
-          className="hidden md:inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
+          className={`${dismissed ? 'inline-flex' : 'hidden'} md:inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95`}
         >
           Download
         </DownloadLink>

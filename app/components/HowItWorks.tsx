@@ -1,4 +1,3 @@
-import GetTheApp from './GetTheApp'
 import Screenshot from './Screenshot'
 import {
   img_write_questions, img_write_questions_light,
@@ -60,7 +59,6 @@ export default function HowItWorks({ isDark }: { isDark: boolean }) {
           ))}
         </ol>
 
-        <GetTheApp placement="how" className="mt-16" />
       </div>
     </section>
   )
