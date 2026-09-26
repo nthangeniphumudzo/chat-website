@@ -2,30 +2,28 @@ import { useEffect, useState } from 'react'
 import DownloadLink from './DownloadLink'
 import { usePlatform } from '../hooks/usePlatform'
 import { useTheme } from '../hooks/useTheme'
-import { useStickyDismissed } from '../hooks/useStickyDismissed'
-import { AppStoreBadge, GooglePlayBadge } from './StoreBadge'
+import { AppStoreGlyph, GooglePlayGlyph } from './StoreBadge'
 import { icon_light, icon_dark } from '../assets/images'
 
 /**
- * A floating download card on phones, in thumb reach — the app icon, the name
- * and the store's own badge, in the shape people already know from an app's
- * install prompt (TikTok's, Instagram's, every app that has a web page).
+ * A floating download card on phones, in thumb reach, built to the anatomy of
+ * the stores' own install banners — the ones that appear over TikTok and every
+ * other app: a soft grey pane, a large app icon, the store's name above the
+ * app's name, the category line under it, and a pill on the right.
  *
- * The badge is the point: an iPhone sees Apple's "Download on the App Store",
- * an Android phone sees Google's "GET IT ON Google Play". A visitor recognises
- * those before they read a word, and each one says exactly where the tap goes.
+ * People have tapped that exact shape a hundred times, which is the whole
+ * point: it reads as an install prompt rather than as a website's advert, and
+ * the store mark says where the tap goes before a word is read.
  *
- * It stays out of the way in the hero, where the visitor is still finding out
- * what Ch@t is, and at the final download section, which has its own button.
- * It slides in everywhere between, so someone convinced halfway down never has
- * to scroll to act — and the × sends it away, which brings a download button
- * up into the header in its place (see useStickyDismissed), so the app stays
- * one tap away without the card in the way.
- * Server-rendered hidden; it only needs to exist once the visitor scrolls.
+ * Scrolling is the only thing that shows or hides it, and there is no way to
+ * dismiss it: it stays out of the way wherever a download button of its own is
+ * already within reach — the hero at the top, the download section at the
+ * bottom — and slides back in everywhere between, so the app is never more than
+ * a tap away. Server-rendered hidden; it only needs to exist once the visitor
+ * scrolls.
  */
 export default function StickyDownload() {
   const [show, setShow] = useState(false)
-  const { dismissed, dismiss } = useStickyDismissed()
   const platform = usePlatform()
   const { isDark } = useTheme()
 
@@ -52,13 +50,11 @@ export default function StickyDownload() {
     return () => io.disconnect()
   }, [])
 
-  if (dismissed) return null
-
   // An iPhone gets Apple's badge; everything else goes to Play, which is also
   // where a phone we can't place is sent.
   const isIOS = platform.os === 'ios'
 
-  const open = show && !dismissed
+  const open = show
 
   return (
     <div
@@ -82,35 +78,36 @@ export default function StickyDownload() {
         <DownloadLink
           placement="sticky"
           aria-label={isIOS ? 'Download Ch@t on the App Store' : 'Get Ch@t on Google Play'}
-          className="dl-card block w-full cursor-pointer rounded-2xl bg-white p-3 text-gray-900 ring-1 ring-gray-900/[0.14] shadow-[0_20px_44px_-14px_rgba(15,23,42,0.45),0_6px_14px_-6px_rgba(15,23,42,0.28)] transition-transform duration-150 active:scale-[0.985] dark:bg-[#212127] dark:text-white dark:ring-white/15 dark:shadow-[0_22px_48px_-14px_rgba(0,0,0,0.95),0_3px_10px_-3px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.06)]"
+          className="dl-card block w-full cursor-pointer rounded-[22px] bg-[#ededf0]/95 p-2.5 text-gray-900 shadow-[0_18px_40px_-16px_rgba(15,23,42,0.45),0_4px_12px_-6px_rgba(15,23,42,0.25)] backdrop-blur-xl transition-transform duration-150 active:scale-[0.985] dark:bg-[#2c2c2e]/95 dark:text-white dark:shadow-[0_20px_44px_-14px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.07)]"
         >
           <span className="flex w-full items-center gap-3">
             <img
               src={isDark ? icon_dark : icon_light}
               alt=""
-              className="h-11 w-11 flex-shrink-0 rounded-xl ring-1 ring-gray-900/10 dark:ring-white/10"
+              className="h-14 w-14 flex-shrink-0 rounded-[13px] ring-1 ring-gray-900/10 dark:ring-white/10"
             />
 
             <span className="min-w-0 flex-1">
-              <span className="block truncate font-syne text-base font-bold leading-tight">Ch@t</span>
-              <span className="mt-0.5 block truncate text-xs text-gray-500 dark:text-gray-400">Dating · Free</span>
+              {/* The store, said the way the store says it. */}
+              <span className="flex items-center gap-1.5 text-[13px] leading-tight text-gray-500 dark:text-gray-400">
+                {isIOS
+                  ? <AppStoreGlyph className="h-[13px] w-[13px] flex-shrink-0" />
+                  : <GooglePlayGlyph className="h-[13px] w-[13px] flex-shrink-0" />}
+                <span className="truncate">{isIOS ? 'App Store' : 'Google Play'}</span>
+              </span>
+              <span className="mt-0.5 block truncate text-[17px] font-semibold leading-tight">Ch@t</span>
+              <span className="block truncate text-[13px] leading-tight text-gray-500 dark:text-gray-400">
+                Dating, SpeedDate, Chat
+              </span>
             </span>
 
-            {isIOS ? <AppStoreBadge className="h-9 w-[108px] flex-shrink-0" /> : <GooglePlayBadge className="h-9 w-[121px] flex-shrink-0" />}
+            {/* Not a button — the whole card is the link. It is shaped like the
+                store's own Get pill because that is where a thumb goes looking. */}
+            <span className="flex-shrink-0 rounded-full bg-mint px-6 py-1.5 text-[17px] font-semibold text-gray-900">
+              Get
+            </span>
           </span>
         </DownloadLink>
-
-        {/* Outside the link, not inside it: a button nested in a link is invalid
-            HTML, and a tap meant for the × must never reach the store. */}
-        <button
-          onClick={dismiss}
-          aria-label="Dismiss"
-          className="absolute -right-2 -top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white text-gray-500 ring-1 ring-gray-900/10 shadow-[0_4px_10px_-2px_rgba(15,23,42,0.25)] active:scale-95 dark:bg-[#2a2a30] dark:text-gray-300 dark:ring-white/15"
-        >
-          <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" aria-hidden="true">
-            <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-          </svg>
-        </button>
       </div>
     </div>
   )
