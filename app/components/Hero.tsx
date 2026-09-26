@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import GetTheApp from './GetTheApp'
+import HeroQuote from './HeroQuote'
 import Screenshot from './Screenshot'
 import {
   img_write_questions_light,
@@ -51,19 +52,18 @@ export default function Hero() {
         {/* Copy */}
         <div className="text-center lg:text-left">
           {/* What happens here, in the visitor's own hands: the thing they do
-              first, and what they get for it. One line under it, and no more —
-              the promise is meant to leave a question behind ("how?"), which the
-              screens beside it and the sections below are there to answer.
-              Sized so each line holds on a 375px phone. */}
+              first, and what they get for it. Under it, a line about love that
+              changes with each visit (HeroQuote) — the headline leaves a
+              question behind ("how?"), which the screens beside it and the
+              sections below are there to answer. Sized so each line holds on a
+              375px phone. */}
           <h1 className="poster-h font-syne mb-5 text-[2.3rem] min-[400px]:text-[2.7rem] sm:text-6xl lg:text-7xl">
             Ask three questions.
             <br />
             <span className="text-mint-ink">Meet through real answers.</span>
           </h1>
 
-          <p className="mx-auto mb-8 max-w-md text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl lg:mx-0">
-            Skip the first-date awkwardness.
-          </p>
+          <HeroQuote />
 
           {/* Desktop only. On a phone a download button before the visitor has
               seen how Ch@t works asks too much too soon; the sticky bar and the
