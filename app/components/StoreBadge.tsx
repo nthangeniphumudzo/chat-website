@@ -10,14 +10,21 @@
  * so a screen reader announcing these as well would only say it twice.
  */
 
-/** Apple's App Store mark: an "A" drawn as three separate strokes. */
+/**
+ * Apple's App Store mark: an "A" built from three crossing strokes.
+ *
+ * The overshoot is the whole character of it — the two diagonals cross just
+ * below their tops, leaving a small peak above the join, and the crossbar runs
+ * past both of them. Draw it as a plain letter A and it stops reading as the
+ * App Store.
+ */
 export function AppStoreGlyph({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" focusable="false">
-      <g stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" fill="none">
-        <path d="M4.6 18.4 11.1 5.8" />
-        <path d="M12.9 5.8 19.4 18.4" />
-        <path d="M8.1 14.2h7.8" />
+      <g stroke="currentColor" strokeWidth="2.15" strokeLinecap="round" fill="none">
+        <path d="M4.9 19.2 12.5 5.2" />
+        <path d="M11.5 5.2 19.1 19.2" />
+        <path d="M6.9 14.6h10.2" />
       </g>
     </svg>
   )
