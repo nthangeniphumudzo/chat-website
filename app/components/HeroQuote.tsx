@@ -1,4 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+/** The house line, and the one most visitors see: it names the person they
+ *  came here hoping to meet, in names from home. Weighted to show seven times
+ *  out of ten (see pick), with the love lines sharing the rest. */
+const FEATURED = 'We hope you find your Mandisa/Sandile here.'
+
+/** How often FEATURED wins the toss. */
+const FEATURED_SHARE = 0.7
 
 /* Ten lines about love — the subject, not the product. Nothing here sells the
    app or nods at how it works; the headline above already did that, and a line
@@ -19,6 +27,15 @@ const QUOTES = [
   'To be truly known is to be truly loved.',
 ]
 
+/** One line, by the odds above: the house line seven times in ten, otherwise
+ *  any of the love lines. Each change is its own toss rather than a walk
+ *  through the list — a rotation in order would hand every line an equal turn
+ *  and quietly undo the weighting. */
+function pick() {
+  if (Math.random() < FEATURED_SHARE) return FEATURED
+  return QUOTES[Math.floor(Math.random() * QUOTES.length)]
+}
+
 /** How long a line holds before the next one fades in. */
 const HOLD_MS = 30_000
 
@@ -26,34 +43,45 @@ const HOLD_MS = 30_000
 const FADE_MS = 500
 
 /**
- * The line under the headline: a love quote, a different one for each visitor,
- * changing every thirty seconds for anyone still reading.
+ * The line under the headline: the house line most of the time, a love line
+ * the rest of it, re-drawn every thirty seconds for anyone still reading.
  *
  * Which line shows is decided in the browser, not on the server — the server
  * render has to match the first client render exactly or React replaces it, so
- * the page ships with the first quote and picks the visitor's own the moment it
- * hydrates. Rotation starts from there and runs in order, so nobody sees the
- * same line twice in a row.
+ * the page ships with the house line (the likeliest one anyway) and draws the
+ * visitor's own the moment it hydrates.
  *
  * The box holds its own height at two lines so the phone screens below it don't
  * jump each time the text changes length.
  */
 export default function HeroQuote() {
-  const [index, setIndex] = useState(0)
+  const [line, setLine] = useState(FEATURED)
   const [shown, setShown] = useState(true)
+  // What is on screen right now, readable from inside the interval without
+  // making the interval depend on it — and without deciding anything inside a
+  // state updater, which React is free to run more than once.
+  const current = useRef(FEATURED)
 
   useEffect(() => {
-    setIndex(Math.floor(Math.random() * QUOTES.length))
+    const show = (next: string) => {
+      current.current = next
+      setLine(next)
+    }
+    show(pick())
 
     const timers: ReturnType<typeof setTimeout>[] = []
     const rotate = setInterval(() => {
       // Nothing to look at on a page nobody is looking at, and a tab woken from
       // the background shouldn't flash through the lines it missed.
       if (document.visibilityState !== 'visible') return
+      // Drawing the line that is already up would fade out and back into the
+      // same words; hold it instead and draw again at the next turn.
+      const next = pick()
+      if (next === current.current) return
       setShown(false)
       timers.push(
         setTimeout(() => {
-          setIndex(i => (i + 1) % QUOTES.length)
+          show(next)
           setShown(true)
         }, FADE_MS),
       )
@@ -74,7 +102,7 @@ export default function HeroQuote() {
       aria-live="polite"
       aria-atomic="true"
     >
-      {QUOTES[index]}
+      {line}
     </p>
   )
 }
