@@ -74,6 +74,7 @@ export default function Advisor() {
   // on top of it rather than behind it.
   const keyboard = useKeyboardInset()
   const composer = useRef<HTMLFormElement | null>(null)
+  const input = useRef<HTMLTextAreaElement | null>(null)
   const [composerHeight, setComposerHeight] = useState(96)
 
   const stored = useRef<StoredConversation | null>(null)
@@ -130,6 +131,35 @@ export default function Advisor() {
     ro.observe(el)
     setComposerHeight(el.offsetHeight)
     return () => ro.disconnect()
+  }, [])
+
+  /* If the field ever ends up under the keyboard — iOS can scroll it there
+     during momentum, and a page that scrolls while you type can too — there is
+     no point keeping the keyboard up over something the visitor can't see. It
+     is dismissed, which hands the whole screen back. */
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+
+    const check = () => {
+      const field = input.current
+      if (!field || document.activeElement !== field) return
+      const box = composer.current?.getBoundingClientRect()
+      if (!box) return
+      // The bottom of what the visitor can see, in page coordinates.
+      const visibleBottom = vv.offsetTop + vv.height
+      // A little tolerance, so a pixel of rounding doesn't close the keyboard.
+      if (box.bottom - visibleBottom > 24) field.blur()
+    }
+
+    vv.addEventListener('resize', check)
+    vv.addEventListener('scroll', check)
+    window.addEventListener('scroll', check, { passive: true })
+    return () => {
+      vv.removeEventListener('resize', check)
+      vv.removeEventListener('scroll', check)
+      window.removeEventListener('scroll', check)
+    }
   }, [])
 
   // Follow the conversation down as it grows — and again when the keyboard
@@ -373,8 +403,9 @@ export default function Advisor() {
             void send(draft)
           }}
         >
-          <div className="glass mx-auto flex w-full max-w-3xl items-end gap-2 rounded-[22px] p-2">
+          <div className="mx-auto flex w-full max-w-3xl items-end gap-2 rounded-[26px] bg-white p-2 ring-1 ring-gray-900/12 shadow-[0_10px_28px_-12px_rgba(15,23,42,0.35)] focus-within:ring-2 focus-within:ring-mint dark:bg-[#17171b] dark:ring-white/12 dark:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.9)] dark:focus-within:ring-mint">
             <textarea
+              ref={input}
               value={draft}
               onChange={e => setDraft(e.target.value.slice(0, maxChars))}
               onKeyDown={e => {
@@ -395,12 +426,12 @@ export default function Advisor() {
                     : 'What’s on your mind?'
               }
               aria-label="Your message"
-              className="max-h-40 min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 text-base outline-none placeholder:text-gray-400 disabled:opacity-60 dark:placeholder:text-gray-500"
+              className="max-h-40 min-h-12 flex-1 resize-none bg-transparent px-3.5 py-3 text-[17px] leading-snug outline-none placeholder:text-gray-400 disabled:opacity-60 dark:placeholder:text-gray-500"
             />
             <button
               type="submit"
               disabled={!canType || sending || draft.trim().length === 0}
-              className="mb-0.5 inline-flex h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 text-sm font-semibold text-gray-900 transition-transform duration-150 active:scale-95 disabled:opacity-40"
+              className="mb-0.5 inline-flex h-12 flex-shrink-0 items-center rounded-full bg-mint px-6 text-[15px] font-semibold text-gray-900 transition-transform duration-150 active:scale-95 disabled:opacity-40"
             >
               {sending ? 'Sending…' : 'Send'}
             </button>
@@ -434,7 +465,7 @@ export default function Advisor() {
 
         {config && <CrisisPanel resources={config.crisisResources} />}
 
-        <section className="mt-8 border-t border-gray-200 pt-6 text-xs leading-relaxed text-gray-500 dark:border-gray-800 dark:text-gray-400">
+        <section className="mt-5 pt-3 text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">
           {/* The data notice, folded away: spelled out in full for anyone who
               wants it, but not set in front of someone who came here to talk.
               A plain <details> — it opens without JavaScript, and a screen
@@ -446,18 +477,17 @@ export default function Advisor() {
             </summary>
             <div className="mt-2 space-y-2 text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">
               <p>
-                This advisor is powered by a third-party provider (Anthropic), which processes your messages to write
-                the replies. Ch@t keeps an anonymised copy of conversations — phone numbers, emails, links and @handles
-                are stripped out, and no IP address or device identifier is stored — for up to a year, to understand
-                what people face in dating. Please don’t share full names or contact details here.
+                Your messages are saved anonymously — never attached to you, and nobody here knows who sent them.
               </p>
-              <p>Your conversation stays on this device so you can carry on later.</p>
+              <p>
+                Whatever you talk about stays between you and the advisor. It is never shared with anyone else on Ch@t.
+              </p>
             </div>
           </details>
 
           <p className="mt-4">
-            The advisor is support, not therapy, and not a crisis service. If someone is in danger, use the numbers
-            above.
+            Support, not therapy, and not a crisis service. If someone is in danger, the numbers are under “Need help
+            now?”.
           </p>
         </section>
 
@@ -496,13 +526,30 @@ function Dot({ delay = '0ms' }: { delay?: string }) {
   )
 }
 
-/** Always on the page, never behind a tap — the one thing here that can't wait. */
+/**
+ * The help numbers, folded shut.
+ *
+ * They stay one tap from every screen, but closed to begin with: a page that
+ * opens with crisis helplines spread across it tells the visitor the site has
+ * assumed the worst about them, and most people came here about a text message
+ * that went unanswered.
+ *
+ * A plain <details> with no stored state, so it is shut on every visit and
+ * every refresh — it never remembers that someone opened it once.
+ */
 function CrisisPanel({ resources }: { resources: CrisisResource[] }) {
   if (resources.length === 0) return null
   return (
-    <section className="glass mt-8 rounded-2xl p-5">
-      <h2 className="font-syne text-lg font-bold">Need help now?</h2>
-      <ul className="mt-3 space-y-3 text-sm">
+    <details className="group mt-8">
+      <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 [&::-webkit-details-marker]:hidden">
+        <InfoIcon className="h-4 w-4 flex-shrink-0" />
+        <span>Need help now?</span>
+        <svg viewBox="0 0 12 12" className="h-3 w-3 transition-transform duration-200 group-open:rotate-180" aria-hidden="true">
+          <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </summary>
+
+      <ul className="glass mt-3 space-y-3 rounded-2xl p-5 text-sm">
         {resources.map(resource => (
           <li key={`${resource.name}-${resource.contact}`}>
             <p className="text-gray-500 dark:text-gray-400">{resource.situation}</p>
@@ -516,7 +563,7 @@ function CrisisPanel({ resources }: { resources: CrisisResource[] }) {
           </li>
         ))}
       </ul>
-    </section>
+    </details>
   )
 }
 
