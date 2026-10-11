@@ -72,6 +72,15 @@ const jsonLd = {
   ],
 };
 
+/**
+ * The first-visit store redirect, off for now: visitors land on the site and
+ * decide for themselves when to download — which also gives the Relationship
+ * Advisor a chance to be seen at all. Everything that drives it is still here;
+ * flip this to true to send first-time phone visitors straight to their store
+ * again.
+ */
+const AUTO_STORE_REDIRECT = false
+
 // Works out, from the request, which store this visitor belongs to — so the
 // download link is right in the server-rendered HTML — and whether this is a
 // phone that should be sent to its store on a first visit. HTML is served
@@ -87,9 +96,10 @@ export function loader({ request }: Route.LoaderArgs) {
   // an automatic store redirect in TikTok fails with "action can't be taken"
   // the moment the page lands — and never crawlers, or Google would index the
   // store listing instead of the site.
-  const firstVisit = platform.canDeepLink
-    ? { deep: link.href, web: link.web, os: platform.os }
-    : null;
+  const firstVisit =
+    AUTO_STORE_REDIRECT && platform.canDeepLink
+      ? { deep: link.href, web: link.web, os: platform.os }
+      : null;
 
   return { platform, firstVisit };
 }
