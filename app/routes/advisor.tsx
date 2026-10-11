@@ -75,6 +75,7 @@ export default function Advisor() {
   const keyboard = useKeyboardInset()
   const composer = useRef<HTMLFormElement | null>(null)
   const input = useRef<HTMLTextAreaElement | null>(null)
+  const end = useRef<HTMLDivElement | null>(null)
   const [composerHeight, setComposerHeight] = useState(96)
 
   const stored = useRef<StoredConversation | null>(null)
@@ -166,9 +167,11 @@ export default function Advisor() {
   // opens, so the last thing said stays in view above it.
   useEffect(() => {
     if (messages.length === 0 && streaming === null) return
-    // The conversation is part of the page rather than a box with its own
-    // scrollbar, so it is the window that follows it down.
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+    // The last thing said, brought to rest just above the composer. Scrolling
+    // to the foot of the document instead would carry the visitor past the
+    // conversation and park them on the footnotes, which are nobody's business
+    // unless they go looking.
+    end.current?.scrollIntoView({ block: 'end', behavior: 'smooth' })
   }, [messages, streaming, keyboard])
 
   const persist = useCallback((next: Partial<StoredConversation> & { messages?: AdvisorMessage[] }) => {
@@ -382,6 +385,7 @@ export default function Advisor() {
                 pending={streaming.length === 0}
               />
             )}
+            <div ref={end} aria-hidden style={{ scrollMarginBottom: composerHeight + 16 }} />
           </div>
         )}
 
@@ -476,7 +480,7 @@ export default function Advisor() {
             them should take a deliberate scroll — they are there for whoever
             goes looking, not for someone who simply ran out of things to say
             and kept their thumb moving. */}
-        <div aria-hidden className="h-[calc(55svh+30px)]" />
+        <div aria-hidden className="h-[calc(27svh+15px)]" />
 
         {config && <CrisisPanel resources={config.crisisResources} />}
 
