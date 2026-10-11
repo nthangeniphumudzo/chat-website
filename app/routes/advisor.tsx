@@ -472,6 +472,12 @@ export default function Advisor() {
           )}
         </form>
 
+        {/* Quiet ground between the conversation and the footnotes. Reaching
+            them should take a deliberate scroll — they are there for whoever
+            goes looking, not for someone who simply ran out of things to say
+            and kept their thumb moving. */}
+        <div aria-hidden className="h-[calc(55svh+30px)]" />
+
         {config && <CrisisPanel resources={config.crisisResources} />}
 
         <section className="mt-5 pt-3 text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">
