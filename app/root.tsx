@@ -129,7 +129,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        {/* interactive-widget: on Android the keyboard resizes the layout itself,
+            so a bar pinned to the bottom stays above it without any measuring.
+            iOS ignores this and is handled in JS (see useKeyboardInset). */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+        />
         <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="mobile-web-app-capable" content="yes" />

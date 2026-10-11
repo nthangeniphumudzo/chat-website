@@ -5,6 +5,7 @@ import ChatMark from '../components/ChatMark'
 import Turnstile from '../components/Turnstile'
 import Sparkle from '../components/Sparkle'
 import TopicIcon from '../components/TopicIcon'
+import { useKeyboardInset } from '../hooks/useKeyboardInset'
 import {
   AdvisorError,
   fetchConfig,
@@ -69,6 +70,12 @@ export default function Advisor() {
   const [turnstileKey, setTurnstileKey] = useState(0)
   const [sending, setSending] = useState(false)
 
+  // How much of the screen the keyboard is covering, so the composer can sit
+  // on top of it rather than behind it.
+  const keyboard = useKeyboardInset()
+  const composer = useRef<HTMLFormElement | null>(null)
+  const [composerHeight, setComposerHeight] = useState(96)
+
   const stored = useRef<StoredConversation | null>(null)
   const visitorId = useRef<string>('')
   // A message that lost its session mid-flight, waiting for a fresh one.
@@ -114,11 +121,23 @@ export default function Advisor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Follow the conversation down as it grows.
+  // The composer is out of the flow, so the page has to reserve its height —
+  // which changes as the textarea grows and as the status line appears.
+  useEffect(() => {
+    const el = composer.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(() => setComposerHeight(el.offsetHeight))
+    ro.observe(el)
+    setComposerHeight(el.offsetHeight)
+    return () => ro.disconnect()
+  }, [])
+
+  // Follow the conversation down as it grows — and again when the keyboard
+  // opens, so the last thing said stays in view above it.
   useEffect(() => {
     const el = scroller.current
     if (el) el.scrollTop = el.scrollHeight
-  }, [messages, streaming])
+  }, [messages, streaming, keyboard])
 
   const persist = useCallback((next: Partial<StoredConversation> & { messages?: AdvisorMessage[] }) => {
     if (!stored.current) return
@@ -338,15 +357,23 @@ export default function Advisor() {
           </p>
         )}
 
-        {/* Composer */}
+        {/* Composer. Fixed to the bottom of what the visitor can actually see:
+            `bottom` is the keyboard's height, so it rides above the keyboard
+            instead of being buried under it, and it stays put while the
+            conversation scrolls behind it. */}
         <form
-          className="sticky bottom-0 mt-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2"
+          ref={composer}
+          style={{
+            bottom: keyboard,
+            paddingBottom: keyboard > 0 ? '0.5rem' : 'max(0.75rem, env(safe-area-inset-bottom))',
+          }}
+          className="fixed inset-x-0 z-30 border-t border-gray-200/80 bg-white/85 px-5 pt-3 backdrop-blur-xl transition-[bottom] duration-150 dark:border-gray-800 dark:bg-[#050505]/85 sm:px-8"
           onSubmit={e => {
             e.preventDefault()
             void send(draft)
           }}
         >
-          <div className="glass flex items-end gap-2 rounded-[22px] p-2">
+          <div className="glass mx-auto flex w-full max-w-3xl items-end gap-2 rounded-[22px] p-2">
             <textarea
               value={draft}
               onChange={e => setDraft(e.target.value.slice(0, maxChars))}
@@ -379,7 +406,7 @@ export default function Advisor() {
             </button>
           </div>
 
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-1 text-xs text-gray-500 dark:text-gray-400">
+          <div className="mx-auto mt-2 flex w-full max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-1 text-xs text-gray-500 dark:text-gray-400">
             <span>
               {state === 'verifying' && 'Getting ready…'}
               {state === 'ready' && usage && `${usage.remaining} messages left today`}
@@ -433,6 +460,11 @@ export default function Advisor() {
             above.
           </p>
         </section>
+
+        {/* What the composer would have taken up, now that it floats: without
+            it the foot of the page can never be scrolled out from under the
+            bar. */}
+        <div aria-hidden style={{ height: composerHeight }} />
       </main>
     </div>
   )
