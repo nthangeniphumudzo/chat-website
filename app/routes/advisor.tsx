@@ -165,8 +165,10 @@ export default function Advisor() {
   // Follow the conversation down as it grows — and again when the keyboard
   // opens, so the last thing said stays in view above it.
   useEffect(() => {
-    const el = scroller.current
-    if (el) el.scrollTop = el.scrollHeight
+    if (messages.length === 0 && streaming === null) return
+    // The conversation is part of the page rather than a box with its own
+    // scrollbar, so it is the window that follows it down.
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
   }, [messages, streaming, keyboard])
 
   const persist = useCallback((next: Partial<StoredConversation> & { messages?: AdvisorMessage[] }) => {
@@ -332,6 +334,11 @@ export default function Advisor() {
       </header>
 
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-5 pb-6 sm:px-8">
+        {/* Tall enough to fill what's left of the screen under the header, so
+            the field is the last thing on it and the small print below has to
+            be scrolled to. The notes are footnotes; they shouldn't sit between
+            a visitor and the thing they came to do. */}
+        <div className="min-h-[calc(100svh-10.5rem)]">
         {empty && (
           <section className="pt-10 text-center">
             <h1 className="poster-h font-syne text-[2.1rem] sm:text-5xl">
@@ -365,7 +372,7 @@ export default function Advisor() {
         )}
 
         {!empty && (
-          <div ref={scroller} className="flex-1 space-y-4 overflow-y-auto py-6">
+          <div ref={scroller} className="space-y-4 py-6">
             {messages.map((message, i) => (
               <Bubble key={`${message.role}-${i}`} message={message} />
             ))}
@@ -377,6 +384,8 @@ export default function Advisor() {
             )}
           </div>
         )}
+
+        </div>
 
         {notice && (
           <p
