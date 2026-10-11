@@ -12,6 +12,7 @@ import PrivacyDemo from "../components/PrivacyDemo";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
 import StickyDownload from "../components/StickyDownload";
+import AdvisorPromo from "../components/AdvisorPromo";
 import LegalSection from "../components/LegalSection";
 import Footer from "../components/Footer";
 
@@ -99,6 +100,7 @@ export default function Home() {
       <LegalSection />
       <Footer isDark={isDark} onToggleTheme={toggle} />
       <StickyDownload />
+      <AdvisorPromo />
     </div>
   );
 }

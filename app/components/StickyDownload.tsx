@@ -6,6 +6,13 @@ import { AppStoreGlyph, GooglePlayGlyph } from './StoreBadge'
 import { icon_light, icon_dark } from '../assets/images'
 
 /**
+ * Off for now — the header's download button carries the page instead, at every
+ * width. Nothing here has been taken apart: flip this to true and the card is
+ * back exactly as it was.
+ */
+const ENABLED = false
+
+/**
  * A floating download card on phones, in thumb reach, built to the anatomy of
  * the stores' own install banners — the ones that appear over TikTok and every
  * other app: a soft grey pane, a large app icon, the store's name above the
@@ -28,6 +35,8 @@ export default function StickyDownload() {
   const { isDark } = useTheme()
 
   useEffect(() => {
+    if (!ENABLED) return
+
     const targets = ['hero', 'download']
       .map(id => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
@@ -49,6 +58,8 @@ export default function StickyDownload() {
     targets.forEach(t => io.observe(t))
     return () => io.disconnect()
   }, [])
+
+  if (!ENABLED) return null
 
   // An iPhone gets Apple's badge; everything else goes to Play, which is also
   // where a phone we can't place is sent.

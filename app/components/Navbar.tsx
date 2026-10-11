@@ -60,17 +60,17 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Desktop keeps a download pill in the corner so the answer to "I'm
-            convinced" never needs a scroll. Phones get that from the floating
-            card instead (StickyDownload), in thumb reach — two of them on one
-            small screen would only compete. */}
+        {/* The page's one ever-present call to action, at every width: the
+            answer to "I'm convinced" never needs a scroll. Phones used to get
+            this from the floating card instead (StickyDownload, now switched
+            off) — with that gone, the pill belongs here on a phone too. */}
         <DownloadLink
           placement="navbar"
           // The label doesn't name the product — the visitor is already on the
           // page — but a screen reader meeting this link out of context needs it,
           // and the pill is the one CTA visible from anywhere on the page.
           aria-label="Download Ch@t"
-          className="hidden md:inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
+          className="inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
         >
           Download
         </DownloadLink>
