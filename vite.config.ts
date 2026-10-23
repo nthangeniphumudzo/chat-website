@@ -16,7 +16,7 @@ import { defineConfig } from "vite";
  */
 const DEV_API_PROXY = "/__api";
 const API_ORIGIN =
-  "https://chatselinacontainer.lemonplant-6e572701.southafricanorth.azurecontainerapps.io";
+  "https://api.chatphcreations.co.za";
 
 export default defineConfig({
   plugins: [
