@@ -1,4 +1,5 @@
 import LiveStats from './LiveStats'
+import { IconBadge } from './Icon'
 
 interface Testimonial {
   /** First name only, and only with the member's permission. */
@@ -15,10 +16,11 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = []
 
 /**
- * "Is anyone actually on this?" — the question that stops a stranger joining an
- * app they've never heard of. Answered with live figures from the backend (see
- * useLiveStats: nothing shows unless the numbers are real) and, once collected,
- * members' own words.
+ * Hope, with evidence: love is happening here today. Also answers "is anyone
+ * actually on this?" — the question that stops a stranger joining an app
+ * they've never heard of — with live figures from the backend (see
+ * useLiveStats: nothing shows unless the numbers are real) and, once
+ * collected, members' own words.
  */
 export default function SocialProof() {
   return (
@@ -28,14 +30,15 @@ export default function SocialProof() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl">
-        <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">Live on Ch@t</p>
+        <div className="mb-6"><IconBadge name="users" /></div>
+        <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">Right now, on Ch@t</p>
         <h2 className="poster-h font-syne mb-8 text-4xl sm:text-6xl">
-          Real people. <span className="text-mint-ink">Real answers.</span>
+          Love is happening here. <span className="text-mint-ink">Today.</span>
         </h2>
 
         <LiveStats className="mb-4" />
         <p className="mx-auto max-w-md text-base text-gray-500 dark:text-gray-400">
-          Every profile is verified before it can use the app — no bots, no catfish.
+          Real, verified people — hoping, just like you, that today is the day.
         </p>
 
         {TESTIMONIALS.length > 0 && (

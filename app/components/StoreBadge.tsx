@@ -41,3 +41,22 @@ export function GooglePlayGlyph({ className = '' }: { className?: string }) {
     </svg>
   )
 }
+
+/**
+ * The stores' own badges — "Download on the App Store" and "Get it on Google
+ * Play" — exactly as Apple and Google publish them (public/badges/), for the
+ * places that offer both stores side by side. Both are drawn at the same
+ * height, which is what both stores' guidelines ask for; Google's PNG had its
+ * built-in transparent margin trimmed so its height is the badge's own.
+ *
+ * The alt text names the store, because here the badge *is* the link's label.
+ */
+const OFFICIAL = {
+  app_store: { src: '/badges/app-store.svg', width: 120, alt: 'Download on the App Store' },
+  google_play: { src: '/badges/google-play.png', width: 134, alt: 'Get it on Google Play' },
+} as const
+
+export function OfficialStoreBadge({ store, className = 'h-10' }: { store: keyof typeof OFFICIAL; className?: string }) {
+  const { src, width, alt } = OFFICIAL[store]
+  return <img src={src} alt={alt} width={width} height={40} className={`block w-auto ${className}`} />
+}

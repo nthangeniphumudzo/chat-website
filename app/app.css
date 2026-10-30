@@ -89,6 +89,11 @@
    whole card rather than sitting where the label used to start. */
 .dl-card[data-opening] .dl-busy { justify-content: center; min-height: 2.75rem; }
 
+/* An official store badge is its own label, and swapping it for "Opening…"
+   would leave an empty link behind. It stays, dimmed, instead. */
+.dl-badge[data-opening] .dl-idle { display: block; opacity: 0.55; }
+.dl-badge[data-opening] .dl-busy { display: none; }
+
 .dl-spinner {
   width: 0.95em;
   height: 0.95em;
@@ -178,38 +183,6 @@
 /* How-it-works step timer */
 @keyframes stepProgress { from { width: 0; } to { width: 100%; } }
 .step-progress { animation: stepProgress linear both; }
-
-/* ── Hero: one SpeedDate on a loop ─────────────────────────────────
-   Three screens, a third of the loop each. The first sits underneath and never
-   moves, so there is a real screen at first paint; the second and third fade
-   in over it and both fade out together at the end, which uncovers the first
-   again without a gap. --reel-duration is set in Hero.tsx. */
-.reel-frame-1, .reel-frame-2 {
-  opacity: 0;
-  animation-duration: var(--reel-duration, 10.5s);
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-.reel-frame-1 { animation-name: reelFrame1; }
-.reel-frame-2 { animation-name: reelFrame2; }
-@keyframes reelFrame1 { 0%, 33.3% { opacity: 0; } 37%, 96% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes reelFrame2 { 0%, 66.6% { opacity: 0; } 70%, 96% { opacity: 1; } 100% { opacity: 0; } }
-
-/* The caption for the screen on show is lit; the others rest. */
-.reel-label {
-  color: rgb(107 114 128);
-  animation: reelLabel var(--reel-duration, 10.5s) var(--reel-delay, 0s) infinite;
-}
-@keyframes reelLabel {
-  0%, 31% { background: var(--color-mint); color: #111827; }
-  34%, 100% { background: transparent; color: rgb(107 114 128); }
-}
-
-/* Reduced motion: the first screen holds, and the captions read as a list. */
-@media (prefers-reduced-motion: reduce) {
-  .reel-frame-1, .reel-frame-2 { animation: none; }
-  .reel-label { animation: none; }
-}
 
 /* The live-stats strip arrives after its fetch resolves, so it fades up rather
    than snapping into a gap the eye was already resting on. */

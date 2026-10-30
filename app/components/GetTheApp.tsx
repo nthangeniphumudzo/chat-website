@@ -1,4 +1,5 @@
 import DownloadLink from './DownloadLink'
+import { OfficialStoreBadge } from './StoreBadge'
 import { usePlatform } from '../hooks/usePlatform'
 
 interface GetTheAppProps {
@@ -9,8 +10,7 @@ interface GetTheAppProps {
   className?: string
 }
 
-const STORE_BUTTON =
-  'inline-flex min-h-12 items-center justify-center rounded-full bg-mint px-6 text-base font-semibold text-gray-900 shadow-md shadow-mint/20 transition-all duration-200 hover:-translate-y-0.5 active:scale-95'
+const STORE_BADGE = 'dl-badge inline-block rounded-lg transition-transform duration-200 hover:-translate-y-0.5 active:scale-95'
 
 /**
  * The page's one call to action, in the form that fits the device.
@@ -50,12 +50,12 @@ export default function GetTheApp({ placement, align = 'center', id, className =
             <p className="mt-1 max-w-[12rem] text-sm leading-snug text-gray-500 dark:text-gray-400">
               Point your phone’s camera here.
             </p>
-            <p className="mt-3 flex gap-4 text-sm font-semibold">
-              <DownloadLink placement={placement} store="app_store" className="text-mint-ink hover:underline">
-                App Store
+            <p className="mt-3 flex gap-2">
+              <DownloadLink placement={placement} store="app_store" className={STORE_BADGE}>
+                <OfficialStoreBadge store="app_store" className="h-9" />
               </DownloadLink>
-              <DownloadLink placement={placement} store="google_play" className="text-mint-ink hover:underline">
-                Google Play
+              <DownloadLink placement={placement} store="google_play" className={STORE_BADGE}>
+                <OfficialStoreBadge store="google_play" className="h-9" />
               </DownloadLink>
             </p>
           </div>
@@ -63,11 +63,11 @@ export default function GetTheApp({ placement, align = 'center', id, className =
 
         <div className="flex flex-col items-center pointer-fine:lg:hidden">
           <div className="flex flex-wrap justify-center gap-3">
-            <DownloadLink placement={placement} store="app_store" className={STORE_BUTTON}>
-              App Store
+            <DownloadLink placement={placement} store="app_store" className={STORE_BADGE}>
+              <OfficialStoreBadge store="app_store" className="h-12" />
             </DownloadLink>
-            <DownloadLink placement={placement} store="google_play" className={STORE_BUTTON}>
-              Google Play
+            <DownloadLink placement={placement} store="google_play" className={STORE_BADGE}>
+              <OfficialStoreBadge store="google_play" className="h-12" />
             </DownloadLink>
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function GetTheApp({ placement, align = 'center', id, className =
         aria-label="Download Ch@t"
         className="inline-flex min-h-14 items-center justify-center rounded-full bg-mint px-9 text-lg font-semibold text-gray-900 shadow-md shadow-mint/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
       >
-        Download
+        Download app
       </DownloadLink>
     </div>
   )

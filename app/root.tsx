@@ -46,7 +46,7 @@ const jsonLd = {
       applicationCategory: "LifestyleApplication",
       applicationSubCategory: "Dating",
       description:
-        "A dating app where you meet people through three questions you write yourself. People nearby answer in their own words before you ever match.",
+        "A dating app for finding real love. Get to know how someone thinks, in their own words, before you ever match — with verified people near you.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "ZAR" },
       installUrl: "https://apps.apple.com/us/app/ch-t/id6763358775",
       sameAs: [

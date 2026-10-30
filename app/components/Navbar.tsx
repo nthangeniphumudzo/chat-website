@@ -3,8 +3,8 @@ import ChatMark from './ChatMark'
 import DownloadLink from './DownloadLink'
 
 const marketingLinks = [
-  { href: './#how', label: 'How it works' },
-  { href: './#privacy', label: 'Privacy' },
+  { href: './#story', label: 'Our story' },
+  { href: './#safe', label: 'Safety' },
   { href: './#faq', label: 'FAQ' },
 ] as const
 
@@ -27,7 +27,9 @@ export default function Navbar() {
   return (
     <nav
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-bar' : 'bg-transparent'
+      // Unscrolled, the bar sits on the hero photo, which is dark in both
+      // themes — so it takes dark-mode colours until it gets its own glass.
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-bar' : 'dark bg-transparent'
         }`}
     >
       {/* Reading progress */}
@@ -39,7 +41,7 @@ export default function Navbar() {
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
         {/* Logo on the left — all sizes */}
-        <a href="./" className="flex items-center gap-2.5 group flex-shrink-0">
+        <a href="./" className="flex items-center gap-2.5 group flex-shrink-0 dark:text-white">
           <ChatMark
             title="Ch@t"
             className="w-11 h-11 transition-transform duration-200 group-hover:scale-105"
@@ -72,7 +74,7 @@ export default function Navbar() {
           aria-label="Download Ch@t"
           className="inline-flex min-h-11 flex-shrink-0 items-center rounded-full bg-mint px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
         >
-          Download
+          Download app
         </DownloadLink>
       </div>
     </nav>

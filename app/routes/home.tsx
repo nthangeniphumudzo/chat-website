@@ -5,10 +5,9 @@ import { API_BASE } from "../constants";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import HeroPoster from "../components/HeroPoster";
-import HowItWorks from "../components/HowItWorks";
-import Compare from "../components/Compare";
+import Story from "../components/Story";
 import SocialProof from "../components/SocialProof";
-import PrivacyDemo from "../components/PrivacyDemo";
+import Safe from "../components/Safe";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
 import StickyDownload from "../components/StickyDownload";
@@ -20,31 +19,31 @@ const OG_IMAGE = "https://www.chatphcreations.co.za/og-image.png";
 
 export function meta(_: Route.MetaArgs) {
   return [
-    { title: "Ch@t — Free Dating App for Real Conversations | Meet Verified Singles" },
+    { title: "Ch@t — Your Person Is Out There | Free Dating App for Real Love" },
     {
       name: "description",
       content:
-        "Ch@t is a free speed-dating app: ask three questions, read real answers, then decide who to chat with. Verified profiles, screenshot-proof chats, no ads. Download for iOS and Android.",
+        "Your person is out there. Ch@t is a free dating app for finding real love — get to know how someone thinks before you meet, with verified people near you. Download for iOS and Android.",
     },
     { property: "og:type", content: "website" },
     { property: "og:site_name", content: "Ch@t" },
     { property: "og:url", content: "https://www.chatphcreations.co.za/" },
-    { property: "og:title", content: "Ch@t — Skip the endless texting. Know if you click first." },
+    { property: "og:title", content: "Ch@t — Your person is out there. Let’s find them." },
     {
       property: "og:description",
       content:
-        "The speed-dating app: ask three questions, read their real answers, then decide. Free on iOS & Android.",
+        "A free dating app for finding real love. Free on iOS & Android.",
     },
     { property: "og:image", content: OG_IMAGE },
     { property: "og:image:width", content: "1200" },
     { property: "og:image:height", content: "630" },
     { property: "og:locale", content: "en_ZA" },
     { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: "Ch@t — Skip the endless texting. Know if you click first." },
+    { name: "twitter:title", content: "Ch@t — Your person is out there. Let’s find them." },
     {
       name: "twitter:description",
       content:
-        "The speed-dating app: ask three questions, read their real answers, then decide. Free on iOS & Android.",
+        "A free dating app for finding real love. Free on iOS & Android.",
     },
     { name: "twitter:image", content: OG_IMAGE },
   ];
@@ -60,6 +59,12 @@ export function meta(_: Route.MetaArgs) {
  * during render would desync the server markup from the first client render.
  */
 const HERO: "direct" | "poster" = "direct";
+
+/**
+ * The floating card that points at the Relationship Advisor. Hidden for now;
+ * the advisor itself (/advisor) is untouched. Set to true to bring it back.
+ */
+const SHOW_ADVISOR_PROMO = false;
 
 export default function Home() {
   const { isDark, toggle } = useTheme();
@@ -91,16 +96,15 @@ export default function Home() {
     <div className="min-h-screen pb-20 md:pb-0 bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
       <Navbar />
       {HERO === "direct" ? <Hero /> : <HeroPoster />}
-      <HowItWorks isDark={isDark} />
-      <Compare />
+      <Story />
       <SocialProof />
-      <PrivacyDemo isDark={isDark} />
+      <Safe />
       <FAQ />
       <FinalCTA />
       <LegalSection />
       <Footer isDark={isDark} onToggleTheme={toggle} />
       <StickyDownload />
-      <AdvisorPromo />
+      {SHOW_ADVISOR_PROMO && <AdvisorPromo />}
     </div>
   );
 }

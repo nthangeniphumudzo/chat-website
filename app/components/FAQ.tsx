@@ -1,35 +1,38 @@
 import { useState } from 'react'
+import { IconBadge, type IconName } from './Icon'
 
 /* The worries that make someone leave to "look it up later", answered here so
-   they don't have to. First four are the brief's objections, in its order. */
-const faqs = [
+   they don't have to. This is the one place on the page that gets specific
+   about the app; everywhere else tells the story. */
+const faqs: { icon: IconName; q: string; a: string }[] = [
   {
-    q: 'Do I have to video call or chat live?',
-    a: 'No. A SpeedDate is written: people answer your three questions in their own time, and you read the answers when you’re ready. No camera, no awkward silences.',
+    icon: 'sparkles',
+    q: 'I’ve tried dating apps before. Why would this be different?',
+    a: 'Most apps start with a face and leave the rest to luck. On Ch@t you get to know how someone thinks before you decide — so when you start talking, you already have a reason to.',
   },
   {
+    icon: 'message',
+    q: 'What if I’m not good at first messages?',
+    a: 'You won’t need one. Every conversation on Ch@t starts from something they’ve already told you, so it’s never a cold “hey”.',
+  },
+  {
+    icon: 'shield-check',
     q: 'Is it safe?',
     a: 'Every profile is verified and must show a real face. Explicit photos can’t be sent, screenshots come out blank, and you can block anyone — silently. They’re never notified.',
   },
   {
-    q: 'Is Ch@t really free?',
-    a: 'Yes — free to download and free to meet people. Premium adds extras, but the core works without it.',
-  },
-  {
+    icon: 'map-pin',
     q: 'Will there be people near me?',
     a: 'Ch@t is local by design — you meet real people in your city, not across the country.',
   },
   {
-    q: 'How is this different from swiping apps?',
-    a: 'They start with a face. Ch@t starts with your questions — so the first message is never a cold "hey".',
-  },
-  {
-    q: 'Who can see my profile?',
-    a: 'You decide. Control your visibility, and block anyone from your contacts — silently.',
+    icon: 'gift',
+    q: 'Is Ch@t really free?',
+    a: 'Yes — free to download and free to meet people. Premium adds extras, but you never need it to find someone.',
   },
 ]
 
-function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
+function FaqItem({ icon, q, a, open, onToggle }: { icon: IconName; q: string; a: string; open: boolean; onToggle: () => void }) {
   return (
     <div className="glass rounded-2xl overflow-hidden transition-colors duration-200 hover:border-mint/30">
       <button
@@ -37,7 +40,8 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         aria-expanded={open}
         className="w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5"
       >
-        <span className="font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 tracking-tight">
+        <span className="flex items-center gap-3 font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 tracking-tight">
+          <IconBadge name={icon} size="sm" />
           {q}
         </span>
         <span
@@ -51,7 +55,7 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
       </button>
       <div className={`grid transition-all duration-300 ease-in-out ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
-          <p className="px-5 sm:px-6 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{a}</p>
+          <p className="pl-[4.25rem] pr-5 sm:pl-[4.5rem] sm:pr-6 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{a}</p>
         </div>
       </div>
     </div>

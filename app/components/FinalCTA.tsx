@@ -1,4 +1,5 @@
 import GetTheApp from './GetTheApp'
+import { IconBadge } from './Icon'
 
 /**
  * A launch offer, shown as a badge above the final call to action — e.g.
@@ -10,8 +11,8 @@ const OFFER: { label: string; detail: string } | null = null
 
 /**
  * The reason to act now rather than "later", which on a landing page means
- * never. Without an event or an offer to point at, the urgency is the mechanic
- * itself: questions posted tonight can have answers by the time you next look.
+ * never. Without an event or an offer to point at, the urgency is the story
+ * itself: the person you're hoping for might already be here.
  */
 export default function FinalCTA() {
   return (
@@ -28,13 +29,15 @@ export default function FinalCTA() {
           </p>
         )}
 
+        <div className="mb-6"><IconBadge name="heart" size="lg" /></div>
+
         <h2 className="poster-h font-syne mb-6 text-4xl sm:text-6xl lg:text-7xl">
-          Ask your three questions
+          Your love story
           <br />
-          <span className="text-mint-ink">tonight.</span>
+          <span className="text-mint-ink">could start tonight.</span>
         </h2>
         <p className="mx-auto mb-10 max-w-md text-lg leading-relaxed text-gray-500 dark:text-gray-400 sm:text-xl">
-          Sign up, write them, and see who answers. It’s free.
+          Ch@t is free. And someone might already be hoping you’ll show up.
         </p>
 
         <GetTheApp placement="final" />

@@ -1,107 +1,66 @@
-import type { CSSProperties } from 'react'
 import GetTheApp from './GetTheApp'
-import HeroQuote from './HeroQuote'
-import Screenshot from './Screenshot'
-import {
-  img_write_questions_light,
-  img_speed_date_inbox,
-  img_chat_light,
-} from '../assets/images'
-
-/* One SpeedDate, start to finish, as three real app screens.
- *
- * The brief asked for a looping video of a speed date in progress. A SpeedDate
- * on Ch@t isn't live — it's three questions, written answers, then a decision —
- * so the honest "video" is those three moments playing in turn. They're
- * crossfaded in CSS rather than shipped as a video file: no extra download, no
- * autoplay rules, and the first frame is on screen at first paint.
- *
- * Light-theme screens in both themes on purpose. The theme is only known after
- * hydration, and swapping the hero's image then would re-fetch the one picture
- * the visitor is looking at. The inbox screen only exists in light anyway. */
-const REEL = [
-  { src: img_write_questions_light, label: 'You ask', alt: 'Writing three questions in Ch@t' },
-  { src: img_speed_date_inbox, label: 'They answer', alt: 'A member’s answers to three questions, with Pass and Interested buttons' },
-  { src: img_chat_light, label: 'You decide', alt: 'A conversation that started from those answers' },
-]
-
-/* Seconds each screen holds. Long enough to read the headline beside it once;
-   the whole loop is REEL_STEP × 3. */
-const REEL_STEP = 3.5
+import { PHOTO_LQIP } from '../assets/photo-lqip'
+import opening640 from '../assets/photos/opening-640.webp'
+import opening1080 from '../assets/photos/opening-1080.webp'
+import opening1600 from '../assets/photos/opening-1600.webp'
 
 /**
- * The first five seconds. It has to answer "what is this?" and "why is it
- * different?" before anyone scrolls — so: an outcome headline, one sentence of
- * how, and the mechanic playing out on a real phone screen (plus, on desktop,
- * the call to action).
+ * The first five seconds. It sells what people came for — someone to love —
+ * not what the app does: real people in Ch@t shirts behind a headline of hope
+ * and (on desktop) the call to action. How the app works is left for the app.
  *
  * Nothing else competes for the tap. Trust signals that used to sit here moved
  * into the sections built to carry them (social proof, FAQ).
+ *
+ * The photo is a night shot, so the hero is dark in both themes: the `dark`
+ * class on the section gives everything inside it its dark-mode colours, the
+ * same as if the visitor had picked dark — headline and QR card both
+ * read on the photo without colours of their own.
  */
 export default function Hero() {
-  const reelVars = { '--reel-duration': `${REEL_STEP * REEL.length}s` } as CSSProperties
-
   return (
-    <section id="hero" className="relative overflow-hidden px-5 pt-24 pb-14 sm:px-8 lg:flex lg:min-h-svh lg:flex-col lg:justify-center lg:pt-20 lg:pb-20">
-      {/* Bold, quiet background wash */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="soft-glow absolute -top-60 left-1/2 -translate-x-1/2 w-[1180px] max-w-[190vw] h-[880px] [--glow-alpha:0.2] dark:[--glow-alpha:0.14]" />
-      </div>
+    <section
+      id="hero"
+      className="dark relative flex min-h-svh flex-col justify-end overflow-hidden lg:justify-center bg-[#050505] px-5 pt-24 pb-14 text-gray-100 sm:px-8 lg:pb-20"
+    >
+      {/* The photo. Its 24px copy is the background, so the scene's colours are
+          on screen at first paint, before the full image arrives. It's a
+          portrait shot: on a phone it fills the screen, with the people in the
+          middle and the copy anchored to the bottom, over the pavement. A wide
+          screen would crop it to a strip through their shirts, so there it
+          takes the right-hand side whole and fades into the dark under the
+          copy on the left. */}
+      <img
+        src={opening1080}
+        srcSet={`${opening640} 640w, ${opening1080} 1080w, ${opening1600} 1600w`}
+        sizes="(min-width: 1024px) 62vw, 100vw"
+        alt="Two people in Ch@t T-shirts, seen from behind, at a lit fountain at night"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover object-[50%_55%] lg:left-auto lg:w-[62%] lg:object-[50%_40%]"
+        style={{ backgroundImage: `url(${PHOTO_LQIP.opening})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      />
+      {/* Darkens the photo where the words sit and leaves the people clear:
+          the bottom on a phone, the left edge on a wide screen. */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 via-45% to-black/10 lg:hidden" aria-hidden />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-[#050505] from-38% via-[#050505]/60 via-48% to-transparent to-65% lg:block" aria-hidden />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
         {/* Copy */}
-        <div className="text-center lg:text-left">
-          {/* What happens here, in the visitor's own hands: the thing they do
-              first, and what they get for it. Under it, a line about love that
-              changes with each visit (HeroQuote) — the headline leaves a
-              question behind ("how?"), which the screens beside it and the
-              sections below are there to answer. Sized so each line holds on a
+        <div className="text-center lg:max-w-xl lg:text-left">
+          {/* The promise, then the invitation. Sized so each line holds on a
               375px phone. */}
-          <h1 className="poster-h font-syne mb-5 text-[2.3rem] min-[400px]:text-[2.7rem] sm:text-6xl lg:text-7xl">
-            Ask three questions.
+          <h1 className="poster-h font-syne mb-8 text-[2.3rem] text-white min-[400px]:text-[2.7rem] sm:text-6xl lg:text-7xl">
+            Your person is out there.
             <br />
-            <span className="text-mint-ink">Meet through real answers.</span>
+            <span className="text-mint-ink">Let’s find them.</span>
           </h1>
 
-          <HeroQuote />
-
           {/* Desktop only. On a phone a download button before the visitor has
-              seen how Ch@t works asks too much too soon; the sticky bar and the
-              buttons further down pick up once they've had the context. */}
+              heard the story asks too much too soon; the navbar pill and
+              the buttons further down pick up once they've had the context. */}
           <div className="hidden md:block">
             <GetTheApp placement="hero" align="start" />
-          </div>
-        </div>
-
-        {/* The mechanic, playing on a real phone screen. */}
-        <div className="flex flex-col items-center lg:items-end">
-          <div className="lg:w-80 flex flex-col items-center" style={reelVars}>
-            <div className="relative w-56 overflow-hidden rounded-[40px] border-2 border-black/10 phone-bleed dark:border-white/10 sm:w-64 lg:w-80">
-              {REEL.map(({ src, alt }, i) => (
-                <div
-                  key={src}
-                  className={i === 0 ? 'relative' : `reel-frame-${i} absolute inset-0`}
-                  aria-hidden={i > 0}
-                >
-                  <Screenshot src={src} alt={i === 0 ? alt : ''} priority={i === 0} />
-                </div>
-              ))}
-            </div>
-
-            {/* Step captions, lit in time with the screen they describe. */}
-            <ol className="mt-5 flex gap-2 text-xs font-semibold sm:text-sm" aria-label="How a SpeedDate works">
-              {REEL.map(({ label }, i) => (
-                <li
-                  key={label}
-                  className="reel-label rounded-full px-3 py-1.5"
-                  /* Negative, so every label starts mid-cycle in the right state
-                     rather than waiting out a delay lit. */
-                  style={{ '--reel-delay': `${i === 0 ? 0 : (i - REEL.length) * REEL_STEP}s` } as CSSProperties}
-                >
-                  {i + 1}. {label}
-                </li>
-              ))}
-            </ol>
           </div>
         </div>
       </div>
