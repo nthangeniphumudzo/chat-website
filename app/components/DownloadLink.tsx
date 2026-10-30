@@ -41,6 +41,7 @@ export default function DownloadLink({ placement, className, children, store, ..
       rel="noopener noreferrer"
       onClick={() => trackDownload(link.store, placement, platform.inApp)}
       data-download=""
+      data-track={`download:${placement}`}
       className={className}
       {...rest}
     >

@@ -24,7 +24,7 @@ const TESTIMONIALS: Testimonial[] = []
  */
 export default function SocialProof() {
   return (
-    <section className="relative overflow-hidden px-5 py-20 text-center sm:px-8 sm:py-28">
+    <section data-track-section="social-proof" className="relative overflow-hidden px-5 py-20 text-center sm:px-8 sm:py-28">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="soft-glow h-[520px] w-[760px] [--glow-alpha:0.14]" />
       </div>

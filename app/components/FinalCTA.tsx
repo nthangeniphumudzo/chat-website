@@ -16,7 +16,7 @@ const OFFER: { label: string; detail: string } | null = null
  */
 export default function FinalCTA() {
   return (
-    <section id="download" className="panel items-center overflow-hidden px-5 text-center sm:px-8">
+    <section id="download" data-track-section="download" className="panel items-center overflow-hidden px-5 text-center sm:px-8">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <div className="soft-glow h-[500px] w-[600px] [--glow-alpha:0.17] sm:h-[640px] sm:w-[940px]" />
       </div>

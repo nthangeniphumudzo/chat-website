@@ -7,12 +7,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 import { isbot } from "isbot";
 
 import type { Route } from "./+types/root";
 import { detectPlatform, storeLink } from "./lib/platform";
 import { API_BASE } from "./constants";
+import { trackPage } from "./lib/heatmap";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -182,6 +184,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+
+  // Our own behaviour tracking (lib/heatmap): where visitors stay, scroll and
+  // tap. Light enough to start right away; follows route changes.
+  useEffect(() => {
+    trackPage(pathname);
+  }, [pathname]);
+
   useEffect(() => {
     // Load the heavy third-party analytics only once the browser is idle, so
     // they never contend with content + hydration on weak connections.

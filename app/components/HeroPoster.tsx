@@ -7,7 +7,7 @@ import SmartDownload from './SmartDownload'
  */
 export default function HeroPoster() {
   return (
-    <section className="panel items-center text-center px-5 sm:px-8 pt-20 pb-10">
+    <section data-track-section="hero" className="panel items-center text-center px-5 sm:px-8 pt-20 pb-10">
       {/* Bold, quiet background wash */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] max-w-[140vw] h-[600px] bg-mint/18 dark:bg-mint/12 rounded-full blur-[140px]" />

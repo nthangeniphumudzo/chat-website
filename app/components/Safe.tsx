@@ -16,7 +16,7 @@ const PROMISES: { icon: IconName; label: string }[] = [
  */
 export default function Safe() {
   return (
-    <section id="safe" className="relative overflow-hidden bg-[linear-gradient(180deg,#f7f9fb_0%,#ecfaf4_45%,#f7f9fb_100%)] px-5 py-20 text-center dark:bg-none dark:bg-[#080808] sm:px-8 sm:py-28">
+    <section id="safe" data-track-section="safe" className="relative overflow-hidden bg-[linear-gradient(180deg,#f7f9fb_0%,#ecfaf4_45%,#f7f9fb_100%)] px-5 py-20 text-center dark:bg-none dark:bg-[#080808] sm:px-8 sm:py-28">
       <div className="soft-glow pointer-events-none absolute -z-10 top-0 left-1/2 h-[560px] w-[760px] max-w-[150vw] -translate-x-1/2 [--glow-alpha:0.22] dark:[--glow-alpha:0.16]" />
       <div className="mx-auto max-w-3xl">
         <div className="mb-6"><IconBadge name="shield-check" size="lg" /></div>

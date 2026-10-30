@@ -21,6 +21,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      data-track-section="hero"
       className="dark relative flex min-h-svh flex-col justify-end overflow-hidden lg:justify-center bg-[#050505] px-5 pt-24 pb-14 text-gray-100 sm:px-8 lg:pb-20"
     >
       {/* The photo. Its 24px copy is the background, so the scene's colours are

@@ -336,7 +336,9 @@ export default function Advisor() {
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-5 pb-6 sm:px-8">
+      {/* data-track-private: the behaviour tracker never labels a tap in here
+          with its text — this is someone's private conversation. */}
+      <main data-track-section="advisor" data-track-private="" className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-5 pb-6 sm:px-8">
         {/* Tall enough to fill what's left of the screen under the header, so
             the field is the last thing on it and the small print below has to
             be scrolled to. The notes are footnotes; they shouldn't sit between

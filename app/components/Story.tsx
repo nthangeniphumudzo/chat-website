@@ -31,7 +31,7 @@ const CHAPTERS: { icon: IconName; label: string; title: string; body: string }[]
  */
 export default function Story() {
   return (
-    <section id="story" className="px-5 py-20 sm:px-8 sm:py-28">
+    <section id="story" data-track-section="story" className="px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center sm:mb-20">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-mint-ink">Your story</p>

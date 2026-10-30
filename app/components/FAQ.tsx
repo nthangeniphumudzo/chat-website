@@ -66,7 +66,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="relative overflow-hidden py-16 sm:py-24 px-5 sm:px-8 max-w-3xl mx-auto">
+    <section id="faq" data-track-section="faq" className="relative overflow-hidden py-16 sm:py-24 px-5 sm:px-8 max-w-3xl mx-auto">
       <div className="soft-glow pointer-events-none absolute -z-10 -top-20 left-1/2 h-[560px] w-[760px] max-w-[150vw] -translate-x-1/2 [--glow-alpha:0.26] dark:[--glow-alpha:0.14]" />
       <div className="mb-8 sm:mb-10 text-center">
         <p className="text-xs font-medium uppercase tracking-widest text-mint-ink mb-4">Before you ask</p>

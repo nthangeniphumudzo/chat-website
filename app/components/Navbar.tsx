@@ -26,6 +26,7 @@ export default function Navbar() {
 
   return (
     <nav
+      data-track-section="nav"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
       // Unscrolled, the bar sits on the hero photo, which is dark in both
       // themes — so it takes dark-mode colours until it gets its own glass.

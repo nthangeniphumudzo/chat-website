@@ -69,6 +69,7 @@ export default function StickyDownload() {
 
   return (
     <div
+      data-track-section="sticky-bar"
       inert={!open}
       style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
       className={`fixed inset-x-0 bottom-0 z-40 px-4 transition-transform duration-300 md:hidden ${

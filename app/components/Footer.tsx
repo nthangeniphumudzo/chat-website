@@ -37,7 +37,7 @@ interface FooterProps {
 
 export default function Footer({ isDark, onToggleTheme }: FooterProps) {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]">
+    <footer data-track-section="footer" className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d0d0d]">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col items-center gap-5 sm:gap-6">
 
         <a href="./" aria-label="Ch@t home" className="flex items-center gap-2.5 group p-2">

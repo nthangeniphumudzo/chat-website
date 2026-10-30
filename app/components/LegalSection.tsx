@@ -251,7 +251,7 @@ export default function LegalSection() {
   }
 
   return (
-    <div id="legal" className="bg-gray-50 dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800">
+    <div id="legal" data-track-section="legal" className="bg-gray-50 dark:bg-[#0d0d0d] border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
         <div className="mb-6 sm:mb-8">
           <p className="text-xs font-medium uppercase tracking-widest text-mint-ink mb-4">Legal & Policies</p>
