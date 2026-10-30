@@ -8,18 +8,15 @@ type Theme = 'dark' | 'light'
 export const THEME_CHOICE_KEY = 'chat-theme-choice'
 
 /**
- * Light or dark, following the visitor's phone unless they've picked one here.
+ * Dark for everyone, until they pick light with the footer toggle.
  *
- * Apple's guidance is not to override the system appearance — people "may think
- * your app is broken because it doesn't respond to their systemwide appearance
- * choice" (HIG, Dark Mode). So the phone's setting is the default, the footer
- * toggle stays as an optional override, and only a tap on it is remembered.
+ * The owner's call: the site looks its best dark — the opening photo is a
+ * night shot — so first-time visitors get dark whatever their phone is set
+ * to. Only a tap on the toggle is remembered, and that choice wins from then on.
  *
  * The inline boot script in root.tsx paints the right class on <html> before
  * first paint. React starts from a deterministic 'light' (so server and client
- * render identically), adopts the painted class after mount, and follows the
- * phone live — e.g. when it switches to dark at sunset — until the visitor
- * makes a choice of their own.
+ * render identically) and adopts the painted class after mount.
  */
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>('light')
@@ -29,19 +26,6 @@ export function useTheme() {
 
   useEffect(() => {
     setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light')
-
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const followPhone = (e: MediaQueryListEvent) => {
-      let choice: string | null = null
-      try {
-        choice = localStorage.getItem(THEME_CHOICE_KEY)
-      } catch {
-        /* storage unavailable: nothing chosen */
-      }
-      if (choice !== 'dark' && choice !== 'light') setTheme(e.matches ? 'dark' : 'light')
-    }
-    mq.addEventListener('change', followPhone)
-    return () => mq.removeEventListener('change', followPhone)
   }, [])
 
   useEffect(() => {

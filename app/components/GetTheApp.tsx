@@ -15,8 +15,9 @@ const STORE_BADGE = 'dl-badge inline-block rounded-lg transition-transform durat
 /**
  * The page's one call to action, in the form that fits the device.
  *
- * On a phone it is a single button — the store is already known, so offering
- * both would only be a second decision to make.
+ * On a phone it is that phone's store badge alone — App Store on an iPhone,
+ * Google Play on Android. The store is already known, so offering both would
+ * only be a second decision to make.
  *
  * On a computer a store button leads nowhere useful: the app can't be installed
  * there, and "I'll do it on my phone later" rarely happens. So desktop gets a QR
@@ -77,12 +78,11 @@ export default function GetTheApp({ placement, align = 'center', id, className =
 
   return (
     <div id={id} className={`flex flex-col ${alignment} ${className}`}>
-      <DownloadLink
-        placement={placement}
-        aria-label="Download Ch@t"
-        className="inline-flex min-h-14 items-center justify-center rounded-full bg-mint px-9 text-lg font-semibold text-gray-900 shadow-md shadow-mint/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-mint/30 active:scale-95"
-      >
-        Download app
+      {/* The phone's own store, as the store's own badge: the one mark people
+          already trust to install from. The link still goes straight into
+          the store app (DownloadLink picks the deep link for this phone). */}
+      <DownloadLink placement={placement} className={STORE_BADGE}>
+        <OfficialStoreBadge store={os === 'ios' ? 'app_store' : 'google_play'} className="h-14" />
       </DownloadLink>
     </div>
   )

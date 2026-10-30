@@ -33,7 +33,7 @@ export const links: Route.LinksFunction = () => [
 // page, and it's usable the moment it arrives. (A full-screen loading overlay
 // used to sit on top and swallow every tap — measured on a slow 4G phone, the
 // page was ready at ~1s while the overlay blocked it until ~3.3s.)
-const bootScript = `(function(){var d=document.documentElement;var t='light';try{var s=localStorage.getItem('chat-theme-choice');localStorage.removeItem('chat-theme');t=(s==='dark'||s==='light')?s:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch(e){try{t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e2){}}d.classList.add(t);})();`;
+const bootScript = `(function(){var d=document.documentElement;var t='dark';try{var s=localStorage.getItem('chat-theme-choice');localStorage.removeItem('chat-theme');if(s==='light')t='light';}catch(e){}d.classList.add(t);})();`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -146,8 +146,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
         />
-        <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        {/* Dark by default for everyone (see useTheme), so the browser bar
+            matches it whatever the phone is set to. */}
+        <meta name="theme-color" content="#050505" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
