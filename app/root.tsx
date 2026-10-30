@@ -165,8 +165,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         {/* Analytics stub only — queues events immediately (so download
-            tracking works). The heavy GA + Clarity scripts load on idle in
-            <App/>, keeping them off the critical path on slow connections. */}
+            tracking works). The heavy GA script loads on idle in
+            <App/>, keeping it off the critical path on slow connections. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
@@ -193,18 +193,13 @@ export default function App() {
   }, [pathname]);
 
   useEffect(() => {
-    // Load the heavy third-party analytics only once the browser is idle, so
-    // they never contend with content + hydration on weak connections.
+    // Load Google Analytics only once the browser is idle, so
+    // it never contends with content + hydration on weak connections.
     const load = () => {
       const ga = document.createElement("script");
       ga.async = true;
       ga.src = "https://www.googletagmanager.com/gtag/js?id=G-4JEM4G6RPF";
       document.head.appendChild(ga);
-
-      const clarity = document.createElement("script");
-      clarity.async = true;
-      clarity.src = "https://www.clarity.ms/tag/xdppoucvrx";
-      document.head.appendChild(clarity);
     };
 
     const ric = (
