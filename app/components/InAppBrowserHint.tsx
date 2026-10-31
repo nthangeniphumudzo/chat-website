@@ -15,13 +15,26 @@ export const OPEN_IN_BROWSER_EVENT = 'chat:open-in-browser'
  * anyone taps and gets let down. Tapping any download button opens the full
  * steps. Rendered on the server too, since the platform comes from the request.
  *
- * Tracked: the steps and both escape buttons carry data-track, so the admin's
- * Website Behaviour page shows how many TikTok visitors try each way out.
+ * Tracked: the steps and both escape buttons carry data-track, and the address
+ * is stamped with ?via=<app> so arrivals in the real browser are counted too —
+ * the admin's Website Behaviour page shows the whole way out, step by step.
  */
 export default function InAppBrowserHint() {
   const { inApp, os } = usePlatform()
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
+
+  // Stamp the address with ?via=tiktok (or the app's name). Whichever way the
+  // visitor gets out (the ••• menu, Copy link, Open in Chrome) carries the
+  // current address, so their browser visit arrives marked as an escape and
+  // the Website Behaviour page can count it. Any ?ref= promo code stays.
+  useEffect(() => {
+    if (!inApp) return
+    const url = new URL(location.href)
+    if (url.searchParams.get('via')) return
+    url.searchParams.set('via', inApp.toLowerCase())
+    history.replaceState(history.state, '', url)
+  }, [inApp])
 
   useEffect(() => {
     const show = () => setOpen(true)
@@ -31,7 +44,7 @@ export default function InAppBrowserHint() {
 
   if (!inApp) return null
 
-  // This same page, query string included, so a ?ref= promo code survives the move.
+  // This same page, query string included, so ?ref= and ?via= survive the move.
   const pageUrl = () => `https://${location.host}${location.pathname}${location.search}`
 
   // Android: ask for Chrome directly. Some in-app browsers allow this handoff,

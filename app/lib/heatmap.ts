@@ -16,6 +16,10 @@ import { detectPlatform } from './platform'
  *  - `data-track-private` — nothing inside it is ever labelled with its text
  *    (the advisor chat). Form fields are never read at all.
  *
+ * `?via=<app>` on the address marks a visitor who escaped TikTok (or another
+ * app's browser) to their real one; InAppBrowserHint puts it there. It's
+ * recorded as ctx.via, only for visits in a real browser.
+ *
  * No cookies and no personal data: the session id is random and lives in
  * sessionStorage, so it ends with the tab.
  *
@@ -259,8 +263,11 @@ export function trackPage(newPath: string) {
     sessionId = getSessionId()
     const platform = detectPlatform(navigator.userAgent)
     let ref: string | null = null
+    let via: string | null = null
     try {
-      ref = new URLSearchParams(location.search).get('ref') || sessionStorage.getItem('promoRef')
+      const params = new URLSearchParams(location.search)
+      ref = params.get('ref') || sessionStorage.getItem('promoRef')
+      via = platform.inApp ? null : params.get('via')?.toLowerCase().replace(/[^a-z]/g, '').slice(0, 20) || null
     } catch {
       /* ignore */
     }
@@ -269,6 +276,7 @@ export function trackPage(newPath: string) {
       os: platform.os,
       inApp: platform.inApp,
       ref: ref?.slice(0, 40) || null,
+      via,
       theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
       vw: window.innerWidth,
       vh: window.innerHeight,
