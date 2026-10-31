@@ -6,6 +6,11 @@ import { IconBadge, type IconName } from './Icon'
    about the app; everywhere else tells the story. */
 const faqs: { icon: IconName; q: string; a: string }[] = [
   {
+    icon: 'shield-check',
+    q: 'Is it safe?',
+    a: 'Every profile is verified and must show a real face, and only phone-verified members can see you. Your exact location is never shared — people see your city and roughly how far away you are, never where you are. Explicit photos can’t be sent, screenshots come out blank, and you can report anyone or block them silently — they’re never notified.',
+  },
+  {
     icon: 'sparkles',
     q: 'I’ve tried dating apps before. Why would this be different?',
     a: 'Most apps start with a face and leave the rest to luck. On Ch@t you get to know how someone thinks before you decide — so when you start talking, you already have a reason to.',
@@ -14,11 +19,6 @@ const faqs: { icon: IconName; q: string; a: string }[] = [
     icon: 'message',
     q: 'What if I’m not good at first messages?',
     a: 'You won’t need one. Every conversation on Ch@t starts from something they’ve already told you, so it’s never a cold “hey”.',
-  },
-  {
-    icon: 'shield-check',
-    q: 'Is it safe?',
-    a: 'Every profile is verified and must show a real face, and only phone-verified members can see you. Your exact location is never shared — people see your city and roughly how far away you are, never where you are. Explicit photos can’t be sent, screenshots come out blank, and you can report anyone or block them silently — they’re never notified.',
   },
   {
     icon: 'map-pin',
