@@ -18,12 +18,12 @@ const faqs: { icon: IconName; q: string; a: string }[] = [
   {
     icon: 'shield-check',
     q: 'Is it safe?',
-    a: 'Every profile is verified and must show a real face. Explicit photos can’t be sent, screenshots come out blank, and you can block anyone — silently. They’re never notified.',
+    a: 'Every profile is verified and must show a real face, and only phone-verified members can see you. Your exact location is never shared — people see your city and roughly how far away you are, never where you are. Explicit photos can’t be sent, screenshots come out blank, and you can report anyone or block them silently — they’re never notified.',
   },
   {
     icon: 'map-pin',
     q: 'Will there be people near me?',
-    a: 'Ch@t is local by design — you meet real people in your city, not across the country.',
+    a: 'Ch@t is local by design — you meet real people in your city, not across the country. And your exact location stays private: people only see your city and a rough distance.',
   },
   {
     icon: 'gift',

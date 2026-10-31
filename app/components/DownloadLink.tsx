@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { usePlatform } from '../hooks/usePlatform'
 import { trackDownload } from '../constants'
 import { storeLink, webStoreLink, type StoreLink } from '../lib/platform'
+import { OPEN_IN_BROWSER_EVENT } from './InAppBrowserHint'
 
 interface DownloadLinkProps {
   placement: string
@@ -22,6 +23,9 @@ interface DownloadLinkProps {
  *   constants.ts), so there's no web page to load before it opens.
  * - Phones open the store in the same tab. A new tab adds nothing on mobile,
  *   and in-app browsers can't open one at all.
+ * - Inside TikTok, Instagram, Facebook or Snapchat the store can't open at
+ *   all, so the button opens the "open in your browser" steps instead
+ *   (InAppBrowserHint) rather than a link that silently goes nowhere.
  * - The button flips to "Opening…" the instant it's pressed (the listener
  *   lives in root.tsx so it works before hydration), so a store that takes a
  *   moment never makes the button look dead.
@@ -33,6 +37,23 @@ interface DownloadLinkProps {
 export default function DownloadLink({ placement, className, children, store, ...rest }: DownloadLinkProps) {
   const platform = usePlatform()
   const link = store ? webStoreLink(store) : storeLink(platform)
+
+  if (platform.inApp) {
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          trackDownload(link.store, placement, platform.inApp)
+          window.dispatchEvent(new Event(OPEN_IN_BROWSER_EVENT))
+        }}
+        data-track={`download:${placement}`}
+        className={className}
+        {...rest}
+      >
+        {children}
+      </button>
+    )
+  }
 
   return (
     <a

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { Route } from "./+types/home";
 import { useTheme } from "../hooks/useTheme";
+import { usePlatform } from "../hooks/usePlatform";
 import { API_BASE } from "../constants";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
@@ -12,6 +13,7 @@ import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
 import StickyDownload from "../components/StickyDownload";
 import AdvisorPromo from "../components/AdvisorPromo";
+import InAppBrowserHint from "../components/InAppBrowserHint";
 import LegalSection from "../components/LegalSection";
 import Footer from "../components/Footer";
 
@@ -68,6 +70,7 @@ const SHOW_ADVISOR_PROMO = false;
 
 export default function Home() {
   const { isDark, toggle } = useTheme();
+  const { inApp } = usePlatform();
 
   useEffect(() => {
     // Fire-and-forget visitor tracking. The flag tells the first-visit store
@@ -92,8 +95,9 @@ export default function Home() {
   }, []);
 
   return (
-    // Bottom padding on phones keeps the sticky download bar off the footer.
-    <div className="min-h-screen pb-20 md:pb-0 bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden">
+    // Bottom padding on phones keeps the sticky download bar (or, inside
+    // TikTok and co., the open-in-browser bar) off the footer.
+    <div className={`min-h-screen ${inApp ? "pb-28" : "pb-20 md:pb-0"} bg-white dark:bg-[#050505] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden`}>
       <Navbar />
       {HERO === "direct" ? <Hero /> : <HeroPoster />}
       <Story />
@@ -104,6 +108,7 @@ export default function Home() {
       <LegalSection />
       <Footer isDark={isDark} onToggleTheme={toggle} />
       <StickyDownload />
+      <InAppBrowserHint />
       {SHOW_ADVISOR_PROMO && <AdvisorPromo />}
     </div>
   );

@@ -7,12 +7,17 @@ const PROMISES: { icon: IconName; label: string }[] = [
   { icon: 'badge-check', label: 'Every profile verified' },
   { icon: 'lock', label: 'Chats can’t be screenshotted' },
   { icon: 'eye-off', label: 'Unseen by people you block' },
+  { icon: 'map-pin', label: 'Your exact location is never shared' },
+  { icon: 'shield-check', label: 'Only phone-verified members can see you' },
+  { icon: 'camera-off', label: 'Explicit photos can’t be sent' },
 ]
 
 /**
  * Safety, as the feeling it buys rather than a list of protections. Every
  * claim here is one the app keeps (verified profiles, screenshot
- * blocking, silent blocking) — the FAQ has the plain-spoken version.
+ * blocking, silent blocking, exact coordinates only ever sent to their owner,
+ * phone verification before viewing anyone, explicit-photo blocking) — the
+ * FAQ has the plain-spoken version.
  */
 export default function Safe() {
   return (
