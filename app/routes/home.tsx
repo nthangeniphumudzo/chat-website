@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import type { Route } from "./+types/home";
 import { useTheme } from "../hooks/useTheme";
 import { usePlatform } from "../hooks/usePlatform";
-import { API_BASE } from "../constants";
+import { useVisitTracking } from "../hooks/useVisitTracking";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import HeroPoster from "../components/HeroPoster";
@@ -22,6 +21,7 @@ const OG_IMAGE = "https://www.chatphcreations.co.za/og-image.png";
 export function meta(_: Route.MetaArgs) {
   return [
     { title: "Ch@t — Your Person Is Out There | Free Dating App for Real Love" },
+    { tagName: "link", rel: "canonical", href: "https://www.chatphcreations.co.za/" },
     {
       name: "description",
       content:
@@ -72,27 +72,7 @@ export default function Home() {
   const { isDark, toggle } = useTheme();
   const { inApp } = usePlatform();
 
-  useEffect(() => {
-    // Fire-and-forget visitor tracking. The flag tells the first-visit store
-    // redirect in root.tsx this visit is already counted, so it doesn't count
-    // it twice on its way out.
-    (window as unknown as { __chatTracked?: boolean }).__chatTracked = true;
-    fetch(`${API_BASE}/website-visitors/track`, { method: "POST", keepalive: true }).catch(() => {});
-
-    // Promo code tracking — attribute the visit via ?ref=CODE
-    try {
-      const ref = new URLSearchParams(window.location.search).get("ref");
-      if (ref) sessionStorage.setItem("promoRef", ref);
-      const activeRef = ref || sessionStorage.getItem("promoRef");
-      if (activeRef) {
-        const url = `${API_BASE}/promo-codes/${encodeURIComponent(activeRef)}/track`;
-        if (navigator.sendBeacon) navigator.sendBeacon(url);
-        else fetch(url, { method: "POST", keepalive: true }).catch(() => {});
-      }
-    } catch {
-      /* ignore */
-    }
-  }, []);
+  useVisitTracking();
 
   return (
     // Bottom padding on phones keeps the sticky download bar (or, inside

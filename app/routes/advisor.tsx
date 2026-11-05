@@ -25,6 +25,7 @@ import {
 export function meta(_: Route.MetaArgs) {
   return [
     { title: 'Relationship Advisor — Ch@t' },
+    { tagName: 'link', rel: 'canonical', href: 'https://www.chatphcreations.co.za/' },
     {
       name: 'description',
       content:

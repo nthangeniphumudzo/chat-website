@@ -20,7 +20,6 @@ import "./app.css";
 export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png", type: "image/png" },
   { rel: "apple-touch-icon", href: "/favicon.png" },
-  { rel: "canonical", href: "https://www.chatphcreations.co.za/" },
   // Preload the display face the hero headline needs first. Body text uses the
   // system font, so there is nothing else to fetch.
   { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/playfair-var.woff2", crossOrigin: "anonymous" },
